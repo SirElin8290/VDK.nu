@@ -12,6 +12,7 @@
 - Separat adminvy för medlemskap, Swish-kontroll, coachansökningar, coachroller, uppdrag och aggregerad statistik.
 - SQLite med unikt externt match-id och händelse-id. VDK:s totalsammanställning räknar varje match en gång.
 - Serverbaserad behörighetskontroll, lösenordshashning med scrypt, engångstoken, HttpOnly-sessioner, ursprungskontroll och begränsning av inloggningsförsök.
+- Regelgenerator 2026 flyttad från DinPuls till `innebandyregler/`, med en tydlig ingång på startsidan och länk tillbaka till VDK. Regelbank och träningsfunktioner är bevarade. DinPuls samtyckes- och analyskod har inte flyttats med. Träningsstatistik sparas lokalt i webbläsaren; tidigare statistik på DinPuls-domänen flyttas inte automatiskt till det nya ursprunget.
 
 ## Inte aktiverat / kräver extern verifiering
 

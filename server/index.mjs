@@ -100,11 +100,13 @@ export function createApp(options={}){
       if(method!=='GET'&&method!=='HEAD')fail(405,'Metoden stöds inte.');
       // Only the public files are exposed; server source, database and environment never are.
       const publicFiles=new Set(['/','/index.html','/styles.css','/app.js','/config.js']);
-      if(!publicFiles.has(path)&&!path.startsWith('/assets/'))fail(404,'Sidan hittades inte.');
-      const file=resolve(root,path==='/'?'index.html':'.'+decodeURIComponent(path));if(!file.startsWith(root.endsWith(sep)?root:root+sep))fail(403,'Åtkomst nekad.');
+      if(path==='/innebandyregler'){res.writeHead(301,{Location:'/innebandyregler/'});return res.end();}
+      if(!publicFiles.has(path)&&!path.startsWith('/assets/')&&!path.startsWith('/innebandyregler/'))fail(404,'Sidan hittades inte.');
+      const file=resolve(root,path==='/'?'index.html':path==='/innebandyregler/'?'innebandyregler/index.html':'.'+decodeURIComponent(path));if(!file.startsWith(root.endsWith(sep)?root:root+sep))fail(403,'Åtkomst nekad.');
       if(path.startsWith('/assets/')&&!file.startsWith(resolve(root,'assets')+sep))fail(404,'Filen hittades inte.');
+      if(path.startsWith('/innebandyregler/')&&!file.startsWith(resolve(root,'innebandyregler')+sep))fail(404,'Filen hittades inte.');
       const info=await stat(file);if(!info.isFile())fail(404,'Filen hittades inte.');
-      const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png'};
+      const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.svg':'image/svg+xml'};
       res.setHeader('Content-Security-Policy',`default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' ${[...allowed].join(' ')}; media-src https:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`);
       res.writeHead(200,{'Content-Type':types[extname(file)]||'application/octet-stream','Cache-Control':'no-cache'});res.end(method==='HEAD'?undefined:await readFile(file));
     }catch(e){const status=e.status|| (e.code==='ENOENT'?404:500);if(status===500)console.error('VDK request failed:',e.message);json(status,{error:status===500?'Ett serverfel inträffade. Försök igen.':e.message});}
