@@ -11,7 +11,7 @@ function text(v,min,max){if(typeof v!=='string'||v.trim().length<min||v.length>m
 function email(v){v=text(v,3,254).toLowerCase();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))fail(400,'Ange en giltig e-postadress.');return v;}
 function password(v){if(typeof v!=='string'||v.length<12||v.length>256)fail(400,'Lösenordet måste ha 12–256 tecken.');return v;}
 function httpsUrl(v,optional=false){if(optional&&!v)return '';try{const u=new URL(v);if(u.protocol!=='https:'||u.username||u.password)throw Error();return u.href;}catch{fail(400,'Ange en giltig https-länk.');}}
-async function readBody(req){let size=0;const chunks=[];for await(const chunk of req){size+=chunk.length;if(size>32768)fail(413,'För mycket data.');chunks.push(chunk);}try{return JSON.parse(Buffer.concat(chunks).toString()||'{}');}catch{fail(400,'Ogiltigt formulär.');}}
+async function readBody(req,limit=32768){let size=0;const chunks=[];for await(const chunk of req){size+=chunk.length;if(size>limit)fail(413,'För mycket data.');chunks.push(chunk);}try{return JSON.parse(Buffer.concat(chunks).toString()||'{}');}catch{fail(400,'Ogiltigt formulär.');}}
 const defaultMailer=async({to,subject,html})=>{if(!process.env.RESEND_API_KEY||!process.env.EMAIL_FROM)fail(503,'E-posttjänsten är inte konfigurerad.');const response=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:`Bearer ${process.env.RESEND_API_KEY}`,'Content-Type':'application/json'},body:JSON.stringify({from:process.env.EMAIL_FROM,to:[to],subject,html})});if(!response.ok)fail(502,'E-post kunde inte skickas. Försök igen.');};
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function createApp(options={}){
@@ -45,7 +45,7 @@ export function createApp(options={}){
           if(!requestOrigin||!allowed.has(requestOrigin))fail(403,'Begäran måste komma från VDK:s webbplats.');
           if(!(req.headers['content-type']||'').startsWith('application/json'))fail(415,'JSON krävs.');
         }
-        const body=method==='POST'?await readBody(req):{};
+        const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:32768):{};
         if(path==='/api/health'&&method==='GET')return json(200,{ok:true});
         if(path==='/api/settings'&&method==='GET')return json(200,{season,fee:100,applicationsOpen:!!swishNumber&&mailReady});
         if(path==='/api/applications'&&method==='POST'){
@@ -73,6 +73,17 @@ export function createApp(options={}){
           rate(req,'reset',10);const mail=email(body.email);if(!mailReady)fail(503,'E-posttjänsten är inte ansluten ännu.');const row=db.prepare('SELECT id,password_hash FROM users WHERE email=?').get(mail);if(row?.password_hash){const token=newToken();db.prepare("INSERT INTO tokens(token_hash,user_id,kind,expires_at) VALUES (?,?,'reset',?)").run(digest(token),row.id,Date.now()+60*60*1000);try{await mailer({to:mail,subject:'Återställ ditt VDK-lösenord',html:`<p><a href="${escapeHtml(origin)}/#/nytt-losenord?token=${token}">Välj ett nytt lösenord</a></p><p>Länken gäller i en timme. Har du inte bett om den kan du bortse från meddelandet.</p>`});}catch(e){db.prepare('DELETE FROM tokens WHERE token_hash=?').run(digest(token));throw e;}}return json(200,{ok:true});
         }
         if(path==='/api/auth/reset'&&method==='POST'){rate(req,'reset-token',20);const token=text(body.token,20,100),pass=password(body.password);const row=db.prepare("SELECT * FROM tokens WHERE token_hash=? AND kind='reset' AND expires_at>?").get(digest(token),Date.now());if(!row)fail(400,'Återställningslänken är ogiltig eller har gått ut.');transaction(db,()=>{db.prepare('UPDATE users SET password_hash=? WHERE id=?').run(hashPassword(pass),row.user_id);db.prepare('DELETE FROM tokens WHERE user_id=?').run(row.user_id);db.prepare('DELETE FROM sessions WHERE user_id=?').run(row.user_id);});return json(200,{ok:true});}
+        if(path==='/api/profile/photo'&&method==='POST'){
+          const u=auth(req);rate(req,'profile-photo',10);
+          if(body.remove===true){db.prepare('DELETE FROM profile_photos WHERE user_id=?').run(u.id);return json(200,{ok:true});}
+          if(!['image/png','image/jpeg'].includes(body.mime)||typeof body.data!=='string'||!body.data.length||!/^[A-Za-z0-9+/]+={0,2}$/.test(body.data))fail(400,'Välj en PNG- eller JPEG-bild.');
+          const bytes=Buffer.from(body.data,'base64');if(bytes.length>2*1024*1024)fail(413,'Bilden får vara högst 2 MB.');
+          const png=bytes.length>45&&bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))&&bytes.toString('ascii',12,16)==='IHDR'&&bytes.toString('ascii',bytes.length-8,bytes.length-4)==='IEND';
+          const jpeg=bytes.length>20&&bytes[0]===255&&bytes[1]===216&&bytes[2]===255&&bytes[bytes.length-2]===255&&bytes[bytes.length-1]===217;
+          if(!(body.mime==='image/png'?png:jpeg))fail(400,'Filen är inte en giltig PNG- eller JPEG-bild.');
+          db.prepare('INSERT INTO profile_photos VALUES (?,?,?,?) ON CONFLICT(user_id) DO UPDATE SET mime=excluded.mime,data=excluded.data,updated_at=excluded.updated_at').run(u.id,body.mime,bytes,new Date().toISOString());return json(200,{ok:true});
+        }
+        if(path==='/api/profile/photo'&&method==='GET'){const u=auth(req);const photo=db.prepare('SELECT mime,data FROM profile_photos WHERE user_id=?').get(u.id);if(!photo)fail(404,'Ingen profilbild uppladdad.');res.writeHead(200,{'Content-Type':photo.mime,'Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'"});return res.end(Buffer.from(photo.data));}
         if(path==='/api/me'&&method==='GET')return json(200,{user:auth(req)});
         if(path==='/api/membership'&&method==='GET'){const u=auth(req);return json(200,{memberships:db.prepare('SELECT season,status,paid,category,amount,organization FROM memberships WHERE user_id=? ORDER BY season DESC').all(u.id),coachApplication:db.prepare('SELECT status FROM coach_applications WHERE user_id=?').get(u.id)||null});}
         if(path==='/api/dashboard'&&method==='GET'){const u=auth(req);return json(200,{counts:{matches:db.prepare('SELECT count(*) AS n FROM match_members WHERE user_id=?').get(u.id).n,coachings:db.prepare("SELECT count(*) AS n FROM coachings WHERE member_id=? AND status='published'").get(u.id).n},notifications:db.prepare('SELECT message,created_at FROM notifications WHERE user_id=? ORDER BY id DESC LIMIT 30').all(u.id)});}

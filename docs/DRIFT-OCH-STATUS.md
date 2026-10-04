@@ -79,3 +79,11 @@ Ingen generell resultat-/tabellservice, inget tillsättningssystem, ingen domarr
 `npm run check` kontrollerar syntax. `npm test` testar betalning före godkännande, engångsaktivering, inloggning, sessionsspärr efter återställning, säsongsåtkomst, ursprungskontroll, dataseparation, seniorbegränsning, coachpublicering och deduplicerad statistik. Testerna använder temporära databaser i minnet och en simulerad e-posttjänst.
 
 Swish-koden finns som användarens oförändrade PDF på alla fyra informationssidor. Avkodad mottagare: 1231494988, förifyllt belopp 100 SEK, meddelande Medlemsavgift 2026/27. Föreningar och företagsstöd får tydliga instruktioner att ändra belopp och meddelande. Mottagarnamn och genomförd betalning är inte verifierade.
+
+## Profilbild och statistik, 2026-10-04
+
+Mina sidor har privat uppladdning och radering av profilbild (JPEG/PNG, högst 2 MB). Bilden lagras i kontodatabasen och kräver användarens egen aktiva session; inga profilbilder publiceras i GitHub eller som offentliga filer. Profiluppladdningen och filtrerad kollegastatistik har kontrollerats i webbläsare vid 1440 och 390 px. Samtliga 14 tester passerade, inklusive åtkomstskydd, återimport utan dubbelräkning och matcher med noll utvisningar.
+
+Statistikvyn visar matchlista med officiell källänk, utvisningar per match, totalsumma, genomsnitt, kategorifördelning och klickbar kollegasammanställning. Matchdata är ännu inte hämtad för användaren. Rätt domaridentitet (Sören eller Johan Johansson) och officiellt match-/profilunderlag behöver bekräftas innan import för 2025/26. Underlaget avser utvisningar i domarparets matcher, inte attribution till enskild beslutsfattare. Full säsongstäckning är inte verifierad.
+
+GitHub Pages har anpassad domän vdk.nu konfigurerad. Inloggningsservern är fortfarande inte driftsatt; dessa kontofunktioner kan därför inte användas på den publika webbplatsen ännu.
