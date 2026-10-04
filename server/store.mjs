@@ -23,7 +23,12 @@ export function openStore(path=':memory:'){
   CREATE TABLE IF NOT EXISTS clips(id INTEGER PRIMARY KEY,coaching_id INTEGER NOT NULL REFERENCES coachings(id),start_seconds INTEGER NOT NULL,end_seconds INTEGER NOT NULL,category TEXT NOT NULL,comment TEXT NOT NULL,audio_url TEXT NOT NULL DEFAULT '',CHECK(start_seconds>=0 AND end_seconds>start_seconds));
   CREATE TABLE IF NOT EXISTS notifications(id INTEGER PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id),message TEXT NOT NULL,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
   CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY,actor_id INTEGER REFERENCES users(id),action TEXT NOT NULL,target_id INTEGER,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
-  `);return db;
+  `);
+  const columns=new Set(db.prepare('PRAGMA table_info(memberships)').all().map(x=>x.name));
+  if(!columns.has('category'))db.exec("ALTER TABLE memberships ADD COLUMN category TEXT NOT NULL DEFAULT 'active' CHECK(category IN ('active','support','club','business'))");
+  if(!columns.has('amount'))db.exec('ALTER TABLE memberships ADD COLUMN amount INTEGER NOT NULL DEFAULT 100');
+  if(!columns.has('organization'))db.exec("ALTER TABLE memberships ADD COLUMN organization TEXT NOT NULL DEFAULT ''");
+  return db;
 }
 export function transaction(db,fn){db.exec('BEGIN IMMEDIATE');try{const result=fn();db.exec('COMMIT');return result;}catch(e){db.exec('ROLLBACK');throw e;}}
 export function getRoles(db,id){return db.prepare('SELECT role FROM roles WHERE user_id=?').all(id).map(x=>x.role);}

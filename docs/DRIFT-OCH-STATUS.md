@@ -5,6 +5,7 @@
 - Publik svensk webbplats: startsida, Om VDK, medlemskap, För domare, sponsorer, nyheter, kontakt och integritetsinformation.
 - Svart, gul och vit identitet med responsiv navigation. Referensbilden används tillfälligt som hero-bakgrund. Ingen ny bild har genererats. Logotypen är en provisorisk textversion tills separat originalfil finns.
 - Medlemsansökan, Swish-referens, manuell betalningskontroll, adminbeslut, e-postaktivering och eget lösenord.
+- Medlemskategorier: aktiv domare 100 kr/säsong, stödmedlem 100 kr/säsong, föreningsmedlem 1 500 kr/säsong och företagsmedlem med valfritt stöd från 1 000 kr. Kategori, belopp och förening/företag sparas i medlemsregistret. Befintliga medlemsrader migreras till aktiv domare, 100 kr. Servern bestämmer de fasta avgifterna och validerar företagets minimibelopp. Föreningsmedlemskap omfattar två domarbesök à en timme samt uppföljning och stöd till föreningsdomare. Företagsupplägget presenteras som ett första förslag med valfri synlighet som stödjande företag.
 - Säsongsbundet medlemsregister, sessionsinloggning, utloggning och lösenordsåterställning.
 - Personliga matcher och statistik med säsongs- och kollegafilter.
 - Videocoachansökan, coachroll, seniormatchuppdrag, rättighetsnotering, tidsintervall, kategorier, textkommentar och valfri https-länk till ljudkommentar.
