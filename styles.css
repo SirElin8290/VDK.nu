@@ -56,3 +56,35 @@
  .statistics-table td::before{content:attr(data-label);display:block;font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:.1rem}
 }
 .tabs{flex-wrap:wrap;overflow:visible}
+
+/* Themes share VDK's yellow accent; theme.js sets the choice before styles load. */
+:root[data-theme="light"]{color-scheme:light;--bg:#f5f7f8;--surface:#ffffff;--surface-2:#e9eef0;--text:#172126;--muted:#52636c;--line:#c7d2d7;--accent-text:#806000}
+.theme-toggle{flex-shrink:0;background:var(--surface-2);color:var(--text);border:1px solid var(--line);border-radius:5px;padding:.65rem .8rem;font-size:.9rem;min-height:44px;white-space:nowrap}
+:root[data-theme="light"] .site-header,:root[data-theme="light"] .site-footer{background:#fff}
+:root[data-theme="light"] .hero:after{background:linear-gradient(90deg,#f5f7f8fc 0%,#f5f7f8f5 35%,#f5f7f899 58%,#f5f7f810 85%),linear-gradient(0deg,#f5f7f8,transparent 25%)}
+:root[data-theme="light"] .hero h1 span,:root[data-theme="light"] .brand-word b:nth-child(2),:root[data-theme="light"] .number,:root[data-theme="light"] .membership-price,:root[data-theme="light"] .membership-chooser span,:root[data-theme="light"] .membership-option .eyebrow,:root[data-theme="light"] .rule-banner .eyebrow,:root[data-theme="light"] .season-summary strong,:root[data-theme="light"] .nav-membership-button.active,:root[data-theme="light"] .quote-card .quote-mark{color:var(--accent-text)}
+:root[data-theme="light"] .quote-card{background:radial-gradient(ellipse at 100% 100%,#e3e8db,#fff 70%)}
+:root[data-theme="light"] .card-light{background:#fff;border-color:var(--line);color:var(--text)}
+:root[data-theme="light"] .field input,:root[data-theme="light"] .field select,:root[data-theme="light"] .field textarea{background:var(--surface);border-color:#98abb5;color:var(--text)}
+:root[data-theme="light"] input::placeholder,:root[data-theme="light"] textarea::placeholder{color:var(--muted);opacity:1}
+:root[data-theme="light"] .membership-mini-menu{background:var(--surface);border-color:var(--line);box-shadow:0 12px 35px #17212620}
+:root[data-theme="light"] .notice{color:var(--text);background:#fff7ce;border-color:#806000}
+:root[data-theme="light"] .notice.error{background:#fff0ee;border-color:#b82c25;color:#98241e}
+:root[data-theme="light"] .notice.success{background:#edf8ef;border-color:#357349;color:#235332}
+:root[data-theme="light"] .form-error{color:#a02520}
+:root[data-theme="light"] .badge-yellow{color:var(--accent-text);border-color:#b69237}
+:root[data-theme="light"] .signature{color:var(--muted)}
+:root[data-theme="light"] .button-outline{border-color:#52636c}
+:root[data-theme="light"] .button-outline:hover{background:#1721260a}
+@media(max-width:650px){
+ .site-header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.75rem}
+ .site-header>.brand{grid-column:1;grid-row:1}
+ .site-header>.menu-toggle{grid-column:2;grid-row:1;margin-left:0;justify-self:end}
+ .site-header>.account-link{grid-column:1;grid-row:2;justify-self:start}
+ .site-header>.theme-toggle{grid-column:2;grid-row:2;justify-self:end;font-size:.875rem}
+ .site-header nav{grid-column:1/-1;grid-row:3}
+ :root[data-theme="light"] .hero:after{background:linear-gradient(90deg,#f5f7f8f5,#f5f7f8b0),linear-gradient(0deg,#f5f7f8,transparent 45%)}
+}
+
+:root[data-theme="light"] .yellow,:root[data-theme="light"] .pillar-icon{color:var(--accent-text)}
+:root[data-theme="light"] .hero .eyebrow{color:var(--muted)}

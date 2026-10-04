@@ -115,7 +115,7 @@ export function createApp(options={}){
       }
       if(method!=='GET'&&method!=='HEAD')fail(405,'Metoden stöds inte.');
       // Only the public files are exposed; server source, database and environment never are.
-      const publicFiles=new Set(['/','/index.html','/styles.css','/app.js','/config.js']);
+      const publicFiles=new Set(['/','/index.html','/styles.css','/app.js','/config.js','/theme.js']);
       if(path==='/innebandyregler'){res.writeHead(301,{Location:'/innebandyregler/'});return res.end();}
       if(!publicFiles.has(path)&&!path.startsWith('/assets/')&&!path.startsWith('/innebandyregler/'))fail(404,'Sidan hittades inte.');
       const file=resolve(root,path==='/'?'index.html':path==='/innebandyregler/'?'innebandyregler/index.html':'.'+decodeURIComponent(path));if(!file.startsWith(root.endsWith(sep)?root:root+sep))fail(403,'Åtkomst nekad.');
