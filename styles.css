@@ -96,3 +96,6 @@
 :root[data-theme="light"] .hero-image-dark{display:none}
 @media(max-width:1000px){.hero-image-dark{width:80%;left:auto;top:0}}
 @media(max-width:650px){.hero-image-dark{width:100%;left:0;top:0;object-position:58% center;opacity:.7}}
+
+:root[data-theme="light"] .hero-image-light{inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;opacity:1}
+@media(max-width:650px){:root[data-theme="light"] .hero-image-light{object-position:75% center}}
