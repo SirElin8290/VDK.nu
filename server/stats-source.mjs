@@ -2,7 +2,7 @@ const BASE='https://api.innebandy.se/v2/api/public';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 export const normalizeName=value=>String(value||'').normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE');
 export class StatsSource {
-  constructor({fetcher=fetch,delay=150}={}){this.fetcher=fetcher;this.delay=delay;this.token=null;this.calls=0;}
+  constructor({fetcher=fetch,delay=150}={}){this.fetcher=fetcher.bind(globalThis);this.delay=delay;this.token=null;this.calls=0;}
   async authorize(){const r=await this.fetcher('https://api.innebandy.se/StatsAppApi/api/startkit',{signal:AbortSignal.timeout(30000)});if(!r.ok)throw Error('Statistikkällans startdata kunde inte läsas.');const data=await r.json();if(!data.accessToken)throw Error('Publik åtkomsttoken saknas.');this.token=data.accessToken;}
   async get(path){if(!this.token)await this.authorize();for(let attempt=0;attempt<4;attempt++){await sleep(this.delay);this.calls++;const r=await this.fetcher(BASE+path,{headers:{Authorization:'Bearer '+this.token,Referer:'https://stats.innebandy.se/'},signal:AbortSignal.timeout(30000)});if(r.ok)return r.json();if(r.status===401&&attempt===0){await this.authorize();continue;}if(r.status===429||r.status>=500){const retry=Number(r.headers.get('retry-after'));await sleep(Math.min(60000,Number.isFinite(retry)&&retry>0?retry*1000:1000*2**attempt));continue;}throw Error(`Statistikkällan svarade ${r.status} för ${path}`);}throw Error('Statistikkällan är tillfälligt otillgänglig.');}
 }

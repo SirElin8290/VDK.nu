@@ -15,4 +15,4 @@ För konfigurerad medlemsdrift: kopiera `.env.example` till `.env` och kör `nod
 ## Drift och integrationsstatus
 
 Se [driftinstruktioner och exakt funktionsstatus](docs/DRIFT-OCH-STATUS.md).
-Frontend kan publiceras på GitHub Pages. Säker inloggning, medlemsregister och admin kräver den medföljande servern och beständig databas. Inga externa match- eller videointegrationer påstås vara aktiverade.
+Frontend publiceras via GitHub Pages. Medlemsserver och privat statistikdatabas är driftsatta på Cloudflare Workers med SQLite i en Durable Object. API-domänanslutningen återstår; aktuell status och verifieringsgränser finns i driftinstruktionerna.

@@ -1,0 +1,50 @@
+{
+  "name": "vdk-members",
+  "main": "cloudflare/worker.mjs",
+  "account_id": "926bf7a201cbc5c5170c49226af005d8",
+  "compatibility_date": "2026-08-21",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": true,
+  "keep_vars": true,
+  "assets": {
+    "directory": "public-build",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*",
+      "/internal/*"
+    ]
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "VDK_DB",
+        "class_name": "VdkDatabase"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "VdkDatabase"
+      ]
+    }
+  ],
+  "vars": {
+    "SEASON": "2026/27",
+    "SWISH_NUMBER": "1231494988",
+    "EMAIL_ENABLED": "true",
+    "PUBLIC_ORIGIN": "https://vdk-members.soren-johansson-7.workers.dev",
+    "ALLOWED_ORIGINS": "https://vdk.nu,https://www.vdk.nu,https://vdk-members.soren-johansson-7.workers.dev"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "triggers": {
+    "crons": [
+      "0 1,2 * * 1"
+    ]
+  }
+}

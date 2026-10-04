@@ -1,0 +1,4 @@
+# För lokal utveckling och för manuell uppladdning till Cloudflare. Lägg aldrig riktiga nycklar i Git.
+RESEND_API_KEY=
+EMAIL_FROM=VDK <konto@vdk.nu>
+IMPORT_SECRET=

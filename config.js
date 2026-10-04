@@ -1,4 +1,7 @@
-// Tom sträng: API på samma server. På GitHub Pages anges den driftsatta API-adressen.
-window.VDK_CONFIG = { apiBase: '', membershipQrPdf: 'assets/swish-qr.pdf', statutesUrl: 'assets/stadgar-vdk.docx' };
-// Samma oförändrade Swish-PDF används för alla fyra informationssidor.
-// statutesUrl ska peka på föreningens bekräftade stadgeversion.
+// VDK:s publika webb använder API-domänen. Lokalt och på Worker-adressen används samma server.
+const vdkPublicHost = ['vdk.nu', 'www.vdk.nu'].includes(window.location.hostname);
+window.VDK_CONFIG = {
+  apiBase: vdkPublicHost ? 'https://api.vdk.nu' : '',
+  membershipQrPdf: 'assets/swish-qr.pdf',
+  statutesUrl: 'assets/stadgar-vdk.docx'
+};

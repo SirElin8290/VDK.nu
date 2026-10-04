@@ -8,6 +8,6 @@
     "start": "node server/index.mjs",
     "stats:sync": "node server/sync-cli.mjs",
     "test": "node --test tests/*.test.mjs",
-    "check": "node --check app.js && node --check server/index.mjs && node --check server/store.mjs && node --check server/stats-source.mjs && node --check server/stats-sync.mjs && node --check server/sync-cli.mjs"
+    "check": "node --check app.js && node --check server/index.mjs && node --check server/store.mjs && node --check server/stats-source.mjs && node --check server/stats-sync.mjs && node --check server/sync-cli.mjs && node --check cloudflare/worker.mjs && node --check cloudflare/api.mjs && node --check cloudflare/store.mjs && node --check cloudflare/sync.mjs && node --check cloudflare/cache-store.mjs && node --check config.js"
   }
 }

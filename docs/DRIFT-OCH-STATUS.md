@@ -1,97 +1,84 @@
-# VDK.nu – implementation och drift
+# VDK.nu – drift och verifierad status
 
-## Byggt
+Uppdaterad 2026-10-04. Denna fil ersätter tidigare statusnoteringar om att medlemsservern inte var driftsatt.
 
-- Publik svensk webbplats: startsida, Om VDK, medlemskap, För domare, sponsorer, nyheter, kontakt och integritetsinformation.
-- Svart, gul och vit identitet med responsiv navigation. Referensbilden används tillfälligt som hero-bakgrund. Ingen ny bild har genererats. Logotypen är en provisorisk textversion tills separat originalfil finns.
-- Medlemsansökan, Swish-referens, manuell betalningskontroll, adminbeslut, e-postaktivering och eget lösenord.
-- Medlemskategorier: aktiv domare 100 kr/säsong, stödmedlem 100 kr/säsong, föreningsmedlem 1 500 kr/säsong och företagsstöd med valfritt stöd från 1 000 kr. Kategori, belopp och förening/företag sparas i medlemsregistret. Befintliga medlemsrader migreras till aktiv domare, 100 kr. Servern bestämmer de fasta avgifterna och validerar företagets minimibelopp. Föreningsmedlemskap omfattar två domarbesök à en timme samt uppföljning och stöd till föreningsdomare. Företagsupplägget presenteras som ett första förslag med valfri synlighet som stödjande företag.
-- Bli medlem i huvudmenyn och startsidans hero öppnar en minimeny med länkar till fyra egna informationssidor: aktiv domare, stödmedlem, föreningsmedlem och företagsstöd. Rösträtt och förslagsrätt beskrivs enligt användarens beslut. Företagsstöd behandlas som en gåva utan medlemsaktivering eller medlemsbehörighet och räknas inte som aktiv domarmedlem i statistiken.
-- Samma QR-plats finns på alla informationssidor och styrs via `membershipQrImage` i `config.js`. Ingen ny QR-bild har skapats. Stadgesidan och länkarna styrs av `statutesUrl`. Den valda filen "Stadgar för Värmlands Domarkollektiv.docx" har lagts i `assets/stadgar-vdk.docx`. På användarens uttryckliga instruktion ändrades enbart aktiv medlemsavgift från 200 till 100; samtliga andra dokumentdelar är identiska med originalet, även formuleringen kalenderår och dokumentets två medlemskategorier.
-- Säsongsbundet medlemsregister, sessionsinloggning, utloggning och lösenordsåterställning.
-- Personliga matcher och statistik med säsongs- och kollegafilter.
-- Videocoachansökan, coachroll, seniormatchuppdrag, rättighetsnotering, tidsintervall, kategorier, textkommentar och valfri https-länk till ljudkommentar.
-- Publicering av coachningar med medlemsnotiser. Endast tilldelad coach kan redigera sitt utkast, endast berörd medlem kan läsa sin publicerade coachning.
-- Separat adminvy för medlemskap, Swish-kontroll, coachansökningar, coachroller, uppdrag och aggregerad statistik.
-- SQLite med unikt externt match-id och händelse-id. VDK:s totalsammanställning räknar varje match en gång.
-- Serverbaserad behörighetskontroll, lösenordshashning med scrypt, engångstoken, HttpOnly-sessioner, ursprungskontroll och begränsning av inloggningsförsök.
-- Regelgenerator 2026 flyttad från DinPuls till `innebandyregler/`, med en tydlig ingång på startsidan och länk tillbaka till VDK. Regelbank och träningsfunktioner är bevarade. DinPuls samtyckes- och analyskod har inte flyttats med. Träningsstatistik sparas lokalt i webbläsaren; tidigare statistik på DinPuls-domänen flyttas inte automatiskt till det nya ursprunget.
+## Produktion
 
-## Inte aktiverat / kräver extern verifiering
+- Publik webb: GitHub Pages, vdk.nu. HTTPS kontrollerat med giltigt certifikat.
+- Medlemsserver: Cloudflare Worker `vdk-members` i samma Cloudflare-konto som DinPuls.
+- Privat databas: SQLite i Durable Object `VdkDatabase`, beständig instans `vdk-production`. VDK använder inte DinPuls databas eller medlemskonton.
+- Tillfällig fungerande tjänsteadress: https://vdk-members.soren-johansson-7.workers.dev/#/mina-sidor
+- Förberedd permanent API-adress: https://api.vdk.nu. `config.js` använder denna från vdk.nu och www.vdk.nu; lokal utveckling och Worker-adressen använder samma server.
+- **API-domänen är ännu inte ansluten.** vdk.nu finns inte i Cloudflare-kontot enligt senaste kontroll. Domänen behöver läggas till och aktiveras innan Worker-domänen kan kopplas. De ordinarie webb- och mejlposterna ska bevaras när DNS flyttas.
+- **Automatiska medlemsmejl är anslutna.** Resend godkände testutskick och återställningsmejl från `VDK <konto@vdk.nu>`. Kontaktadressen är separat. Resend-nyckeln har Sending access för vdk.nu; leveransstatus kan inte läsas med denna nyckel. Inkommande brevlådors funktion är inte verifierad.
+- Medlemsansökningar är öppna på Worker-adressen efter anslutning av Swish och e-post. Aktiveringslänkar använder den fungerande Worker-adressen tills domänkopplingen är färdig. Ett befintligt administratörskonto kan logga in utan att en obekräftad medlemsbetalning registreras.
 
-- Automatisk insamling från innebandy.se och stats.innebandy.se. Ingen skrapning eller iBIS-inloggning har lagts till. Ett adminskyddat importgränssnitt tar endast verifierat underlag för VDK-medlemmar: `POST /api/admin/import-match`. Data måste ha en officiell källadress.
-- Återbudssignaler. Tomläget säger uttryckligen att datakopplingen inte är aktiverad. Inga uppdrag presenteras som lediga.
-- Innebandy Play/Solidsport: automatisk tidshoppning och matchhändelse-till-video-synkronisering är inte verifierade. Tidsmarkeringar och originalvideolänk fungerar; användaren söker själv till tiden. Matchtid och videons tidslinje kan ha olika startpunkter.
-- Inspelning/uppladdning av ljud och egen lagring av videoklipp. Versionen stödjer en länk till befintlig ljudkommentar och länkar till originalvideo; rättigheterna måste dokumenteras av admin.
-- Produktionens Swish-nummer, e-postavsändare, API-nyckel, domän, första admin och servervärd.
-- Slutlig hero-bild och original-logotyp.
-- Godkänd integritetstext med föreningsuppgifter, rättslig grund och lagringstider.
+## Medlemsflöde
 
-## Kör lokalt eller på server
+Aktiv domare 100 kr, stödmedlem 100 kr och föreningsmedlem 1 500 kr per säsong. Föreningsupplägget omfattar två domarbesök om en timme och uppföljning/stöd till föreningsdomare. Företagsstöd är en gåva om minst 1 000 kr och ger inte medlemsinloggning.
 
-Node.js 24 eller senare behövs. Inga externa Node-paket behöver installeras.
+Ansökan får en betalningsreferens. Administratören kontrollerar Swish-betalningen, markerar betalt och godkänner. För medlemskategorier skickas sedan en engångslänk till eget lösenord. Betalningar bekräftas inte automatiskt av QR-koden. Återställning av lösenord upphäver tidigare sessioner.
 
-1. Kopiera `.env.example` till `.env` och fyll i riktiga värden. Lägg aldrig `.env` eller databasen i Git.
-2. Skapa första admin: `node --env-file=.env server/create-admin.mjs`. Ta sedan bort `ADMIN_PASSWORD` ur miljön.
-3. Starta: `node --env-file=.env server/index.mjs`.
-4. Öppna `http://localhost:3000`. Anpassa `PUBLIC_ORIGIN` om porten eller domänen ändras.
+Den gemensamma Swish-PDF:en är oförändrad: mottagare 1231494988, förifyllt 100 SEK och Medlemsavgift 2026/27. Föreningar och företagsstöd får instruktioner att ändra belopp/meddelande. Mottagarnamn och genomförda betalningar har inte verifierats.
 
-Medlemsansökan öppnas endast när `SWISH_NUMBER`, `RESEND_API_KEY` och `EMAIL_FROM` är konfigurerade. Resend kräver en verifierad avsändare. Inga riktiga mejl skickas i testerna.
+Stadgarna i `assets/stadgar-vdk.docx` har enbart ändringen 200 till 100 kr enligt användarens instruktion. Övrig text, kalenderår och stadgarnas medlemskategorier har inte ändrats.
 
-Driftsätt hela appen bakom HTTPS på samma domän, med beständig volym för `data/`, säkerhetskopiering och övervakning. Dockerfile finns. Docker-container kan köras med exempelvis `--env-file .env -p 3000:3000 -v vdk-data:/app/data` och ett HTTPS-proxy framför. Sätt `HOST=0.0.0.0` i servermiljön om den ska lyssna externt.
+## Statistik i produktion
 
-## GitHub Pages
+Databasen innehåller Värmlands ordinarie seniorserier, utan förbundsserier, träningsmatcher, cup, kval eller slutspel. Datakällan är Svenska Innebandyförbundets publika matchdata. Hämtning kräver ingen iBIS-inloggning.
 
-Den publika sidan har publicerats och verifierats på https://sirelin8290.github.io/VDK.nu/. GitHub Pages är inställt på GitHub Actions (workflow). Domänen vdk.nu är ännu inte kopplad och medlemsservern är inte driftsatt.
+Senast verifierat underlag: 773 matcher för 2025/26 och 17 för 2026/27. Fyra ytterligare äldre matcher saknar händelseprotokoll och ingår inte som nollmatcher. Underlaget kan ändras när källan kompletteras.
 
-GitHub Pages visar den publika frontenddelen. Det kan inte köra Node-servern, hålla säkra sessionskonton eller skriva i SQLite. Medlemsfunktionerna har ett tydligt tom-/felmeddelande tills API-servern är ansluten.
+Sören Johansson, domaridentitet 8888: 48 Värmlandsmatcher och 187 utvisningshändelser för 2025/26; 1 match och 5 händelser för 2026/27. Tidigare rapporter om 63 matcher inkluderade även förbundsserier och gäller inte denna regionala avgränsning.
 
-Workflow exporterar endast de publika filerna och publicerar dem efter kontrollerna. Pages-källan har ändrats från main/root till **GitHub Actions**, så att endast frontendfiler publiceras som statiska filer.
+Mina sidor visar personliga matcher och kollegor samt separat Värmlandsstatistik. Filter finns för säsong, serie, lag, domare, domarkollega och utvisningskod. Statistik mot ett visst lag kan väljas. Matchlänkar går till officiella protokoll. Matchhändelser tillhör domarparet; källan anger inte vem som fattade ett enskilt beslut.
 
-Rekommenderad slutlig drift: hela appen på `https://vdk.nu` och samma ursprung för API. Alternativ: frontend på `https://vdk.nu`, API på `https://api.vdk.nu`, `config.js` anger API-bas och serverns `ALLOWED_ORIGINS=https://vdk.nu`. De är samma webbplats i kakornas mening. GitHub Pages-standarddomänen och en orelaterad API-domän fungerar inte med SameSite=Lax-kakor. Undvik sådan cross-site drift.
+Sökningar läser bara den privata databasen. Inga externa källanrop görs i sökvägen. Uppmätta API-svar för Sörens statistik och regional statistik var under 100 ms i de genomförda anropen; det är inte en garanti för varje nätverk eller ett lasttest.
 
-Ingen domänkoppling eller produktionsserver beställs automatiskt och inga Swish-uppgifter eller hemligheter gissas.
+## Automatiska uppdateringar
 
-## Exempel på verifierad matchimport
+Cloudflare Cron är driftsatt med UTC-tiderna 01 och 02 på måndagar. Funktionen väljer enbart den tid som motsvarar 03 i Europe/Stockholm, inklusive sommar/vintertid. Drift kräver inte att användarens dator är igång.
 
-Admin anropar gränssnittet från en godkänd och inloggad VDK-session. Exemplet är en formatbeskrivning, inte riktig matchdata och läses inte in automatiskt:
+Planen lagras före nätverksarbetet. Durable Object-alarm återupptar avbruten planering och behandlar högst 15 matcher per omgång. Varje match hämtas högst en gång i en plan, oavsett hur många VDK-medlemmar som dömt den. Gamla verifierade matcher återanvänds; nya och de senaste 21 dagarnas matcher kontrolleras på nytt. Matcher med saknade protokoll försöks igen vid nästa uppdatering. Källfel raderar inte tidigare verifierade händelser.
 
-```json
-{
-  "externalMatchId": "EXTERN-MATCHIDENTITET",
-  "season": "2026/27",
-  "startsAt": "2026-10-10T14:00:00Z",
-  "home": "Verifierat hemmalag",
-  "away": "Verifierat bortalag",
-  "level": "senior",
-  "sourceUrl": "https://stats.innebandy.se/VERIFIERAD-MATCHADRESS",
-  "members": [{ "userId": 2, "colleague": "Verifierad kollega" }],
-  "penalties": [{ "externalEventId": "EXTERN-HÄNDELSEIDENTITET", "category": "Slag", "seconds": 494 }]
-}
-```
+Schemat är driftsatt. En manuell produktionskörning av samma motor är genomförd: 21 kontroller, 4 saknade äldre protokoll, totalsummor bevarade. Första verkliga tidsstyrda körningen har ännu inte observerats. Aktuella säsonger är 43/44 och behöver ändras vid nästa säsongsbyte.
 
-## Avgränsningar
+## Säkerhet och privata filer
 
-Ingen generell resultat-/tabellservice, inget tillsättningssystem, ingen domarranking, ingen statistikdatabas över Värmlands övriga domare och ingen ungdomsvideocoachning.
+Lösenord lagras som scrypt-hash. Sessioner är Secure/HttpOnly/SameSite=Lax i produktion och begränsas till `/api`. Webbplats och API ska ha HTTPS under samma huvuddomän så att webbläsaren kan behålla sessionen. Ursprungs- och rollkontroll sker på servern. Betalda, aktiva medlemskap krävs för vanliga medlemskonton; administratörer har separat driftsåtkomst.
 
-## Kontroll
+Profilbild: PNG/JPEG upp till 2 MB, med formatkontroll. Lagring och hämtning är privata och kräver kontots egen session. Radering stöds. Bilder och kontodatabaser publiceras inte i GitHub.
 
-`npm run check` kontrollerar syntax. `npm test` testar betalning före godkännande, engångsaktivering, inloggning, sessionsspärr efter återställning, säsongsåtkomst, ursprungskontroll, dataseparation, seniorbegränsning, coachpublicering och deduplicerad statistik. Testerna använder temporära databaser i minnet och en simulerad e-posttjänst.
+`/internal/import`, `/internal/sync` och `/internal/status` är endast driftverktyg och kräver den privata `IMPORT_SECRET`. Nycklar, `.dev.vars`, lokal Cloudflare-lagring och databaser är ignorerade av Git. Offentlig export innehåller endast webbplatsen och dess publika tillgångar.
 
-Swish-koden finns som användarens oförändrade PDF på alla fyra informationssidor. Avkodad mottagare: 1231494988, förifyllt belopp 100 SEK, meddelande Medlemsavgift 2026/27. Föreningar och företagsstöd får tydliga instruktioner att ändra belopp och meddelande. Mottagarnamn och genomförd betalning är inte verifierade.
+## Driftsättning
 
-## Profilbild och statistik, 2026-10-04
+1. Kör `npm run check` och `npm test`.
+2. Kör `node server/export-public.mjs`.
+3. Driftsätt Worker med Wrangler och `wrangler.jsonc`. Produktionens namn/databasinstans ska bevaras.
+4. Sätt `RESEND_API_KEY` och `EMAIL_FROM` som Worker-secrets via standard input, aldrig som hårdkodad text i Git. Avsändare: VDK <konto@vdk.nu>. Sätt EMAIL_ENABLED=true först när ett testutskick har godkänts.
+5. När vdk.nu är aktiv i Cloudflare: koppla `api.vdk.nu` som Custom Domain till `vdk-members`, lägg motsvarande `routes` med `custom_domain: true` i Wrangler-konfigurationen och verifiera certifikat/API.
+6. Publicera frontend via befintligt GitHub Actions-flöde. Testa inloggning, omladdning, statistik och utloggning på den riktiga vdk.nu-domänen.
+7. Verifiera faktisk leverans från kontakt@vdk.nu innan aktiverings- och återställningsmejl betraktas som klara.
 
-Mina sidor har privat uppladdning och radering av profilbild (JPEG/PNG, högst 2 MB). Bilden lagras i kontodatabasen och kräver användarens egen aktiva session; inga profilbilder publiceras i GitHub eller som offentliga filer. Profiluppladdningen och filtrerad kollegastatistik har kontrollerats i webbläsare vid 1440 och 390 px. Samtliga 14 tester passerade, inklusive åtkomstskydd, återimport utan dubbelräkning och matcher med noll utvisningar.
+Cloudflare-konton, Resend-konto och Inleed-mejl är separata behörighetsytor. Att ha GitHub-åtkomst ger inte åtkomst till DNS eller en hemlig Resend-nyckel.
 
-Statistikvyn visar matchlista med officiell källänk, utvisningar per match, totalsumma, genomsnitt, kategorifördelning och klickbar kollegasammanställning. Matchdata är ännu inte hämtad för användaren. Rätt domaridentitet (Sören eller Johan Johansson) och officiellt match-/profilunderlag behöver bekräftas innan import för 2025/26. Underlaget avser utvisningar i domarparets matcher, inte attribution till enskild beslutsfattare. Full säsongstäckning är inte verifierad.
+## Kontroller genomförda
 
-GitHub Pages har anpassad domän vdk.nu konfigurerad. Inloggningsservern är fortfarande inte driftsatt; dessa kontofunktioner kan därför inte användas på den publika webbplatsen ännu.
+27 automatiska tester passerade: befintlig medlemsplattform och nya Cloudflare-flöden för medlemskategorier, betalning före aktivering, engångslänkar, inloggning, återställning, sessionsspärr, roll/ursprungskontroll, regional statistik, 100 testprofiler, kö/resumption och svensk schematid.
 
-## Verklig statistikimport 2026-10-04
+Riktigt befintligt konto: API-inloggning, statistik och utloggning i produktion. Webbläsare: inloggning, bibehållen session efter omladdning och utloggning på Worker-adressen utan JavaScript-fel. Statistikvyer testade vid 1440 och 390 px utan horisontellt överflöde.
 
-Hämtmotorn är byggd och provad mot officiell matchdata. Sören Johansson, RefereeID 8888: 63 unika seriematcher / 241 utvisningshändelser för 2025/26 och 1 match / 5 händelser för 2026/27. Avgränsning: Värmlands IBF inklusive korslistade serier samt Svenska IBF. Övriga distrikt är inte genomgångna; påstå inte full nationell täckning. Träning, cuper och kval ingår inte. Alla 64 importerade matcher kontrollästes mot ursprunglig serie och händelseantal. Ursprunglig genomgång: 148 serielistor och 6197 matchläsningar, inklusive några korslistade dubbelkontroller; matchdatabasen är deduplicerad. Ny motorkod läser varje match-ID högst en gång per körning. Efterföljande löpande körning: 321 matchläsningar och oförändrade säsongstotaler, inga källfel.
+Profilbildens uppladdning, byte-identiska återläsning, åtkomstskydd och radering har verifierats i en separat lokal Cloudflare Worker/Durable Object-miljö. Inget tillfälligt administratörskonto eller profilbildstest skapades i produktion.
 
-21 tester passerar, inklusive 100 syntetiska medlemsprofiler i gemensam hämtning, lag/serie/kollegafilter, uteblivna protokoll, inställda matcher, återimport, cacheåteranvändning och svensk schematid. Detta är inte ett produktionslasttest med 100 riktiga domare. Rapportfilter och Mina sidor är kontrollerade i mobil och dator. Personlig databas och rapporter publiceras inte i GitHub Pages. Driftanvisningar finns i STATISTIKMOTOR.md.
+## Övriga gränser
 
-Inbyggt schema måndag kl 03 Europe/Stockholm är färdigt men inte aktiverat i produktion. Medlemsservern behöver fortfarande driftsättas. Inga produktionskörningar i natt kan utlovas med bara GitHub Pages.
+Videocoachning stödjer rättighetsnotering, matchuppdrag, tidsmarkeringar, text och länkar till video/ljud. Automatisk tidshoppning i externa videoplattformar och egen klipplagring är inte verifierade. Möjliga återbud är inte bekräftade lediga uppdrag. Slutlig hero-bild, original-logotyp och föreningens granskning av integritetstext återstår.
+
+## Statistik på mobil, 2026-10-04
+
+Sökknappen kör nu även med oförändrat urval. Den visar laddningsstatus och flyttar fokus direkt till resultatet. På mobil fälls filterpanelen ihop efter sökning. Säsong, lag, serie och domare väljs i tydligt märkta listor; kryssrutan begränsar händelserna till valt lag. Ett valt lag krävs för denna begränsning, och samma domare kan inte väljas som båda i ett domarpar.
+
+Flikarna radbryts. Match-, kategori- och kollegatabeller visas som vertikala kort vid mobilbredd, med bevarade rubriker och källänkar. Regionala matchrader visar båda officiella domarnamnen, även när matchen inte är kopplad till en medlemsprofil.
+
+Webbläsarkontroll med verkligt regionalt cacheunderlag i en lokal testdatabas, vid 320, 375, 390, 430, 768 och 1440 px: förnyad sökning med samma filter, synligt resultat, kombinerade filter, valideringsfel och tomma urval. Inga JavaScript-fel. Ingen sidledes scrollning i flikar eller statistiktabeller vid mobilbredd. Ingen ny bild eller skärmbild skapades. Produktionskontrollen omfattar driftsatt kod och offentliga API-inställningar; användarens nuvarande lösenord ändrades inte.
