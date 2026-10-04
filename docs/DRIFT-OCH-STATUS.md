@@ -38,9 +38,11 @@ Driftsätt hela appen bakom HTTPS på samma domän, med beständig volym för `d
 
 ## GitHub Pages
 
+Den publika sidan har publicerats och verifierats på https://sirelin8290.github.io/VDK.nu/. GitHub Pages är inställt på GitHub Actions (workflow). Domänen vdk.nu är ännu inte kopplad och medlemsservern är inte driftsatt.
+
 GitHub Pages visar den publika frontenddelen. Det kan inte köra Node-servern, hålla säkra sessionskonton eller skriva i SQLite. Medlemsfunktionerna har ett tydligt tom-/felmeddelande tills API-servern är ansluten.
 
-Workflow exporterar endast de publika filerna och publicerar dem efter kontrollerna. Ställ Pages-källan till **GitHub Actions** för workflow-publicering. Om Pages redan använder main/root visas frontendfilerna från roten; välj Actions före produktionsöppning för att undvika publicering av serverkällan som statiska filer.
+Workflow exporterar endast de publika filerna och publicerar dem efter kontrollerna. Pages-källan har ändrats från main/root till **GitHub Actions**, så att endast frontendfiler publiceras som statiska filer.
 
 Rekommenderad slutlig drift: hela appen på `https://vdk.nu` och samma ursprung för API. Alternativ: frontend på `https://vdk.nu`, API på `https://api.vdk.nu`, `config.js` anger API-bas och serverns `ALLOWED_ORIGINS=https://vdk.nu`. De är samma webbplats i kakornas mening. GitHub Pages-standarddomänen och en orelaterad API-domän fungerar inte med SameSite=Lax-kakor. Undvik sådan cross-site drift.
 
