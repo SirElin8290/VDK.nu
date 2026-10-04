@@ -87,3 +87,11 @@ Mina sidor har privat uppladdning och radering av profilbild (JPEG/PNG, högst 2
 Statistikvyn visar matchlista med officiell källänk, utvisningar per match, totalsumma, genomsnitt, kategorifördelning och klickbar kollegasammanställning. Matchdata är ännu inte hämtad för användaren. Rätt domaridentitet (Sören eller Johan Johansson) och officiellt match-/profilunderlag behöver bekräftas innan import för 2025/26. Underlaget avser utvisningar i domarparets matcher, inte attribution till enskild beslutsfattare. Full säsongstäckning är inte verifierad.
 
 GitHub Pages har anpassad domän vdk.nu konfigurerad. Inloggningsservern är fortfarande inte driftsatt; dessa kontofunktioner kan därför inte användas på den publika webbplatsen ännu.
+
+## Verklig statistikimport 2026-10-04
+
+Hämtmotorn är byggd och provad mot officiell matchdata. Sören Johansson, RefereeID 8888: 63 unika seriematcher / 241 utvisningshändelser för 2025/26 och 1 match / 5 händelser för 2026/27. Avgränsning: Värmlands IBF inklusive korslistade serier samt Svenska IBF. Övriga distrikt är inte genomgångna; påstå inte full nationell täckning. Träning, cuper och kval ingår inte. Alla 64 importerade matcher kontrollästes mot ursprunglig serie och händelseantal. Ursprunglig genomgång: 148 serielistor och 6197 matchläsningar, inklusive några korslistade dubbelkontroller; matchdatabasen är deduplicerad. Ny motorkod läser varje match-ID högst en gång per körning. Efterföljande löpande körning: 321 matchläsningar och oförändrade säsongstotaler, inga källfel.
+
+21 tester passerar, inklusive 100 syntetiska medlemsprofiler i gemensam hämtning, lag/serie/kollegafilter, uteblivna protokoll, inställda matcher, återimport, cacheåteranvändning och svensk schematid. Detta är inte ett produktionslasttest med 100 riktiga domare. Rapportfilter och Mina sidor är kontrollerade i mobil och dator. Personlig databas och rapporter publiceras inte i GitHub Pages. Driftanvisningar finns i STATISTIKMOTOR.md.
+
+Inbyggt schema måndag kl 03 Europe/Stockholm är färdigt men inte aktiverat i produktion. Medlemsservern behöver fortfarande driftsättas. Inga produktionskörningar i natt kan utlovas med bara GitHub Pages.
