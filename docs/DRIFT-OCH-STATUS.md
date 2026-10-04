@@ -1,0 +1,73 @@
+# VDK.nu – implementation och drift
+
+## Byggt
+
+- Publik svensk webbplats: startsida, Om VDK, medlemskap, För domare, sponsorer, nyheter, kontakt och integritetsinformation.
+- Svart, gul och vit identitet med responsiv navigation. Referensbilden används tillfälligt som hero-bakgrund. Ingen ny bild har genererats. Logotypen är en provisorisk textversion tills separat originalfil finns.
+- Medlemsansökan, Swish-referens, manuell betalningskontroll, adminbeslut, e-postaktivering och eget lösenord.
+- Säsongsbundet medlemsregister, sessionsinloggning, utloggning och lösenordsåterställning.
+- Personliga matcher och statistik med säsongs- och kollegafilter.
+- Videocoachansökan, coachroll, seniormatchuppdrag, rättighetsnotering, tidsintervall, kategorier, textkommentar och valfri https-länk till ljudkommentar.
+- Publicering av coachningar med medlemsnotiser. Endast tilldelad coach kan redigera sitt utkast, endast berörd medlem kan läsa sin publicerade coachning.
+- Separat adminvy för medlemskap, Swish-kontroll, coachansökningar, coachroller, uppdrag och aggregerad statistik.
+- SQLite med unikt externt match-id och händelse-id. VDK:s totalsammanställning räknar varje match en gång.
+- Serverbaserad behörighetskontroll, lösenordshashning med scrypt, engångstoken, HttpOnly-sessioner, ursprungskontroll och begränsning av inloggningsförsök.
+
+## Inte aktiverat / kräver extern verifiering
+
+- Automatisk insamling från innebandy.se och stats.innebandy.se. Ingen skrapning eller iBIS-inloggning har lagts till. Ett adminskyddat importgränssnitt tar endast verifierat underlag för VDK-medlemmar: `POST /api/admin/import-match`. Data måste ha en officiell källadress.
+- Återbudssignaler. Tomläget säger uttryckligen att datakopplingen inte är aktiverad. Inga uppdrag presenteras som lediga.
+- Innebandy Play/Solidsport: automatisk tidshoppning och matchhändelse-till-video-synkronisering är inte verifierade. Tidsmarkeringar och originalvideolänk fungerar; användaren söker själv till tiden. Matchtid och videons tidslinje kan ha olika startpunkter.
+- Inspelning/uppladdning av ljud och egen lagring av videoklipp. Versionen stödjer en länk till befintlig ljudkommentar och länkar till originalvideo; rättigheterna måste dokumenteras av admin.
+- Produktionens Swish-nummer, e-postavsändare, API-nyckel, domän, första admin och servervärd.
+- Slutlig hero-bild och original-logotyp.
+- Godkänd integritetstext med föreningsuppgifter, rättslig grund och lagringstider.
+
+## Kör lokalt eller på server
+
+Node.js 24 eller senare behövs. Inga externa Node-paket behöver installeras.
+
+1. Kopiera `.env.example` till `.env` och fyll i riktiga värden. Lägg aldrig `.env` eller databasen i Git.
+2. Skapa första admin: `node --env-file=.env server/create-admin.mjs`. Ta sedan bort `ADMIN_PASSWORD` ur miljön.
+3. Starta: `node --env-file=.env server/index.mjs`.
+4. Öppna `http://localhost:3000`. Anpassa `PUBLIC_ORIGIN` om porten eller domänen ändras.
+
+Medlemsansökan öppnas endast när `SWISH_NUMBER`, `RESEND_API_KEY` och `EMAIL_FROM` är konfigurerade. Resend kräver en verifierad avsändare. Inga riktiga mejl skickas i testerna.
+
+Driftsätt hela appen bakom HTTPS på samma domän, med beständig volym för `data/`, säkerhetskopiering och övervakning. Dockerfile finns. Docker-container kan köras med exempelvis `--env-file .env -p 3000:3000 -v vdk-data:/app/data` och ett HTTPS-proxy framför. Sätt `HOST=0.0.0.0` i servermiljön om den ska lyssna externt.
+
+## GitHub Pages
+
+GitHub Pages visar den publika frontenddelen. Det kan inte köra Node-servern, hålla säkra sessionskonton eller skriva i SQLite. Medlemsfunktionerna har ett tydligt tom-/felmeddelande tills API-servern är ansluten.
+
+Workflow exporterar endast de publika filerna och publicerar dem efter kontrollerna. Ställ Pages-källan till **GitHub Actions** för workflow-publicering. Om Pages redan använder main/root visas frontendfilerna från roten; välj Actions före produktionsöppning för att undvika publicering av serverkällan som statiska filer.
+
+Rekommenderad slutlig drift: hela appen på `https://vdk.nu` och samma ursprung för API. Alternativ: frontend på `https://vdk.nu`, API på `https://api.vdk.nu`, `config.js` anger API-bas och serverns `ALLOWED_ORIGINS=https://vdk.nu`. De är samma webbplats i kakornas mening. GitHub Pages-standarddomänen och en orelaterad API-domän fungerar inte med SameSite=Lax-kakor. Undvik sådan cross-site drift.
+
+Ingen domänkoppling eller produktionsserver beställs automatiskt och inga Swish-uppgifter eller hemligheter gissas.
+
+## Exempel på verifierad matchimport
+
+Admin anropar gränssnittet från en godkänd och inloggad VDK-session. Exemplet är en formatbeskrivning, inte riktig matchdata och läses inte in automatiskt:
+
+```json
+{
+  "externalMatchId": "EXTERN-MATCHIDENTITET",
+  "season": "2026/27",
+  "startsAt": "2026-10-10T14:00:00Z",
+  "home": "Verifierat hemmalag",
+  "away": "Verifierat bortalag",
+  "level": "senior",
+  "sourceUrl": "https://stats.innebandy.se/VERIFIERAD-MATCHADRESS",
+  "members": [{ "userId": 2, "colleague": "Verifierad kollega" }],
+  "penalties": [{ "externalEventId": "EXTERN-HÄNDELSEIDENTITET", "category": "Slag", "seconds": 494 }]
+}
+```
+
+## Avgränsningar
+
+Ingen generell resultat-/tabellservice, inget tillsättningssystem, ingen domarranking, ingen statistikdatabas över Värmlands övriga domare och ingen ungdomsvideocoachning.
+
+## Kontroll
+
+`npm run check` kontrollerar syntax. `npm test` testar betalning före godkännande, engångsaktivering, inloggning, sessionsspärr efter återställning, säsongsåtkomst, ursprungskontroll, dataseparation, seniorbegränsning, coachpublicering och deduplicerad statistik. Testerna använder temporära databaser i minnet och en simulerad e-posttjänst.

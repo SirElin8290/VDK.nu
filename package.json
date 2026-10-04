@@ -1,0 +1,12 @@
+{
+  "name": "vdk-nu",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "start": "node server/index.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check app.js && node --check server/index.mjs && node --check server/store.mjs"
+  }
+}
