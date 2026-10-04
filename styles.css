@@ -88,3 +88,11 @@
 
 :root[data-theme="light"] .yellow,:root[data-theme="light"] .pillar-icon{color:var(--accent-text)}
 :root[data-theme="light"] .hero .eyebrow{color:var(--muted)}
+
+/* Keep each supplied hero photograph independent of the selected theme. */
+.hero-image-light{display:none}
+.hero-image-dark{display:block;inset:0 0 0 auto;width:65%;height:100%;object-fit:cover;object-position:center 40%;opacity:1}
+:root[data-theme="light"] .hero-image-light{display:block}
+:root[data-theme="light"] .hero-image-dark{display:none}
+@media(max-width:1000px){.hero-image-dark{width:80%;left:auto;top:0}}
+@media(max-width:650px){.hero-image-dark{width:100%;left:0;top:0;object-position:58% center;opacity:.7}}
