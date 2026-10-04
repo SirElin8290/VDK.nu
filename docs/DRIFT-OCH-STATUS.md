@@ -77,3 +77,5 @@ Ingen generell resultat-/tabellservice, inget tillsättningssystem, ingen domarr
 ## Kontroll
 
 `npm run check` kontrollerar syntax. `npm test` testar betalning före godkännande, engångsaktivering, inloggning, sessionsspärr efter återställning, säsongsåtkomst, ursprungskontroll, dataseparation, seniorbegränsning, coachpublicering och deduplicerad statistik. Testerna använder temporära databaser i minnet och en simulerad e-posttjänst.
+
+Swish-koden finns som användarens oförändrade PDF på alla fyra informationssidor. Avkodad mottagare: 1231494988, förifyllt belopp 100 SEK, meddelande Medlemsavgift 2026/27. Föreningar och företagsstöd får tydliga instruktioner att ändra belopp och meddelande. Mottagarnamn och genomförd betalning är inte verifierade.

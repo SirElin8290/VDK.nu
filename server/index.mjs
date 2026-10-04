@@ -110,8 +110,9 @@ export function createApp(options={}){
       if(path.startsWith('/assets/')&&!file.startsWith(resolve(root,'assets')+sep))fail(404,'Filen hittades inte.');
       if(path.startsWith('/innebandyregler/')&&!file.startsWith(resolve(root,'innebandyregler')+sep))fail(404,'Filen hittades inte.');
       const info=await stat(file);if(!info.isFile())fail(404,'Filen hittades inte.');
-      const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document'};
-      res.setHeader('Content-Security-Policy',`default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' ${[...allowed].join(' ')}; media-src https:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`);
+      const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.pdf':'application/pdf','.docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document'};
+      res.setHeader('Content-Security-Policy',`default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' ${[...allowed].join(' ')}; media-src https:; object-src 'self'; base-uri 'self'; frame-ancestors ${extname(file)==='.pdf'?"'self'":"'none'"}`);
+      if(extname(file)==='.pdf')res.setHeader('X-Frame-Options','SAMEORIGIN');
       res.writeHead(200,{'Content-Type':types[extname(file)]||'application/octet-stream','Cache-Control':'no-cache'});res.end(method==='HEAD'?undefined:await readFile(file));
     }catch(e){const status=e.status|| (e.code==='ENOENT'?404:500);if(status===500)console.error('VDK request failed:',e.message);json(status,{error:status===500?'Ett serverfel inträffade. Försök igen.':e.message});}
   });return {server,db};
