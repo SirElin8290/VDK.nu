@@ -40,6 +40,7 @@ export function createApp(options={}){
           if(!(req.headers['content-type']||'').startsWith('application/json'))fail(415,'JSON krävs.');
         }
         const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:32768):{};
+        if(path==='/api/rules/access'&&method==='GET'){const u=auth(req);if(!u.roles.includes('ADMIN')&&!db.prepare("SELECT 1 FROM memberships WHERE user_id=? AND season=? AND category IN ('active','club') AND status='active' AND paid=1").get(u.id,season))fail(403,'Fullversionen kräver ett godkänt aktivt medlemskap eller föreningsmedlemskap.');return json(200,{ok:true});}
         if(path==='/api/health'&&method==='GET')return json(200,{ok:true});
         if(path==='/api/settings'&&method==='GET')return json(200,{season,fee:100,applicationsOpen:!!swishNumber&&mailReady});
         if(path==='/api/applications'&&method==='POST'){
@@ -49,8 +50,9 @@ export function createApp(options={}){
           const organization=['club','business'].includes(category)?text(body.organization,2,160):'';
           const amount=category==='club'?1500:category==='business'?Number(body.amount):100;
           if(!Number.isSafeInteger(amount)||amount<(category==='business'?1000:100)||amount>10000000)fail(400,'Företagsstödet ska vara ett helt belopp på minst 1 000 kr.');
+          const initialPassword=category!=='business'&&body.password?hashPassword(password(body.password)):null;
           const reference='VDK-'+newToken().slice(0,8).toUpperCase();
-          transaction(db,()=>{const existing=db.prepare('SELECT id FROM users WHERE email=?').get(mail);const userId=existing?.id||Number(db.prepare('INSERT INTO users(name,email) VALUES (?,?)').run(name,mail).lastInsertRowid);if(db.prepare('SELECT 1 FROM memberships WHERE user_id=? AND season=?').get(userId,season))fail(409,'Det finns redan en ansökan eller ett medlemskap för den här säsongen. Kontakta VDK.');db.prepare('INSERT INTO memberships(user_id,season,payment_reference,consented_at,category,amount,organization) VALUES (?,?,?,?,?,?,?)').run(userId,season,reference,new Date().toISOString(),category,amount,organization);});
+          transaction(db,()=>{const existing=db.prepare('SELECT id FROM users WHERE email=?').get(mail);const userId=existing?.id||Number(db.prepare('INSERT INTO users(name,email,password_hash) VALUES (?,?,?)').run(name,mail,initialPassword).lastInsertRowid);if(db.prepare('SELECT 1 FROM memberships WHERE user_id=? AND season=?').get(userId,season))fail(409,'Det finns redan en ansökan eller ett medlemskap för den här säsongen. Kontakta VDK.');db.prepare('INSERT INTO memberships(user_id,season,payment_reference,consented_at,category,amount,organization) VALUES (?,?,?,?,?,?,?)').run(userId,season,reference,new Date().toISOString(),category,amount,organization);});
           return json(201,{paymentReference:reference,swishNumber,fee:amount,category,season});
         }
         if(path==='/api/auth/activate'&&method==='POST'){

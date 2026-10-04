@@ -82,3 +82,14 @@ Sökknappen kör nu även med oförändrat urval. Den visar laddningsstatus och 
 Flikarna radbryts. Match-, kategori- och kollegatabeller visas som vertikala kort vid mobilbredd, med bevarade rubriker och källänkar. Regionala matchrader visar båda officiella domarnamnen, även när matchen inte är kopplad till en medlemsprofil.
 
 Webbläsarkontroll med verkligt regionalt cacheunderlag i en lokal testdatabas, vid 320, 375, 390, 430, 768 och 1440 px: förnyad sökning med samma filter, synligt resultat, kombinerade filter, valideringsfel och tomma urval. Inga JavaScript-fel. Ingen sidledes scrollning i flikar eller statistiktabeller vid mobilbredd. Ingen ny bild eller skärmbild skapades. Produktionskontrollen omfattar driftsatt kod och offentliga API-inställningar; användarens nuvarande lösenord ändrades inte.
+
+
+## Regelgenerator och medlemskontroll
+
+Den publika exporten innehåller endast en demo med tio grundfrågor. Den tidigare adressen `/innebandyregler/` leder till demon. Fullversionen ligger under `/member-rules/` på medlemsservern. Varje fil hämtas efter serverkontroll av session och betalt, aktivt medlemskap för aktuell säsong i kategorierna `active` eller `club`; administratörer har också tillgång. Stödmedlemmar och företagsstöd får inte fullversionen.
+
+Wrangler bygger automatiskt med `node server/export-public.mjs --worker`, medan GitHub Pages använder den publika exporten utan fullversion. Registrering kan lagra ett valt lösenord men ger inte tillträde före betalningskontroll, administratörens godkännande och kontoaktivering.
+
+`api.vdk.nu` saknade DNS vid kontrollen. Medlemsansökningar och Mina sidor från den publika sidan öppnas därför på den fungerande Worker-adressen. Ingen DNS-ändring har gjorts. GitHub-repositoryt är fortfarande offentligt: webbspärren skyddar inte frågebanken i GitHub-historiken. Användaren har godkänt att göra källkoden privat senare, men GitHub-planens stöd för privata Pages måste bekräftas först.
+
+Utvecklingstrappan på `#/kunskapsnivaer` bygger på användarens tolv steg med observerbara kriterier, övningar och mental trygghet som genomgående princip. Den är markerad som förslag. VDK behöver fastställa modellen och bekräfta damseriernas gruppering.

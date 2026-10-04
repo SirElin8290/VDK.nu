@@ -47,6 +47,7 @@ export function createApp(options={}){
           if(!(req.headers['content-type']||'').startsWith('application/json'))fail(415,'JSON krävs.');
         }
         const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:32768):{};
+        if(path==='/api/rules/access'&&method==='GET'){const u=auth(req);if(!u.roles.includes('ADMIN')&&!db.prepare("SELECT 1 FROM memberships WHERE user_id=? AND season=? AND category IN ('active','club') AND status='active' AND paid=1").get(u.id,season))fail(403,'Fullversionen kräver ett godkänt aktivt medlemskap eller föreningsmedlemskap.');return json(200,{ok:true});}
         if(path==='/api/health'&&method==='GET')return json(200,{ok:true});
         if(path==='/api/settings'&&method==='GET')return json(200,{season,fee:100,applicationsOpen:!!swishNumber&&mailReady});
         if(path==='/api/applications'&&method==='POST'){
@@ -56,8 +57,9 @@ export function createApp(options={}){
           const organization=['club','business'].includes(category)?text(body.organization,2,160):'';
           const amount=category==='club'?1500:category==='business'?Number(body.amount):100;
           if(!Number.isSafeInteger(amount)||amount<(category==='business'?1000:100)||amount>10000000)fail(400,'Företagsstödet ska vara ett helt belopp på minst 1 000 kr.');
+          const initialPassword=category!=='business'&&body.password?hashPassword(password(body.password)):null;
           const reference='VDK-'+newToken().slice(0,8).toUpperCase();
-          transaction(db,()=>{const existing=db.prepare('SELECT id FROM users WHERE email=?').get(mail);const userId=existing?.id||Number(db.prepare('INSERT INTO users(name,email) VALUES (?,?)').run(name,mail).lastInsertRowid);if(db.prepare('SELECT 1 FROM memberships WHERE user_id=? AND season=?').get(userId,season))fail(409,'Det finns redan en ansökan eller ett medlemskap för den här säsongen. Kontakta VDK.');db.prepare('INSERT INTO memberships(user_id,season,payment_reference,consented_at,category,amount,organization) VALUES (?,?,?,?,?,?,?)').run(userId,season,reference,new Date().toISOString(),category,amount,organization);});
+          transaction(db,()=>{const existing=db.prepare('SELECT id FROM users WHERE email=?').get(mail);const userId=existing?.id||Number(db.prepare('INSERT INTO users(name,email,password_hash) VALUES (?,?,?)').run(name,mail,initialPassword).lastInsertRowid);if(db.prepare('SELECT 1 FROM memberships WHERE user_id=? AND season=?').get(userId,season))fail(409,'Det finns redan en ansökan eller ett medlemskap för den här säsongen. Kontakta VDK.');db.prepare('INSERT INTO memberships(user_id,season,payment_reference,consented_at,category,amount,organization) VALUES (?,?,?,?,?,?,?)').run(userId,season,reference,new Date().toISOString(),category,amount,organization);});
           return json(201,{paymentReference:reference,swishNumber,fee:amount,category,season});
         }
         if(path==='/api/auth/activate'&&method==='POST'){
@@ -115,17 +117,19 @@ export function createApp(options={}){
       }
       if(method!=='GET'&&method!=='HEAD')fail(405,'Metoden stöds inte.');
       // Only the public files are exposed; server source, database and environment never are.
-      const publicFiles=new Set(['/','/index.html','/styles.css','/app.js','/config.js','/theme.js']);
+      const publicFiles=new Set(['/','/index.html','/styles.css','/app.js','/config.js','/theme.js','/demo-questions.js']);
       if(path==='/innebandyregler'){res.writeHead(301,{Location:'/innebandyregler/'});return res.end();}
-      if(!publicFiles.has(path)&&!path.startsWith('/assets/')&&!path.startsWith('/innebandyregler/'))fail(404,'Sidan hittades inte.');
-      const file=resolve(root,path==='/'?'index.html':path==='/innebandyregler/'?'innebandyregler/index.html':'.'+decodeURIComponent(path));if(!file.startsWith(root.endsWith(sep)?root:root+sep))fail(403,'Åtkomst nekad.');
+      if(path==='/member-rules'){res.writeHead(302,{Location:'/member-rules/'});return res.end();}
+      if(path.startsWith('/member-rules/')){const u=auth(req);if(!u.roles.includes('ADMIN')&&!db.prepare("SELECT 1 FROM memberships WHERE user_id=? AND season=? AND category IN ('active','club') AND status='active' AND paid=1").get(u.id,season))fail(403,'Fullversionen kräver aktivt medlemskap eller föreningsmedlemskap.');res.setHeader('Cache-Control','private, no-store');}
+      if(!publicFiles.has(path)&&!path.startsWith('/assets/')&&!['/innebandyregler/','/innebandyregler/index.html'].includes(path)&&!path.startsWith('/member-rules/'))fail(404,'Sidan hittades inte.');
+      const file=resolve(root,path==='/'?'index.html':['/innebandyregler/','/innebandyregler/index.html'].includes(path)?'rule-demo/index.html':path.startsWith('/member-rules/')?'innebandyregler/'+(path.slice('/member-rules/'.length)||'index.html'):'.'+decodeURIComponent(path));if(!file.startsWith(root.endsWith(sep)?root:root+sep))fail(403,'Åtkomst nekad.');
       if(path.startsWith('/assets/')&&!file.startsWith(resolve(root,'assets')+sep))fail(404,'Filen hittades inte.');
-      if(path.startsWith('/innebandyregler/')&&!file.startsWith(resolve(root,'innebandyregler')+sep))fail(404,'Filen hittades inte.');
+      if(path.startsWith('/member-rules/')&&!file.startsWith(resolve(root,'innebandyregler')+sep))fail(404,'Filen hittades inte.');
       const info=await stat(file);if(!info.isFile())fail(404,'Filen hittades inte.');
       const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.pdf':'application/pdf','.docx':'application/vnd.openxmlformats-officedocument.wordprocessingml.document'};
       res.setHeader('Content-Security-Policy',`default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' ${[...allowed].join(' ')}; media-src https:; object-src 'self'; base-uri 'self'; frame-ancestors ${extname(file)==='.pdf'?"'self'":"'none'"}`);
       if(extname(file)==='.pdf')res.setHeader('X-Frame-Options','SAMEORIGIN');
-      res.writeHead(200,{'Content-Type':types[extname(file)]||'application/octet-stream','Cache-Control':'no-cache'});res.end(method==='HEAD'?undefined:await readFile(file));
+      res.writeHead(200,{'Content-Type':types[extname(file)]||'application/octet-stream','Cache-Control':path.startsWith('/member-rules/')?'private, no-store':'no-cache'});res.end(method==='HEAD'?undefined:await readFile(file));
     }catch(e){const status=e.status|| (e.code==='ENOENT'?404:500);if(status===500)console.error('VDK request failed:',e.message);json(status,{error:status===500?'Ett serverfel inträffade. Försök igen.':e.message});}
   });return {server,db};
 }

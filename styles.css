@@ -105,3 +105,6 @@
 :root[data-theme="light"] .hero:after{background:linear-gradient(90deg,#f5f7f8ed 0%,#f5f7f8d9 30%,#f5f7f880 48%,transparent 65%),linear-gradient(0deg,#f5f7f8,transparent 12%)}
 :root[data-theme="light"] .hero-image-light{object-position:75% top}
 @media(max-width:650px){:root[data-theme="light"] .hero:after{background:linear-gradient(90deg,#f5f7f8f0,#f5f7f8ab),linear-gradient(0deg,#f5f7f8,transparent 20%)}}
+
+.demo-question{margin-bottom:1rem;min-width:0}.demo-question h2{font-size:1.5rem}.development-steps{display:grid;gap:1rem;margin:2rem 0}.development-step summary{display:flex;gap:1rem;align-items:center;cursor:pointer}.development-step summary strong{display:block;font-size:1.3rem}.development-step summary small{display:block;color:var(--muted)}.step-number{display:flex;align-items:center;justify-content:center;min-width:42px;height:42px;border-radius:50%;background:var(--yellow);color:#080b0c;font-weight:700}.development-step h3{font-size:1.3rem;margin-top:1.5rem}
+.page-head h1,.development-step summary strong{overflow-wrap:anywhere}.development-step summary>span:last-child{min-width:0}.development-step{min-width:0}.step-number{flex-shrink:0}
