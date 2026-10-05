@@ -93,3 +93,10 @@ Wrangler bygger automatiskt med `node server/export-public.mjs --worker`, medan 
 `api.vdk.nu` saknade DNS vid kontrollen. Medlemsansökningar och Mina sidor från den publika sidan öppnas därför på den fungerande Worker-adressen. Ingen DNS-ändring har gjorts. GitHub-repositoryt är fortfarande offentligt: webbspärren skyddar inte frågebanken i GitHub-historiken. Användaren har godkänt att göra källkoden privat senare, men GitHub-planens stöd för privata Pages måste bekräftas först.
 
 Utvecklingstrappan på `#/kunskapsnivaer` bygger på användarens tolv steg med observerbara kriterier, övningar och mental trygghet som genomgående princip. Den är markerad som förslag. VDK behöver fastställa modellen och bekräfta damseriernas gruppering.
+
+
+## Juniorstatistik
+
+Statistikurvalet omfattar nu HJ17 och DJ17 Region samt HJ18 och DJ18 Juniorallsvenskan som finns i Värmlands serieöversikt. Hela de gemensamma seriegrupperna ingår, även matcher över distriktsgränser. Andra förbundsserier, träningsmatcher, kval och slutspel är fortsatt uteslutna. Matcherna markeras som ungdom och räknas en gång per match-ID. Videocoachningens senioravgränsning ändras inte.
+
+Planeringen av den större uppdateringen sker i omgångar om högst sex serier för att hålla anropen under Worker-gränsen. Framsteg sparas mellan omgångarna, och matchprotokoll läses därefter i omgångar om 15 matcher. Automatisk måndagsuppdatering kl. 03 svensk tid använder samma urval.
