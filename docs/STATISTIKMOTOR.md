@@ -6,7 +6,7 @@ Svensk Innebandys publika statistikklient hämtar startdata från `https://api.i
 
 Domaren upptäcks med exakt normaliserat namn och kopplas till ett stabilt RefereeID. Namnkollisioner/ändrade ID ska utredas, inte slås ihop automatiskt. Sören Johansson är verifierad med 8888 i tre säsonger. Medlemmen behöver inte lämna ID eller matchlänk. Aktiva godkända domarmedlemmar registreras automatiskt i nästa hämtning; Sören är särskilt auktoriserad som lokal pilot utan påhittad betalning eller administratörsroll.
 
-Endast vanlig serie, CompetitionTypeID 1, hämtas. Träning, cup, kval, slutspel och sammandrag utesluts. Grundavgränsningen är förbund 11 (Värmland inklusive de korslistade serierna) och 1 (Svenska IBF). Detta är inte en garanti att en domares matcher i alla andra distrikt ingår. Lägg till relevanta distrikts-ID i STATS_FEDERATION_IDS för domare med uppdrag utanför detta område. Säsong 43 är 2025/26; 44 är 2026/27. Nya säsonger måste läggas till i miljöinställningen.
+Endast vanlig serie, CompetitionTypeID 1, hämtas. Träning, cup, kval, slutspel och sammandrag utesluts. Grundavgränsningen är förbund 11 (Värmland inklusive de korslistade serierna) och 1 (Svenska IBF). Detta är inte en garanti att en domares matcher i alla andra distrikt ingår. Lägg till relevanta distrikts-ID i STATS_FEDERATION_IDS för domare med uppdrag utanför detta område. Säsongerna 40–44 motsvarar 2022/23–2026/27. Cloudflare hämtar distriktsserierna med geografisk kontroll av spelplatsen; även HJ17/DJ17 och HJ18/DJ18 ingår enligt statistikens avgränsning. Nya säsonger måste läggas till i miljöinställningen.
 
 ## Datamodell och personliga filter
 

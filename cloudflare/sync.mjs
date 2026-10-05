@@ -5,7 +5,7 @@ const sourceFor=owner=>owner.sourceFactory?.()||new StatsSource();
 export const isRegionalSenior=isVdkStatisticsCompetition;
 async function discover(owner,window){
  const {db}=owner,source=sourceFor(owner);const plan=db.prepare('SELECT jobs FROM regional_sync_plan WHERE id=1 AND window=?').get(window);let state=JSON.parse(plan?.jobs||'[]');
- if(Array.isArray(state)){const competitions=[],seen=new Set();for(const season of [43,44])for(const c of await source.get(`/seasons/${season}/federations/11/competitions`)){if(isRegionalSenior(c)&&!seen.has(c.CompetitionID)){seen.add(c.CompetitionID);competitions.push(c);}}state={planning:true,competitions,cursor:0,jobs:[]};db.prepare('UPDATE regional_sync_plan SET jobs=? WHERE id=1 AND window=?').run(JSON.stringify(state),window);}
+ if(Array.isArray(state)){const competitions=[],seen=new Set();for(const season of [40,41,42,43,44])for(const c of await source.get(`/seasons/${season}/federations/11/competitions`)){if(isRegionalSenior(c)&&!seen.has(c.CompetitionID)){seen.add(c.CompetitionID);competitions.push(c);}}state={planning:true,competitions,cursor:0,jobs:[]};db.prepare('UPDATE regional_sync_plan SET jobs=? WHERE id=1 AND window=?').run(JSON.stringify(state),window);}
  const seen=new Set(state.jobs.map(j=>j.id));const end=Math.min(state.cursor+6,state.competitions.length);
  for(;state.cursor<end;state.cursor++){
   const c=state.competitions[state.cursor];const meta=await source.get(`/competitions/${c.CompetitionID}`);
