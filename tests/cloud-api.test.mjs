@@ -12,4 +12,27 @@ test('Cloudflare enforces origins and keeps admin access independent of fictiona
 
 test('full rule generator restricts access to paid active and club members approved for current season',async t=>{const {db,request}=fixture(t);assert.equal((await request('/rules/access')).status,401);for(const [category,status,paid,expected] of [['active','pending',0,403],['active','pending',1,403],['active','approved',1,403],['active','active',0,403],['active','active',1,200],['club','active',1,200],['support','active',1,403],['business','active',1,403],['club','expired',1,403]]){const id=Number(db.prepare('INSERT INTO users(name,email) VALUES (?,?)').run('Rule test',category+status+paid+'@example.test').lastInsertRowid);db.prepare('INSERT INTO memberships(user_id,season,status,paid,payment_reference,consented_at,category,amount) VALUES (?,?,?,?,?,?,?,?)').run(id,'2026/27',status,paid,'RULE-'+id,new Date().toISOString(),category,100);const token=newToken();db.prepare('INSERT INTO sessions VALUES (?,?,?)').run(digest(token),id,Date.now()+60000);assert.equal((await request('/rules/access',{cookie:'vdk_session='+token})).status,expected,category+status+paid);}assert.equal((await request('/rules/access',{cookie:admin(db)})).status,200);});
 
-test('creating an account password does not open membership before payment and admin approval',async t=>{const {request}=fixture(t);const r=await request('/applications',{method:'POST',body:{name:'Pending Account',email:'pending-account@example.test',password:'Pending-password-123',season:'2026/27',category:'active',consent:true}});assert.equal(r.status,201);assert.equal((await request('/auth/login',{method:'POST',body:{email:'pending-account@example.test',password:'Pending-password-123'}})).status,403);});
+test('account activation and membership payment work independently in either order',async t=>{const {db,sent,request}=fixture(t);const adminCookie=admin(db);
+  const application=await request('/applications',{method:'POST',body:{name:'Pending Account',email:'pending-account@example.test',season:'2026/27',category:'active',consent:true}});
+  assert.equal(application.status,201);assert.equal(sent.length,1);
+  const row=db.prepare('SELECT * FROM memberships WHERE payment_reference=?').get(application.data.paymentReference);
+  const activationToken=sent[0].html.match(/token=([A-Za-z0-9_-]+)/)[1];
+  assert.equal((await request('/auth/activate',{method:'POST',body:{token:activationToken,password:'Pending-password-123'}})).status,200);
+  const login=await request('/auth/login',{method:'POST',body:{email:'pending-account@example.test',password:'Pending-password-123'}});
+  assert.equal(login.status,200);const cookie=login.headers['set-cookie'].split(';')[0];
+  assert.equal((await request('/me',{cookie})).status,200);
+  assert.equal((await request('/membership',{cookie})).status,200);
+  assert.equal((await request('/dashboard',{cookie})).status,403);
+  assert.equal((await request(`/admin/applications/${row.id}/payment`,{method:'POST',cookie:adminCookie})).status,200);
+  assert.equal((await request(`/admin/applications/${row.id}/approve`,{method:'POST',cookie:adminCookie})).status,200);
+  assert.equal((await request('/dashboard',{cookie})).status,200);
+
+  const second=await request('/applications',{method:'POST',body:{name:'Paid First',email:'paid-first@example.test',season:'2026/27',category:'active',consent:true}});
+  const secondRow=db.prepare('SELECT * FROM memberships WHERE payment_reference=?').get(second.data.paymentReference);
+  assert.equal((await request(`/admin/applications/${secondRow.id}/payment`,{method:'POST',cookie:adminCookie})).status,200);
+  assert.equal((await request(`/admin/applications/${secondRow.id}/approve`,{method:'POST',cookie:adminCookie})).status,200);
+  const secondToken=sent.at(-1).html.match(/token=([A-Za-z0-9_-]+)/)[1];
+  assert.equal((await request('/auth/activate',{method:'POST',body:{token:secondToken,password:'Paid-first-password-123'}})).status,200);
+  const secondLogin=await request('/auth/login',{method:'POST',body:{email:'paid-first@example.test',password:'Paid-first-password-123'}});
+  assert.equal(secondLogin.status,200);assert.equal((await request('/dashboard',{cookie:secondLogin.headers['set-cookie'].split(';')[0]})).status,200);
+});
