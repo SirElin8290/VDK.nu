@@ -1,3 +1,4 @@
+import {availabilityResults} from './availability.mjs';
 import {digest,hashPassword,verifyPassword,newToken,transaction,getRoles,publicUser,hasMembership,audit,statistics,importMatch} from './store.mjs';
 class HttpError extends Error{constructor(status,message){super(message);this.status=status;}}
 const fail=(status,message)=>{throw new HttpError(status,message);};
@@ -42,6 +43,7 @@ export function createApp(options={}){
         }
         const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:32768):{};
         if(path==='/api/rules/access'&&method==='GET'){const u=auth(req);if(!u.roles.includes('ADMIN')&&!db.prepare("SELECT 1 FROM memberships WHERE user_id=? AND season=? AND category IN ('active','club') AND status='active' AND paid=1").get(u.id,season))fail(403,'Fullversionen kräver ett godkänt aktivt medlemskap eller föreningsmedlemskap.');return json(200,{ok:true});}
+        if(path==='/api/availability'&&method==='GET'){requireMembership(req);return json(200,availabilityResults(db,url.searchParams));}
         if(path==='/api/health'&&method==='GET')return json(200,{ok:true});
         if(path==='/api/settings'&&method==='GET')return json(200,{season,fee:100,applicationsOpen:!!swishNumber&&mailReady});
         if(path==='/api/applications'&&method==='POST'){
