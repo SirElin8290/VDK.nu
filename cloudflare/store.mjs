@@ -1,9 +1,11 @@
+import {initializeMessages} from './messages.mjs';
 import {randomBytes,scryptSync,timingSafeEqual,createHash} from 'node:crypto';
 export const digest = value => createHash('sha256').update(value).digest('hex');
 export function hashPassword(value) { const salt=randomBytes(16).toString('hex');return `${salt}:${scryptSync(value,salt,64).toString('hex')}`; }
 export function verifyPassword(value, hash) { if(!hash)return false;const [salt,key]=hash.split(':');const calculated=scryptSync(value,salt,64);const stored=Buffer.from(key,'hex');return stored.length===calculated.length && timingSafeEqual(stored,calculated); }
 export function newToken(){return randomBytes(32).toString('base64url');}
 export function initializeStore(db){
+ initializeMessages(db);
  db.exec("CREATE TABLE IF NOT EXISTS availability_plan(id INTEGER PRIMARY KEY,day TEXT NOT NULL,state TEXT NOT NULL); CREATE TABLE IF NOT EXISTS availability_snapshot(id INTEGER PRIMARY KEY,day TEXT NOT NULL,updated_at TEXT NOT NULL,data TEXT NOT NULL);");
  db.exec("CREATE TABLE IF NOT EXISTS stats_venues(id INTEGER PRIMARY KEY,data TEXT NOT NULL); CREATE TABLE IF NOT EXISTS stats_geography(match_id INTEGER PRIMARY KEY,venue_id INTEGER,in_scope INTEGER NOT NULL,scope_version TEXT NOT NULL);");
  db.exec("CREATE TABLE IF NOT EXISTS regional_sync_plan(id INTEGER PRIMARY KEY,window TEXT NOT NULL,jobs TEXT NOT NULL,position INTEGER NOT NULL,errors TEXT NOT NULL,started_at TEXT NOT NULL);");
