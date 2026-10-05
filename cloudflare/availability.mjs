@@ -1,6 +1,7 @@
 import {StatsSource,isLeague} from '../server/stats-source.mjs';
 import {isVenueInScope} from '../server/stat-geography.mjs';
 export function swedishDay(time=Date.now()){return new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Stockholm',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(time));}
+export function matchDay(value){return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?$/.test(value)?value.slice(0,10):swedishDay(value);}
 export function availabilityWindow(time=Date.now()){const from=swedishDay(time),end=new Date(from+'T12:00:00Z');end.setUTCDate(end.getUTCDate()+29);return {from,to:end.toISOString().slice(0,10)};}
 export function dailyThree(time){const hour=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Stockholm',hour:'2-digit',hourCycle:'h23'}).format(new Date(time));return hour==='03'?swedishDay(time):null;}
 export function allowedCompetition(c){return isLeague(c)&&!/\b(?:HJ|DJ|VG)\s*18\b|juniorallsvenskan|(?:herr|dam)junior\s*18|tränings/i.test(c.Name||'');}
@@ -21,14 +22,14 @@ export async function runAvailability(owner){
   if(s.cursor<s.competitions.length){
    const end=Math.min(s.cursor+5,s.competitions.length),seen=new Set(s.jobs.map(j=>j.id));
    for(;s.cursor<end;s.cursor++){const c=s.competitions[s.cursor],meta=await source.get('/competitions/'+c.CompetitionID);if(!allowedCompetition(meta))continue;
-    for(const m of await source.get('/competitions/'+c.CompetitionID+'/matches')){const day=swedishDay(m.MatchDateTime);if(m.Cancelled||m.HasFinalResult||day<s.from||day>s.to||seen.has(m.MatchID))continue;seen.add(m.MatchID);s.jobs.push({id:m.MatchID,c:{...meta,CompetitionID:m.CompetitionID||meta.CompetitionID,Name:m.CompetitionName||meta.Name}});}
+    for(const m of await source.get('/competitions/'+c.CompetitionID+'/matches')){const day=matchDay(m.MatchDateTime);if(m.Cancelled||m.HasFinalResult||day<s.from||day>s.to||seen.has(m.MatchID))continue;seen.add(m.MatchID);s.jobs.push({id:m.MatchID,c:{...meta,CompetitionID:m.CompetitionID||meta.CompetitionID,Name:m.CompetitionName||meta.Name}});}
    }
   }else{
    const end=Math.min(s.position+12,s.jobs.length);
    for(;s.position<end;s.position++){const j=s.jobs[s.position];try{
     const m=await source.get('/matches/'+j.id),refs=namedReferees(m);if(m.Cancelled||m.HasFinalResult||refs.length>1)continue;
     const c=m.CompetitionID&&m.CompetitionID!==j.c.CompetitionID?await source.get('/competitions/'+m.CompetitionID):j.c;if(!allowedCompetition(c))continue;
-    const day=swedishDay(m.MatchDateTime);if(day<s.from||day>s.to)continue;
+    const day=matchDay(m.MatchDateTime);if(day<s.from||day>s.to)continue;
     if(!m.VenueID)throw Error('Spelplats saknas');const cache=db.prepare('SELECT data FROM stats_venues WHERE id=?').get(m.VenueID),venue=cache?JSON.parse(cache.data):await source.get('/venues/'+m.VenueID);if(!isVenueInScope(venue))continue;
     if(!cache)db.prepare('INSERT OR REPLACE INTO stats_venues VALUES(?,?)').run(m.VenueID,JSON.stringify({City:venue.City,WGS84Latitude:venue.WGS84Latitude,WGS84Longitude:venue.WGS84Longitude}));
     s.rows.push({id:m.MatchID,day,starts_at:m.MatchDateTime,home:m.HomeTeam||m.HomeTeamName||'',away:m.AwayTeam||m.AwayTeamName||'',competition:c.Name,competitionId:c.CompetitionID,venue:m.Venue||m.VenueName||venue.City||'',referees:refs,source_url:`https://stats.innebandy.se/sasong/${s.season}/serie/${c.CompetitionID}/match/${m.MatchID}`});
