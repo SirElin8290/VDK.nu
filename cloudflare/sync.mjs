@@ -1,7 +1,7 @@
-import {StatsSource,isLeague} from '../server/stats-source.mjs';
+import {StatsSource,isLeague,isVdkStatisticsCompetition} from '../server/stats-source.mjs';
 import {cacheMatch} from './cache-store.mjs';
 const sourceFor=owner=>owner.sourceFactory?.()||new StatsSource();
-export const isRegionalSenior=c=>/^(Herrar Division [2-9]|Damer Division [1-9])(?: |$)/.test(c.Name)&&!/\(SIBF\)/i.test(c.Name);
+export const isRegionalSenior=isVdkStatisticsCompetition;
 async function discover(owner,window){
  const {db}=owner,source=sourceFor(owner),jobs=[],seen=new Set();
  for(const season of [43,44])for(const c of await source.get(`/seasons/${season}/federations/11/competitions`)){
@@ -56,7 +56,7 @@ export async function runSyncBatch(owner){
   if(position<jobs.length){await owner.ctx.storage.setAlarm(Date.now()+1000);return;}
   db.transaction(()=>{
    const status=errors.length?'partial':'complete';
-   db.prepare('INSERT INTO sync_runs(started_at,finished_at,status,report) VALUES(?,?,?,?)').run(plan.started_at,new Date().toISOString(),status,JSON.stringify({scope:'Värmland, ordinarie seniorserier',checked:jobs.length,errors}));
+   db.prepare('INSERT INTO sync_runs(started_at,finished_at,status,report) VALUES(?,?,?,?)').run(plan.started_at,new Date().toISOString(),status,JSON.stringify({scope:'Värmlands seniorserier samt HJ17, DJ17, HJ18 och DJ18, inklusive gemensamma serier',checked:jobs.length,errors}));
    db.prepare('UPDATE sync_schedule_windows SET status=? WHERE window=?').run(status,plan.window);
    db.prepare('DELETE FROM regional_sync_plan WHERE id=1').run();
   });

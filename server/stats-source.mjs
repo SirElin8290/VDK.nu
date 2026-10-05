@@ -14,3 +14,7 @@ export function memberRecord(m,c,season,members){
   const refs=referees(m);const homeMatchTeam=Number(m.HomeMatchTeamID),awayMatchTeam=Number(m.AwayMatchTeamID);
   return {externalMatchId:String(m.MatchID),season,startsAt:m.MatchDateTime,home:m.HomeTeam,away:m.AwayTeam,homeTeamId:String(m.HomeTeamID),awayTeamId:String(m.AwayTeamID),competitionId:String(c.CompetitionID),competitionName:c.Name,level:/flick|pojk|junior|HJ|DJ|P\d|F\d/i.test(c.Name)?'youth':'senior',sourceUrl:`https://stats.innebandy.se/sasong/${m.SeasonID}/serie/${c.CompetitionID}/match/${m.MatchID}`,members:members.map(u=>({userId:u.userId,colleague:refs.filter(r=>r.id!==u.refereeId).map(r=>r.name).join(', ')})),penalties:m.Events.filter(e=>e.MatchEventTypeID===2||e.MatchEventType==='Utvisning').map(e=>({externalEventId:String(e.MatchEventID),category:e.PenaltyName||'Okänd utvisningstyp',code:String(e.PenaltyCode||''),seconds:penaltySeconds(e.PenaltyName),teamId:Number(e.MatchTeamID)===homeMatchTeam?String(m.HomeTeamID):Number(e.MatchTeamID)===awayMatchTeam?String(m.AwayTeamID):'',period:e.Period,minute:e.Minute,second:e.Second}))};
 }
+
+// Junior competitions listed by Värmland include shared regional series and its JAS groups.
+export const isVdkJunior=c=>/^(?:Herrjunior\s*17|Damjunior\s*17)\b/i.test(c.Name)||/\b(?:HJ|DJ)\s*18\b/i.test(c.Name);
+export const isVdkStatisticsCompetition=c=>isVdkJunior(c)||(/^(Herrar Division [2-9]|Damer Division [1-9])(?: |$)/.test(c.Name)&&!/\(SIBF\)/i.test(c.Name));
