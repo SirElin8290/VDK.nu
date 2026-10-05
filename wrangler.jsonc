@@ -30,6 +30,7 @@
     }
   ],
   "vars": {
+    "OWNER_ADMIN_EMAIL": "sorenjohansson@outlook.com",
     "SEASON": "2026/27",
     "SWISH_NUMBER": "1231494988",
     "EMAIL_ENABLED": "true",
