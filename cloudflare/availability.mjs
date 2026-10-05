@@ -4,7 +4,10 @@ export function swedishDay(time=Date.now()){return new Intl.DateTimeFormat('sv-S
 export function matchDay(value){return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?$/.test(value)?value.slice(0,10):swedishDay(value);}
 export function availabilityWindow(time=Date.now()){const from=swedishDay(time),end=new Date(from+'T12:00:00Z');end.setUTCDate(end.getUTCDate()+29);return {from,to:end.toISOString().slice(0,10)};}
 export function dailyThree(time){const hour=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Stockholm',hour:'2-digit',hourCycle:'h23'}).format(new Date(time));return hour==='03'?swedishDay(time):null;}
-export function allowedCompetition(c){return isLeague(c)&&!/\b(?:HJ|DJ|VG)\s*18\b|juniorallsvenskan|(?:herr|dam)junior\s*18|tränings/i.test(c.Name||'');}
+export function allowedSeriesName(name=''){
+ return !/SIBF|juniorallsvenskan/i.test(name)&&(/^(?:Pantamera\s+)?(?:Pojkar|Flickor)\s+Röd\s+Serie\s+\d+\b/i.test(name)||/^Herrar\s+Division\s+[2-5]\b/i.test(name)||/^Damer\s+Division\s+[1-3]\b/i.test(name)||/^(?:Herrjunior|Damjunior)\s*17\b|^\s*(?:HJ|DJ)\s*17\b/i.test(name));
+}
+export function allowedCompetition(c){return isLeague(c)&&allowedSeriesName(c.Name);}
 export function namedReferees(m){return [...new Set([m.Referee1,m.Referee2].map(x=>String(x||'').trim()).filter(Boolean))];}
 const sourceFor=o=>o.sourceFactory?.()||new StatsSource();
 export async function startAvailability(owner,day=swedishDay()){
@@ -18,7 +21,7 @@ export async function runAvailability(owner){
  const db=owner.db,plan=db.prepare('SELECT * FROM availability_plan WHERE id=1').get();if(!plan)return;
  const s=JSON.parse(plan.state),source=sourceFor(owner);
  try{
-  if(!s.competitions){const year=Number(s.from.slice(0,4))-(Number(s.from.slice(5,7))<7?1:0);const season=year-1982;s.season=season;s.competitions=(await source.get(`/seasons/${season}/federations/11/competitions`)).filter(c=>!/tränings|juniorallsvenskan|\b(?:HJ|DJ|VG)\s*18\b/i.test(c.Name||''));}
+  if(!s.competitions){const year=Number(s.from.slice(0,4))-(Number(s.from.slice(5,7))<7?1:0);const season=year-1982;s.season=season;s.competitions=(await source.get(`/seasons/${season}/federations/11/competitions`)).filter(c=>allowedSeriesName(c.Name));}
   if(s.cursor<s.competitions.length){
    const end=Math.min(s.cursor+5,s.competitions.length),seen=new Set(s.jobs.map(j=>j.id));
    for(;s.cursor<end;s.cursor++){const c=s.competitions[s.cursor],meta=await source.get('/competitions/'+c.CompetitionID);if(!allowedCompetition(meta))continue;
@@ -42,7 +45,7 @@ export async function runAvailability(owner){
 }
 export function availabilityResults(db,params,time=Date.now()){
  const snapshot=db.prepare('SELECT * FROM availability_snapshot WHERE id=1').get(),window=availabilityWindow(time);if(!snapshot)return {...window,matches:[],competitions:[],updatedAt:null,loading:!!db.prepare('SELECT 1 FROM availability_plan').get()};
- const data=JSON.parse(snapshot.data);let rows=data.rows.filter(m=>m.day>=window.from&&m.day<=window.to);const competition=params.get('competition'),count=params.get('count'),team=(params.get('team')||'').toLocaleLowerCase('sv-SE'),referee=(params.get('referee')||'').toLocaleLowerCase('sv-SE');
+ const data=JSON.parse(snapshot.data);let rows=data.rows.filter(m=>allowedSeriesName(m.competition)&&m.day>=window.from&&m.day<=window.to);const competition=params.get('competition'),count=params.get('count'),team=(params.get('team')||'').toLocaleLowerCase('sv-SE'),referee=(params.get('referee')||'').toLocaleLowerCase('sv-SE');
  rows=rows.filter(m=>(!competition||String(m.competitionId)===competition)&&(!['0','1'].includes(count)||m.referees.length===Number(count))&&(!team||(m.home+' '+m.away).toLocaleLowerCase('sv-SE').includes(team))&&(!referee||m.referees.some(r=>r.toLocaleLowerCase('sv-SE').includes(referee)))&&(!params.get('from')||m.day>=params.get('from'))&&(!params.get('to')||m.day<=params.get('to')));
  return {...window,matches:rows.sort((a,b)=>a.starts_at.localeCompare(b.starts_at)),competitions:data.competitions.filter(c=>allowedCompetition({Name:c.name,CompetitionTypeID:1})),updatedAt:snapshot.updated_at,status:data.status,unverified:data.errors.length,checked:data.jobs.length,loading:!!db.prepare('SELECT 1 FROM availability_plan').get()};
 }
