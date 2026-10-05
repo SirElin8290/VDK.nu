@@ -102,6 +102,7 @@ export function createApp(options={}){
  fail(404,'Funktionen finns inte.');
 }
         if(path==='/api/me'&&method==='GET')return json(200,{user:auth(req)});
+        if(path==='/api/members'&&method==='GET'){const u=requireMembership(req);return json(200,{members:messageDirectory(db,u.id,season,true)});}
         if(path==='/api/membership'&&method==='GET'){const u=auth(req);return json(200,{memberships:db.prepare('SELECT season,status,paid,category,amount,organization FROM memberships WHERE user_id=? ORDER BY season DESC').all(u.id),coachApplication:db.prepare('SELECT status FROM coach_applications WHERE user_id=?').get(u.id)||null});}
         if(path==='/api/dashboard'&&method==='GET'){const u=auth(req);return json(200,dashboard(db,u,season,swishNumber));}
         if(path==='/api/coachings/viewed'&&method==='POST'){const u=requireMembership(req);const id=Number(body.id);if(!db.prepare("SELECT 1 FROM coachings c JOIN matches m ON m.id=c.match_id WHERE c.id=? AND c.member_id=? AND c.status='published' AND m.excluded=0 AND datetime(m.starts_at)<=datetime('now')").get(id,u.id))fail(404,'Coachningen finns inte.');db.prepare('INSERT INTO coaching_views VALUES(?,?,?) ON CONFLICT(user_id,coaching_id) DO UPDATE SET viewed_at=excluded.viewed_at').run(u.id,id,new Date().toISOString());return json(200,{ok:true});}
