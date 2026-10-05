@@ -1,3 +1,4 @@
+import {initializeCoaching} from './coaching.mjs';
 import {initializeMatchComments} from './match-comments.mjs';
 import {initializeMessages} from './messages.mjs';
 import {randomBytes,scryptSync,timingSafeEqual,createHash} from 'node:crypto';
@@ -41,6 +42,7 @@ db.exec(`PRAGMA foreign_keys=ON;
   if(!columns.has('organization'))db.exec("ALTER TABLE memberships ADD COLUMN organization TEXT NOT NULL DEFAULT ''");
   for(const [table,fields] of Object.entries({matches:{excluded:'INTEGER NOT NULL DEFAULT 0',home_team_id:"TEXT NOT NULL DEFAULT ''",away_team_id:"TEXT NOT NULL DEFAULT ''",competition_id:"TEXT NOT NULL DEFAULT ''",competition_name:"TEXT NOT NULL DEFAULT ''"},penalties:{team_id:"TEXT NOT NULL DEFAULT ''",code:"TEXT NOT NULL DEFAULT ''",period:'INTEGER',minute:'INTEGER',second:'INTEGER'}})){const existing=new Set(db.prepare('PRAGMA table_info('+table+')').all().map(x=>x.name));for(const [name,type]of Object.entries(fields))if(!existing.has(name))db.exec('ALTER TABLE '+table+' ADD COLUMN '+name+' '+type);}
   db.exec("CREATE TABLE IF NOT EXISTS match_referees(match_id INTEGER NOT NULL REFERENCES matches(id),referee_id INTEGER NOT NULL,name TEXT NOT NULL,normalized_name TEXT NOT NULL,PRIMARY KEY(match_id,referee_id)); CREATE INDEX IF NOT EXISTS referee_matches ON match_referees(referee_id,match_id); CREATE INDEX IF NOT EXISTS referee_names ON match_referees(normalized_name,match_id); CREATE INDEX IF NOT EXISTS penalties_match ON penalties(match_id);");
+  initializeCoaching(db);
   return db;
 }
 export function transaction(db,fn){return db.transaction(fn);}
