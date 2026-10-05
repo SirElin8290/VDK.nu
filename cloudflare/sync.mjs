@@ -1,3 +1,4 @@
+import {isVenueInScope} from '../server/stat-geography.mjs';
 import {StatsSource,isLeague,isVdkStatisticsCompetition} from '../server/stats-source.mjs';
 import {cacheMatch} from './cache-store.mjs';
 const sourceFor=owner=>owner.sourceFactory?.()||new StatsSource();
@@ -11,8 +12,8 @@ async function discover(owner,window){
   if(isRegionalSenior(meta)&&isLeague(meta))for(const m of await source.get(`/competitions/${c.CompetitionID}/matches`)){
    if(m.Cancelled){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(m.MatchID));continue;}
    if(!m.HasFinalResult||seen.has(m.MatchID))continue;seen.add(m.MatchID);
-   const exists=db.prepare('SELECT 1 FROM matches WHERE external_match_id=?').get(String(m.MatchID));if(exists&&Date.now()-new Date(m.MatchDateTime).getTime()>21*86400000)continue;
-   state.jobs.push({id:m.MatchID,competition:meta});
+   const actual={...meta,CompetitionID:m.CompetitionID||meta.CompetitionID,Name:m.CompetitionName||meta.Name};const exists=db.prepare('SELECT competition_id FROM matches WHERE external_match_id=?').get(String(m.MatchID));const checked=db.prepare("SELECT in_scope FROM stats_geography WHERE match_id=? AND scope_version='vdk-geography-1'").get(m.MatchID);if(checked&&(checked.in_scope===0||(exists&&String(exists.competition_id)===String(actual.CompetitionID)))&&Date.now()-new Date(m.MatchDateTime).getTime()>21*86400000)continue;
+   state.jobs.push({id:m.MatchID,competition:actual});
   }
   db.prepare('UPDATE regional_sync_plan SET jobs=? WHERE id=1 AND window=?').run(JSON.stringify({...state,cursor:state.cursor+1}),window);
  }
@@ -48,13 +49,13 @@ export async function runSyncBatch(owner){
   const end=Math.min(position+15,jobs.length);
   for(;position<end;position++){
    const j=jobs[position];
-   try{const m=await source.get(`/matches/${j.id}`);if(m.Cancelled)db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));else cacheMatch(db,m,j.competition);}catch(e){errors.push({matchId:j.id,error:e.message});}
+   try{const m=await source.get(`/matches/${j.id}`);if(m.Cancelled)db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));else{let inScope;try{const venueId=Number(m.VenueID);if(!venueId)throw Error('Spelplats saknas');const cached=db.prepare('SELECT data FROM stats_venues WHERE id=?').get(venueId);const venue=cached?JSON.parse(cached.data):await source.get('/venues/'+venueId);inScope=isVenueInScope(venue);if(!cached)db.prepare('INSERT OR REPLACE INTO stats_venues VALUES(?,?)').run(venueId,JSON.stringify({City:venue.City,WGS84Latitude:venue.WGS84Latitude,WGS84Longitude:venue.WGS84Longitude}));db.prepare('INSERT OR REPLACE INTO stats_geography VALUES(?,?,?,?)').run(m.MatchID,venueId,inScope?1:0,'vdk-geography-1');}catch(e){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));throw e;}if(!inScope){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));}else{const c=m.CompetitionID&&Number(m.CompetitionID)!==Number(j.competition.CompetitionID)?await source.get('/competitions/'+m.CompetitionID):j.competition;cacheMatch(db,m,c);}}}catch(e){errors.push({matchId:j.id,error:e.message});}
    db.prepare('UPDATE regional_sync_plan SET position=?,errors=? WHERE id=1').run(position+1,JSON.stringify(errors));
   }
   if(position<jobs.length){await owner.ctx.storage.setAlarm(Date.now()+1000);return;}
   db.transaction(()=>{
    const status=errors.length?'partial':'complete';
-   db.prepare('INSERT INTO sync_runs(started_at,finished_at,status,report) VALUES(?,?,?,?)').run(plan.started_at,new Date().toISOString(),status,JSON.stringify({scope:'Värmlands seniorserier samt HJ17, DJ17, HJ18 och DJ18, inklusive gemensamma serier',checked:jobs.length,errors}));
+   db.prepare('INSERT INTO sync_runs(started_at,finished_at,status,report) VALUES(?,?,?,?)').run(plan.started_at,new Date().toISOString(),status,JSON.stringify({scope:'Matcher spelade i Värmland samt Karlskoga, Degerfors, Billingsfors och Åmål; seniorserier och HJ17/DJ17/HJ18/DJ18',checked:jobs.length,errors}));
    db.prepare('UPDATE sync_schedule_windows SET status=? WHERE window=?').run(status,plan.window);
    db.prepare('DELETE FROM regional_sync_plan WHERE id=1').run();
   });

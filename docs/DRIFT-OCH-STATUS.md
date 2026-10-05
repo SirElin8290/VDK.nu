@@ -100,3 +100,10 @@ Utvecklingstrappan på `#/kunskapsnivaer` bygger på användarens tolv steg med 
 Statistikurvalet omfattar nu HJ17 och DJ17 Region samt HJ18 och DJ18 Juniorallsvenskan som finns i Värmlands serieöversikt. Hela de gemensamma seriegrupperna ingår, även matcher över distriktsgränser. Andra förbundsserier, träningsmatcher, kval och slutspel är fortsatt uteslutna. Matcherna markeras som ungdom och räknas en gång per match-ID. Videocoachningens senioravgränsning ändras inte.
 
 Planeringen av den större uppdateringen sker i omgångar om högst sex serier för att hålla anropen under Worker-gränsen. Framsteg sparas mellan omgångarna, och matchprotokoll läses därefter i omgångar om 15 matcher. Automatisk måndagsuppdatering kl. 03 svensk tid använder samma urval.
+
+
+## Geografisk korrigering av statistik
+
+Användarens slutliga avgränsning är spelplats i Värmland, med Karlskoga, Degerfors, Billingsfors och Åmål inkluderade. Hela bortaserier i Örebro/Västmanland ska inte ingå. Hallens stad och koordinater hämtas från Svensk Innebandys venue-API. SCB:s RegSO 2025 används som gränsunderlag för län 17 och kommunerna Karlskoga 1883 / Degerfors 1862; de fyra uttryckligen angivna ortnamnen godtas också. Källa: https://www.scb.se/vara-tjanster/oppna-data/oppna-geodata/regso/ . Okända geografiska lägen räknas inte tills de verifierats. Matchplats är inte bevis för en domares hemvist.
+
+En engångsgenomgång verifierar även tidigare importerade matcher. Utanför området markeras de som exkluderade i stället för att raderas. Matchens egna serie-ID används för kombinerade A/B- eller Östra/Västra-listningar. Halluppgifter och geografiska kontrollresultat sparas för snabbare kommande uppdateringar.

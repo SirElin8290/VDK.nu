@@ -1,0 +1,5 @@
+import {regionPolygons} from './statistics-region.js';
+const extraCities=new Set(['åmål','billingsfors','karlskoga','degerfors']);
+const prepared=regionPolygons.map(rings=>{const outer=rings[0];return {rings,bounds:[Math.min(...outer.map(p=>p[0])),Math.min(...outer.map(p=>p[1])),Math.max(...outer.map(p=>p[0])),Math.max(...outer.map(p=>p[1]))]};});
+function inRing(x,y,ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const[a,b]=ring[i],[c,d]=ring[j];if(((b>y)!==(d>y))&&x<(c-a)*(y-b)/(d-b)+a)inside=!inside;}return inside;}
+export function isVenueInScope(venue){if(extraCities.has(String(venue.City||'').normalize('NFC').trim().toLocaleLowerCase('sv-SE')))return true;const x=Number(venue.WGS84Longitude),y=Number(venue.WGS84Latitude);if(!Number.isFinite(x)||!Number.isFinite(y)||x===0||y===0)throw Error('Spelplatsens geografiska läge kan inte verifieras');return prepared.some(({rings,bounds:[a,b,c,d]})=>x>=a&&x<=c&&y>=b&&y<=d&&inRing(x,y,rings[0])&&!rings.slice(1).some(r=>inRing(x,y,r)));}
