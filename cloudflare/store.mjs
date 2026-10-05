@@ -6,6 +6,7 @@ export function hashPassword(value) { const salt=randomBytes(16).toString('hex')
 export function verifyPassword(value, hash) { if(!hash)return false;const [salt,key]=hash.split(':');const calculated=scryptSync(value,salt,64);const stored=Buffer.from(key,'hex');return stored.length===calculated.length && timingSafeEqual(stored,calculated); }
 export function newToken(){return randomBytes(32).toString('base64url');}
 export function initializeStore(db){
+ db.exec('CREATE TABLE IF NOT EXISTS coaching_views(user_id INTEGER NOT NULL,coaching_id INTEGER NOT NULL,viewed_at TEXT NOT NULL,PRIMARY KEY(user_id,coaching_id));');
  initializeMessages(db);
  initializeMatchComments(db);
  db.exec("CREATE TABLE IF NOT EXISTS availability_plan(id INTEGER PRIMARY KEY,day TEXT NOT NULL,state TEXT NOT NULL); CREATE TABLE IF NOT EXISTS availability_snapshot(id INTEGER PRIMARY KEY,day TEXT NOT NULL,updated_at TEXT NOT NULL,data TEXT NOT NULL);");

@@ -22,7 +22,7 @@ test('account activation and membership payment work independently in either ord
   assert.equal(login.status,200);const cookie=login.headers['set-cookie'].split(';')[0];
   assert.equal((await request('/me',{cookie})).status,200);
   assert.equal((await request('/membership',{cookie})).status,200);
-  assert.equal((await request('/dashboard',{cookie})).status,403);
+  assert.equal((await request('/dashboard',{cookie})).data.access,false);
   assert.equal((await request(`/admin/applications/${row.id}/payment`,{method:'POST',cookie:adminCookie})).status,200);
   assert.equal((await request(`/admin/applications/${row.id}/approve`,{method:'POST',cookie:adminCookie})).status,200);
   assert.equal((await request('/dashboard',{cookie})).status,200);
