@@ -121,7 +121,7 @@ export function createApp(options={}){
       }
       if(method!=='GET'&&method!=='HEAD')fail(405,'Metoden stöds inte.');
       // Only the public files are exposed; server source, database and environment never are.
-      const publicFiles=new Set(['/','/index.html','/styles.css','/app.js','/config.js','/theme.js','/demo-questions.js','/development.js','/statutes.js','/faq.js']);
+      const publicFiles=new Set(['/','/index.html','/styles.css','/app.js','/config.js','/theme.js','/demo-questions.js','/development.js','/statutes.js','/faq.js','/board-data.js','/domartavla.js']);
       if(path==='/innebandyregler'){res.writeHead(301,{Location:'/innebandyregler/'});return res.end();}
       if(path==='/member-rules'){res.writeHead(302,{Location:'/member-rules/'});return res.end();}
       if(path.startsWith('/member-rules/')){const u=auth(req);if(!u.roles.includes('ADMIN')&&!db.prepare("SELECT 1 FROM memberships WHERE user_id=? AND season=? AND category IN ('active','club') AND status='active' AND paid=1").get(u.id,season))fail(403,'Fullversionen kräver aktivt medlemskap eller föreningsmedlemskap.');res.setHeader('Cache-Control','private, no-store');}
