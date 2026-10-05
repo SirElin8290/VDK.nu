@@ -5,7 +5,7 @@ const sourceFor=owner=>owner.sourceFactory?.()||new StatsSource();
 export const isRegionalSenior=isVdkStatisticsCompetition;
 async function discover(owner,window){
  const {db}=owner,source=sourceFor(owner);const plan=db.prepare('SELECT jobs FROM regional_sync_plan WHERE id=1 AND window=?').get(window);let state=JSON.parse(plan?.jobs||'[]');
- if(Array.isArray(state)){const competitions=[],seen=new Set();for(const season of [43,44])for(const c of await source.get(`/seasons/${season}/federations/11/competitions`)){if(isRegionalSenior(c)&&!seen.has(c.CompetitionID)){seen.add(c.CompetitionID);competitions.push(c);}}state={planning:true,competitions,cursor:0,jobs:[]};db.prepare('UPDATE regional_sync_plan SET jobs=? WHERE id=1 AND window=?').run(JSON.stringify(state),window);}
+ if(Array.isArray(state)){const competitions=[],seen=new Set();for(const season of [40,41,42,43,44])for(const c of await source.get(`/seasons/${season}/federations/11/competitions`)){if(isRegionalSenior(c)&&!seen.has(c.CompetitionID)){seen.add(c.CompetitionID);competitions.push(c);}}state={planning:true,competitions,cursor:0,jobs:[]};db.prepare('UPDATE regional_sync_plan SET jobs=? WHERE id=1 AND window=?').run(JSON.stringify(state),window);}
  const seen=new Set(state.jobs.map(j=>j.id));const end=Math.min(state.cursor+6,state.competitions.length);
  for(;state.cursor<end;state.cursor++){
   const c=state.competitions[state.cursor];const meta=await source.get(`/competitions/${c.CompetitionID}`);
@@ -47,9 +47,14 @@ export async function runSyncBatch(owner){
   const jobs=JSON.parse(plan.jobs),errors=JSON.parse(plan.errors),source=sourceFor(owner);
   let position=plan.position;
   const end=Math.min(position+15,jobs.length);
+  // Fetch in groups of three after the first request has initialized source authentication.
+  const fetched=new Map();
+  async function read(j){try{fetched.set(j.id,{match:await source.get(`/matches/${j.id}`)});}catch(error){fetched.set(j.id,{error});}}
+  if(position<end)await read(jobs[position]);
+  for(let i=position+1;i<end;i+=3)await Promise.all(jobs.slice(i,Math.min(i+3,end)).map(read));
   for(;position<end;position++){
    const j=jobs[position];
-   try{const m=await source.get(`/matches/${j.id}`);if(m.Cancelled)db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));else{let inScope;try{const venueId=Number(m.VenueID);if(!venueId)throw Error('Spelplats saknas');const cached=db.prepare('SELECT data FROM stats_venues WHERE id=?').get(venueId);const venue=cached?JSON.parse(cached.data):await source.get('/venues/'+venueId);inScope=isVenueInScope(venue);if(!cached)db.prepare('INSERT OR REPLACE INTO stats_venues VALUES(?,?)').run(venueId,JSON.stringify({City:venue.City,WGS84Latitude:venue.WGS84Latitude,WGS84Longitude:venue.WGS84Longitude}));db.prepare('INSERT OR REPLACE INTO stats_geography VALUES(?,?,?,?)').run(m.MatchID,venueId,inScope?1:0,'vdk-geography-1');}catch(e){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));throw e;}if(!inScope){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));}else{const c=m.CompetitionID&&Number(m.CompetitionID)!==Number(j.competition.CompetitionID)?await source.get('/competitions/'+m.CompetitionID):j.competition;cacheMatch(db,m,c);}}}catch(e){errors.push({matchId:j.id,error:e.message});}
+   try{const result=fetched.get(j.id);if(result.error)throw result.error;const m=result.match;if(m.Cancelled)db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));else{let inScope;try{const venueId=Number(m.VenueID);if(!venueId)throw Error('Spelplats saknas');const cached=db.prepare('SELECT data FROM stats_venues WHERE id=?').get(venueId);const venue=cached?JSON.parse(cached.data):await source.get('/venues/'+venueId);inScope=isVenueInScope(venue);if(!cached)db.prepare('INSERT OR REPLACE INTO stats_venues VALUES(?,?)').run(venueId,JSON.stringify({City:venue.City,WGS84Latitude:venue.WGS84Latitude,WGS84Longitude:venue.WGS84Longitude}));db.prepare('INSERT OR REPLACE INTO stats_geography VALUES(?,?,?,?)').run(m.MatchID,venueId,inScope?1:0,'vdk-geography-1');}catch(e){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));throw e;}if(!inScope){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));}else{const c=m.CompetitionID&&Number(m.CompetitionID)!==Number(j.competition.CompetitionID)?await source.get('/competitions/'+m.CompetitionID):j.competition;cacheMatch(db,m,c);}}}catch(e){errors.push({matchId:j.id,error:e.message});}
    db.prepare('UPDATE regional_sync_plan SET position=?,errors=? WHERE id=1').run(position+1,JSON.stringify(errors));
   }
   if(position<jobs.length){await owner.ctx.storage.setAlarm(Date.now()+1000);return;}

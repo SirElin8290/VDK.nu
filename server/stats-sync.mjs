@@ -3,7 +3,7 @@ import {StatsSource,normalizeName,isLeague,referees,memberRecord} from './stats-
 
 async function mapLimit(items,fn){let next=0;await Promise.all(Array.from({length:3},async()=>{while(next<items.length)await fn(items[next++]);}));}
 // One shared scan, regardless of whether the roster contains 1 or 100 referees.
-export async function syncStats(db,{source=new StatsSource(),seasonIds=[43,44],federationIds=[11,1],full=false,now=new Date(),onProgress=()=>{}}={}){
+export async function syncStats(db,{source=new StatsSource(),seasonIds=[40,41,42,43,44],federationIds=[11,1],full=false,now=new Date(),onProgress=()=>{}}={}){
   const lock=db.prepare("INSERT OR IGNORE INTO sync_lock VALUES (1,?)").run(Date.now());if(!lock.changes)throw Error('En statistikuppdatering pågår redan. Kontrollera låset efter ett avbrutet serverjobb.');
   const report={startedAt:now.toISOString(),finishedAt:null,status:'running',scope:{seasonIds,federationIds,full},competitions:0,examined:0,imported:0,unreported:0,errors:[],unresolved:[]};
   const run=Number(db.prepare('INSERT INTO sync_runs(started_at,status,report) VALUES (?,?,?)').run(report.startedAt,'running',JSON.stringify(report)).lastInsertRowid);

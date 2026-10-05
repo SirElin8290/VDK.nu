@@ -107,3 +107,20 @@ Planeringen av den större uppdateringen sker i omgångar om högst sex serier f
 Användarens slutliga avgränsning är spelplats i Värmland, med Karlskoga, Degerfors, Billingsfors och Åmål inkluderade. Hela bortaserier i Örebro/Västmanland ska inte ingå. Hallens stad och koordinater hämtas från Svensk Innebandys venue-API. SCB:s RegSO 2025 används som gränsunderlag för län 17 och kommunerna Karlskoga 1883 / Degerfors 1862; de fyra uttryckligen angivna ortnamnen godtas också. Källa: https://www.scb.se/vara-tjanster/oppna-data/oppna-geodata/regso/ . Okända geografiska lägen räknas inte tills de verifierats. Matchplats är inte bevis för en domares hemvist.
 
 En engångsgenomgång verifierar även tidigare importerade matcher. Utanför området markeras de som exkluderade i stället för att raderas. Matchens egna serie-ID används för kombinerade A/B- eller Östra/Västra-listningar. Halluppgifter och geografiska kontrollresultat sparas för snabbare kommande uppdateringar.
+
+
+## Historiska säsonger – verifierat 2026-10-05
+
+Statistikens hämtning och säsongsval omfattar 2022/23–2026/27. Importen avslutades 2026-10-05 19:03 UTC med delvis verifierat underlag, enligt samma spelplatsavgränsning som tidigare.
+
+| Säsong | Verifierade matcher i regionen | Sören Johanssons matcher |
+| --- | ---: | ---: |
+| 2022/23 | 718 | 39 |
+| 2023/24 | 773 | 49 |
+| 2024/25 | 902 | 57 |
+| 2025/26 | 891 | 58 |
+| 2026/27 | 28 | 1 |
+
+Den samlade importkörningen utelämnade 215 matcher med geografiskt okänd spelplats, en utan spelplats och 23 med saknat händelseprotokoll. Dessa räknas inte som matcher med noll utvisningar. Antalen ovan ersätter äldre ögonblicksbilder i dokumentet. Namnet Pantamera Herrjunior 17 Region från 2022/23 ingår.
+
+Verifierat live: egna och regionala sökningar för samtliga tre äldre säsonger, säsongsval i Mina matcher/Min statistik/Värmlands statistik på 375 och 1440 pixlars bredd utan sidscrollning. 47 automatiska tester passerade.
