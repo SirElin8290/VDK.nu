@@ -3,23 +3,21 @@ import {cacheMatch} from './cache-store.mjs';
 const sourceFor=owner=>owner.sourceFactory?.()||new StatsSource();
 export const isRegionalSenior=isVdkStatisticsCompetition;
 async function discover(owner,window){
- const {db}=owner,source=sourceFor(owner),jobs=[],seen=new Set();
- for(const season of [43,44])for(const c of await source.get(`/seasons/${season}/federations/11/competitions`)){
-  if(!isRegionalSenior(c))continue;
-  const meta=await source.get(`/competitions/${c.CompetitionID}`);
-  if(!isRegionalSenior(meta)||!isLeague(meta))continue;
-  for(const m of await source.get(`/competitions/${c.CompetitionID}/matches`)){
+ const {db}=owner,source=sourceFor(owner);const plan=db.prepare('SELECT jobs FROM regional_sync_plan WHERE id=1 AND window=?').get(window);let state=JSON.parse(plan?.jobs||'[]');
+ if(Array.isArray(state)){const competitions=[],seen=new Set();for(const season of [43,44])for(const c of await source.get(`/seasons/${season}/federations/11/competitions`)){if(isRegionalSenior(c)&&!seen.has(c.CompetitionID)){seen.add(c.CompetitionID);competitions.push(c);}}state={planning:true,competitions,cursor:0,jobs:[]};db.prepare('UPDATE regional_sync_plan SET jobs=? WHERE id=1 AND window=?').run(JSON.stringify(state),window);}
+ const seen=new Set(state.jobs.map(j=>j.id));const end=Math.min(state.cursor+6,state.competitions.length);
+ for(;state.cursor<end;state.cursor++){
+  const c=state.competitions[state.cursor];const meta=await source.get(`/competitions/${c.CompetitionID}`);
+  if(isRegionalSenior(meta)&&isLeague(meta))for(const m of await source.get(`/competitions/${c.CompetitionID}/matches`)){
    if(m.Cancelled){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(m.MatchID));continue;}
-   if(!m.HasFinalResult||seen.has(m.MatchID))continue;
-   seen.add(m.MatchID);
-   const exists=db.prepare('SELECT 1 FROM matches WHERE external_match_id=?').get(String(m.MatchID));
-   if(exists&&Date.now()-new Date(m.MatchDateTime).getTime()>21*86400000)continue;
-   jobs.push({id:m.MatchID,competition:meta});
+   if(!m.HasFinalResult||seen.has(m.MatchID))continue;seen.add(m.MatchID);
+   const exists=db.prepare('SELECT 1 FROM matches WHERE external_match_id=?').get(String(m.MatchID));if(exists&&Date.now()-new Date(m.MatchDateTime).getTime()>21*86400000)continue;
+   state.jobs.push({id:m.MatchID,competition:meta});
   }
+  db.prepare('UPDATE regional_sync_plan SET jobs=? WHERE id=1 AND window=?').run(JSON.stringify({...state,cursor:state.cursor+1}),window);
  }
- db.prepare('UPDATE regional_sync_plan SET jobs=?,position=0,errors=? WHERE id=1 AND window=?').run(JSON.stringify(jobs),'[]',window);
- await owner.ctx.storage.setAlarm(Date.now()+1000);
- return {started:true,jobs:jobs.length};
+ if(state.cursor<state.competitions.length){await owner.ctx.storage.setAlarm(Date.now()+1000);return {started:true,planning:true,competitions:state.cursor,totalCompetitions:state.competitions.length};}
+ db.prepare('UPDATE regional_sync_plan SET jobs=?,position=0,errors=? WHERE id=1 AND window=?').run(JSON.stringify(state.jobs),'[]',window);await owner.ctx.storage.setAlarm(Date.now()+1000);return {started:true,jobs:state.jobs.length};
 }
 export async function planSync(owner,window){
  const {db}=owner;
