@@ -16,5 +16,5 @@ export function memberRecord(m,c,season,members){
 }
 
 // Junior competitions listed by Värmland include shared regional series and its JAS groups.
-export const isVdkJunior=c=>/^(?:Herrjunior\s*17|Damjunior\s*17)\b/i.test(c.Name)||/\b(?:HJ|DJ)\s*18\b/i.test(c.Name);
+export const isVdkJunior=c=>/^(?:Pantamera\s+)?(?:Herrjunior\s*17|Damjunior\s*17)\b/i.test(c.Name)||/\b(?:HJ|DJ)\s*(?:17|18)\b/i.test(c.Name);
 export const isVdkStatisticsCompetition=c=>isVdkJunior(c)||(/^(Herrar Division [2-9]|Damer Division [1-9])(?: |$)/.test(c.Name)&&!/\(SIBF\)/i.test(c.Name));

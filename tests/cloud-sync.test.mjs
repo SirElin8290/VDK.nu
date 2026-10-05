@@ -29,3 +29,5 @@ test('geographic backfill excludes an old outside match and advances even if ent
 
 
 test('historical season imports retain their own year and link to personal and regional statistics',()=>{const db=cloudStore();try{const userId=pilot(db);for(const [SeasonID,season] of [[40,'2022/23'],[41,'2023/24'],[42,'2024/25']]){cacheMatch(db,{...match,SeasonID,MatchID:SeasonID,Events:match.Events.map(e=>({...e,MatchEventID:e.MatchEventID+SeasonID*10}))},league);assert.equal(statistics(db,{season,regional:true}).matches,1);assert.equal(statistics(db,{season,userId}).penalties,2);}assert.equal(statistics(db,{season:'all',userId}).matches,3);assert.throws(()=>cacheMatch(db,{...match,SeasonID:39},league),/avgränsning/);}finally{db.close();}});
+
+test('historical Pantamera junior 17 competitions retain youth classification',()=>{const db=cloudStore();try{pilot(db);cacheMatch(db,{...match,SeasonID:40},{...league,Name:'Pantamera Herrjunior 17 Region'});assert.equal(db.prepare('SELECT level FROM matches WHERE id=1').get().level,'youth');}finally{db.close();}});
