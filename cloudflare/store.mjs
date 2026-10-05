@@ -1,3 +1,4 @@
+import {initializeMatchComments} from './match-comments.mjs';
 import {initializeMessages} from './messages.mjs';
 import {randomBytes,scryptSync,timingSafeEqual,createHash} from 'node:crypto';
 export const digest = value => createHash('sha256').update(value).digest('hex');
@@ -6,6 +7,7 @@ export function verifyPassword(value, hash) { if(!hash)return false;const [salt,
 export function newToken(){return randomBytes(32).toString('base64url');}
 export function initializeStore(db){
  initializeMessages(db);
+ initializeMatchComments(db);
  db.exec("CREATE TABLE IF NOT EXISTS availability_plan(id INTEGER PRIMARY KEY,day TEXT NOT NULL,state TEXT NOT NULL); CREATE TABLE IF NOT EXISTS availability_snapshot(id INTEGER PRIMARY KEY,day TEXT NOT NULL,updated_at TEXT NOT NULL,data TEXT NOT NULL);");
  db.exec("CREATE TABLE IF NOT EXISTS stats_venues(id INTEGER PRIMARY KEY,data TEXT NOT NULL); CREATE TABLE IF NOT EXISTS stats_geography(match_id INTEGER PRIMARY KEY,venue_id INTEGER,in_scope INTEGER NOT NULL,scope_version TEXT NOT NULL);");
  db.exec("CREATE TABLE IF NOT EXISTS regional_sync_plan(id INTEGER PRIMARY KEY,window TEXT NOT NULL,jobs TEXT NOT NULL,position INTEGER NOT NULL,errors TEXT NOT NULL,started_at TEXT NOT NULL);");
