@@ -7,7 +7,7 @@ const fold=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocale
 const sqlFold=e=>`lower(replace(replace(replace(replace(replace(replace(${e},'Å','a'),'Ä','a'),'Ö','o'),'å','a'),'ä','a'),'ö','o'))`;
 export function searchMatches(db,params,currentSeason='2026/27'){
  const q=(params.get('q')||'').trim(),season=params.get('season')||'2026/27',offset=Math.max(0,Math.min(100000,Math.trunc(Number(params.get('offset')))||0)),limit=30;
- const terms=fold(q).split(/\s+/).filter(Boolean).slice(0,8),where=['m.excluded=0'],args=[];
+ const terms=fold(q).split(/\s+/).filter(Boolean).slice(0,8),where=['m.excluded=0','m.regional_eligible=1'],args=[];
  if(season!=='all'){where.push('m.season=?');args.push(season);}
  for(const term of terms){const variants=term==='h18'?['hj18','herrjunior18']:term==='d18'?['dj18','damjunior18']:/^h[2-5]$/.test(term)?[term,'herrar division '+term.slice(1)]:/^d[1-3]$/.test(term)?[term,'damer division '+term.slice(1)]:[term];const expression=sqlFold("m.home||' '||m.away||' '||m.competition_name||' '||COALESCE((SELECT group_concat(r.name,' ') FROM match_referees r WHERE r.match_id=m.id),'')");where.push('('+variants.map(()=>`${expression} LIKE ? ESCAPE '\\'`).join(' OR ')+(variants.length>1?' OR '+variants.map(()=>`replace(${expression},' ','') LIKE ? ESCAPE '\\'`).join(' OR '):'')+')');const values=variants.map(v=>'%'+v.replace(/[\\%_]/g,x=>'\\'+x)+'%');args.push(...values,...(variants.length>1?values:[]));}
  const from=' FROM matches m WHERE '+where.join(' AND '),total=db.prepare('SELECT count(*) AS n'+from).get(...args).n;
