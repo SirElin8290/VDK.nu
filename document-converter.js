@@ -16,3 +16,7 @@ export async function textPdf(title,content){
  const write=(text,size)=>{const words=text.split(/\s+/),lines=[];let line='';for(const word of words){for(const char of (line?' ':'')+word){if(font.widthOfTextAtSize(line+char,size)>490){lines.push(line);line='';}line+=char;}}lines.push(line);for(const l of lines){if(y<55)next();page.drawText(l,{x:50,y,size,font});y-=size*1.55;}y-=8;};write(title,18);for(const paragraph of content.split(/\n/))write(paragraph,11);return doc.save();
 }
 export function base64Pdf(bytes){let s='';for(let i=0;i<bytes.length;i+=16384)s+=String.fromCharCode(...bytes.subarray(i,i+16384));return btoa(s);}
+
+export async function renderExistingPdf(url,canvas){
+ const task=pdfjs.getDocument({url,isEvalSupported:false,useSystemFonts:true}),doc=await task.promise;try{const page=await doc.getPage(1),original=page.getViewport({scale:1}),view=page.getViewport({scale:Math.min(2,1000/original.width)});canvas.width=Math.ceil(view.width);canvas.height=Math.ceil(view.height);await page.render({canvasContext:canvas.getContext('2d'),viewport:view}).promise;}finally{await task.destroy();}
+}

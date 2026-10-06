@@ -160,3 +160,5 @@
 /* Medlemsansökan ska rymmas även på smala mobilskärmar. */
 .membership-detail-aside,.membership-detail-aside>.card{min-width:0}.membership-detail-aside h2,.registration-receipt{overflow-wrap:anywhere}@media(max-width:650px){.membership-detail-layout{grid-template-columns:minmax(0,1fr)}}
 
+
+.membership-qr-view{margin:1rem 0;background:#fff;color:#182126;padding:.5rem;border-radius:4px}.membership-qr-view canvas{display:block;width:100%;height:auto}.membership-qr-view canvas[hidden]{display:none}
