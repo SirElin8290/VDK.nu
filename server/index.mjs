@@ -1,3 +1,4 @@
+import {initializeMemberTools,memberToolsAction} from './member-tools.mjs';
 import {canGrantAdmin,reactivateMembership,grantAdmin} from './admin-actions.mjs';
 import {startStatsScheduler} from './stats-scheduler.mjs';
 import { createServer } from 'node:http';
@@ -18,6 +19,7 @@ const defaultMailer=async({to,subject,html})=>{if(!process.env.RESEND_API_KEY||!
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function createApp(options={}){
   const db=options.db||openStore(process.env.DB_PATH||resolve(root,'data/vdk.sqlite'));
+  initializeMemberTools(db);
   const season=options.season||process.env.SEASON||'2026/27';
   const origin=options.origin||process.env.PUBLIC_ORIGIN||'http://localhost:3000';
   const swishNumber=options.swishNumber||process.env.SWISH_NUMBER||'';
@@ -49,6 +51,7 @@ export function createApp(options={}){
           if(!(req.headers['content-type']||'').startsWith('application/json'))fail(415,'JSON krävs.');
         }
         const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:32768):{};
+        if(memberToolsAction({db,path,method,body,req,auth,requireMembership:auth,season,fail,res,json,url}))return;
         if(path==='/api/rules/access'&&method==='GET'){const u=auth(req);if(!u.roles.includes('ADMIN')&&!db.prepare("SELECT 1 FROM memberships WHERE user_id=? AND season=? AND category IN ('active','club','support') AND status='active' AND paid=1").get(u.id,season))fail(403,'Fullversionen kräver ett godkänt aktivt medlemskap, stödmedlemskap eller föreningsmedlemskap.');return json(200,{ok:true});}
         if(path==='/api/health'&&method==='GET')return json(200,{ok:true});
         if(path==='/api/settings'&&method==='GET')return json(200,{season,fee:100,applicationsOpen:!!swishNumber&&mailReady});
