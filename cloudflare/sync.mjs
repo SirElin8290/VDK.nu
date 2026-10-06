@@ -60,7 +60,7 @@ export async function runSyncBatch(owner){
   if(position<jobs.length){await owner.ctx.storage.setAlarm(Date.now()+1000);return;}
   db.transaction(()=>{
    const status=errors.length?'partial':'complete';
-   db.prepare('INSERT INTO sync_runs(started_at,finished_at,status,report) VALUES(?,?,?,?)').run(plan.started_at,new Date().toISOString(),status,JSON.stringify({scope:'Matcher spelade i Värmland samt Karlskoga, Degerfors, Billingsfors och Åmål; seniorserier och HJ17/DJ17/HJ18/DJ18',checked:jobs.length,errors}));
+   db.prepare('INSERT INTO sync_runs(started_at,finished_at,status,report) VALUES(?,?,?,?)').run(plan.started_at,new Date().toISOString(),status,JSON.stringify({scope:'Matcher spelade i Värmland samt Karlskoga, Degerfors, Billingsfors och Åmål; röda pojk- och flickserier, seniorserier och HJ17/DJ17/HJ18/DJ18',checked:jobs.length,errors}));
    db.prepare('UPDATE sync_schedule_windows SET status=? WHERE window=?').run(status,plan.window);
    db.prepare('DELETE FROM regional_sync_plan WHERE id=1').run();
   });

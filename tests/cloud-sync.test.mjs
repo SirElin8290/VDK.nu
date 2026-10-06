@@ -1,3 +1,4 @@
+import {isRegionalSenior} from '../cloudflare/sync.mjs';
 import {isVenueInScope} from '../server/stat-geography.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
@@ -34,3 +35,5 @@ test('historical Pantamera junior 17 competitions retain youth classification',(
 
 
 test('season comparisons combine colleague, penalty type and team without dropping zero-event matches',()=>{const db=cloudStore();try{const userId=pilot(db);cacheMatch(db,{...match,SeasonID:42,MatchID:40},league);cacheMatch(db,{...match,SeasonID:43,MatchID:41,Events:[],GoalsHomeTeam:0,GoalsAwayTeam:0},league);cacheMatch(db,{...match,SeasonID:43,MatchID:42,Referee2:'Other colleague',Referee2ID:100},league);cacheMatch(db,{...match,SeasonID:43,MatchID:43,Referee1:'Other referee',Referee1ID:200},league);const d=statistics(db,{season:'all',userId,colleague:'Kollega',code:'219',team:'10',against:true});assert.equal(d.matches,2);assert.equal(d.penalties,1);assert.deepEqual(d.seasonSummary.map(r=>[r.season,r.matches,r.penalties,r.penaltiesPerMatch]),[['2024/25',1,1,1],['2025/26',1,0,0]]);assert.equal(d.seasonColleagues.length,2);assert.ok(d.seasonColleagues.every(r=>r.colleague==='Kollega'));assert.equal(d.penaltiesPerMatch,0.5);assert.equal(statistics(db,{season:'all',userId,colleague:'Kollega',code:'219',team:'20',against:true}).penalties,0);}finally{db.close();}});
+
+test('all red boys and girls series, including seasonal divisions, are cached as youth',()=>{const db=cloudStore();try{pilot(db);for(const Name of ['Pantamera Pojkar Röd Serie 7 Östra','Pantamera Flickor Röd Serie 5 Västra','Pantamera Pojkar Röd Serie 5 Vår B','Pantamera Flick Mörkröd B Höst (Västsvenska)']){assert.equal(isRegionalSenior({Name}),true);cacheMatch(db,match,{...league,Name});assert.equal(db.prepare('SELECT level FROM matches WHERE id=1').get().level,'youth');}for(const Name of ['Pantamera Pojkar Blå Serie 1','Pantamera Flickor Grön Serie 1'])assert.equal(isRegionalSenior({Name}),false);}finally{db.close();}});

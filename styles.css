@@ -151,3 +151,5 @@
 .support-section{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--line);scroll-margin-top:1rem}.support-section .member-directory{grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
 
 .document-reading{margin-top:2rem;max-width:900px}.document-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8}.support-section .card+.card{margin-top:1rem}
+
+.portal-navigation{flex-wrap:wrap}.portal-rules{min-height:46px;padding:.6rem 1rem;line-height:1.4}@media(max-width:650px){.portal-rules{padding:.65rem .7rem;font-size:.9rem}.portal-menu-wrap{flex-basis:100%}}

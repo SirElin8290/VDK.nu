@@ -101,7 +101,7 @@ export const publicFaq = [
       },
       {
         "type": "paragraph",
-        "text": "Du kan skapa ett konto innan medlemskapet är godkänt. Medlemsfunktionerna öppnas när VDK har kontrollerat betalningen och godkänt medlemskapet. Tillgången till verktyg följer medlemskategori; hela regelgeneratorn är för aktiva medlemmar och föreningsmedlemmar."
+        "text": "Du kan skapa ett konto innan medlemskapet är godkänt. Medlemsfunktionerna öppnas när VDK har kontrollerat betalningen och godkänt medlemskapet. Tillgången till verktyg följer medlemskategori; hela regelgeneratorn är för aktiva medlemmar, stödmedlemmar och föreningsmedlemmar."
       }
     ]
   },

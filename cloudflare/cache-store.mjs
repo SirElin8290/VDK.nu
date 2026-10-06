@@ -1,4 +1,4 @@
-import {normalizeName,referees,penaltySeconds,isLeague,isVdkStatisticsCompetition,isVdkJunior} from '../server/stats-source.mjs';
+import {normalizeName,referees,penaltySeconds,isLeague,isVdkStatisticsCompetition,isVdkJunior,isVdkRed} from '../server/stats-source.mjs';
 export function cacheMatch(db,m,c){
  if(![40,41,42,43,44].includes(Number(m.SeasonID))||!isLeague(c)||!isVdkStatisticsCompetition(c))throw Error('Matchen ligger utanför VDK:s statistikavgränsning');
  if(m.Cancelled||!m.HasFinalResult)return false;
@@ -9,7 +9,7 @@ export function cacheMatch(db,m,c){
  return db.transaction(()=>{
   const id=Number(m.MatchID);
   if(!Number.isSafeInteger(id)||id<=0||!Number.isFinite(Date.parse(m.MatchDateTime)))throw Error('Ogiltig matchidentitet eller tid');
-  db.prepare("INSERT INTO matches(id,external_match_id,season,starts_at,home,away,level,source_url,excluded,home_team_id,away_team_id,competition_id,competition_name) VALUES(?,?,?,?,?,?,?,?,0,?,?,?,?) ON CONFLICT(id) DO UPDATE SET season=excluded.season,level=excluded.level,excluded=0,starts_at=excluded.starts_at,home=excluded.home,away=excluded.away,home_team_id=excluded.home_team_id,away_team_id=excluded.away_team_id,competition_id=excluded.competition_id,competition_name=excluded.competition_name,source_url=excluded.source_url").run(id,String(id),`${Number(m.SeasonID)+1982}/${String(Number(m.SeasonID)+1983).slice(-2)}`,m.MatchDateTime,m.HomeTeam,m.AwayTeam,isVdkJunior(c)?'youth':'senior',`https://stats.innebandy.se/sasong/${m.SeasonID}/serie/${c.CompetitionID}/match/${id}`,String(m.HomeTeamID),String(m.AwayTeamID),String(c.CompetitionID),c.Name);
+  db.prepare("INSERT INTO matches(id,external_match_id,season,starts_at,home,away,level,source_url,excluded,home_team_id,away_team_id,competition_id,competition_name) VALUES(?,?,?,?,?,?,?,?,0,?,?,?,?) ON CONFLICT(id) DO UPDATE SET season=excluded.season,level=excluded.level,excluded=0,starts_at=excluded.starts_at,home=excluded.home,away=excluded.away,home_team_id=excluded.home_team_id,away_team_id=excluded.away_team_id,competition_id=excluded.competition_id,competition_name=excluded.competition_name,source_url=excluded.source_url").run(id,String(id),`${Number(m.SeasonID)+1982}/${String(Number(m.SeasonID)+1983).slice(-2)}`,m.MatchDateTime,m.HomeTeam,m.AwayTeam,(isVdkJunior(c)||isVdkRed(c))?'youth':'senior',`https://stats.innebandy.se/sasong/${m.SeasonID}/serie/${c.CompetitionID}/match/${id}`,String(m.HomeTeamID),String(m.AwayTeamID),String(c.CompetitionID),c.Name);
   db.prepare('DELETE FROM penalties WHERE match_id=?').run(id);
   db.prepare('DELETE FROM match_referees WHERE match_id=?').run(id);
   db.prepare('DELETE FROM match_members WHERE match_id=?').run(id);
