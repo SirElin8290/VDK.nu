@@ -156,3 +156,7 @@
 .statistics-fold{border:1px solid var(--line);border-radius:8px;background:var(--surface);margin:1rem 0}.statistics-fold>summary{cursor:pointer;font-weight:700;font-size:1.1rem;padding:1rem;min-height:48px}.statistics-fold-body{padding:0 1rem 1rem;min-width:0}.profile-editor{max-width:780px;margin-bottom:1.5rem}.profile-contact>div{margin:1rem 0}.profile-contact dt{font-weight:700}.profile-contact dd{margin:.3rem 0;overflow-wrap:anywhere}.profile-bio{white-space:pre-wrap;overflow-wrap:anywhere}.match-search-results{display:grid;gap:1rem;margin:1rem 0}.search-referee{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.7rem;margin:.8rem 0;overflow-wrap:anywhere}.profile-editor .check-label{margin:1rem 0}.nav-membership[hidden],[data-member-documents][hidden]{display:none!important}
 
 [data-member-profile][hidden]{display:none!important}
+
+/* Medlemsansökan ska rymmas även på smala mobilskärmar. */
+.membership-detail-aside,.membership-detail-aside>.card{min-width:0}.membership-detail-aside h2,.registration-receipt{overflow-wrap:anywhere}@media(max-width:650px){.membership-detail-layout{grid-template-columns:minmax(0,1fr)}}
+
