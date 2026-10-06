@@ -8,3 +8,6 @@ public-build/
 .dev.vars*
 .wrangler/
 !.dev.vars.example
+
+assets/documents/converter.js
+assets/documents/pdf.worker.mjs

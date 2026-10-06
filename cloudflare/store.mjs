@@ -1,3 +1,4 @@
+import {initializeDocuments} from './documents.mjs';
 import {initializeCoaching} from './coaching.mjs';
 import {initializeMatchComments} from './match-comments.mjs';
 import {initializeMessages} from './messages.mjs';
@@ -8,7 +9,7 @@ export function verifyPassword(value, hash) { if(!hash)return false;const [salt,
 export function newToken(){return randomBytes(32).toString('base64url');}
 export function initializeStore(db){
  db.exec('CREATE TABLE IF NOT EXISTS coaching_views(user_id INTEGER NOT NULL,coaching_id INTEGER NOT NULL,viewed_at TEXT NOT NULL,PRIMARY KEY(user_id,coaching_id));');
- initializeMessages(db);
+ initializeMessages(db);initializeDocuments(db);
  initializeMatchComments(db);
  db.exec("CREATE TABLE IF NOT EXISTS availability_plan(id INTEGER PRIMARY KEY,day TEXT NOT NULL,state TEXT NOT NULL); CREATE TABLE IF NOT EXISTS availability_snapshot(id INTEGER PRIMARY KEY,day TEXT NOT NULL,updated_at TEXT NOT NULL,data TEXT NOT NULL);");
  db.exec("CREATE TABLE IF NOT EXISTS stats_venues(id INTEGER PRIMARY KEY,data TEXT NOT NULL); CREATE TABLE IF NOT EXISTS stats_geography(match_id INTEGER PRIMARY KEY,venue_id INTEGER,in_scope INTEGER NOT NULL,scope_version TEXT NOT NULL);");

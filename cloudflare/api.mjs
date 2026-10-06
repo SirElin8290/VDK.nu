@@ -1,3 +1,4 @@
+import {documentsAction} from './documents.mjs';
 import {coachingAction} from './coaching.mjs';
 import {dashboard} from './dashboard.mjs';
 import {commentedMatches} from './match-comments.mjs';
@@ -45,8 +46,9 @@ export function createApp(options={}){
           if(!requestOrigin||!allowed.has(requestOrigin))fail(403,'Begäran måste komma från VDK:s webbplats.');
           if(!(req.headers['content-type']||'').startsWith('application/json'))fail(415,'JSON krävs.');
         }
-        const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:32768):{};
+        const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:path==='/api/admin/documents'?7500000:32768):{};
         if(/^\/api\/(dashboard|matches|statistics|regional-statistics|availability|commented-matches|coachings|coach-applications|coach\/work)(?:\/|$)/.test(path)){const u=auth(req);if(u.membershipCategory==='support'&&!u.roles.includes('ADMIN'))fail(403,'Den här funktionen ingår inte i stödmedlemskapet.');}
+        if(await documentsAction({db,path,method,body,req,requireMembership,auth,fail,res,json}))return;
         if(path==='/api/rules/access'&&method==='GET'){const u=auth(req);if(!u.roles.includes('ADMIN')&&!db.prepare("SELECT 1 FROM memberships WHERE user_id=? AND season=? AND category IN ('active','club') AND status='active' AND paid=1").get(u.id,season))fail(403,'Fullversionen kräver ett godkänt aktivt medlemskap eller föreningsmedlemskap.');return json(200,{ok:true});}
         if(path==='/api/availability'&&method==='GET'){requireMembership(req);return json(200,availabilityResults(db,url.searchParams));}
         if(path==='/api/health'&&method==='GET')return json(200,{ok:true});
