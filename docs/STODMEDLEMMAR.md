@@ -9,3 +9,5 @@ Lämna förslag finns som mottagarval i Meddelanden för alla godkända medlemma
 Admin kan välja Alla medlemmar och bekräfta utskicket. Det skickas som separata privata meddelanden till godkända betalande medlemmar med aktiverat konto, inklusive stödmedlemmar, exklusive avsändaren och företagsgåvor. Svar är privata mellan medlem och avsändare. Befintliga mejlpreferenser och aviseringskö används. Idempotens förhindrar dubbla utskick vid samma formulärförsök.
 
 Verifiering: tests/support-portal.test.mjs omfattar kategoriåtkomst, förslagssekretess, validering, utskicksbehörighet och idempotens. Webbläsarkontroll i lokal testdatabas omfattar 320, 390 och 1440 px, båda teman, stödmedlemmars samlade sida, inskickning, admininkorg och bekräftat utskick. Inga testmeddelanden eller testförslag skickas i produktion.
+
+Adminutskick kan riktas till all, active, club eller support. Kategorigrupper kräver betalt och aktivt medlemskap för aktuell säsong. Tom grupp ger ett tydligt fel och skapar inget utskick. Mottagargruppen sparas med utskicket och ingår i kontrollen av upprepade formulärförsök.
