@@ -155,4 +155,4 @@ export function createApp(options={}){
   };return {handler,db};
 }
 
-function statisticsImportProgress(db){const p=db.prepare('SELECT window,position,jobs FROM regional_sync_plan WHERE id=1').get();if(!p)return null;const jobs=JSON.parse(p.jobs);return p.position===-1?{phase:'planning',checked:jobs.cursor||0,total:jobs.competitions?.length||0}:{phase:'matches',checked:p.position,total:db.prepare('SELECT count(*) AS n FROM stats_sync_jobs WHERE window=?').get(p.window).n||(Array.isArray(jobs)?jobs.length:0)};}
+function statisticsImportProgress(db){const p=db.prepare('SELECT window,position,jobs FROM regional_sync_plan WHERE id=1').get();if(!p)return null;const jobs=JSON.parse(p.jobs);return p.position===-1?{phase:'planning',checked:jobs.cursor||0,total:jobs.competitions?.length||0}:{phase:'matches',checked:p.position,total:db.prepare('SELECT coalesce((SELECT position+1 FROM stats_sync_jobs WHERE window=? ORDER BY position DESC LIMIT 1),0) AS n').get(p.window).n||(Array.isArray(jobs)?jobs.length:0)};}

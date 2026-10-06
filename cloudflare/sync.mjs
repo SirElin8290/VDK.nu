@@ -6,7 +6,7 @@ export const isRegionalSenior=isVdkStatisticsCompetition;
 export function memberRoster(db){return db.prepare("SELECT u.id,u.name FROM users u WHERE EXISTS(SELECT 1 FROM roles r WHERE r.user_id=u.id AND r.role='ADMIN') OR EXISTS(SELECT 1 FROM memberships ms WHERE ms.user_id=u.id AND ms.status='active' AND ms.paid=1 AND ms.category='active')").all();}
 const matchesRoster=(refs,roster)=>refs.some(r=>roster.some(u=>normalizeName(u.name)===normalizeName(r.name)));
 const compact=c=>({CompetitionID:c.CompetitionID,CompetitionTypeID:c.CompetitionTypeID,Name:c.Name,federal:!!c.federal,regional:!!c.regional});
-const queueSize=(db,window)=>db.prepare('SELECT count(*) AS n FROM stats_sync_jobs WHERE window=?').get(window).n;
+const queueSize=(db,window)=>db.prepare('SELECT coalesce((SELECT position+1 FROM stats_sync_jobs WHERE window=? ORDER BY position DESC LIMIT 1),0) AS n').get(window).n;
 async function discover(owner,window){
  const {db}=owner,source=sourceFor(owner),plan=db.prepare('SELECT jobs FROM regional_sync_plan WHERE id=1 AND window=?').get(window);let state=JSON.parse(plan?.jobs||'[]');
  if(Array.isArray(state)){const byId=new Map();for(const season of [40,41,42,43,44]){for(const c of await source.get(`/seasons/${season}/federations/11/competitions`))if(isRegionalSenior(c))byId.set(c.CompetitionID,compact({...c,regional:true}));for(const c of await source.get(`/seasons/${season}/federations/1/competitions`)){const regional=byId.get(c.CompetitionID)?.regional||false;byId.set(c.CompetitionID,compact({...c,federal:true,regional}));}}state={planning:true,competitions:[...byId.values()],cursor:0,jobs:[],queued:0};db.prepare('UPDATE regional_sync_plan SET jobs=? WHERE id=1 AND window=?').run(JSON.stringify(state),window);}
