@@ -65,7 +65,7 @@ export const publicFaq = [
       },
       {
         "type": "paragraph",
-        "text": "Medlemsavgiften bidrar till VDK:s verksamhet och utvecklingen av stöd, coachning, utbildning, aktiviteter och digitala verktyg för domarkåren."
+        "text": "Medlemsavgiften bidrar till VDK:s verksamhet och utvecklingen av stöd, videocoachning, utbildning, aktiviteter och digitala verktyg för domarkåren."
       }
     ]
   },
@@ -101,7 +101,7 @@ export const publicFaq = [
       },
       {
         "type": "paragraph",
-        "text": "Du kan skapa ett konto innan medlemskapet är godkänt. Medlemsfunktionerna öppnas när VDK har kontrollerat betalningen och godkänt medlemskapet. Tillgången till verktyg följer medlemskategori; hela regelgeneratorn är för aktiva medlemmar, stödmedlemmar och föreningsmedlemmar."
+        "text": "Registrera din ansökan och betala med Swish. När VDK har kontrollerat betalningen och godkänt medlemskapet skickas aktiveringsmejlet från konto@vdk.nu. Mejlet kan ta några minuter efter godkännandet; kontrollera även skräpposten. Via länken väljer du lösenord och aktiverar ditt konto. Tillgången till verktyg följer medlemskategori; hela regelgeneratorn är för aktiva medlemmar, stödmedlemmar och föreningsmedlemmar."
       }
     ]
   },
@@ -118,7 +118,7 @@ export const publicFaq = [
       },
       {
         "type": "paragraph",
-        "text": "Coachningen sammanställs på Mina sidor med tidsangivelser, kommentarer och en helhetsbild av matchen."
+        "text": "Videocoachningen sammanställs på Mina sidor med tidsangivelser, kommentarer och en helhetsbild av matchen."
       },
       {
         "type": "paragraph",
@@ -276,7 +276,7 @@ export const publicFaq = [
     "answer": [
       {
         "type": "paragraph",
-        "text": "En gåva till VDK bidrar till arbetet med domarutveckling, coachning, gemenskap och en bättre hallmiljö."
+        "text": "En gåva till VDK bidrar till arbetet med domarutveckling, videocoachning, gemenskap och en bättre hallmiljö."
       },
       {
         "type": "paragraph",
@@ -399,7 +399,7 @@ export const publicFaq = [
     "answer": [
       {
         "type": "paragraph",
-        "text": "Företagsstöd är en valfri gåva från 1 000 kronor till VDK:s verksamhet. Gåvan bidrar till domarutveckling, coachning, utbildning och gemenskap."
+        "text": "Företagsstöd är en valfri gåva från 1 000 kronor till VDK:s verksamhet. Gåvan bidrar till domarutveckling, videocoachning, utbildning och gemenskap."
       },
       {
         "type": "paragraph",

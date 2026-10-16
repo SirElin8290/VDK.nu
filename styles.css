@@ -162,3 +162,5 @@
 
 
 .membership-qr-view{margin:1rem 0;background:#fff;color:#182126;padding:.5rem;border-radius:4px}.membership-qr-view canvas{display:block;width:100%;height:auto}.membership-qr-view canvas[hidden]{display:none}
+
+.home-about{margin:2rem 0 3rem}.home-about>.content-grid{margin:1.5rem 0}.home-about .card{min-width:0}.home-about h3{overflow-wrap:anywhere}
