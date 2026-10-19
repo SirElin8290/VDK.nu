@@ -101,7 +101,7 @@ export const publicFaq = [
       },
       {
         "type": "paragraph",
-        "text": "Registrera din ansökan och betala med Swish. När VDK har kontrollerat betalningen och godkänt medlemskapet skickas aktiveringsmejlet från konto@vdk.nu. Mejlet kan ta några minuter efter godkännandet; kontrollera även skräpposten. Via länken väljer du lösenord och aktiverar ditt konto. Tillgången till verktyg följer medlemskategori; hela regelgeneratorn är för aktiva medlemmar, stödmedlemmar och föreningsmedlemmar."
+        "text": "Registrera din ansökan och betala med Swish. Aktiveringsmejlet från konto@vdk.nu skickas direkt vid registreringen. Mejlet kan ta några minuter; kontrollera även skräpposten. Via länken väljer du lösenord och får tillfällig åtkomst motsvarande stödmedlem. När VDK har kontrollerat betalningen och godkänt medlemskapet öppnas den sökta medlemsbehörigheten. Tillgången till verktyg följer medlemskategori; hela regelgeneratorn är för aktiva medlemmar, stödmedlemmar och föreningsmedlemmar."
       }
     ]
   },
