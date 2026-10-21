@@ -1,6 +1,6 @@
 import {deliverMessageEmail} from './messages.mjs';
 import {startAvailability,runAvailability,dailyThree} from './availability.mjs';
-import {planSync,runSyncBatch,isSwedishMondayThree} from './sync.mjs';
+import {planSync,runSyncBatch,isSwedishMondayThree,importUsmMatchIds} from './sync.mjs';
 import {DurableObject} from 'cloudflare:workers';
 import {initializeStore} from './store.mjs';
 import {createApp} from './api.mjs';
@@ -13,6 +13,7 @@ export class VdkDatabase extends DurableObject{
  if(!this.env.IMPORT_SECRET||request.headers.get('Authorization')!=='Bearer '+this.env.IMPORT_SECRET)return Response.json({error:'Åtkomst nekad'},{status:403});
  if(u.pathname==='/internal/availability'&&request.method==='POST')return Response.json(await this.startAvailability());
  if(u.pathname==='/internal/availability'&&request.method==='GET'){const p=this.db.prepare('SELECT state FROM availability_plan WHERE id=1').get();const s=p?JSON.parse(p.state):null;return Response.json(s?{planning:s.cursor,totalCompetitions:s.competitions?.length,jobs:s.jobs.length,position:s.position,errors:s.errors.length}: {complete:true});}
+ if(u.pathname==='/internal/import-usm'&&request.method==='POST'){const data=await request.json();return Response.json(await importUsmMatchIds(this,data.matchIds));}
  if(u.pathname==='/internal/sync'&&request.method==='POST')return Response.json(await this.startSync('manual-'+new Date().toISOString()));
  if(u.pathname==='/internal/status'&&request.method==='GET'){const plan=this.db.prepare('SELECT window,position,errors,started_at,jobs FROM regional_sync_plan WHERE id=1').get();let sync=null;if(plan){const jobs=JSON.parse(plan.jobs);const {jobs:raw,...progress}=plan;sync={...progress,totalJobs:Array.isArray(jobs)?(this.db.prepare('SELECT coalesce((SELECT position+1 FROM stats_sync_jobs WHERE window=? ORDER BY position DESC LIMIT 1),0) AS n').get(plan.window).n||jobs.length):(jobs.queued||jobs.jobs.length),...(!Array.isArray(jobs)?{competitionPosition:jobs.cursor,totalCompetitions:jobs.competitions.length}:{})};}return Response.json({sync,lastRun:this.db.prepare('SELECT * FROM sync_runs ORDER BY id DESC LIMIT 1').get()||null,matches:this.db.prepare('SELECT season,count(*) AS count FROM matches WHERE excluded=0 GROUP BY season').all()});}
  if(u.pathname!=='/internal/import'||request.method!=='POST')return Response.json({error:'Funktionen hittades inte'},{status:404});

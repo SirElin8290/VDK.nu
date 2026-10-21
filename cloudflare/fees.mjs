@@ -2,6 +2,8 @@
 export function matchFee(season,name){
  if(season!=='2026/27')return null;
  const n=name.normalize('NFC').toLocaleLowerCase('sv-SE');
+ // VDK-confirmed F16 USM qualification fee, per referee, 2026/27 only.
+ if(/^usm flickor grupp \d+$/.test(n.trim()))return 500;
  // Tournament phases must be explicit; never infer a phase from dates.
  if(/(?:\bdm\b|distriktsmästerskap|lilla vm)/.test(n)){
   if(/junior/.test(n)&&/\bdm\b|distriktsmästerskap/.test(n))return 580;

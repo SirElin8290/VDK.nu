@@ -1,21 +1,21 @@
 import {isVenueInScope} from '../server/stat-geography.mjs';
-import {StatsSource,isLeague,isVdkStatisticsCompetition,normalizeName,referees} from '../server/stats-source.mjs';
+import {StatsSource,isLeague,isVdkStatisticsCompetition,normalizeName,referees,isUsmQualifier} from '../server/stats-source.mjs';
 import {cacheMatch} from './cache-store.mjs';
 const sourceFor=owner=>owner.sourceFactory?.()||new StatsSource();
 export const isRegionalSenior=isVdkStatisticsCompetition;
 export function memberRoster(db){return db.prepare("SELECT u.id,u.name FROM users u WHERE EXISTS(SELECT 1 FROM roles r WHERE r.user_id=u.id AND r.role='ADMIN') OR EXISTS(SELECT 1 FROM memberships ms WHERE ms.user_id=u.id AND ms.status='active' AND ms.paid=1 AND ms.category='active')").all();}
 const matchesRoster=(refs,roster)=>refs.some(r=>roster.some(u=>normalizeName(u.name)===normalizeName(r.name)));
-const compact=c=>({CompetitionID:c.CompetitionID,CompetitionTypeID:c.CompetitionTypeID,Name:c.Name,federal:!!c.federal,regional:!!c.regional});
+const compact=c=>({CompetitionID:c.CompetitionID,CompetitionTypeID:c.CompetitionTypeID,CategoryID:c.CategoryID,CategoryName:c.CategoryName,Name:c.Name,federal:!!c.federal,regional:!!c.regional});
 const queueSize=(db,window)=>db.prepare('SELECT coalesce((SELECT position+1 FROM stats_sync_jobs WHERE window=? ORDER BY position DESC LIMIT 1),0) AS n').get(window).n;
 async function discover(owner,window){
  const {db}=owner,source=sourceFor(owner),plan=db.prepare('SELECT jobs FROM regional_sync_plan WHERE id=1 AND window=?').get(window);let state=JSON.parse(plan?.jobs||'[]');
- if(Array.isArray(state)){const byId=new Map();for(const season of [40,41,42,43,44]){for(const c of await source.get(`/seasons/${season}/federations/11/competitions`))if(isRegionalSenior(c))byId.set(c.CompetitionID,compact({...c,regional:true}));for(const c of await source.get(`/seasons/${season}/federations/1/competitions`)){const regional=byId.get(c.CompetitionID)?.regional||false;byId.set(c.CompetitionID,compact({...c,federal:true,regional}));}}state={planning:true,competitions:[...byId.values()],cursor:0,jobs:[],queued:0};db.prepare('UPDATE regional_sync_plan SET jobs=? WHERE id=1 AND window=?').run(JSON.stringify(state),window);}
+ if(Array.isArray(state)){const byId=new Map();for(const season of [40,41,42,43,44]){for(const c of await source.get(`/seasons/${season}/federations/11/competitions`))if(isRegionalSenior(c))byId.set(c.CompetitionID,compact({...c,regional:true}));for(const c of await source.get(`/seasons/${season}/federations/1/competitions`)){const regional=byId.get(c.CompetitionID)?.regional||false;byId.set(c.CompetitionID,compact({...c,federal:true,regional}));}}for(const t of await source.get('/seasons/44/federations/1/tournaments'))if([353,354].includes(Number(t.CompetitionCategoryID)))for(const c of await source.get('/seasons/44/competitioncategories/'+t.CompetitionCategoryID+'/competitionswithmatchesandstandings'))if(isUsmQualifier(c))byId.set(c.CompetitionID,compact({...c,federal:true,regional:false}));state={planning:true,competitions:[...byId.values()],cursor:0,jobs:[],queued:0};db.prepare('UPDATE regional_sync_plan SET jobs=? WHERE id=1 AND window=?').run(JSON.stringify(state),window);}
  // Jobs are persisted as small rows; a five-season national backfill cannot exceed a SQL row limit.
  if(state.jobs?.length){let next=queueSize(db,window);for(const j of state.jobs)if(!db.prepare('SELECT 1 FROM stats_sync_jobs WHERE window=? AND match_id=?').get(window,j.id))db.prepare('INSERT INTO stats_sync_jobs VALUES(?,?,?,?)').run(window,next++,j.id,JSON.stringify(compact(j.competition)));state.jobs=[];}
  let position=queueSize(db,window);const roster=memberRoster(db),catalog=new Map(state.competitions.map(c=>[Number(c.CompetitionID),c])),end=Math.min(state.cursor+6,state.competitions.length);
  for(;state.cursor<end;state.cursor++){
   const listing=state.competitions[state.cursor],meta=compact({...await source.get(`/competitions/${listing.CompetitionID}`),federal:listing.federal,regional:listing.regional});
-  if(isLeague(meta)&&(meta.federal||isRegionalSenior(meta)))for(const m of await source.get(`/competitions/${meta.CompetitionID}/matches`)){
+  if((isLeague(meta)||isUsmQualifier(meta))&&(meta.federal||isRegionalSenior(meta)))for(const m of await source.get(`/competitions/${meta.CompetitionID}/matches`)){
    if(m.Cancelled){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(m.MatchID));continue;}
    if(!m.HasFinalResult||db.prepare('SELECT 1 FROM stats_sync_jobs WHERE window=? AND match_id=?').get(window,m.MatchID))continue;
    const actualId=m.CompetitionID||meta.CompetitionID,actual=compact({...meta,CompetitionID:actualId,Name:m.CompetitionName||meta.Name,federal:meta.federal||catalog.get(Number(actualId))?.federal});
@@ -41,9 +41,9 @@ export async function runSyncBatch(owner){
   let position=plan.position;
   for(const j of jobs){try{const result=fetched.get(j.id);if(result.error)throw result.error;const m=result.match;if(m.Cancelled){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));}else{
     const c=m.CompetitionID&&Number(m.CompetitionID)!==Number(j.competition.CompetitionID)?compact({...await source.get('/competitions/'+m.CompetitionID),federal:j.competition.federal,regional:j.competition.regional}):j.competition;
-    if(!isLeague(c))throw Error('Matchen är inte seriespel');
-    if(c.federal){const refs=referees(m);db.prepare('INSERT OR REPLACE INTO federal_match_index VALUES(?,?,?)').run(m.MatchID,JSON.stringify(refs),new Date().toISOString());const own=matchesRoster(refs,roster);let regionalEligible=false;if(isRegionalSenior(c)){try{regionalEligible=await regionalVenue(owner,source,m);}catch(e){errors.push({matchId:j.id,error:e.message,scope:'regional'});}}
-     if(own||regionalEligible)cacheMatch(db,m,c,{federal:true,regionalEligible});else if(db.prepare('SELECT 1 FROM matches WHERE id=?').get(m.MatchID))db.prepare('UPDATE matches SET regional_eligible=0,competition_scope=? WHERE id=?').run('federal',m.MatchID);
+    if(!isLeague(c)&&!isUsmQualifier(c))throw Error('Matchen är varken seriespel eller USM-kval');
+    if(c.federal){const refs=referees(m);db.prepare('INSERT OR REPLACE INTO federal_match_index VALUES(?,?,?)').run(m.MatchID,JSON.stringify(refs),new Date().toISOString());const own=matchesRoster(refs,roster);let regionalEligible=false,localUsm=false;if(isUsmQualifier(c)){try{localUsm=await regionalVenue(owner,source,m);}catch(e){if(!own)throw e;}}else if(isRegionalSenior(c)){try{regionalEligible=await regionalVenue(owner,source,m);}catch(e){errors.push({matchId:j.id,error:e.message,scope:'regional'});}}
+     if(own||regionalEligible||localUsm)cacheMatch(db,m,c,{federal:true,regionalEligible});else if(db.prepare('SELECT 1 FROM matches WHERE id=?').get(m.MatchID))db.prepare('UPDATE matches SET regional_eligible=0,competition_scope=? WHERE id=?').run('federal',m.MatchID);
     }else{let inScope;try{inScope=await regionalVenue(owner,source,m);}catch(e){db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));throw e;}if(!inScope)db.prepare('UPDATE matches SET excluded=1 WHERE external_match_id=?').run(String(j.id));else cacheMatch(db,m,c);}
    }}catch(e){errors.push({matchId:j.id,error:e.message});}position++;db.prepare('UPDATE regional_sync_plan SET position=?,errors=? WHERE id=1').run(position,JSON.stringify(errors));}
   if(position<total){await owner.ctx.storage.setAlarm(Date.now()+1000);return;}
@@ -51,3 +51,5 @@ export async function runSyncBatch(owner){
  }catch(e){await owner.ctx.storage.setAlarm(Date.now()+60000);throw e;}
 }
 export function isSwedishMondayThree(time){const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Stockholm',weekday:'short',hour:'2-digit',hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(time)).map(x=>[x.type,x.value]));return p.weekday==='Mon'&&p.hour==='03'?`${p.year}-${p.month}-${p.day}`:null;}
+
+export async function importUsmMatchIds(owner,ids){if(!Array.isArray(ids)||!ids.length||ids.length>10||ids.some(id=>!Number.isSafeInteger(id)||id<=0))throw Error('Ange 1–10 giltiga MatchID');const source=sourceFor(owner),results=[];for(const id of new Set(ids)){const m=await source.get('/matches/'+id),c=await source.get('/competitions/'+m.CompetitionID);if(Number(m.SeasonID)!==44||!isUsmQualifier(c))throw Error('Endast verifierade USM-kvalmatcher 2026/27 får importeras');if(m.Cancelled||!m.HasFinalResult||m.MatchResultTypeID===6){results.push({id,imported:false});continue;}try{await regionalVenue(owner,source,m);}catch(e){if(!matchesRoster(referees(m),memberRoster(owner.db)))throw e;}const imported=cacheMatch(owner.db,m,c,{federal:true,regionalEligible:false});results.push({id,imported});}return {results};}
