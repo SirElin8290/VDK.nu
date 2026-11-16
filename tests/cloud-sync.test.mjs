@@ -45,3 +45,19 @@ test('federal scan saves an index for other referees, only caches member matches
 test('large import planning stores small individual jobs instead of a single huge SQL value',async()=>{const db=cloudStore();try{pilot(db);const rows=Array.from({length:10000},(_,i)=>({...match,MatchID:10000+i})),o=owner(db,rows);assert.equal((await planSync(o,'large')).jobs,10000);assert.ok(db.prepare('SELECT length(jobs) AS n FROM regional_sync_plan').get().n<1000);assert.equal(db.prepare('SELECT count(*) AS n FROM stats_sync_jobs').get().n,10000);assert.ok(db.prepare('SELECT max(length(competition)) AS n FROM stats_sync_jobs').get().n<1000);}finally{db.close();}});
 
 test('USM qualifiers are discovered, cached once for all local referees, and excluded from district totals',async()=>{const db=cloudStore();try{const uid=pilot(db),c={CompetitionID:90,CompetitionTypeID:2,CategoryID:353,CategoryName:'USM Flickor 16',Name:'USM Flickor Grupp 13'},rows=[{...match,SeasonID:44,CompetitionID:90,MatchID:90},{...match,SeasonID:44,CompetitionID:90,MatchID:91,Referee1ID:21,Referee1:'Annan domare',Referee2ID:22,Referee2:'Tredje domare'}],o=owner(db,[]),base=o.sourceFactory();o.sourceFactory=()=>({get(p){if(p==='/seasons/44/federations/1/tournaments')return Promise.resolve([{CompetitionCategoryID:353}]);if(p.includes('/competitioncategories/353/'))return Promise.resolve([c,c]);if(p==='/competitions/90')return Promise.resolve(c);if(p==='/competitions/90/matches')return Promise.resolve(rows);if(p.startsWith('/matches/'))return Promise.resolve(rows.find(m=>m.MatchID===Number(p.split('/').at(-1))));return base.get(p);}});await planSync(o,'usm-window');while(db.prepare('SELECT 1 FROM regional_sync_plan').get())await runSyncBatch(o);assert.equal(db.prepare('SELECT count(*) n FROM matches').get().n,2);assert.equal(statistics(db,{season:'2026/27',userId:uid}).matches,1);assert.equal(statistics(db,{season:'2026/27',regional:true}).matches,0);assert.equal(db.prepare('SELECT level FROM matches WHERE id=90').get().level,'youth');cacheMatch(db,rows[0],c,{federal:true,regionalEligible:false});assert.equal(db.prepare('SELECT count(*) n FROM matches').get().n,2);assert.throws(()=>cacheMatch(db,{...rows[1],MatchID:92},c,{federal:true,regionalEligible:false}),/tillhör inte/);}finally{db.close();}});
+
+test('a stale import is recorded as failed and the next window imports without losing saved matches',async()=>{
+ const db=cloudStore();
+ try{
+  pilot(db);cacheMatch(db,match,league);
+  const o=owner(db,[match],true);
+  assert.equal((await planSync(o,'stalled')).retrying,true);
+  db.prepare('UPDATE regional_sync_plan SET started_at=?').run(new Date(Date.now()-25*3600000).toISOString());
+  const recovered=owner(db,[{...match,MatchID:2}]);
+  assert.equal((await planSync(recovered,'next')).jobs,1);
+  assert.equal(db.prepare("SELECT status FROM sync_schedule_windows WHERE window='stalled'").get().status,'failed');
+  assert.match(db.prepare("SELECT report FROM sync_runs WHERE status='failed'").get().report,/Source unavailable/);
+  await runSyncBatch(recovered);
+  assert.equal(statistics(db,{season:'2025/26',regional:true}).matches,2);
+ }finally{db.close();}
+});

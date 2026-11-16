@@ -1,10 +1,50 @@
 const BASE='https://api.innebandy.se/v2/api/public';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 export const normalizeName=value=>String(value||'').normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE');
+const AUTH='https://api.innebandy.se/v2/api/auth';
+const CLIENT={Origin:'https://stats.innebandy.se',Referer:'https://stats.innebandy.se/'};
+const EMPTY_SHA256='e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+const encode=new TextEncoder();
 export class StatsSource {
-  constructor({fetcher=fetch,delay=150}={}){this.fetcher=fetcher.bind(globalThis);this.delay=delay;this.token=null;this.calls=0;}
-  async authorize(){const r=await this.fetcher('https://api.innebandy.se/StatsAppApi/api/startkit',{signal:AbortSignal.timeout(30000)});if(!r.ok)throw Error('Statistikkällans startdata kunde inte läsas.');const data=await r.json();if(!data.accessToken)throw Error('Publik åtkomsttoken saknas.');this.token=data.accessToken;}
-  async get(path){if(!this.token)await this.authorize();for(let attempt=0;attempt<4;attempt++){await sleep(this.delay);this.calls++;const r=await this.fetcher(BASE+path,{headers:{Authorization:'Bearer '+this.token,Referer:'https://stats.innebandy.se/'},signal:AbortSignal.timeout(30000)});if(r.ok)return r.json();if(r.status===401&&attempt===0){await this.authorize();continue;}if(r.status===429||r.status>=500){const retry=Number(r.headers.get('retry-after'));await sleep(Math.min(60000,Number.isFinite(retry)&&retry>0?retry*1000:1000*2**attempt));continue;}throw Error(`Statistikkällan svarade ${r.status} för ${path}`);}throw Error('Statistikkällan är tillfälligt otillgänglig.');}
+  constructor({fetcher=fetch,delay=150}={}){this.fetcher=fetcher.bind(globalThis);this.delay=delay;this.session=null;this.connecting=null;this.calls=0;}
+  async connect(){
+    const start=await this.fetcher(AUTH+'/startkit',{headers:CLIENT,signal:AbortSignal.timeout(30000)});
+    if(!start.ok)throw Error('Statistikkällans startdata kunde inte läsas (HTTP '+start.status+').');
+    const {accessToken}=await start.json();
+    if(!accessToken)throw Error('Publik åtkomsttoken saknas.');
+    const headers={...CLIENT,Authorization:'Bearer '+accessToken};
+    const response=await this.fetcher(AUTH+'/handshake',{method:'POST',headers:{...headers,'Content-Type':'application/json'},body:'{}',signal:AbortSignal.timeout(30000)});
+    if(!response.ok)throw Error('Statistikkällans session kunde inte öppnas (HTTP '+response.status+').');
+    const {ss,st}=await response.json();
+    const cookies=(response.headers.getSetCookie?.()||response.headers.getAll?.('Set-Cookie')||[]).map(value=>value.split(';',1)[0]).join('; ');
+    if(typeof ss!=='string'||!ss||!Number.isFinite(st)||!cookies)throw Error('Ofullständig publiksessionsdata från statistikkällan.');
+    const key=await crypto.subtle.importKey('raw',encode.encode(ss),{name:'HMAC',hash:'SHA-256'},false,['sign']);
+    return {headers:{...headers,Cookie:cookies},key,offset:st-Date.now()};
+  }
+  async authorize(){
+    if(!this.session){
+      this.connecting??=this.connect().then(session=>this.session=session).finally(()=>{this.connecting=null;});
+      return this.connecting;
+    }
+    return this.session;
+  }
+  async get(path){
+    const url=new URL(BASE+path);
+    for(let attempt=0;attempt<4;attempt++){
+      const session=await this.authorize();
+      await sleep(this.delay);this.calls++;
+      const timestamp=String(Date.now()+session.offset),nonce=crypto.randomUUID();
+      const message=['GET',url.pathname+url.search,timestamp,nonce,EMPTY_SHA256].join('\n');
+      const bytes=await crypto.subtle.sign('HMAC',session.key,encode.encode(message));
+      const signature=Array.from(new Uint8Array(bytes),b=>b.toString(16).padStart(2,'0')).join('');
+      const r=await this.fetcher(url.href,{headers:{...session.headers,'X-Signature':signature,'X-Timestamp':timestamp,'X-Nonce':nonce},signal:AbortSignal.timeout(30000)});
+      if(r.ok)return r.json();
+      if(r.status===401&&attempt===0){if(this.session===session)this.session=null;continue;}
+      if(r.status===429||r.status>=500){const retry=Number(r.headers.get('retry-after'));await sleep(Math.min(60000,Number.isFinite(retry)&&retry>0?retry*1000:1000*2**attempt));continue;}
+      throw Error(`Statistikkällan svarade ${r.status} för ${path}`);
+    }
+    throw Error('Statistikkällan är tillfälligt otillgänglig.');
+  }
 }
 export function isLeague(c){return c.CompetitionTypeID===1&&!/tränings|training|cup|kval|slutspel|mästerskap|sammandrag/i.test(c.Name);}
 export function referees(m){return [1,2].map(n=>({id:Number(m['Referee'+n+'ID']),name:m['Referee'+n]||''})).filter(x=>x.id>0&&x.name);}

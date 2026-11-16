@@ -2,7 +2,7 @@
 
 ## Källa och avgränsning
 
-Svensk Innebandys publika statistikklient hämtar startdata från `https://api.innebandy.se/StatsAppApi/api/startkit` och matchdata från `https://api.innebandy.se/v2/api/public`. Motorn använder samma publika starttoken i minnet. Ingen iBIS-inloggning används; token sparas aldrig eller skrivs till logg. Detta är den publika webbklientens datafunktion, inte ett av förbundet utlovat stabilt integrationsavtal.
+Motorn använder Svensk Innebandys publika statistikklient: startdata och session från `https://api.innebandy.se/v2/api/auth/` och signerade anrop till `https://api.innebandy.se/v2/api/public`. Ingen iBIS-inloggning används. Sessionsuppgifter finns endast i minnet och loggas aldrig. En körning som inte blir klar inom 24 timmar avslutas och blockerar inte nästa körning. Redan importerade matcher finns kvar.
 
 Domaren upptäcks med exakt normaliserat namn och kopplas till ett stabilt RefereeID. Namnkollisioner/ändrade ID ska utredas, inte slås ihop automatiskt. Sören Johansson är verifierad med 8888 i tre säsonger. Medlemmen behöver inte lämna ID eller matchlänk. Aktiva godkända domarmedlemmar registreras automatiskt i nästa hämtning; Sören är särskilt auktoriserad som lokal pilot utan påhittad betalning eller administratörsroll.
 

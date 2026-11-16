@@ -11,7 +11,7 @@ export function allowedCompetition(c){return isLeague(c)&&allowedSeriesName(c.Na
 export function namedReferees(m){return [...new Set([m.Referee1,m.Referee2].map(x=>String(x||'').trim()).filter(Boolean))];}
 const sourceFor=o=>o.sourceFactory?.()||new StatsSource();
 export async function startAvailability(owner,day=swedishDay()){
- const db=owner.db;if(db.prepare('SELECT 1 FROM availability_plan WHERE id=1').get())return {busy:true};
+ const db=owner.db;const pending=db.prepare('SELECT day FROM availability_plan WHERE id=1').get();if(pending&&pending.day>=day)return {busy:true};if(pending)db.prepare('DELETE FROM availability_plan WHERE id=1').run();
  if(db.prepare('SELECT day FROM availability_snapshot WHERE id=1').get()?.day===day)return {started:false};
  const window=availabilityWindow(day+'T12:00:00Z');
  const state={...window,competitions:null,cursor:0,jobs:[],position:0,rows:[],errors:[]};
@@ -38,7 +38,7 @@ export async function runAvailability(owner){
     s.rows.push({id:m.MatchID,day,starts_at:m.MatchDateTime,home:m.HomeTeam||m.HomeTeamName||'',away:m.AwayTeam||m.AwayTeamName||'',competition:c.Name,competitionId:c.CompetitionID,venue:m.Venue||m.VenueName||venue.City||'',referees:refs,source_url:`https://stats.innebandy.se/sasong/${s.season}/serie/${c.CompetitionID}/match/${m.MatchID}`});
    }catch(e){s.errors.push({id:j.id,error:e.message});}}
   }
-  db.prepare('UPDATE availability_plan SET state=? WHERE id=1').run(JSON.stringify(s));
+  if(!db.prepare('UPDATE availability_plan SET state=? WHERE id=1 AND day=?').run(JSON.stringify(s),plan.day).changes)return;
   if(s.cursor>=s.competitions.length&&s.position>=s.jobs.length){db.transaction(()=>{db.prepare('INSERT OR REPLACE INTO availability_snapshot VALUES(1,?,?,?)').run(plan.day,new Date().toISOString(),JSON.stringify({...s,competitions:s.competitions.map(c=>({id:c.CompetitionID,name:c.Name})),status:s.errors.length?'partial':'complete'}));db.prepare('DELETE FROM availability_plan WHERE id=1').run();});}
   else await owner.ctx.storage.setAlarm(Date.now()+1000);
  }catch(e){await owner.ctx.storage.setAlarm(Date.now()+60000);throw e;}
