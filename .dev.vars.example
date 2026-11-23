@@ -2,3 +2,8 @@
 RESEND_API_KEY=
 EMAIL_FROM=VDK <konto@vdk.nu>
 IMPORT_SECRET=
+
+# Mötesplatsens kostnadsfria LiveKit Cloud-projekt. Hemliga värden hör enbart hemma på servern.
+LIVEKIT_URL=
+LIVEKIT_API_KEY=
+LIVEKIT_API_SECRET=
