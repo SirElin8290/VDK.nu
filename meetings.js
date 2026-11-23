@@ -26,18 +26,18 @@ export function leaveMeetings(){
 export async function meetingPage({api}){
  const id=new URLSearchParams(location.hash.split('?')[1]).get('id');
  if(id){
-  const d=await api(path(id)),m=d.room;const invitees=d.canLead?(await api('/meetings/invitees')).members:[];
+  const d=await api(path(id)),m=d.room,board=m.visibility==='board';const invitees=d.canLead&&!board?(await api('/meetings/invitees')).members:[];
   return `<div id="meeting-room" data-meeting="${escape(id)}">
-   <a class="text-link" href="#/mina-sidor/moten">← Alla möten</a>
-   <div class="meeting-title"><div><p class="eyebrow">VDK:s digitala mötesplats</p><h2>${escape(m.title)}</h2><p>${escape(formatTime(m.starts_at))} · Mötesledare: <span id="meeting-host">${escape(m.host_name)}</span></p></div><span class="badge" id="meeting-state">${m.status==='open'?'Öppet möte':'Avslutat möte'}</span></div>
+   <a class="text-link" href="${board?'#/mina-sidor/styrelserum':'#/mina-sidor/moten'}">${board?'← Till styrelserummet':'← Alla möten'}</a>
+   <div class="meeting-title"><div><p class="eyebrow">VDK:s digitala mötesplats</p><h2>${escape(m.title)}</h2><p> ${board?'Alltid tillgängligt':escape(formatTime(m.starts_at))} · Mötesledare: <span id="meeting-host">${escape(m.host_name)}</span></p></div><span class="badge" id="meeting-state">${m.status==='open'?'Öppet möte':'Avslutat möte'}</span></div>
    ${m.description?`<p class="meeting-description">${escape(m.description)}</p>`:''}
-   <p class="control-note">Bara inloggade medlemmar kan delta. Ljudet spelas inte in. Chatten sparas och kan läsas av VDK:s medlemmar efter mötet.</p>
+   <p class="control-note">${board?'Bara behöriga styrelsemedlemmar kan delta eller läsa chatten.':'Bara inloggade medlemmar kan delta. Chatten sparas och kan läsas av VDK:s medlemmar efter mötet.'} Ljudet spelas inte in.</p>
    <div id="meeting-alert" role="alert" hidden></div>
    <section class="card meeting-controls" aria-label="Möteskontroller">
     <div id="meeting-join-actions">${m.status==='open'?'<button class="button" id="meeting-join">Gå med i mötet</button>':''}</div>
     <div id="meeting-live-actions" class="inline-actions" hidden>
      <button class="button button-outline" id="meeting-audio-connect">Anslut ljud</button>
-     <button class="button" id="meeting-mic" disabled aria-pressed="false">Mikrofon av</button>
+     <button class="mic-switch" id="meeting-mic" type="button" role="switch" aria-label="Mikrofon" disabled aria-checked="false"><span class="mic-switch-track" aria-hidden="true"><span class="mic-switch-thumb"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="3" width="8" height="16" rx="4"/><path d="M8 14v2a8 8 0 0 0 16 0v-2M16 24v5M11 29h10"/><path class="mic-slash" d="M5 27 27 5"/></svg></span></span><span class="mic-switch-copy"><strong data-mic-state>Mikrofon av</strong><small data-mic-help>Anslut ljud för att använda mikrofonen</small></span></button>
      <button class="button button-outline" id="meeting-hand" aria-pressed="false">✋ Räck upp handen</button>
      <button class="button button-quiet" id="meeting-playback" hidden>Spela upp ljud</button>
      <button class="button button-quiet" id="meeting-leave">Lämna mötet</button>
@@ -45,7 +45,7 @@ export async function meetingPage({api}){
     <p id="meeting-audio-status" role="status">${m.status==='open'?'Gå med för att skriva i chatten, räcka upp handen och ansluta ljudet.':'Mötet är avslutat. Du kan läsa chatten nedan.'}</p>
     <div id="meeting-audio-elements"></div>
    </section>
-   ${d.canLead&&m.status==='open'?`<details class="card"><summary>Bjud in medlemmar till mötet</summary><form id="meeting-invite-form">${invitationPicker(invitees,'room')}<button type="submit" class="button">Skicka valda inbjudningar</button><p class="form-error" role="alert" hidden></p></form><p id="meeting-invitation-status" role="status"></p></details>`:''}
+   ${d.canLead&&!board&&m.status==='open'?`<details class="card"><summary>Bjud in medlemmar till mötet</summary><form id="meeting-invite-form">${invitationPicker(invitees,'room')}<button type="submit" class="button">Skicka valda inbjudningar</button><p class="form-error" role="alert" hidden></p></form><p id="meeting-invitation-status" role="status"></p></details>`:''}
    <div class="meeting-layout">
     <section class="card meeting-chat"><h3>Chatt</h3><p id="meeting-history-note" class="control-note">Senaste 100 meddelandena visas när du öppnar mötet.</p><div id="meeting-messages" class="meeting-messages" role="log" aria-label="Möteschatt" aria-live="polite" aria-relevant="additions"></div>
      <form id="meeting-chat-form" hidden><label for="meeting-message">Skriv till deltagarna</label><textarea id="meeting-message" name="message" required maxlength="3000" rows="2"></textarea><button class="button" type="submit">Skicka</button></form>
@@ -108,7 +108,7 @@ export function mountMeetings({api,user,toast}){
  const alert=message=>{el('alert').textContent=message;el('alert').hidden=!message;};
  const status=message=>{if(c.active)el('audio-status').textContent=message;};
  const post=(action,body={})=>api(path(c.id)+'/'+action,{method:'POST',body});
- const toggleMic=enabled=>{c.mic=enabled;if(c.active){el('mic').textContent=enabled?'Mikrofon på – stäng av':'Mikrofon av – slå på';el('mic').setAttribute('aria-pressed',String(enabled));}};
+ const toggleMic=enabled=>{c.mic=enabled;if(c.active){el('mic').querySelector('[data-mic-state]').textContent=enabled?'Mikrofon på':'Mikrofon av';el('mic').querySelector('[data-mic-help]').textContent=enabled?'Tryck för att stänga av':'Tryck för att slå på';el('mic').setAttribute('aria-checked',String(enabled));}};
  const drawPeople=()=>{el('people').innerHTML=orderedMeetingPeople(c.data?.people||[],c.data?.room.host_id,c.speakers).map(p=>`<li class="meeting-person ${c.speakers.includes(p.id)?'is-speaking':''}"><span class="meeting-speaking-icon" aria-hidden="true">${c.speakers.includes(p.id)?'▂▆▃':'●'}</span><span>${escape(p.name)}${p.id===user.id?' (du)':''}${p.id===c.data.room.host_id?' <small>Mötesledare</small>':''}${c.speakers.includes(p.id)?' <strong class="meeting-speaking-label">Pratar nu</strong>':''}</span></li>`).join('')||'<li>Ingen har gått med ännu.</li>';};
  function update(d){
   if(!c.active)return;c.data=d;
@@ -179,7 +179,7 @@ export function mountMeetings({api,user,toast}){
  el('transfer').addEventListener('click',event=>action(event.currentTarget,()=>post('host',{userId:Number(el('new-host').value)})));
  el('end').addEventListener('click',event=>{if(confirm('Avsluta mötet för alla deltagare?'))action(event.currentTarget,()=>post('end'));});
  el('leave').addEventListener('click',event=>action(event.currentTarget,async()=>{
-  c.joined=false;await c.audio?.disconnect();await post('leave');location.hash='/mina-sidor/moten';
+  c.joined=false;await c.audio?.disconnect();await post('leave');location.hash=c.data?.room.visibility==='board'?'/mina-sidor/styrelserum':'/mina-sidor/moten';
  }));
  el('chat-form').addEventListener('submit',async event=>{
   event.preventDefault();const input=el('message'),value=input.value,button=el('chat-form').querySelector('button');

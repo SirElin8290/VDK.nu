@@ -23,7 +23,7 @@ function fixture(t,extra={}){
   await handler({url:'/api/meetings'+path,method,headers:{cookie:who?.cookie||'',origin,'content-type':'application/json'},socket:{remoteAddress:'meeting-tests'},async *[Symbol.asyncIterator](){yield Buffer.from(JSON.stringify(body||{}));}},{setHeader(){},writeHead(s){status=s;},end(v){output=v;}});
   return {status,data:JSON.parse(output||'null')};
  }
- return {db,request,member,env};
+ return {db,request,member,env,handler};
 }
 test('meeting access includes all member categories but blocks anonymous, expired and unrelated origins',async t=>{
  const {request,member}=fixture(t);
@@ -124,4 +124,24 @@ test('speaker order pins leader first and moves live speakers above other attend
  assert.deepEqual(people.map(p=>p.id),[3,2,1,4]);
  const m=meetingInvitationEmail({room:{id:'test',title:'<script>',starts_at:'2026-11-23T17:00:00Z',description:'<img>'},recipient:{name:'<unsafe>',email:'x@example.test'},host:{name:'VDK'}});
  assert.match(m.text,/18:00/);assert.match(m.text,/23 november 2026/);assert.ok(!m.html.includes('<script>'));assert.ok(!m.html.includes('<img>'));assert.ok(m.html.includes('&lt;unsafe&gt;'));
+});
+
+test('board meeting is permanent, invisible to members and protected on every meeting action',async t=>{
+ const {db,request,member}=fixture(t),host=member('Board'),colleague=member('Board colleague'),other=member('Other');
+ db.prepare('INSERT INTO board_access VALUES(?,?,?)').run(host.id,new Date().toISOString(),host.id);
+ db.prepare('INSERT INTO board_access VALUES(?,?,?)').run(colleague.id,new Date().toISOString(),host.id);
+ const {ensureBoardMeeting}=await import('../cloudflare/meetings.mjs'),room=ensureBoardMeeting(db);
+ assert.equal((await request('',host)).data.rooms.length,0);
+ for(const action of ['', '/join','/audio','/hand','/pulse','/chat','/next','/end','/invite']){
+  const result=await request('/'+room.id+action,other,action?{}:undefined);assert.equal(result.status,403,action);
+ }
+ await request('/'+room.id+'/join',host,{});await request('/'+room.id+'/join',colleague,{});
+ await request('/'+room.id+'/chat',host,{message:'Private draft',clientId:'board-private-message'});
+ await request('/'+room.id+'/end',colleague,{});
+ const reset=(await request('/'+room.id,host)).data;
+ assert.equal(reset.room.status,'open');assert.equal(reset.room.opened_at,null);assert.equal(reset.people.length,0);assert.equal(reset.messages.length,1);
+ assert.equal((await request('/'+room.id+'/join',host,{})).status,200);
+ assert.equal(ensureBoardMeeting(db).id,room.id);
+ db.prepare('DELETE FROM board_access WHERE user_id=?').run(colleague.id);
+ assert.equal((await request('/'+room.id,colleague)).status,403);
 });

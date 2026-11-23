@@ -1,3 +1,4 @@
+import {hasBoardAccess} from './board-access.mjs';
 import {createHmac,randomUUID} from 'node:crypto';
 import {eligibleMember} from './messages.mjs';
 
@@ -23,12 +24,22 @@ export function initializeMeetings(db){
  status TEXT NOT NULL DEFAULT 'pending',attempts INTEGER NOT NULL DEFAULT 0,next_attempt INTEGER NOT NULL DEFAULT 0,sent_at INTEGER,
  PRIMARY KEY(room_id,user_id));
  CREATE INDEX IF NOT EXISTS meeting_invitation_due ON meeting_invitations(status,next_attempt);`);
+ if(!db.prepare('PRAGMA table_info(meeting_rooms)').all().some(c=>c.name==='visibility'))db.exec("ALTER TABLE meeting_rooms ADD COLUMN visibility TEXT NOT NULL DEFAULT 'members'");
 }
 export function meetingToken(env,claims,lifetime=300){
  const now=Math.floor(Date.now()/1000);
  const b64=v=>Buffer.from(JSON.stringify(v)).toString('base64url');
  const head=b64({alg:'HS256',typ:'JWT'}),body=b64({iss:env.LIVEKIT_API_KEY,nbf:now-10,exp:now+lifetime,...claims});
  return head+'.'+body+'.'+createHmac('sha256',env.LIVEKIT_API_SECRET).update(head+'.'+body).digest('base64url');
+}
+export const BOARD_MEETING_ID='178957f0-7300-4000-9000-000000000001';
+export function ensureBoardMeeting(db){
+ const host=db.prepare('SELECT user_id FROM board_access ORDER BY user_id LIMIT 1').get();
+ if(!host)throw Error('Styrelserummet saknar behöriga medlemmar.');
+ db.prepare("INSERT OR IGNORE INTO meeting_rooms(id,title,description,host_id,created_by,starts_at,created_at,visibility) VALUES(?,'Styrelserummet','Privat samtal för VDK:s styrelse.',?,?,?,?, 'board')").run(BOARD_MEETING_ID,host.user_id,host.user_id,new Date().toISOString(),Date.now());
+ const current=db.prepare('SELECT * FROM meeting_rooms WHERE id=?').get(BOARD_MEETING_ID);
+ if(!hasBoardAccess(db,current.host_id))db.prepare('UPDATE meeting_rooms SET host_id=? WHERE id=?').run(host.user_id,BOARD_MEETING_ID);
+ return db.prepare('SELECT * FROM meeting_rooms WHERE id=?').get(BOARD_MEETING_ID);
 }
 function audioReady(env){try{const u=new URL(env.LIVEKIT_URL);return u.protocol==='wss:'&&u.hostname.endsWith('.livekit.cloud')&&!!env.LIVEKIT_API_KEY&&!!env.LIVEKIT_API_SECRET;}catch{return false;}}
 async function deleteAudio(env,id){
@@ -48,7 +59,7 @@ function roomState(db,room,user,params,env){
  const messages=cursor?db.prepare('SELECT c.id,c.user_id,u.name,c.body,c.created_at FROM meeting_chat c JOIN users u ON u.id=c.user_id WHERE c.room_id=? AND c.id>? ORDER BY c.id LIMIT 100').all(room.id,cursor):db.prepare('SELECT c.id,c.user_id,u.name,c.body,c.created_at FROM meeting_chat c JOIN users u ON u.id=c.user_id WHERE c.room_id=? ORDER BY c.id DESC LIMIT 100').all(room.id).reverse();
  const joined=people.some(p=>p.id===user.id);
  const speaker=room.current_speaker&&people.find(p=>p.id===room.current_speaker)||null;
- const canLead=room.host_id===user.id||user.roles.includes('ADMIN');
+ const canLead=room.visibility==='board'?hasBoardAccess(db,user.id):room.host_id===user.id||user.roles.includes('ADMIN');
  const invitations=canLead?db.prepare('SELECT status,count(*) AS count FROM meeting_invitations WHERE room_id=? GROUP BY status').all(room.id):[];
  return {room:view,people,queue,messages,joined,speaker,canLead,invitations,audioConfigured:audioReady(env),maxParticipants:MAX_PEOPLE};
 }
@@ -71,7 +82,7 @@ export async function meetingsAction({db,path,method,body,req,requireMembership,
  }
  if(path==='/api/meetings'){
   if(method==='GET'){
-   const rooms=db.prepare("SELECT * FROM meeting_rooms WHERE status='open' OR ended_at>? ORDER BY CASE status WHEN 'open' THEN 0 ELSE 1 END,starts_at LIMIT 80").all(now-7*86400000).map(r=>roomView(db,r,now));
+   const rooms=db.prepare("SELECT * FROM meeting_rooms WHERE visibility='members' AND (status='open' OR ended_at>?) ORDER BY CASE status WHEN 'open' THEN 0 ELSE 1 END,starts_at LIMIT 80").all(now-7*86400000).map(r=>roomView(db,r,now));
    return json(200,{rooms,audioConfigured:audioReady(env),maxParticipants:MAX_PEOPLE}),true;
   }
   rate(req,'meeting-create-'+user.id,12);
@@ -90,10 +101,12 @@ export async function meetingsAction({db,path,method,body,req,requireMembership,
  const id=match[1],action=match[2];
  let room=db.prepare('SELECT * FROM meeting_rooms WHERE id=?').get(id);
  if(!room)fail(404,'Mötet hittades inte.');
+ const board=room.visibility==='board';
+ if(board&&!hasBoardAccess(db,user.id))fail(403,'Styrelserummet är bara tillgängligt för behöriga styrelsemedlemmar.');
  // Expired calls cannot continue to issue new connection tokens.
  if(room.status==='open'&&room.opened_at&&now-room.opened_at>MAX_HOURS*3600000){
   await deleteAudio(env,id);
-  db.prepare("UPDATE meeting_rooms SET status='ended',ended_at=?,current_speaker=NULL WHERE id=?").run(now,id);
+  if(board){db.prepare('DELETE FROM meeting_attendees WHERE room_id=?').run(id);db.prepare("UPDATE meeting_rooms SET opened_at=NULL,current_speaker=NULL,status='open',ended_at=NULL WHERE id=?").run(id);}else db.prepare("UPDATE meeting_rooms SET status='ended',ended_at=?,current_speaker=NULL WHERE id=?").run(now,id);
   db.prepare('DELETE FROM meeting_hands WHERE room_id=?').run(id);
   room=db.prepare('SELECT * FROM meeting_rooms WHERE id=?').get(id);
  }
@@ -107,6 +120,7 @@ export async function meetingsAction({db,path,method,body,req,requireMembership,
  }
  if(room.status!=='open'){if(action==='pulse')return json(200,roomState(db,room,user,url.searchParams,env)),true;fail(409,'Mötet är avslutat.');}
  if(action==='invite'){
+  if(board)fail(403,'Styrelserummet är privat. Medlemsinbjudningar används inte här.');
   if(room.host_id!==user.id&&!user.roles.includes('ADMIN'))fail(403,'Bara mötesledaren kan bjuda in medlemmar.');
   rate(req,'meeting-invite-'+user.id,15);
   const ids=recipients(),queued=db.transaction(()=>queue(id,ids));
@@ -121,7 +135,7 @@ export async function meetingsAction({db,path,method,body,req,requireMembership,
   db.prepare('UPDATE meeting_rooms SET opened_at=COALESCE(opened_at,?) WHERE id=?').run(Math.max(now,Date.parse(room.starts_at)),id);
   return json(200,roomState(db,db.prepare('SELECT * FROM meeting_rooms WHERE id=?').get(id),user,url.searchParams,env)),true;
  }
- if(['next','host','end'].includes(action)&&room.host_id!==user.id&&!user.roles.includes('ADMIN'))fail(403,'Bara mötesledaren eller en administratör kan göra det.');
+ if(['next','host','end'].includes(action)&&!board&&room.host_id!==user.id&&!user.roles.includes('ADMIN'))fail(403,'Bara mötesledaren eller en administratör kan göra det.');
  const attendee=db.prepare('SELECT 1 FROM meeting_attendees WHERE room_id=? AND user_id=? AND last_seen>?').get(id,user.id,now-PRESENCE);
  if(!attendee&&action!=='end')fail(409,'Gå med i mötet först.');
  if(action==='pulse'){
@@ -159,7 +173,7 @@ export async function meetingsAction({db,path,method,body,req,requireMembership,
  }
  if(action==='end'){
   await deleteAudio(env,id);
-  db.prepare("UPDATE meeting_rooms SET status='ended',ended_at=?,current_speaker=NULL WHERE id=?").run(now,id);
+  if(board){db.prepare('DELETE FROM meeting_attendees WHERE room_id=?').run(id);db.prepare("UPDATE meeting_rooms SET opened_at=NULL,current_speaker=NULL,status='open',ended_at=NULL WHERE id=?").run(id);}else db.prepare("UPDATE meeting_rooms SET status='ended',ended_at=?,current_speaker=NULL WHERE id=?").run(now,id);
   db.prepare('DELETE FROM meeting_hands WHERE room_id=?').run(id);
   return json(200,{ok:true}),true;
  }

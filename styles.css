@@ -182,6 +182,15 @@
 .meeting-create{margin:1.5rem 0}.meeting-create summary{font-size:1.15rem;font-weight:700;cursor:pointer;padding:.4rem 0}.meeting-create form{margin-top:1rem}
 #meeting-alert:not([hidden]){background:#602b26;color:#fff;padding:1rem;border-radius:6px;margin-bottom:1rem}
 #meeting-audio-elements audio{display:none}
+.mic-switch{display:inline-flex;align-items:center;gap:.85rem;padding:.6rem .85rem;border:1px solid #ad514d;border-radius:14px;background:var(--surface);color:var(--text);text-align:left;min-height:86px}
+.mic-switch-track{display:block;position:relative;width:116px;height:58px;flex-shrink:0;border-radius:32px;background:linear-gradient(#6e2428,#8a3538);border:2px solid #bd6663;box-shadow:inset 0 3px 8px #0006}
+.mic-switch-thumb{position:absolute;top:3px;left:3px;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(#fffaf0,#dfd4bb);color:#111b1c;box-shadow:0 2px 5px #0008;transition:transform .18s ease}
+.mic-switch-thumb svg{width:32px;height:32px}.mic-switch-copy strong,.mic-switch-copy small{display:block}.mic-switch-copy strong{font-weight:700;font-size:1.05rem}.mic-switch-copy small{font-size:.8rem;color:var(--muted)}
+.mic-switch[aria-checked=true]{border-color:#43955d}.mic-switch[aria-checked=true] .mic-switch-track{background:linear-gradient(#174e29,#28723d);border-color:#68ae73}.mic-switch[aria-checked=true] .mic-switch-thumb{transform:translateX(58px)}.mic-switch[aria-checked=true] .mic-slash{display:none}
+.mic-switch:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}.mic-switch:disabled{opacity:.65}.board-entry{border-color:var(--yellow)}
+.board-standby{display:flex;align-items:center;justify-content:space-between;gap:1.5rem}.board-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.25rem;align-items:start}.board-workspace>*{min-width:0}.board-document-text{white-space:pre-wrap;overflow-wrap:anywhere}.board-proposals article,.board-document-list article{padding:1rem 0;border-top:1px solid var(--line);overflow-wrap:anywhere}.board-proposals{margin-top:1.5rem}.board-workspace summary{cursor:pointer;padding:.5rem 0;font-weight:700}.board-workspace form{margin-top:1rem}
+@media(max-width:700px){.board-workspace{grid-template-columns:minmax(0,1fr)}.board-standby{display:block}.board-entry{width:100%}.meeting-controls .mic-switch{flex:1 1 100%}}
+@media(prefers-reduced-motion:reduce){.mic-switch-thumb{transition:none}}
 .meeting-invitee-list{max-height:280px;overflow:auto;display:grid;gap:.45rem;padding:.75rem 0}.meeting-invitations{margin:1rem 0}.meeting-invitee-list .check-label{padding:.4rem;border-bottom:1px solid var(--border,#536066)}#meeting-invite-form{margin-top:1rem}
 .meeting-people .meeting-person{display:flex;align-items:center;gap:.7rem;padding:.65rem;border:2px solid transparent;border-radius:8px;width:100%;box-sizing:border-box}
 .meeting-speaking-icon{display:flex;flex:none;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:2px solid #839099;font-size:15px;color:#839099!important}

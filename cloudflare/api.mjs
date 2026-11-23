@@ -1,3 +1,4 @@
+import {initializeBoardroom,boardroomAction} from './boardroom.mjs';
 import {initializeMeetings,meetingsAction} from './meetings.mjs';
 import {initializeMemberTools,memberToolsAction} from '../server/member-tools.mjs';
 import {documentsAction} from './documents.mjs';
@@ -19,7 +20,7 @@ const defaultMailer=async({to,subject,html},env)=>{if(!env.RESEND_API_KEY||!env.
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function createApp(options={}){
   const db=options.db;
-  initializeMemberTools(db);initializeMeetings(db);
+  initializeMemberTools(db);initializeMeetings(db);initializeBoardroom(db);
   const season=options.season||options.env.SEASON||'2026/27';
   const origin=options.origin||options.env.PUBLIC_ORIGIN||'http://localhost:3000';
   const swishNumber=options.swishNumber||options.env.SWISH_NUMBER||'';
@@ -49,8 +50,9 @@ export function createApp(options={}){
           if(!requestOrigin||!allowed.has(requestOrigin))fail(403,'Begäran måste komma från VDK:s webbplats.');
           if(!(req.headers['content-type']||'').startsWith('application/json'))fail(415,'JSON krävs.');
         }
-        const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:path==='/api/admin/documents'?7500000:32768):{};
+        const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:(path==='/api/admin/documents'||path==='/api/boardroom/documents')?7500000:32768):{};
         if(/^\/api\/(dashboard|matches|statistics|regional-statistics|availability|commented-matches|coachings|coach-applications|coach\/work)(?:\/|$)/.test(path)){const u=auth(req);if(u.membershipCategory==='support'&&!u.roles.includes('ADMIN'))fail(403,'Den här funktionen ingår inte i stödmedlemskapet.');}
+        if(await boardroomAction({db,path,method,body,req,requireMembership:requireMembership,fail,json,res}))return;
         if(await meetingsAction({db,path,method,body,req,requireMembership,fail,json,url,env:options.env,rate,onQueued:options.onMeetingsQueued}))return;
         if(memberToolsAction({db,path,method,body,req,auth,requireMembership:requireMembership,season,fail,res,json,url}))return;
         if(await documentsAction({db,path,method,body,req,requireMembership,auth,fail,res,json}))return;

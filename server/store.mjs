@@ -1,3 +1,4 @@
+import {initializeBoardAccess,hasBoardAccess} from '../cloudflare/board-access.mjs';
 import { DatabaseSync } from 'node:sqlite';
 import { randomBytes, scryptSync, timingSafeEqual, createHash } from 'node:crypto';
 import { mkdirSync } from 'node:fs';
@@ -37,11 +38,12 @@ export function openStore(path=':memory:'){
   if(!columns.has('amount'))db.exec('ALTER TABLE memberships ADD COLUMN amount INTEGER NOT NULL DEFAULT 100');
   if(!columns.has('organization'))db.exec("ALTER TABLE memberships ADD COLUMN organization TEXT NOT NULL DEFAULT ''");
   for(const [table,fields] of Object.entries({matches:{competition_scope:"TEXT NOT NULL DEFAULT 'district'",regional_eligible:'INTEGER NOT NULL DEFAULT 1',excluded:'INTEGER NOT NULL DEFAULT 0',home_team_id:"TEXT NOT NULL DEFAULT ''",away_team_id:"TEXT NOT NULL DEFAULT ''",competition_id:"TEXT NOT NULL DEFAULT ''",competition_name:"TEXT NOT NULL DEFAULT ''"},penalties:{team_id:"TEXT NOT NULL DEFAULT ''",code:"TEXT NOT NULL DEFAULT ''",period:'INTEGER',minute:'INTEGER',second:'INTEGER'}})){const existing=new Set(db.prepare('PRAGMA table_info('+table+')').all().map(x=>x.name));for(const [name,type]of Object.entries(fields))if(!existing.has(name))db.exec('ALTER TABLE '+table+' ADD COLUMN '+name+' '+type);}
+  initializeBoardAccess(db);
   return db;
 }
 export function transaction(db,fn){db.exec('BEGIN IMMEDIATE');try{const result=fn();db.exec('COMMIT');return result;}catch(e){db.exec('ROLLBACK');throw e;}}
 export function getRoles(db,id){return db.prepare('SELECT role FROM roles WHERE user_id=?').all(id).map(x=>x.role);}
-export function publicUser(db,id,season){const u=db.prepare('SELECT id,name,email FROM users WHERE id=?').get(id);return u?{...u,roles:getRoles(db,id),hasPhoto:!!db.prepare('SELECT 1 FROM profile_photos WHERE user_id=?').get(id),season}:null;}
+export function publicUser(db,id,season){const u=db.prepare('SELECT id,name,email FROM users WHERE id=?').get(id);return u?{...u,roles:getRoles(db,id),boardAccess:hasBoardAccess(db,id),hasPhoto:!!db.prepare('SELECT 1 FROM profile_photos WHERE user_id=?').get(id),season}:null;}
 export function hasMembership(db,id,season){return !!db.prepare("SELECT 1 FROM memberships WHERE user_id=? AND season=? AND status='active' AND paid=1 AND category!='business'").get(id,season);}
 export function audit(db,actor,action,target){db.prepare('INSERT INTO audit(actor_id,action,target_id) VALUES (?,?,?)').run(actor,action,target);}
 export function createAdmin(db,{name,email,password,season}){return transaction(db,()=>{let u=db.prepare('SELECT id FROM users WHERE email=?').get(email);if(u)throw new Error('Kontot finns redan. Skapa inte om en befintlig administratör.');const id=Number(db.prepare('INSERT INTO users(name,email,password_hash) VALUES (?,?,?)').run(name,email.toLowerCase(),hashPassword(password)).lastInsertRowid);db.prepare('INSERT INTO roles VALUES (?,?)').run(id,'MEMBER');db.prepare('INSERT INTO roles VALUES (?,?)').run(id,'ADMIN');db.prepare("INSERT INTO memberships(user_id,season,status,paid,payment_reference,consented_at) VALUES (?,?,'active',1,?,?)").run(id,season,'ADMIN-'+newToken().slice(0,10),new Date().toISOString());return id;});}

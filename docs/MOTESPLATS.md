@@ -118,3 +118,32 @@ inte att leverans till mottagarens inkorg har bekräftats. Status visas för mö
 Deltagarlistan placerar alltid mötesledaren först. LiveKits aktiva talare visas därefter med större symbol,
 tydlig ram och etiketten Pratar nu. Talarmarkeringen förutsätter att medlemmen har anslutit ljudet.
 Knappen vid talarlistans väntande namn heter Ta bort.
+
+
+## Privat styrelserum
+
+Styrelserummet öppnas från knappen på kontrollrummet eller medlemsmenyn för konton med board_access.
+Detta är en separat behörighet och ger inte administration av medlemsregistret eller andra adminfunktioner.
+Inte heller en administratör utan styrelsebehörighet får läsa styrelsens material.
+Styrelserummet listas inte bland vanliga möten. Samma kontroll gäller alla mötesåtgärder, chatt,
+ljudtoken, förslag, dokumenttext och PDF-nedladdningar. Kännedom om den fasta rumsadressen ger ingen åtkomst.
+
+Rummet har ett stabilt internt UUID och skapas automatiskt vid första behöriga besöket.
+Avslutade styrelsesamtal stänger ljudrummet, tömmer närvaro och talarlista samt återställer standby.
+Nästa samtal använder samma rum utan ny bokning. Chatt, dokument och utkast finns kvar privat.
+Ingen ljudanslutning hålls öppen i standby, så ett tomt rum använder inte LiveKit-deltagarminuter.
+Styrelsemedlemmar kan leda samtalet och lämna över mötesledningen till varandra.
+
+Styrelsen kan ladda upp PDF, Word (.docx) och UTF-8-text, högst 5 MB.
+Dokument visas som granskad text och kan laddas ner som PDF.
+PDF-lösenord och Word-filer med bilder hanteras på samma sätt som i medlemsdokumentfunktionen:
+använd en läsbar PDF-export för att behålla bildinnehåll.
+Styrelsefiler lagras separat från member_documents och kan inte läsas via medlemsdokumentens API.
+
+Förslag kan sparas som utkast, pågående eller färdigt och bearbetas av andra i styrelsen.
+Versionskontroll stoppar en inaktuell ändring från att skriva över en kollegas nyare text.
+Det finns ingen automatisk radering eller full versionshistorik i första versionen.
+
+Mikrofonknappen är en tillgänglig switch med mikrofonikon, text, placering och färg som visar läget.
+Rött och överstruken mikrofon betyder av; grönt och vanlig mikrofon betyder på.
+Switchen ändras först när ljudklienten har bekräftat ändringen. Den är av från början.
