@@ -147,3 +147,17 @@ Det finns ingen automatisk radering eller full versionshistorik i första versio
 Mikrofonknappen är en tillgänglig switch med mikrofonikon, text, placering och färg som visar läget.
 Rött och överstruken mikrofon betyder av; grönt och vanlig mikrofon betyder på.
 Switchen ändras först när ljudklienten har bekräftat ändringen. Den är av från början.
+
+
+## Mötesdokument och flikar
+Mötet har Samtal (talarlista), Chatt, Deltagare (även mötesledning) och Dokument.
+Flikarna byter synlig panel lokalt utan ny sidladdning eller frånkopplat ljud.
+På mobilen hålls ljud- och mikrofonkontroller tillgängliga under scrollning.
+Alla anslutna deltagare, inklusive stödmedlemmar, kan dela PDF, DOCX och UTF-8-text upp till 5 MB.
+Text granskas innan publicering. Word och text omvandlas till PDF med samma begränsningar som övriga dokument.
+Listan uppdateras vid mötets vanliga närvaropuls. Text läses direkt i dokumentfliken och PDF kan laddas ner.
+Filer lagras i meeting_documents och meeting_document_chunks, separat per mötes-ID, högst 100 dokument per rum.
+Endast deltagare med aktuell närvaro kan ladda upp, och bara medan mötet är öppet.
+Materialet finns kvar efter avslut och har samma medlemsåtkomst som mötets sparade chatt.
+Styrelserummets mötesdokument är skyddade av styrelsebehörigheten, även när PDF-adressen är känd.
+Ingen ny extern lagring eller betald tjänst används; filerna använder befintlig Cloudflare-lagring.

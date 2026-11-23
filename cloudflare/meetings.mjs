@@ -1,3 +1,4 @@
+import {meetingDocuments,initializeMeetingDocuments} from './meeting-documents.mjs';
 import {hasBoardAccess} from './board-access.mjs';
 import {createHmac,randomUUID} from 'node:crypto';
 import {eligibleMember} from './messages.mjs';
@@ -5,6 +6,7 @@ import {eligibleMember} from './messages.mjs';
 const PRESENCE=120000,MAX_PEOPLE=40,MAX_HOURS=4;
 const roomName=id=>'vdk-meeting-'+id;
 export function initializeMeetings(db){
+ initializeMeetingDocuments(db);
  db.exec(`CREATE TABLE IF NOT EXISTS meeting_rooms(
  id TEXT PRIMARY KEY,title TEXT NOT NULL,description TEXT NOT NULL DEFAULT '',host_id INTEGER NOT NULL REFERENCES users(id),
  created_by INTEGER NOT NULL REFERENCES users(id),starts_at TEXT NOT NULL,created_at INTEGER NOT NULL,
@@ -61,9 +63,10 @@ function roomState(db,room,user,params,env){
  const speaker=room.current_speaker&&people.find(p=>p.id===room.current_speaker)||null;
  const canLead=room.visibility==='board'?hasBoardAccess(db,user.id):room.host_id===user.id||user.roles.includes('ADMIN');
  const invitations=canLead?db.prepare('SELECT status,count(*) AS count FROM meeting_invitations WHERE room_id=? GROUP BY status').all(room.id):[];
- return {room:view,people,queue,messages,joined,speaker,canLead,invitations,audioConfigured:audioReady(env),maxParticipants:MAX_PEOPLE};
+ const documents=db.prepare('SELECT d.id,d.title,d.filename,d.created_at,u.name AS uploaded_by FROM meeting_documents d JOIN users u ON u.id=d.uploaded_by WHERE d.room_id=? ORDER BY d.id DESC').all(room.id);
+ return {documents,room:view,people,queue,messages,joined,speaker,canLead,invitations,audioConfigured:audioReady(env),maxParticipants:MAX_PEOPLE};
 }
-export async function meetingsAction({db,path,method,body,req,requireMembership,fail,json,url,env,rate,onQueued}){
+export async function meetingsAction({db,path,method,body,req,requireMembership,fail,json,res,url,env,rate,onQueued}){
  if(!/^\/api\/meetings(?:\/|$)/.test(path))return false;
  const user=requireMembership(req),now=Date.now();
  const text=(v,min,max)=>{if(typeof v!=='string'||v.trim().length<min||v.length>max)fail(400,'Kontrollera mötets uppgifter.');return v.trim();};
@@ -96,8 +99,8 @@ export async function meetingsAction({db,path,method,body,req,requireMembership,
   if(queued)await onQueued?.();
   return json(201,{id,queuedInvitations:queued}),true;
  }
- const match=path.match(/^\/api\/meetings\/([0-9a-f-]{36})(?:\/(join|pulse|leave|chat|hand|next|host|end|audio|invite))?$/);
- if(!match)fail(404,'Mötet hittades inte.');
+ const match=path.match(/^\/api\/meetings\/([0-9a-f-]{36})(?:\/(join|pulse|leave|chat|hand|next|host|end|audio|invite|documents)(?:\/(\d+)(\/pdf)?)?)?$/);
+ if(!match||(match[3]&&match[2]!=='documents'))fail(404,'Mötet hittades inte.');
  const id=match[1],action=match[2];
  let room=db.prepare('SELECT * FROM meeting_rooms WHERE id=?').get(id);
  if(!room)fail(404,'Mötet hittades inte.');
@@ -110,6 +113,7 @@ export async function meetingsAction({db,path,method,body,req,requireMembership,
   db.prepare('DELETE FROM meeting_hands WHERE room_id=?').run(id);
   room=db.prepare('SELECT * FROM meeting_rooms WHERE id=?').get(id);
  }
+ if(action==='documents')return meetingDocuments({db,room,user,method,body,documentId:match[3],pdf:!!match[4],fail,json,res,rate,req});
  if(method==='GET'&&!action)return json(200,roomState(db,room,user,url.searchParams,env)),true;
  if(method!=='POST'||!action)fail(405,'Metoden stöds inte.');
  if(action==='leave'){

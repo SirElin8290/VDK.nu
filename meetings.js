@@ -1,3 +1,4 @@
+import {meetingDocumentPanel,mountMeetingDocuments} from './meeting-documents.js';
 const escape=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const formatTime=v=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Stockholm',dateStyle:'medium',timeStyle:'short'}).format(new Date(v));
 const path=id=>'/meetings/'+encodeURIComponent(id);
@@ -46,18 +47,21 @@ export async function meetingPage({api}){
     <div id="meeting-audio-elements"></div>
    </section>
    ${d.canLead&&!board&&m.status==='open'?`<details class="card"><summary>Bjud in medlemmar till mötet</summary><form id="meeting-invite-form">${invitationPicker(invitees,'room')}<button type="submit" class="button">Skicka valda inbjudningar</button><p class="form-error" role="alert" hidden></p></form><p id="meeting-invitation-status" role="status"></p></details>`:''}
+   <div class="meeting-tabs" role="tablist" aria-label="Mötets innehåll">${[['call','Samtal'],['chat','Chatt'],['people','Deltagare'],['documents','Dokument']].map(([id,label],i)=>`<button type="button" role="tab" id="meeting-tab-${id}" aria-controls="meeting-panel-${id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${label}</button>`).join('')}</div>
    <div class="meeting-layout">
+    <div id="meeting-panel-chat" role="tabpanel" aria-labelledby="meeting-tab-chat" hidden>
     <section class="card meeting-chat"><h3>Chatt</h3><p id="meeting-history-note" class="control-note">Senaste 100 meddelandena visas när du öppnar mötet.</p><div id="meeting-messages" class="meeting-messages" role="log" aria-label="Möteschatt" aria-live="polite" aria-relevant="additions"></div>
      <form id="meeting-chat-form" hidden><label for="meeting-message">Skriv till deltagarna</label><textarea id="meeting-message" name="message" required maxlength="3000" rows="2"></textarea><button class="button" type="submit">Skicka</button></form>
     </section>
-    <aside class="meeting-sidebar">
+    </div><div id="meeting-panel-call" role="tabpanel" aria-labelledby="meeting-tab-call">
      <section class="card"><h3>Talarlista</h3><p id="meeting-speaker" role="status">Ingen har ordet.</p><p class="control-note">Handuppräckning lägger dig sist i kön.</p><ol id="meeting-queue" class="meeting-queue"></ol><p id="meeting-empty-queue">Ingen väntar på ordet.</p>
       <button class="button" id="meeting-next" hidden>Ge ordet till nästa</button>
       <p class="control-note">Talarlistan är ett stöd för mötesledaren. Den styr inte deltagarnas mikrofoner.</p>
      </section>
+    </div><div id="meeting-panel-people" role="tabpanel" aria-labelledby="meeting-tab-people" hidden>
      <section class="card"><h3>Deltagare <span id="meeting-count">0</span></h3><ul id="meeting-people" class="meeting-people"></ul><p class="control-note">Grönt namn och grönt fält visar vem som pratar när du har anslutit ljudet.</p></section>
      <section class="card" id="meeting-lead-controls" hidden><h3>Led mötet</h3><label for="meeting-new-host">Lämna över mötesledningen</label><select id="meeting-new-host"></select><button class="button button-outline" id="meeting-transfer">Lämna över</button><button class="button button-quiet" id="meeting-end">Avsluta mötet för alla</button></section>
-    </aside>
+    </div><section class="card" id="meeting-panel-documents" role="tabpanel" aria-labelledby="meeting-tab-documents" hidden>${meetingDocumentPanel()}</section>
    </div>
   </div>`;
  }
@@ -88,7 +92,7 @@ export function swedishMeetingTime(value){
  if(`${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`!==value)throw Error('Den tiden finns inte vid bytet till sommartid. Välj en annan tid.');
  return new Date(result).toISOString();
 }
-export function mountMeetings({api,user,toast}){
+export function mountMeetings({api,apiBase='',user,toast}){
  const create=document.querySelector('#meeting-create-form');bindInvitationPicker(create);
  create?.addEventListener('submit',async event=>{
   event.preventDefault();const button=create.querySelector('button[type=submit]'),error=create.querySelector('.form-error');button.disabled=true;error.hidden=true;
@@ -110,8 +114,12 @@ export function mountMeetings({api,user,toast}){
  const post=(action,body={})=>api(path(c.id)+'/'+action,{method:'POST',body});
  const toggleMic=enabled=>{c.mic=enabled;if(c.active){el('mic').querySelector('[data-mic-state]').textContent=enabled?'Mikrofon på':'Mikrofon av';el('mic').querySelector('[data-mic-help]').textContent=enabled?'Tryck för att stänga av':'Tryck för att slå på';el('mic').setAttribute('aria-checked',String(enabled));}};
  const drawPeople=()=>{el('people').innerHTML=orderedMeetingPeople(c.data?.people||[],c.data?.room.host_id,c.speakers).map(p=>`<li class="meeting-person ${c.speakers.includes(p.id)?'is-speaking':''}"><span><span class="meeting-person-name">${escape(p.name)}${p.id===user.id?' (du)':''}</span>${p.id===c.data.room.host_id?' <small>Mötesledare</small>':''}</span></li>`).join('')||'<li>Ingen har gått med ännu.</li>';};
+ const drawDocuments=mountMeetingDocuments({api,apiBase,id:c.id,toast,refresh});
+ const tabs=[...root.querySelectorAll('[role=tab]')];
+ const selectTab=tab=>{for(const t of tabs){const selected=t===tab;t.setAttribute('aria-selected',String(selected));t.tabIndex=selected?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!selected;}};
+ tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>selectTab(tab));tab.addEventListener('keydown',e=>{const index=e.key==='ArrowRight'?(i+1)%tabs.length:e.key==='ArrowLeft'?(i+tabs.length-1)%tabs.length:e.key==='Home'?0:e.key==='End'?tabs.length-1:-1;if(index>=0){e.preventDefault();selectTab(tabs[index]);tabs[index].focus();}});});
  function update(d){
-  if(!c.active)return;c.data=d;
+  if(!c.active)return;c.data=d;drawDocuments(d);
   el('host').textContent=d.room.host_name;el('count').textContent=String(d.people.length);
   el('state').textContent=d.room.status==='open'?'Öppet möte':'Avslutat möte';
   el('lead-controls').hidden=!d.canLead||!c.joined||d.room.status!=='open';

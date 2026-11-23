@@ -52,9 +52,9 @@ export function createApp(options={}){
           if(!requestOrigin||!allowed.has(requestOrigin))fail(403,'Begäran måste komma från VDK:s webbplats.');
           if(!(req.headers['content-type']||'').startsWith('application/json'))fail(415,'JSON krävs.');
         }
-        const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:path==='/api/boardroom/documents'?7500000:32768):{};
+        const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:(path==='/api/boardroom/documents'||/^\/api\/meetings\/[0-9a-f-]{36}\/documents$/.test(path))?7500000:32768):{};
         if(await boardroomAction({db,path,method,body,req,requireMembership:auth,fail,json,res}))return;
-        if(await meetingsAction({db,path,method,body,req,requireMembership:auth,fail,json,url,env:options.env||process.env,rate}))return;
+        if(await meetingsAction({db,path,method,body,req,res,requireMembership:auth,fail,json,url,env:options.env||process.env,rate}))return;
         if(memberToolsAction({db,path,method,body,req,auth,requireMembership:auth,season,fail,res,json,url}))return;
         if(path==='/api/rules/access'&&method==='GET'){const u=auth(req);if(!u.roles.includes('ADMIN')&&!db.prepare("SELECT 1 FROM memberships WHERE user_id=? AND season=? AND category IN ('active','club','support') AND status='active' AND paid=1").get(u.id,season))fail(403,'Fullversionen kräver ett godkänt aktivt medlemskap, stödmedlemskap eller föreningsmedlemskap.');return json(200,{ok:true});}
         if(path==='/api/health'&&method==='GET')return json(200,{ok:true});

@@ -196,3 +196,35 @@
 .meeting-people .is-speaking{border-color:#168653;background:rgba(49,200,121,.14)}
 .meeting-people .is-speaking .meeting-person-name{color:#198357;font-weight:700}html[data-theme=dark] .meeting-people .is-speaking .meeting-person-name{color:#66e5a4}.meeting-person small{display:block}.meeting-person>span:last-child{min-width:0;overflow-wrap:anywhere;color:inherit}
 @media(max-width:700px){.meeting-layout{grid-template-columns:minmax(0,1fr)}.meeting-sidebar{grid-row:1}.meeting-title{display:block}.meeting-entry>.button{width:100%;white-space:normal;text-align:center}.meeting-controls .inline-actions>button{flex:1 1 140px}.meeting-layout .card{padding:1rem}.meeting-messages{height:300px}.meeting-people{display:flex;flex-wrap:wrap;gap:.3rem 1rem}.meeting-title h2{overflow-wrap:anywhere}}
+
+/* Switching panels preserves the connected audio session. */
+#meeting-room .meeting-layout{display:block}
+.meeting-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:18px 0;background:var(--surface)}
+.meeting-tabs button{flex:1;border:0;border-bottom:3px solid transparent;background:transparent;color:var(--text);font:inherit;font-weight:700;padding:14px 8px;cursor:pointer;min-width:0}
+.meeting-tabs button[aria-selected=true]{border-color:var(--yellow);color:var(--yellow)}
+.meeting-tabs button:focus-visible{outline:2px solid var(--yellow);outline-offset:-3px}
+#meeting-room [role=tabpanel][hidden]{display:none}
+.meeting-document-item{padding:16px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.meeting-document-item h4{margin:0 0 6px}
+#meeting-doc-reading{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:16px}
+@media(max-width:700px){
+ body:has(#meeting-room) .portal-head{display:none}
+ body:has(#meeting-room) .meeting-entry{display:none}
+ body:has(#meeting-room) .portal-navigation{margin-bottom:12px}
+ #meeting-room .meeting-title .eyebrow{display:none}
+ #meeting-room .meeting-title h2{font-size:1.5rem;margin:8px 0}
+ #meeting-room .meeting-title p{font-size:.85rem;margin:6px 0}
+ #meeting-room .meeting-controls{padding:12px;position:sticky;top:0;z-index:6;background:var(--surface)}
+ #meeting-room .meeting-controls .inline-actions{gap:8px}
+ #meeting-room .meeting-controls .button{padding:10px;font-size:.85rem}
+ #meeting-room .mic-switch{min-width:0;padding:6px 10px}
+ #meeting-room .mic-switch-copy small{display:none}
+ #meeting-room #meeting-audio-status{font-size:.8rem;margin:6px 0 0}
+ #meeting-room .meeting-tabs{margin:12px 0}
+ #meeting-room .meeting-tabs button{font-size:.85rem;padding:12px 4px}
+ #meeting-room .meeting-messages{height:min(42vh,350px);min-height:140px}
+ #meeting-room [role=tabpanel] .card{padding:14px}
+}
+html[data-theme=light] .meeting-tabs button[aria-selected=true]{color:#806300}
+
+@media(max-width:700px){#meeting-room .meeting-controls .mic-switch{flex:1 1 140px} #meeting-room .meeting-controls .inline-actions>button{flex:1 1 120px}}
