@@ -96,3 +96,25 @@ Browserkontroll med tre testmedlemmar täcker den gula ingången för samtliga k
 anslutning, chatt, turordning, avbockning, avslut och mobil utan horisontell rullning.
 Riktigt tvåvägsljud har provats via LiveKit med två syntetiska testmikrofoner och mottagna spelande ljudspår.
 Test på fysiska iPhone- och Android-enheter med olika hemnät är separat användarprovning.
+
+
+## Valfria mejlinbjudningar
+
+Skicka mejlinbjudan är avstängt som standard. Om det aktiveras väljer skaparen mottagare bland medlemmar
+med aktiverat konto och aktuell åtkomst. Flera namn kan markeras; det finns även Välj alla och Avmarkera alla.
+Ingen medlems e-postadress lämnas ut till klienten. Listan visar bara namn och användar-ID.
+
+Mötesledaren eller admin kan även bjuda in från ett redan skapat möte. En mejlinbjudan gör inte mötet privat:
+alla inloggade medlemmar kan fortfarande se och öppna det.
+Datum, svensk tid, avsändande mötesledare och VDK-länk ingår i HTML- och textversionen av mejlet.
+Mejlet skickas genom den befintliga Resend-anslutningen från konto@vdk.nu.
+
+Mottagarna köas atomärt med mötets skapande. En mottagare köas bara en gång per möte.
+Durable Object-alarmet skickar ett mejl åt gången med en stabil idempotensnyckel och återförsök vid tillfälliga fel.
+Efter sex misslyckade försök markeras mejlet som misslyckat. Köade mejl till ett avslutat/borttaget möte
+eller en mottagare som har förlorat åtkomst skickas inte. Status sent betyder att mejltjänsten har accepterat mejlet,
+inte att leverans till mottagarens inkorg har bekräftats. Status visas för mötesledaren.
+
+Deltagarlistan placerar alltid mötesledaren först. LiveKits aktiva talare visas därefter med större symbol,
+tydlig ram och etiketten Pratar nu. Talarmarkeringen förutsätter att medlemmen har anslutit ljudet.
+Knappen vid talarlistans väntande namn heter Ta bort.

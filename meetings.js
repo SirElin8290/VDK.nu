@@ -2,6 +2,21 @@ const escape=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>
 const formatTime=v=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Stockholm',dateStyle:'medium',timeStyle:'short'}).format(new Date(v));
 const path=id=>'/meetings/'+encodeURIComponent(id);
 let current=null;
+export function orderedMeetingPeople(people,hostId,speakers){
+ const rank=p=>p.id===hostId?0:speakers.includes(p.id)?1:2;
+ return people.slice().sort((a,b)=>rank(a)-rank(b));
+}
+function invitationPicker(members,prefix){
+ return `<div class="meeting-invitations"><label class="check-label"><input type="checkbox" name="sendInvites" data-send-meeting-invites><span>Skicka mejlinbjudan</span></label><p class="control-note">Frivilligt. Inget mejl skickas om rutan inte är ikryssad.</p><div data-meeting-recipients hidden><p>Välj vilka medlemmar som ska få datum, tid och länk till VDK.</p><div class="inline-actions"><button type="button" class="button button-outline button-small" data-meeting-select-all>Välj alla</button><button type="button" class="button button-quiet button-small" data-meeting-select-none>Avmarkera alla</button></div><div class="meeting-invitee-list">${members.map(m=>`<label class="check-label" for="${prefix}-invite-${m.id}"><input type="checkbox" id="${prefix}-invite-${m.id}" name="inviteeIds" value="${m.id}"><span>${escape(m.name)}</span></label>`).join('')||'<p>Inga medlemmar att bjuda in.</p>'}</div><p class="control-note">Mejlet är en inbjudan. Mötet är fortfarande synligt för alla VDK-medlemmar.</p></div></div>`;
+}
+const inviteData=form=>({sendInvites:form.querySelector('[data-send-meeting-invites]')?.checked===true,inviteeIds:[...form.querySelectorAll('[name=inviteeIds]:checked')].map(e=>Number(e.value))});
+function bindInvitationPicker(form){
+ const toggle=form?.querySelector('[data-send-meeting-invites]');if(!toggle)return;
+ toggle.addEventListener('change',()=>{form.querySelector('[data-meeting-recipients]').hidden=!toggle.checked;});
+ form.querySelector('[data-meeting-select-all]').addEventListener('click',()=>form.querySelectorAll('[name=inviteeIds]').forEach(el=>el.checked=true));
+ form.querySelector('[data-meeting-select-none]').addEventListener('click',()=>form.querySelectorAll('[name=inviteeIds]').forEach(el=>el.checked=false));
+}
+
 export function leaveMeetings(){
  if(!current)return;
  const old=current;current=null;old.active=false;clearTimeout(old.timer);old.audio?.disconnect();
@@ -11,7 +26,7 @@ export function leaveMeetings(){
 export async function meetingPage({api}){
  const id=new URLSearchParams(location.hash.split('?')[1]).get('id');
  if(id){
-  const d=await api(path(id)),m=d.room;
+  const d=await api(path(id)),m=d.room;const invitees=d.canLead?(await api('/meetings/invitees')).members:[];
   return `<div id="meeting-room" data-meeting="${escape(id)}">
    <a class="text-link" href="#/mina-sidor/moten">← Alla möten</a>
    <div class="meeting-title"><div><p class="eyebrow">VDK:s digitala mötesplats</p><h2>${escape(m.title)}</h2><p>${escape(formatTime(m.starts_at))} · Mötesledare: <span id="meeting-host">${escape(m.host_name)}</span></p></div><span class="badge" id="meeting-state">${m.status==='open'?'Öppet möte':'Avslutat möte'}</span></div>
@@ -30,6 +45,7 @@ export async function meetingPage({api}){
     <p id="meeting-audio-status" role="status">${m.status==='open'?'Gå med för att skriva i chatten, räcka upp handen och ansluta ljudet.':'Mötet är avslutat. Du kan läsa chatten nedan.'}</p>
     <div id="meeting-audio-elements"></div>
    </section>
+   ${d.canLead&&m.status==='open'?`<details class="card"><summary>Bjud in medlemmar till mötet</summary><form id="meeting-invite-form">${invitationPicker(invitees,'room')}<button type="submit" class="button">Skicka valda inbjudningar</button><p class="form-error" role="alert" hidden></p></form><p id="meeting-invitation-status" role="status"></p></details>`:''}
    <div class="meeting-layout">
     <section class="card meeting-chat"><h3>Chatt</h3><p id="meeting-history-note" class="control-note">Senaste 100 meddelandena visas när du öppnar mötet.</p><div id="meeting-messages" class="meeting-messages" role="log" aria-label="Möteschatt" aria-live="polite" aria-relevant="additions"></div>
      <form id="meeting-chat-form" hidden><label for="meeting-message">Skriv till deltagarna</label><textarea id="meeting-message" name="message" required maxlength="3000" rows="2"></textarea><button class="button" type="submit">Skicka</button></form>
@@ -45,7 +61,7 @@ export async function meetingPage({api}){
    </div>
   </div>`;
  }
- const d=await api('/meetings');
+ const d=await api('/meetings');const invitees=(await api('/meetings/invitees')).members;
  const card=m=>`<article class="card meeting-card"><p class="eyebrow">${m.status==='open'?'Kommande / öppet':'Avslutat'}</p><h3>${escape(m.title)}</h3><p>${escape(formatTime(m.starts_at))} (svensk tid)<br>Mötesledare: ${escape(m.host_name)}</p><p>${escape(m.description)}</p><p>${m.participants} deltagare på plats</p><a class="button ${m.status==='open'?'':'button-outline'}" href="#/mina-sidor/moten?id=${escape(m.id)}">${m.status==='open'?'Öppna mötet':'Läs chatten'}</a></article>`;
  return `<section id="meeting-lobby"><p class="eyebrow">Träffas på VDK</p><h2>Mötesplats</h2><p>Prata med kollegorna med ljud och textchatt. Räck upp handen för att hamna i talarlistan. Alla medlemmar kan skapa möten.</p>
  ${!d.audioConfigured?'<div class="notice">Ljudtjänsten förbereds. Mötesrum, chatt och talarlista går att använda.</div>':''}
@@ -54,6 +70,7 @@ export async function meetingPage({api}){
  <div class="field"><label for="meeting-date-input">Datum och tid (svensk tid)</label><input id="meeting-date-input" name="startsAt" type="datetime-local"><small>Lämna tomt för att börja nu.</small></div>
  <div class="field"><label for="meeting-description-input">Beskrivning eller punkter att prata om</label><textarea id="meeting-description-input" name="description" maxlength="2000" rows="3"></textarea></div>
  <p class="control-note">Mötet blir synligt för alla VDK-medlemmar. Högst 40 deltagare och fyra timmar per möte. Kamera och inspelning används inte.</p>
+ ${invitationPicker(invitees,'create')}
  <button class="button" type="submit">Skapa möte</button><p class="form-error" role="alert" hidden></p></form></details>
  <h3>Öppna möten</h3><div class="meeting-cards">${d.rooms.filter(m=>m.status==='open').map(card).join('')||'<p>Inga möten planerade ännu. Skapa det första!</p>'}</div>
  ${d.rooms.some(m=>m.status!=='open')?`<details class="card"><summary>Tidigare möten – senaste veckan</summary><div class="meeting-cards">${d.rooms.filter(m=>m.status!=='open').map(card).join('')}</div></details>`:''}</section>`;
@@ -72,11 +89,18 @@ export function swedishMeetingTime(value){
  return new Date(result).toISOString();
 }
 export function mountMeetings({api,user,toast}){
- const create=document.querySelector('#meeting-create-form');
+ const create=document.querySelector('#meeting-create-form');bindInvitationPicker(create);
  create?.addEventListener('submit',async event=>{
-  event.preventDefault();const button=create.querySelector('button'),error=create.querySelector('.form-error');button.disabled=true;error.hidden=true;
-  try{const values=Object.fromEntries(new FormData(create));const d=await api('/meetings',{method:'POST',body:{...values,startsAt:swedishMeetingTime(values.startsAt)}});location.hash='/mina-sidor/moten?id='+d.id;}
+  event.preventDefault();const button=create.querySelector('button[type=submit]'),error=create.querySelector('.form-error');button.disabled=true;error.hidden=true;
+  try{const values=Object.fromEntries(new FormData(create));const d=await api('/meetings',{method:'POST',body:{...values,...inviteData(create),startsAt:swedishMeetingTime(values.startsAt)}});if(d.queuedInvitations)toast(d.queuedInvitations+' mejlinbjudningar ligger nu i kön för utskick.');location.hash='/mina-sidor/moten?id='+d.id;}
   catch(e){error.textContent=e.message;error.hidden=false;}finally{button.disabled=false;}
+ });
+ const invite=document.querySelector('#meeting-invite-form');bindInvitationPicker(invite);
+ invite?.addEventListener('submit',async event=>{
+  event.preventDefault();const error=invite.querySelector('.form-error'),button=invite.querySelector('button[type=submit]');error.hidden=true;
+  const data=inviteData(invite);if(!data.sendInvites){error.textContent='Kryssa i Skicka mejlinbjudan om du vill skicka mejl. Inget har skickats.';error.hidden=false;return;}
+  button.disabled=true;
+  try{const id=document.querySelector('#meeting-room').dataset.meeting;const result=await api(path(id)+'/invite',{method:'POST',body:data});toast(result.queuedInvitations?result.queuedInvitations+' mejlinbjudningar ligger i kön för utskick.':'De valda medlemmarna har redan bjudits in.');}catch(e){error.textContent=e.message;error.hidden=false;}finally{button.disabled=false;}
  });
  const root=document.querySelector('#meeting-room');if(!root)return;
  const c={id:root.dataset.meeting,api,user,active:true,joined:false,timer:null,audio:null,mic:false,data:null,lastMessage:0,seen:new Set(),speakers:[],chatId:crypto.randomUUID(),pending:false};
@@ -85,7 +109,7 @@ export function mountMeetings({api,user,toast}){
  const status=message=>{if(c.active)el('audio-status').textContent=message;};
  const post=(action,body={})=>api(path(c.id)+'/'+action,{method:'POST',body});
  const toggleMic=enabled=>{c.mic=enabled;if(c.active){el('mic').textContent=enabled?'Mikrofon på – stäng av':'Mikrofon av – slå på';el('mic').setAttribute('aria-pressed',String(enabled));}};
- const drawPeople=()=>{el('people').innerHTML=(c.data?.people||[]).map(p=>`<li class="${c.speakers.includes(p.id)?'is-speaking':''}"><span aria-hidden="true">●</span> ${escape(p.name)}${p.id===user.id?' (du)':''}${p.id===c.data.room.host_id?' · mötesledare':''}</li>`).join('')||'<li>Ingen har gått med ännu.</li>';};
+ const drawPeople=()=>{el('people').innerHTML=orderedMeetingPeople(c.data?.people||[],c.data?.room.host_id,c.speakers).map(p=>`<li class="meeting-person ${c.speakers.includes(p.id)?'is-speaking':''}"><span class="meeting-speaking-icon" aria-hidden="true">${c.speakers.includes(p.id)?'▂▆▃':'●'}</span><span>${escape(p.name)}${p.id===user.id?' (du)':''}${p.id===c.data.room.host_id?' <small>Mötesledare</small>':''}${c.speakers.includes(p.id)?' <strong class="meeting-speaking-label">Pratar nu</strong>':''}</span></li>`).join('')||'<li>Ingen har gått med ännu.</li>';};
  function update(d){
   if(!c.active)return;c.data=d;
   el('host').textContent=d.room.host_name;el('count').textContent=String(d.people.length);
@@ -94,11 +118,12 @@ export function mountMeetings({api,user,toast}){
   el('next').hidden=!d.canLead||!c.joined||d.room.status!=='open';
   el('next').textContent=d.queue.length?'Ge ordet till nästa':'Markera ordet som avslutat';
   el('speaker').textContent=d.speaker?'Har ordet: '+d.speaker.name:'Ingen har ordet.';
-  el('queue').innerHTML=d.queue.map(p=>`<li><span>${escape(p.name)}${p.user_id===user.id?' (du)':''}</span>${d.canLead&&c.joined?`<button class="button button-quiet button-small" data-meeting-check="${p.id}" aria-label="Bocka av ${escape(p.name)}">✓ Klar</button>`:''}</li>`).join('');
+  el('queue').innerHTML=d.queue.map(p=>`<li><span>${escape(p.name)}${p.user_id===user.id?' (du)':''}</span>${d.canLead&&c.joined?`<button class="button button-quiet button-small" data-meeting-check="${p.id}" aria-label="Ta bort ${escape(p.name)} från talarlistan">Ta bort</button>`:''}</li>`).join('');
   el('empty-queue').hidden=!!d.queue.length;
   const raised=d.queue.some(p=>p.user_id===user.id);el('hand').setAttribute('aria-pressed',String(raised));el('hand').textContent=raised?'✋ Ta ner handen':'✋ Räck upp handen';
   const selected=el('new-host').value;el('new-host').innerHTML=d.people.filter(p=>p.id!==d.room.host_id).map(p=>`<option value="${p.id}">${escape(p.name)}</option>`).join('');if([...el('new-host').options].some(p=>p.value===selected))el('new-host').value=selected;
   drawPeople();
+  if(el('invitation-status'))el('invitation-status').textContent=d.invitations?.length?d.invitations.map(x=>x.count+' '+({pending:'väntar på utskick',sent:'överlämnade till mejltjänsten',failed:'kunde inte skickas',cancelled:'avbrutna'}[x.status]||x.status)).join(' · '):'';
   const messages=el('messages'),atBottom=messages.scrollHeight-messages.scrollTop-messages.clientHeight<100;
   for(const m of d.messages){
    c.lastMessage=Math.max(c.lastMessage,m.id);if(c.seen.has(m.id))continue;c.seen.add(m.id);
@@ -127,17 +152,18 @@ export function mountMeetings({api,user,toast}){
   finally{c.pending=false;if(c.active&&c.data?.room.status!=='ended')c.timer=setTimeout(refresh,c.joined?4000:10000);}
  }
  async function action(button,job){
-  if(button.disabled)return;button.disabled=true;try{await job();await refresh();}catch(e){if(c.active)alert(e.message);}finally{button.disabled=false;}
+  if(button.disabled)return;button.disabled=true;try{await job();await refresh();}catch(e){if(c.active){alert(e.message);if(button===el('audio-connect')){button.textContent='Försök ansluta ljud igen';button.removeAttribute('aria-busy');status('Ljudet kunde inte anslutas: '+e.message);}}}finally{button.disabled=false;}
  }
  async function connect(){
-  if(c.audio?.connected)return;
+  if(c.audio?.connected){status('Ljudet är redan anslutet. Slå på mikrofonen för att prata.');el('audio-connect').hidden=true;return;}
+  el('audio-connect').textContent='Ansluter ljud…';el('audio-connect').setAttribute('aria-busy','true');
   status('Ansluter ljud…');const d=await post('audio');
   if(!c.active)return;
   const {connectAudio}=await import('./assets/meetings/audio.js');
   if(!c.active)return;
   const audio=await connectAudio({url:d.url,token:d.token,container:el('audio-elements'),onStatus:status,onMute:toggleMic,onSpeakers:ids=>{c.speakers=ids;if(c.active)drawPeople();},onDisconnect:()=>{if(!c.active)return;el('audio-connect').hidden=false;el('mic').disabled=true;status(c.data?.room.status!=='open'?'Mötet är avslutat. Du kan läsa chatten här.':'Ljudet är frånkopplat. Du är kvar i chatten och kan ansluta ljud igen.');}});
   if(!c.active){await audio.disconnect();return;}
-  c.audio=audio;el('audio-connect').hidden=true;el('mic').disabled=false;el('playback').hidden=false;
+  c.audio=audio;el('audio-connect').textContent='Anslut ljud';el('audio-connect').removeAttribute('aria-busy');el('audio-connect').hidden=true;el('mic').disabled=false;el('playback').hidden=false;
  }
  el('join')?.addEventListener('click',event=>action(event.currentTarget,async()=>{
   const d=await post('join');if(!c.active){await post('leave');return;}

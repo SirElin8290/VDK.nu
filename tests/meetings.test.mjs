@@ -4,7 +4,8 @@ import {createHmac} from 'node:crypto';
 import {cloudStore} from './cloud-fixture.mjs';
 import {createApp} from '../cloudflare/api.mjs';
 import {digest} from '../cloudflare/store.mjs';
-import {swedishMeetingTime} from '../meetings.js';
+import {swedishMeetingTime,orderedMeetingPeople} from '../meetings.js';
+import {deliverMeetingInvitation,meetingInvitationEmail} from '../cloudflare/meetings.mjs';
 
 function fixture(t,extra={}){
  const db=cloudStore();t.after(()=>db.close());
@@ -22,7 +23,7 @@ function fixture(t,extra={}){
   await handler({url:'/api/meetings'+path,method,headers:{cookie:who?.cookie||'',origin,'content-type':'application/json'},socket:{remoteAddress:'meeting-tests'},async *[Symbol.asyncIterator](){yield Buffer.from(JSON.stringify(body||{}));}},{setHeader(){},writeHead(s){status=s;},end(v){output=v;}});
   return {status,data:JSON.parse(output||'null')};
  }
- return {db,request,member};
+ return {db,request,member,env};
 }
 test('meeting access includes all member categories but blocks anonymous, expired and unrelated origins',async t=>{
  const {request,member}=fixture(t);
@@ -85,4 +86,42 @@ test('Swedish meeting time is independent of device timezone and rejects nonexis
  assert.equal(swedishMeetingTime('2026-11-23T18:00'),'2026-11-23T17:00:00.000Z');
  assert.equal(swedishMeetingTime('2026-07-23T18:00'),'2026-07-23T16:00:00.000Z');
  assert.throws(()=>swedishMeetingTime('2026-03-29T02:30'),/sommartid/);
+});
+
+test('meeting invitation is opt in, validates recipients, and queues only selected members once',async t=>{
+ const {db,request,member,env}=fixture(t,{RESEND_API_KEY:'test-only',EMAIL_FROM:'VDK <konto@vdk.nu>'});
+ const host=member('Host'),one=member('Erik'),two=member('Sara','support');
+ db.prepare('UPDATE users SET password_hash=?').run('test-account');
+ const without=(await request('',host,{title:'Utan mejl',sendInvites:false,inviteeIds:[one.id]})).data.id;
+ assert.equal(db.prepare('SELECT count(*) n FROM meeting_invitations').get().n,0);
+ assert.equal((await request('',host,{title:'Fel val',sendInvites:true,inviteeIds:[999999]})).status,400);
+ assert.equal((await request('',host,{title:'Inget val',sendInvites:true,inviteeIds:[]})).status,400);
+ const created=await request('',host,{title:'Medlemsträff',sendInvites:true,inviteeIds:[one.id,one.id]});
+ assert.equal(created.status,201);assert.equal(created.data.queuedInvitations,1);
+ const id=created.data.id;
+ assert.equal((await request('/'+id+'/invite',one,{sendInvites:true,inviteeIds:[two.id]})).status,403);
+ assert.equal((await request('/'+id+'/invite',host,{sendInvites:true,inviteeIds:[one.id]})).data.queuedInvitations,0);
+ const sent=[],owner={db,env,meetingMailer:async m=>sent.push(m)};
+ assert.equal(await deliverMeetingInvitation(owner),true);assert.equal(sent.length,1);assert.equal(sent[0].to,'Erik@example.test');
+ assert.match(sent[0].text,/svensk tid/);assert.match(sent[0].html,/https:\/\/vdk.nu/);
+ assert.equal(await deliverMeetingInvitation(owner),false);
+ assert.equal(db.prepare('SELECT status FROM meeting_invitations WHERE room_id=?').get(id).status,'sent');
+ assert.equal((await request('/'+without+'/invite',host,{sendInvites:false,inviteeIds:[two.id]})).data.queuedInvitations,0);
+});
+test('meeting emails retry safely, and ended meetings cancel queued invitations',async t=>{
+ const {db,request,member,env}=fixture(t,{RESEND_API_KEY:'test-only',EMAIL_FROM:'VDK <konto@vdk.nu>'});
+ const host=member('Host'),guest=member('Guest');db.prepare('UPDATE users SET password_hash=?').run('test-account');
+ const id=(await request('',host,{title:'Retry',sendInvites:true,inviteeIds:[guest.id]})).data.id;
+ await deliverMeetingInvitation({db,env,meetingMailer:async()=>{throw Error('temporary');}});
+ const job=db.prepare('SELECT * FROM meeting_invitations').get();assert.equal(job.status,'pending');assert.equal(job.attempts,1);assert.ok(job.next_attempt>Date.now());
+ await request('/'+id+'/end',host,{});db.prepare('UPDATE meeting_invitations SET next_attempt=0').run();
+ let mailed=false;await deliverMeetingInvitation({db,env,meetingMailer:async()=>{mailed=true;}});
+ assert.equal(mailed,false);assert.equal(db.prepare('SELECT status FROM meeting_invitations').get().status,'cancelled');
+});
+test('speaker order pins leader first and moves live speakers above other attendees',()=>{
+ const people=[{id:3},{id:2},{id:1},{id:4}];
+ assert.deepEqual(orderedMeetingPeople(people,1,[4,2]).map(p=>p.id),[1,2,4,3]);
+ assert.deepEqual(people.map(p=>p.id),[3,2,1,4]);
+ const m=meetingInvitationEmail({room:{id:'test',title:'<script>',starts_at:'2026-11-23T17:00:00Z',description:'<img>'},recipient:{name:'<unsafe>',email:'x@example.test'},host:{name:'VDK'}});
+ assert.match(m.text,/18:00/);assert.match(m.text,/23 november 2026/);assert.ok(!m.html.includes('<script>'));assert.ok(!m.html.includes('<img>'));assert.ok(m.html.includes('&lt;unsafe&gt;'));
 });

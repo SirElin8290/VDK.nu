@@ -1,4 +1,5 @@
 import {createHmac,randomUUID} from 'node:crypto';
+import {eligibleMember} from './messages.mjs';
 
 const PRESENCE=120000,MAX_PEOPLE=40,MAX_HOURS=4;
 const roomName=id=>'vdk-meeting-'+id;
@@ -17,7 +18,11 @@ export function initializeMeetings(db){
  CREATE TABLE IF NOT EXISTS meeting_chat(id INTEGER PRIMARY KEY AUTOINCREMENT,room_id TEXT NOT NULL REFERENCES meeting_rooms(id),
  user_id INTEGER NOT NULL REFERENCES users(id),body TEXT NOT NULL,client_id TEXT NOT NULL,created_at INTEGER NOT NULL,
  UNIQUE(room_id,user_id,client_id));
- CREATE INDEX IF NOT EXISTS meeting_chat_cursor ON meeting_chat(room_id,id);`);
+ CREATE INDEX IF NOT EXISTS meeting_chat_cursor ON meeting_chat(room_id,id);
+ CREATE TABLE IF NOT EXISTS meeting_invitations(room_id TEXT NOT NULL REFERENCES meeting_rooms(id),user_id INTEGER NOT NULL REFERENCES users(id),
+ status TEXT NOT NULL DEFAULT 'pending',attempts INTEGER NOT NULL DEFAULT 0,next_attempt INTEGER NOT NULL DEFAULT 0,sent_at INTEGER,
+ PRIMARY KEY(room_id,user_id));
+ CREATE INDEX IF NOT EXISTS meeting_invitation_due ON meeting_invitations(status,next_attempt);`);
 }
 export function meetingToken(env,claims,lifetime=300){
  const now=Math.floor(Date.now()/1000);
@@ -43,12 +48,27 @@ function roomState(db,room,user,params,env){
  const messages=cursor?db.prepare('SELECT c.id,c.user_id,u.name,c.body,c.created_at FROM meeting_chat c JOIN users u ON u.id=c.user_id WHERE c.room_id=? AND c.id>? ORDER BY c.id LIMIT 100').all(room.id,cursor):db.prepare('SELECT c.id,c.user_id,u.name,c.body,c.created_at FROM meeting_chat c JOIN users u ON u.id=c.user_id WHERE c.room_id=? ORDER BY c.id DESC LIMIT 100').all(room.id).reverse();
  const joined=people.some(p=>p.id===user.id);
  const speaker=room.current_speaker&&people.find(p=>p.id===room.current_speaker)||null;
- return {room:view,people,queue,messages,joined,speaker,canLead:room.host_id===user.id||user.roles.includes('ADMIN'),audioConfigured:audioReady(env),maxParticipants:MAX_PEOPLE};
+ const canLead=room.host_id===user.id||user.roles.includes('ADMIN');
+ const invitations=canLead?db.prepare('SELECT status,count(*) AS count FROM meeting_invitations WHERE room_id=? GROUP BY status').all(room.id):[];
+ return {room:view,people,queue,messages,joined,speaker,canLead,invitations,audioConfigured:audioReady(env),maxParticipants:MAX_PEOPLE};
 }
-export async function meetingsAction({db,path,method,body,req,requireMembership,fail,json,url,env,rate}){
+export async function meetingsAction({db,path,method,body,req,requireMembership,fail,json,url,env,rate,onQueued}){
  if(!/^\/api\/meetings(?:\/|$)/.test(path))return false;
  const user=requireMembership(req),now=Date.now();
  const text=(v,min,max)=>{if(typeof v!=='string'||v.trim().length<min||v.length>max)fail(400,'Kontrollera mötets uppgifter.');return v.trim();};
+ const recipients=()=>{
+  if(body.sendInvites!==true)return [];
+  if(!env.RESEND_API_KEY||!env.EMAIL_FROM)fail(503,'E-posttjänsten är inte ansluten. Du kan skapa mötet utan mejlinbjudan.');
+  if(!Array.isArray(body.inviteeIds)||!body.inviteeIds.length||body.inviteeIds.length>300||body.inviteeIds.some(id=>!Number.isSafeInteger(id)||id<=0))fail(400,'Välj minst en medlem som ska få mejlet.');
+  const eligible=new Set(db.prepare('SELECT u.id FROM users u WHERE '+eligibleMember).all(user.season).map(u=>u.id));
+  const ids=[...new Set(body.inviteeIds)];
+  if(ids.some(id=>!eligible.has(id)))fail(400,'Någon vald medlem har inte längre tillgång till mötesplatsen.');
+  return ids;
+ };
+ const queue=(id,ids)=>{let queued=0;for(const uid of ids)queued+=db.prepare('INSERT OR IGNORE INTO meeting_invitations(room_id,user_id,next_attempt) VALUES(?,?,?)').run(id,uid,now).changes;return queued;};
+ if(path==='/api/meetings/invitees'&&method==='GET'){
+  return json(200,{members:db.prepare('SELECT u.id,u.name FROM users u WHERE '+eligibleMember+' ORDER BY u.name').all(user.season)}),true;
+ }
  if(path==='/api/meetings'){
   if(method==='GET'){
    const rooms=db.prepare("SELECT * FROM meeting_rooms WHERE status='open' OR ended_at>? ORDER BY CASE status WHEN 'open' THEN 0 ELSE 1 END,starts_at LIMIT 80").all(now-7*86400000).map(r=>roomView(db,r,now));
@@ -60,10 +80,12 @@ export async function meetingsAction({db,path,method,body,req,requireMembership,
   if(!Number.isFinite(start)||start<now-86400000||start>now+366*86400000)fail(400,'Välj en giltig tid för mötet.');
   if(db.prepare("SELECT count(*) n FROM meeting_rooms WHERE created_by=? AND status='open'").get(user.id).n>=10)fail(409,'Du har redan tio öppna möten. Avsluta ett innan du skapar fler.');
   const id=randomUUID();
-  db.prepare('INSERT INTO meeting_rooms(id,title,description,host_id,created_by,starts_at,created_at) VALUES(?,?,?,?,?,?,?)').run(id,title,description,user.id,user.id,new Date(start).toISOString(),now);
-  return json(201,{id}),true;
+  const ids=recipients();
+  const queued=db.transaction(()=>{db.prepare('INSERT INTO meeting_rooms(id,title,description,host_id,created_by,starts_at,created_at) VALUES(?,?,?,?,?,?,?)').run(id,title,description,user.id,user.id,new Date(start).toISOString(),now);return queue(id,ids);});
+  if(queued)await onQueued?.();
+  return json(201,{id,queuedInvitations:queued}),true;
  }
- const match=path.match(/^\/api\/meetings\/([0-9a-f-]{36})(?:\/(join|pulse|leave|chat|hand|next|host|end|audio))?$/);
+ const match=path.match(/^\/api\/meetings\/([0-9a-f-]{36})(?:\/(join|pulse|leave|chat|hand|next|host|end|audio|invite))?$/);
  if(!match)fail(404,'Mötet hittades inte.');
  const id=match[1],action=match[2];
  let room=db.prepare('SELECT * FROM meeting_rooms WHERE id=?').get(id);
@@ -84,6 +106,13 @@ export async function meetingsAction({db,path,method,body,req,requireMembership,
   return json(200,{ok:true}),true;
  }
  if(room.status!=='open'){if(action==='pulse')return json(200,roomState(db,room,user,url.searchParams,env)),true;fail(409,'Mötet är avslutat.');}
+ if(action==='invite'){
+  if(room.host_id!==user.id&&!user.roles.includes('ADMIN'))fail(403,'Bara mötesledaren kan bjuda in medlemmar.');
+  rate(req,'meeting-invite-'+user.id,15);
+  const ids=recipients(),queued=db.transaction(()=>queue(id,ids));
+  if(queued)await onQueued?.();
+  return json(200,{queuedInvitations:queued}),true;
+ }
  if(action==='join'){
   const own=db.prepare('SELECT 1 FROM meeting_attendees WHERE room_id=? AND user_id=? AND last_seen>?').get(id,user.id,now-PRESENCE);
   if(!own&&db.prepare('SELECT count(*) n FROM meeting_attendees WHERE room_id=? AND last_seen>?').get(id,now-PRESENCE).n>=MAX_PEOPLE)fail(409,'Mötet är fullt. Högst 40 deltagare kan vara med.');
@@ -141,4 +170,38 @@ export async function meetingsAction({db,path,method,body,req,requireMembership,
   return json(200,{url:env.LIVEKIT_URL,token}),true;
  }
  fail(404,'Mötesfunktionen hittades inte.');
+}
+
+const htmlEscape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export function meetingInvitationEmail({room,recipient,host}){
+ const when=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Stockholm',weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(room.starts_at));
+ const link='https://vdk.nu/#/mina-sidor/moten?id='+room.id;
+ return {
+  to:recipient.email,subject:'Inbjudan till '+room.title+' – VDK',
+  text:'Hej '+recipient.name+'!\n\n'+host.name+' bjuder in dig till '+room.title+'.\n'+when+' (svensk tid).\n\n'+room.description+'\n\nLogga in på VDK och öppna Mötesplats för att gå med.\n'+link+'\n\nDu kan delta med ljud och textchatt. Mikrofonen är av från början.\n\nVärmlands Domarkollektiv',
+  html:'<!doctype html><html lang="sv"><body style="margin:0;background:#f3f5f6;font-family:Arial,sans-serif;color:#172127"><table role="presentation" width="100%" cellspacing="0" cellpadding="0"><tr><td style="padding:28px 12px"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:580px;margin:auto;background:#fff;border-radius:12px"><tr><td style="padding:30px;background:#111a1e;color:#ffd400;border-radius:12px 12px 0 0;font-size:30px;font-weight:bold">VDK<span style="display:block;color:#fff;font-size:13px;font-weight:normal;margin-top:6px">Värmlands Domarkollektiv</span></td></tr><tr><td style="padding:30px"><p>Hej '+htmlEscape(recipient.name)+'!</p><h1 style="font-size:25px;line-height:1.3">'+htmlEscape(room.title)+'</h1><p>'+htmlEscape(host.name)+' bjuder in dig till en digital träff på VDK.</p><p style="padding:16px;background:#fff6c5;border-radius:6px"><strong>'+htmlEscape(when)+'</strong><br>Svensk tid</p>'+(room.description?'<p style="white-space:pre-line">'+htmlEscape(room.description)+'</p>':'')+'<p>Logga in på <strong>vdk.nu</strong> och öppna <strong>Mötesplats</strong> för att gå med.</p><p style="margin:28px 0"><a href="'+htmlEscape(link)+'" style="display:inline-block;padding:15px 22px;background:#ffd400;color:#111;text-decoration:none;font-weight:bold;border-radius:6px">Öppna mötet på VDK</a></p><p>Du kan delta med ljud och textchatt. Mikrofonen är avstängd när du kommer in.</p><p style="font-size:13px;color:#52636c">Du får mejlet eftersom en medlem har valt att bjuda in dig. Ljud spelas inte in. Chatten kan läsas av VDK:s medlemmar.</p><p style="font-size:12px;word-break:break-all"><a href="'+htmlEscape(link)+'">'+htmlEscape(link)+'</a></p></td></tr></table></td></tr></table></body></html>'
+ };
+}
+export async function deliverMeetingInvitation(owner){
+ const {db,env}=owner,now=Date.now();
+ const job=db.prepare("SELECT * FROM meeting_invitations WHERE status='pending' AND next_attempt<=? ORDER BY next_attempt LIMIT 1").get(now);
+ if(!job)return false;
+ const room=db.prepare('SELECT * FROM meeting_rooms WHERE id=?').get(job.room_id);
+ const season=env.SEASON||'2026/27';
+ const recipient=db.prepare('SELECT u.id,u.name,u.email FROM users u WHERE u.id=? AND '+eligibleMember).get(job.user_id,season);
+ if(!room||room.status!=='open'||!recipient){db.prepare("UPDATE meeting_invitations SET status='cancelled' WHERE room_id=? AND user_id=?").run(job.room_id,job.user_id);return true;}
+ try{
+  const host=db.prepare('SELECT name FROM users WHERE id=?').get(room.host_id);
+  const message=meetingInvitationEmail({room,recipient,host});
+  if(owner.meetingMailer)await owner.meetingMailer(message);
+  else{
+   if(!env.RESEND_API_KEY||!env.EMAIL_FROM)throw Error('E-posttjänsten saknar konfiguration');
+   const r=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+env.RESEND_API_KEY,'Content-Type':'application/json','Idempotency-Key':'vdk-meeting-'+job.room_id+'-'+job.user_id},body:JSON.stringify({from:env.EMAIL_FROM,to:[message.to],subject:message.subject,html:message.html,text:message.text}),signal:AbortSignal.timeout(15000)});
+   if(!r.ok)throw Error('Mejlet kunde inte skickas');
+  }
+  db.prepare("UPDATE meeting_invitations SET status='sent',sent_at=? WHERE room_id=? AND user_id=?").run(now,job.room_id,job.user_id);
+ }catch{
+  db.prepare('UPDATE meeting_invitations SET attempts=attempts+1,status=?,next_attempt=? WHERE room_id=? AND user_id=?').run(job.attempts>=5?'failed':'pending',now+Math.min(3600000,60000*2**job.attempts),job.room_id,job.user_id);
+ }
+ return true;
 }
