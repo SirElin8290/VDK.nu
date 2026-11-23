@@ -160,15 +160,15 @@ export const publicFaq = [
     ]
   },
   {
-    "question": "Ersätter VDK Värmlands Innebandyförbund?",
+    "question": "Är VDK en oberoende organisation?",
     "answer": [
       {
         "type": "paragraph",
-        "text": "VDK är en självständig ideell förening och ett komplement till Värmlands Innebandyförbund. Vi är inte en del av förbundet och ersätter inte dess roll."
+        "text": "VDK är en oberoende ideell intresseorganisation som engagerar sig i domarfrågor. Vi företräder våra medlemmar och är fristående från andra organisationer."
       },
       {
         "type": "paragraph",
-        "text": "VDK och förbundet har olika uppgifter men ett gemensamt intresse: en trygg och utvecklande domarverksamhet i Värmland. Vi vill bidra genom samarbete och dialog och har fått positiv respons på föreningens ambition och verksamhetsidé."
+        "text": "VDK:s verksamhet, verktyg och ställningstaganden är våra egna. De innebär inget officiellt uppdrag eller godkännande från ett förbund eller dess samarbetspartner."
       },
       {
         "type": "paragraph",
@@ -189,7 +189,7 @@ export const publicFaq = [
       },
       {
         "type": "paragraph",
-        "text": "VDK är inte en fackförening och är inte skapad för att vara en motpart till Värmlands Innebandyförbund."
+        "text": "VDK är en oberoende intresseorganisation. Vi driver domarfrågor utifrån våra medlemmars erfarenheter och behov."
       }
     ]
   },
