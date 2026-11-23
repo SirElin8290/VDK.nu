@@ -55,7 +55,7 @@ export async function meetingPage({api}){
       <button class="button" id="meeting-next" hidden>Ge ordet till nästa</button>
       <p class="control-note">Talarlistan är ett stöd för mötesledaren. Den styr inte deltagarnas mikrofoner.</p>
      </section>
-     <section class="card"><h3>Deltagare <span id="meeting-count">0</span></h3><ul id="meeting-people" class="meeting-people"></ul><p class="control-note">En grön markering visar vem som pratar när du har anslutit ljudet.</p></section>
+     <section class="card"><h3>Deltagare <span id="meeting-count">0</span></h3><ul id="meeting-people" class="meeting-people"></ul><p class="control-note">Grönt namn och grönt fält visar vem som pratar när du har anslutit ljudet.</p></section>
      <section class="card" id="meeting-lead-controls" hidden><h3>Led mötet</h3><label for="meeting-new-host">Lämna över mötesledningen</label><select id="meeting-new-host"></select><button class="button button-outline" id="meeting-transfer">Lämna över</button><button class="button button-quiet" id="meeting-end">Avsluta mötet för alla</button></section>
     </aside>
    </div>
@@ -109,7 +109,7 @@ export function mountMeetings({api,user,toast}){
  const status=message=>{if(c.active)el('audio-status').textContent=message;};
  const post=(action,body={})=>api(path(c.id)+'/'+action,{method:'POST',body});
  const toggleMic=enabled=>{c.mic=enabled;if(c.active){el('mic').querySelector('[data-mic-state]').textContent=enabled?'Mikrofon på':'Mikrofon av';el('mic').querySelector('[data-mic-help]').textContent=enabled?'Tryck för att stänga av':'Tryck för att slå på';el('mic').setAttribute('aria-checked',String(enabled));}};
- const drawPeople=()=>{el('people').innerHTML=orderedMeetingPeople(c.data?.people||[],c.data?.room.host_id,c.speakers).map(p=>`<li class="meeting-person ${c.speakers.includes(p.id)?'is-speaking':''}"><span class="meeting-speaking-icon" aria-hidden="true">${c.speakers.includes(p.id)?'▂▆▃':'●'}</span><span>${escape(p.name)}${p.id===user.id?' (du)':''}${p.id===c.data.room.host_id?' <small>Mötesledare</small>':''}${c.speakers.includes(p.id)?' <strong class="meeting-speaking-label">Pratar nu</strong>':''}</span></li>`).join('')||'<li>Ingen har gått med ännu.</li>';};
+ const drawPeople=()=>{el('people').innerHTML=orderedMeetingPeople(c.data?.people||[],c.data?.room.host_id,c.speakers).map(p=>`<li class="meeting-person ${c.speakers.includes(p.id)?'is-speaking':''}"><span><span class="meeting-person-name">${escape(p.name)}${p.id===user.id?' (du)':''}</span>${p.id===c.data.room.host_id?' <small>Mötesledare</small>':''}</span></li>`).join('')||'<li>Ingen har gått med ännu.</li>';};
  function update(d){
   if(!c.active)return;c.data=d;
   el('host').textContent=d.room.host_name;el('count').textContent=String(d.people.length);

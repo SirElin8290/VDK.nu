@@ -193,8 +193,6 @@
 @media(prefers-reduced-motion:reduce){.mic-switch-thumb{transition:none}}
 .meeting-invitee-list{max-height:280px;overflow:auto;display:grid;gap:.45rem;padding:.75rem 0}.meeting-invitations{margin:1rem 0}.meeting-invitee-list .check-label{padding:.4rem;border-bottom:1px solid var(--border,#536066)}#meeting-invite-form{margin-top:1rem}
 .meeting-people .meeting-person{display:flex;align-items:center;gap:.7rem;padding:.65rem;border:2px solid transparent;border-radius:8px;width:100%;box-sizing:border-box}
-.meeting-speaking-icon{display:flex;flex:none;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:2px solid #839099;font-size:15px;color:#839099!important}
 .meeting-people .is-speaking{border-color:#168653;background:rgba(49,200,121,.14)}
-.meeting-people .is-speaking .meeting-speaking-icon{background:#168653;border-color:#168653;color:#fff!important;font-weight:800;font-size:22px}
-.meeting-speaking-label{display:block;color:#198357;font-size:.85rem}html[data-theme=dark] .meeting-speaking-label{color:#66e5a4}.meeting-person small{display:block}.meeting-person>span:last-child{min-width:0;overflow-wrap:anywhere;color:inherit}
+.meeting-people .is-speaking .meeting-person-name{color:#198357;font-weight:700}html[data-theme=dark] .meeting-people .is-speaking .meeting-person-name{color:#66e5a4}.meeting-person small{display:block}.meeting-person>span:last-child{min-width:0;overflow-wrap:anywhere;color:inherit}
 @media(max-width:700px){.meeting-layout{grid-template-columns:minmax(0,1fr)}.meeting-sidebar{grid-row:1}.meeting-title{display:block}.meeting-entry>.button{width:100%;white-space:normal;text-align:center}.meeting-controls .inline-actions>button{flex:1 1 140px}.meeting-layout .card{padding:1rem}.meeting-messages{height:300px}.meeting-people{display:flex;flex-wrap:wrap;gap:.3rem 1rem}.meeting-title h2{overflow-wrap:anywhere}}
