@@ -227,4 +227,59 @@
 }
 html[data-theme=light] .meeting-tabs button[aria-selected=true]{color:#806300}
 
+/* Public entry: registration first, sign-in on the reverse of the same card. */
+.home-entry{position:relative;isolation:isolate;overflow:hidden;background:var(--bg);padding:52px 0 60px}
+.entry-backdrop{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.entry-backdrop img{width:64%;height:100%;object-fit:cover;object-position:70% center;opacity:.33}
+.entry-backdrop:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#080b0c88,var(--bg) 68%),linear-gradient(0deg,var(--bg),transparent 30%)}
+.entry-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,530px);gap:70px;align-items:center}
+.entry-intro h1{font-size:clamp(2.9rem,4.6vw,4.6rem);max-width:620px}
+.entry-intro h1 span{display:block;color:var(--yellow)}
+.entry-intro>p:not(.eyebrow){font-size:1.2rem;max-width:500px;color:var(--muted)}
+.entry-intro ul{list-style:none;padding:0;font-size:1rem;color:var(--text);margin:26px 0}
+.entry-intro li{margin:10px 0;padding-left:25px;position:relative}
+.entry-intro li:before{content:'✓';position:absolute;left:0;color:var(--yellow)}
+.entry-intro .motto{margin-bottom:24px}
+.entry-card{perspective:1600px;min-width:0;scroll-margin-top:20px}
+.entry-rotor{position:relative;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.7,.2,1),height .3s ease;min-height:480px}
+.entry-card.is-flipped .entry-rotor{transform:rotateY(180deg)}
+.entry-face{position:absolute;top:0;left:0;width:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--yellow);border-radius:16px;padding:28px;box-shadow:0 22px 65px #0003;overflow-wrap:anywhere}
+.entry-back{transform:rotateY(180deg)}
+.entry-brand{margin-bottom:20px}.entry-brand .brand-word{font-size:2.8rem;letter-spacing:-.25rem}
+.entry-brand .brand-year{font-size:.55rem;letter-spacing:.28em;margin-top:8px}
+.entry-face>.eyebrow{font-size:.7rem;margin-bottom:8px}
+.entry-face h2{font-size:2rem;margin-bottom:12px}
+.entry-subtitle{font-size:.95rem;color:var(--muted);margin-bottom:16px}
+.entry-steps{display:flex;list-style:none;padding:0;gap:12px;margin:16px 0 22px;flex-wrap:wrap;font-size:.76rem;color:var(--muted)}
+.entry-steps li[aria-current]{color:var(--text);font-weight:700;border-bottom:2px solid var(--yellow);padding-bottom:5px}
+.entry-category{border:0;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-width:0}
+.entry-category legend{font-weight:600;font-size:.9rem;margin-bottom:8px}
+.entry-category label{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--line);border-radius:7px;padding:10px;cursor:pointer;min-width:0;background:var(--bg)}
+.entry-category label:has(input:checked){border-color:var(--yellow);background:color-mix(in srgb,var(--yellow) 8%,var(--surface))}
+.entry-category input{accent-color:var(--yellow);margin:4px 0 0;width:16px;height:16px;flex-shrink:0}
+.entry-category strong,.entry-category small{display:block;font-size:.85rem;line-height:1.35}
+.entry-category small{color:var(--muted);font-size:.78rem;margin-top:4px}
+.entry-note{font-size:.83rem;color:var(--muted);line-height:1.5;margin:12px 0}
+.entry-face .field{margin-bottom:13px;gap:5px}
+.entry-face .field label{font-size:.9rem}
+.entry-face .field input{padding:10px 12px}
+.entry-face .check-label{font-size:.79rem;line-height:1.5;gap:10px}
+.entry-face .check-label input{width:18px;height:18px}
+.entry-face .form-error:empty{display:none}
+.entry-switch{border-top:1px solid var(--line);padding-top:18px;margin-top:18px}
+.entry-face .button{font-size:.95rem;padding:12px 15px}
+.entry-back .entry-subtitle{margin-bottom:26px}
+.entry-back .entry-note{margin-top:22px}
+.entry-next{margin-top:22px;font-size:.92rem}.entry-next h3{font-size:1.5rem}
+#entry-payment .qr-card{box-shadow:none;padding:18px;background:var(--bg)}
+#entry-payment .qr-card h2{font-size:1.6rem}
+#entry-payment .qr-card p{font-size:.86rem}
+html[data-theme=light] .entry-backdrop:after{background:linear-gradient(90deg,#f5f7f888,var(--bg) 68%),linear-gradient(0deg,var(--bg),transparent 30%)}
+html[data-theme=light] .entry-intro h1 span{color:#806300}
+@media(max-width:1000px){.entry-grid{gap:30px;grid-template-columns:minmax(0,1fr) minmax(0,470px)}.entry-intro h1{font-size:3rem}.entry-intro ul{font-size:.9rem}}
+@media(max-width:700px){.home-entry{padding:24px 0 32px}.entry-grid{grid-template-columns:minmax(0,1fr);gap:22px}.entry-intro h1{font-size:2.25rem;margin-bottom:10px;max-width:520px}.entry-intro h1 span{display:inline}.entry-intro>.eyebrow{font-size:.7rem;margin-bottom:8px}.entry-intro>p:not(.eyebrow){font-size:1rem;margin-bottom:0}.entry-intro ul,.entry-intro .motto,.entry-intro>.text-link{display:none}.entry-backdrop img{width:100%;height:380px;opacity:.18}.entry-face{padding:22px}.entry-brand{margin-bottom:16px}.entry-face h2{font-size:1.8rem}.entry-category label{padding:9px 8px}.entry-category strong{font-size:.81rem}.entry-steps{gap:10px;font-size:.73rem}.entry-rotor{min-height:400px}}
+@media(prefers-reduced-motion:reduce){.entry-rotor{transition:none}}
+
 @media(max-width:700px){#meeting-room .meeting-controls .mic-switch{flex:1 1 140px} #meeting-room .meeting-controls .inline-actions>button{flex:1 1 120px}}
+
+.entry-login-shortcut{margin:0 0 22px}.entry-face .entry-login-shortcut{font-size:.9rem;padding:11px}
