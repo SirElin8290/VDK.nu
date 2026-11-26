@@ -310,3 +310,11 @@ html[data-theme=light] .entry-backdrop{display:none}
 .referee-year-milestones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:.8rem 0 1.5rem}.referee-year-milestone{display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:.8rem .4rem;border:1px solid var(--line);border-radius:10px;background:var(--bg);text-align:center;opacity:.65}.referee-year-milestone.earned{opacity:1}.referee-year-milestone>span{font-size:1.8rem}.referee-year-milestone.bronze>span{color:#b98054}.referee-year-milestone.silver>span{color:#a2b8c7}.referee-year-milestone.gold>span{color:#cfa52c}.referee-year-milestone small{font-size:.7rem}
 
 .profile-achievement.platinum>span,.referee-year-milestone.platinum>span{color:#91a7b2}.profile-achievement.diamond>span,.referee-year-milestone.diamond>span{color:#4eafce}.profile-achievement.legend>span,.referee-year-milestone.legend>span{color:#ae78ca}.profile-achievement.legend{border-color:#ae78ca}.referee-year-milestone.legend.earned{border-color:#ae78ca}
+
+/* Referee career shields and native, keyboard-accessible series disclosure. */
+.referee-year-badge{display:block;width:128px;height:128px;max-width:100%;object-fit:contain;flex-shrink:0}
+.profile-achievement-career{flex-direction:column;text-align:center;gap:.5rem}.profile-achievement-career .referee-year-badge{width:144px;height:144px}
+.referee-year-milestone{opacity:1}.referee-year-milestone:not(.earned) .referee-year-badge{filter:grayscale(1);opacity:.38}
+.profile-series-disclosure>summary{cursor:pointer;list-style:none;width:fit-content;max-width:100%;white-space:normal}.profile-series-disclosure>summary::-webkit-details-marker{display:none}
+.profile-series-disclosure .series-hide,.profile-series-disclosure[open] .series-show{display:none}.profile-series-disclosure[open] .series-hide{display:inline}.profile-series-disclosure .profile-series-list{margin-top:1rem}
+@media(max-width:650px){.referee-year-milestones{grid-template-columns:repeat(2,minmax(0,1fr))}.profile-achievement-career .referee-year-badge{width:128px;height:128px}}
