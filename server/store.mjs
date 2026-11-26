@@ -1,3 +1,4 @@
+import {initializeJourney} from '../cloudflare/journey.mjs';
 import {initializeBoardAccess,hasBoardAccess} from '../cloudflare/board-access.mjs';
 import { DatabaseSync } from 'node:sqlite';
 import { randomBytes, scryptSync, timingSafeEqual, createHash } from 'node:crypto';
@@ -39,6 +40,7 @@ export function openStore(path=':memory:'){
   if(!columns.has('organization'))db.exec("ALTER TABLE memberships ADD COLUMN organization TEXT NOT NULL DEFAULT ''");
   for(const [table,fields] of Object.entries({matches:{competition_scope:"TEXT NOT NULL DEFAULT 'district'",regional_eligible:'INTEGER NOT NULL DEFAULT 1',excluded:'INTEGER NOT NULL DEFAULT 0',home_team_id:"TEXT NOT NULL DEFAULT ''",away_team_id:"TEXT NOT NULL DEFAULT ''",competition_id:"TEXT NOT NULL DEFAULT ''",competition_name:"TEXT NOT NULL DEFAULT ''"},penalties:{team_id:"TEXT NOT NULL DEFAULT ''",code:"TEXT NOT NULL DEFAULT ''",period:'INTEGER',minute:'INTEGER',second:'INTEGER'}})){const existing=new Set(db.prepare('PRAGMA table_info('+table+')').all().map(x=>x.name));for(const [name,type]of Object.entries(fields))if(!existing.has(name))db.exec('ALTER TABLE '+table+' ADD COLUMN '+name+' '+type);}
   initializeBoardAccess(db);
+  initializeJourney(db);
   return db;
 }
 export function transaction(db,fn){db.exec('BEGIN IMMEDIATE');try{const result=fn();db.exec('COMMIT');return result;}catch(e){db.exec('ROLLBACK');throw e;}}

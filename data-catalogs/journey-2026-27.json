@@ -1,0 +1,4744 @@
+{
+  "version": "2026-27-v1",
+  "season": "2026/27",
+  "checkedAt": "2026-11-26T13:30:26.625Z",
+  "definition": "Hallar med minst en icke inställd publicerad distriktsmatch 2026/27 (även kommande). Föreningar med deltagande lag i dessa matcher och distriktstillhörighet Värmland. Träningsmatcher och rena förbundsserier ingår inte i aktivitetsgranskningen.",
+  "sourceUrls": [
+    "https://www.innebandy.se/varmland/tavling/innebandyhallar",
+    "https://innebandy.se/varmland/historikstatistik/varmlandska-innebandyforeningar",
+    "https://stats.innebandy.se/"
+  ],
+  "competitions": [
+    {
+      "id": 44679,
+      "name": "Damer Division 1 Region"
+    },
+    {
+      "id": 44053,
+      "name": "Damer Division 2"
+    },
+    {
+      "id": 44054,
+      "name": "Damer Division 3 Västra"
+    },
+    {
+      "id": 44055,
+      "name": "Damer Division 3 Östra"
+    },
+    {
+      "id": 45472,
+      "name": "Flickor Blå Serie 2 Västra"
+    },
+    {
+      "id": 45486,
+      "name": "Damjunior 17 Region"
+    },
+    {
+      "id": 45473,
+      "name": "Flickor Blå Serie 2 Östra"
+    },
+    {
+      "id": 45474,
+      "name": "Flickor Blå Serie 3 Västra"
+    },
+    {
+      "id": 45475,
+      "name": "Flickor Blå Serie 3 Östra"
+    },
+    {
+      "id": 45469,
+      "name": "Flickor Grön Poolspel Fortsättning Höst"
+    },
+    {
+      "id": 44046,
+      "name": "Herrar Division 2"
+    },
+    {
+      "id": 45470,
+      "name": "Flickor Grön Poolspel Nybörjare Höst"
+    },
+    {
+      "id": 44047,
+      "name": "Herrar Division 3"
+    },
+    {
+      "id": 44052,
+      "name": "Herrar Division 5 Norra"
+    },
+    {
+      "id": 44049,
+      "name": "Herrar Division 4 Östra"
+    },
+    {
+      "id": 44048,
+      "name": "Herrar Division 4 Västra"
+    },
+    {
+      "id": 44050,
+      "name": "Herrar Division 5 Västra"
+    },
+    {
+      "id": 44051,
+      "name": "Herrar Division 5 Östra"
+    },
+    {
+      "id": 45359,
+      "name": "Herrjunior 17 Region A"
+    },
+    {
+      "id": 45360,
+      "name": "Herrjunior 17 Region B"
+    },
+    {
+      "id": 44863,
+      "name": "HJ16-20"
+    },
+    {
+      "id": 45471,
+      "name": "Pantamera Flickor Blå Serie 1"
+    },
+    {
+      "id": 45439,
+      "name": "Pantamera Flickor Röd Serie 2"
+    },
+    {
+      "id": 45438,
+      "name": "Pantamera Flickor Röd Serie 1"
+    },
+    {
+      "id": 45440,
+      "name": "Pantamera Flickor Röd Serie 3 Västra"
+    },
+    {
+      "id": 45441,
+      "name": "Pantamera Flickor Röd Serie 3 Östra"
+    },
+    {
+      "id": 45442,
+      "name": "Pantamera Flickor Röd Serie 4 Västra"
+    },
+    {
+      "id": 45443,
+      "name": "Pantamera Flickor Röd Serie 4 Östra"
+    },
+    {
+      "id": 45476,
+      "name": "Pantamera Pojkar Blå Serie 1 Västra"
+    },
+    {
+      "id": 45444,
+      "name": "Pantamera Pojkar Röd Serie 1"
+    },
+    {
+      "id": 45477,
+      "name": "Pantamera Pojkar Blå Serie 1 Östra"
+    },
+    {
+      "id": 45445,
+      "name": "Pantamera Pojkar Röd Serie 2"
+    },
+    {
+      "id": 45446,
+      "name": "Pantamera Pojkar Röd Serie 3"
+    },
+    {
+      "id": 45448,
+      "name": "Pantamera Pojkar Röd Serie 5"
+    },
+    {
+      "id": 45447,
+      "name": "Pantamera Pojkar Röd Serie 4"
+    },
+    {
+      "id": 45449,
+      "name": "Pantamera Pojkar Röd Serie 6"
+    },
+    {
+      "id": 45451,
+      "name": "Pantamera Pojkar Röd Serie 7 Östra"
+    },
+    {
+      "id": 45845,
+      "name": "PK 6 Örebro"
+    },
+    {
+      "id": 45450,
+      "name": "Pantamera Pojkar Röd Serie 7 Västra"
+    },
+    {
+      "id": 45481,
+      "name": "Pojkar Blå Serie 2 Norra"
+    },
+    {
+      "id": 45478,
+      "name": "Pojkar Blå Serie 2 Västra"
+    },
+    {
+      "id": 45480,
+      "name": "Pojkar Blå Serie 2 Södra"
+    },
+    {
+      "id": 45479,
+      "name": "Pojkar Blå Serie 2 Östra"
+    },
+    {
+      "id": 45483,
+      "name": "Pojkar Blå Serie 3 Central"
+    },
+    {
+      "id": 45485,
+      "name": "Pojkar Blå Serie 3 Södra"
+    },
+    {
+      "id": 45482,
+      "name": "Pojkar Blå Serie 3 Västra"
+    },
+    {
+      "id": 45484,
+      "name": "Pojkar Blå Serie 3 Östra"
+    },
+    {
+      "id": 45467,
+      "name": "Pojkar Grön Poolspel Fortsättning Höst"
+    },
+    {
+      "id": 45468,
+      "name": "Pojkar Grön Poolspel Nybörjare Höst"
+    }
+  ],
+  "halls": [
+    {
+      "id": 1552,
+      "name": "AllOffice Arena",
+      "city": "Karlstad",
+      "address": "Stadionvägen 1",
+      "lat": 59.385,
+      "lng": 13.483,
+      "inScope": true,
+      "scheduledMatches": 134,
+      "aliases": [
+        1552
+      ]
+    },
+    {
+      "id": 1548,
+      "name": "Arvika Sporthall",
+      "city": "Arvika",
+      "address": "Skolgatan 34-36",
+      "lat": 59.65737,
+      "lng": 12.59229,
+      "inScope": true,
+      "scheduledMatches": 27,
+      "aliases": [
+        1548,
+        3167
+      ]
+    },
+    {
+      "id": 1587,
+      "name": "ASP Arena",
+      "city": "Karlstad",
+      "address": "Stadionvägen 1",
+      "lat": 59.385,
+      "lng": 13.483,
+      "inScope": true,
+      "scheduledMatches": 166,
+      "aliases": [
+        1587,
+        3117
+      ]
+    },
+    {
+      "id": 2357,
+      "name": "Billingsfors Bollhall",
+      "city": "Billingsfors",
+      "address": "Lövåsenskolan i  Billingsfors",
+      "lat": 58.98485,
+      "lng": 12.24455,
+      "inScope": true,
+      "scheduledMatches": 48,
+      "aliases": [
+        2357,
+        3302
+      ]
+    },
+    {
+      "id": 1550,
+      "name": "Brogårdshallen",
+      "city": "Kristinehamn",
+      "address": "Gamla Kyrkogatan 3",
+      "lat": 59.3112,
+      "lng": 14.11305,
+      "inScope": true,
+      "scheduledMatches": 82,
+      "aliases": [
+        1550
+      ]
+    },
+    {
+      "id": 4817,
+      "name": "CarlGustav Arena",
+      "city": "Torsby",
+      "address": "",
+      "lat": 60.1412,
+      "lng": 13.00255,
+      "inScope": true,
+      "scheduledMatches": 88,
+      "aliases": [
+        4817
+      ]
+    },
+    {
+      "id": 1554,
+      "name": "Deje Sporthall A",
+      "city": "Deje",
+      "address": "Bruksvägen 1",
+      "lat": 59.61082,
+      "lng": 13.46879,
+      "inScope": true,
+      "scheduledMatches": 44,
+      "aliases": [
+        1554
+      ]
+    },
+    {
+      "id": 3614,
+      "name": "ECG Arena",
+      "city": "Kil",
+      "address": "Industrigatan 2",
+      "lat": 59.50692,
+      "lng": 13.30631,
+      "inScope": true,
+      "scheduledMatches": 99,
+      "aliases": [
+        3614,
+        3615
+      ]
+    },
+    {
+      "id": 1557,
+      "name": "Ekshärads Sporthall",
+      "city": "Ekshärad",
+      "address": "",
+      "lat": 60.17345,
+      "lng": 13.4841,
+      "inScope": true,
+      "scheduledMatches": 38,
+      "aliases": [
+        1557,
+        3133
+      ]
+    },
+    {
+      "id": 1558,
+      "name": "Fageråshallen",
+      "city": "Fagerås",
+      "address": "",
+      "lat": 59.52043,
+      "lng": 13.22271,
+      "inScope": true,
+      "scheduledMatches": 42,
+      "aliases": [
+        1558,
+        3125
+      ]
+    },
+    {
+      "id": 4171,
+      "name": "Filipstads Sporthall",
+      "city": "Filipstad",
+      "address": "",
+      "lat": 59.70925,
+      "lng": 14.16495,
+      "inScope": true,
+      "scheduledMatches": 74,
+      "aliases": [
+        4171,
+        4172
+      ]
+    },
+    {
+      "id": 1559,
+      "name": "Forshaga Sporthall",
+      "city": "Forshaga",
+      "address": "",
+      "lat": 59.52853,
+      "lng": 13.48161,
+      "inScope": true,
+      "scheduledMatches": 154,
+      "aliases": [
+        1559,
+        3112
+      ]
+    },
+    {
+      "id": 4191,
+      "name": "GA-hallen, Sysslebäck",
+      "city": "Sysslebäck",
+      "address": "",
+      "lat": 60.71046,
+      "lng": 12.88585,
+      "inScope": true,
+      "scheduledMatches": 7,
+      "aliases": [
+        4191
+      ]
+    },
+    {
+      "id": 1566,
+      "name": "Grossbolshallen",
+      "city": "Forshaga",
+      "address": "Europavägen 4",
+      "lat": 59.53663,
+      "lng": 13.4792,
+      "inScope": true,
+      "scheduledMatches": 13,
+      "aliases": [
+        1566
+      ]
+    },
+    {
+      "id": 1567,
+      "name": "Grums Sporthall",
+      "city": "Grums",
+      "address": "Gamla Vägen 33",
+      "lat": 59.35414,
+      "lng": 13.10589,
+      "inScope": true,
+      "scheduledMatches": 112,
+      "aliases": [
+        1567,
+        3114
+      ]
+    },
+    {
+      "id": 1568,
+      "name": "Gunnarsbyhallen",
+      "city": "Charlottenberg",
+      "address": "",
+      "lat": 59.88121,
+      "lng": 12.31019,
+      "inScope": true,
+      "scheduledMatches": 7,
+      "aliases": [
+        1568
+      ]
+    },
+    {
+      "id": 1569,
+      "name": "Gärdeshallen",
+      "city": "Åmotfors",
+      "address": "Norumsvägen",
+      "lat": 59.7677,
+      "lng": 12.35631,
+      "inScope": true,
+      "scheduledMatches": 43,
+      "aliases": [
+        1569,
+        3295
+      ]
+    },
+    {
+      "id": 4030,
+      "name": "Hammarhallen A",
+      "city": "Hammarö",
+      "address": "",
+      "lat": 59.33248,
+      "lng": 13.51761,
+      "inScope": true,
+      "scheduledMatches": 1,
+      "aliases": [
+        4030
+      ]
+    },
+    {
+      "id": 1571,
+      "name": "Hammarö Arena",
+      "city": "Skoghall",
+      "address": "",
+      "lat": 59.33165,
+      "lng": 13.47687,
+      "inScope": true,
+      "scheduledMatches": 115,
+      "aliases": [
+        1571
+      ]
+    },
+    {
+      "id": 1572,
+      "name": "Hammarö Arena B",
+      "city": "Skoghall",
+      "address": "",
+      "lat": 59.33165,
+      "lng": 13.47687,
+      "inScope": true,
+      "scheduledMatches": 141,
+      "aliases": [
+        1572,
+        3120
+      ]
+    },
+    {
+      "id": 3491,
+      "name": "Hultsbergshallen",
+      "city": "",
+      "address": "",
+      "lat": 59.38363,
+      "lng": 13.42972,
+      "inScope": true,
+      "scheduledMatches": 9,
+      "aliases": [
+        3491
+      ]
+    },
+    {
+      "id": 4174,
+      "name": "Ilandahallen",
+      "city": "",
+      "address": "",
+      "lat": 59.43171,
+      "lng": 13.42276,
+      "inScope": true,
+      "scheduledMatches": 75,
+      "aliases": [
+        4174,
+        4175
+      ]
+    },
+    {
+      "id": 1577,
+      "name": "Ilandaskolan",
+      "city": "Karlstad",
+      "address": "Ilandavägen 50",
+      "lat": 59.43223,
+      "lng": 13.42195,
+      "inScope": true,
+      "scheduledMatches": 10,
+      "aliases": [
+        1577
+      ]
+    },
+    {
+      "id": 3740,
+      "name": "Karlbergshallen A Karlskoga",
+      "city": "",
+      "address": "",
+      "lat": 59.33138,
+      "lng": 14.49545,
+      "inScope": true,
+      "scheduledMatches": 103,
+      "aliases": [
+        3740,
+        3741
+      ]
+    },
+    {
+      "id": 1574,
+      "name": "Karlbergshallen B Karlskoga",
+      "city": "Karlskoga",
+      "address": "",
+      "lat": 59.33138,
+      "lng": 14.49545,
+      "inScope": true,
+      "scheduledMatches": 1,
+      "aliases": [
+        1574
+      ]
+    },
+    {
+      "id": 2126,
+      "name": "Karlbergshallen Åmål",
+      "city": "Åmål",
+      "address": "Schölinsgatan 7",
+      "lat": 59.04296,
+      "lng": 12.70843,
+      "inScope": true,
+      "scheduledMatches": 74,
+      "aliases": [
+        2126,
+        3303
+      ]
+    },
+    {
+      "id": 1551,
+      "name": "Klubbhuset Arena",
+      "city": "Karlstad",
+      "address": "Stadionvägen 1",
+      "lat": 59.385,
+      "lng": 13.483,
+      "inScope": true,
+      "scheduledMatches": 113,
+      "aliases": [
+        1551,
+        3118
+      ]
+    },
+    {
+      "id": 1581,
+      "name": "Lesjöforshallen",
+      "city": "Lesjöfors",
+      "address": "",
+      "lat": 59.98406,
+      "lng": 14.17599,
+      "inScope": true,
+      "scheduledMatches": 9,
+      "aliases": [
+        1581
+      ]
+    },
+    {
+      "id": 1578,
+      "name": "Molkoms Sporthall",
+      "city": "Molkom",
+      "address": "Skolgatan 3",
+      "lat": 59.59922,
+      "lng": 13.72553,
+      "inScope": true,
+      "scheduledMatches": 58,
+      "aliases": [
+        1578,
+        3296
+      ]
+    },
+    {
+      "id": 3599,
+      "name": "Munkfors Arena",
+      "city": "",
+      "address": "",
+      "lat": 59.84035,
+      "lng": 13.56384,
+      "inScope": true,
+      "scheduledMatches": 64,
+      "aliases": [
+        3599,
+        3600
+      ]
+    },
+    {
+      "id": 1579,
+      "name": "Nykroppahallen",
+      "city": "Nykroppa",
+      "address": "",
+      "lat": 59.62219,
+      "lng": 14.30011,
+      "inScope": true,
+      "scheduledMatches": 9,
+      "aliases": [
+        1579
+      ]
+    },
+    {
+      "id": 1582,
+      "name": "Sannerudshallen",
+      "city": "Kil",
+      "address": "Karlslundsgatan 6",
+      "lat": 59.49858,
+      "lng": 13.31025,
+      "inScope": true,
+      "scheduledMatches": 50,
+      "aliases": [
+        1582,
+        3119
+      ]
+    },
+    {
+      "id": 1583,
+      "name": "Skattkärrsskolan",
+      "city": "Skattkärr",
+      "address": "Skattkärrsvägen 44-46",
+      "lat": 59.41281,
+      "lng": 13.67128,
+      "inScope": true,
+      "scheduledMatches": 21,
+      "aliases": [
+        1583
+      ]
+    },
+    {
+      "id": 1584,
+      "name": "Sparbankshallen Sunne",
+      "city": "Sunne",
+      "address": "",
+      "lat": 59.84233,
+      "lng": 13.16331,
+      "inScope": true,
+      "scheduledMatches": 96,
+      "aliases": [
+        1584,
+        3135
+      ]
+    },
+    {
+      "id": 1585,
+      "name": "Sporthallen Gjutaren",
+      "city": "Karlstad",
+      "address": "Verkstadsgatan",
+      "lat": 59.38074,
+      "lng": 13.51572,
+      "inScope": true,
+      "scheduledMatches": 64,
+      "aliases": [
+        1585,
+        3215
+      ]
+    },
+    {
+      "id": 1588,
+      "name": "Stjernehallen",
+      "city": "Torsby",
+      "address": "Fabriksgatan 3",
+      "lat": 60.14127,
+      "lng": 13.00461,
+      "inScope": true,
+      "scheduledMatches": 12,
+      "aliases": [
+        1588,
+        3134
+      ]
+    },
+    {
+      "id": 1589,
+      "name": "Stora Vallahallen",
+      "city": "Degerfors",
+      "address": "Stora Vallavägen",
+      "lat": 59.24089,
+      "lng": 14.446,
+      "inScope": true,
+      "scheduledMatches": 54,
+      "aliases": [
+        1589
+      ]
+    },
+    {
+      "id": 1590,
+      "name": "Storfors Sporthall",
+      "city": "Storfors",
+      "address": "Kroppavägen",
+      "lat": 59.54371,
+      "lng": 14.27944,
+      "inScope": true,
+      "scheduledMatches": 16,
+      "aliases": [
+        1590
+      ]
+    },
+    {
+      "id": 1591,
+      "name": "Strandhallen Arvika",
+      "city": "Arvika",
+      "address": "Strandvägen 2",
+      "lat": 59.65505,
+      "lng": 12.58165,
+      "inScope": true,
+      "scheduledMatches": 193,
+      "aliases": [
+        1591,
+        3113
+      ]
+    },
+    {
+      "id": 3156,
+      "name": "Södermalmshallen",
+      "city": "Kristinehamn",
+      "address": "",
+      "lat": 59.30579,
+      "lng": 14.11258,
+      "inScope": true,
+      "scheduledMatches": 39,
+      "aliases": [
+        3156,
+        3155
+      ]
+    },
+    {
+      "id": 1596,
+      "name": "Tegnérhallen",
+      "city": "Säffle",
+      "address": "Tegnérgatan 20",
+      "lat": 59.12885,
+      "lng": 12.94137,
+      "inScope": true,
+      "scheduledMatches": 61,
+      "aliases": [
+        1596
+      ]
+    },
+    {
+      "id": 2521,
+      "name": "Uddeholm Arena",
+      "city": "",
+      "address": "",
+      "lat": 60.03731,
+      "lng": 13.70162,
+      "inScope": true,
+      "scheduledMatches": 113,
+      "aliases": [
+        2521
+      ]
+    },
+    {
+      "id": 4874,
+      "name": "Vallargärdets Sporthall",
+      "city": "Vallargärdet",
+      "address": "",
+      "lat": null,
+      "lng": null,
+      "inScope": true,
+      "scheduledMatches": 7,
+      "locationNote": "Vallargärdets skola, Ulvsby. Exakt kartposition saknas i matchkällan.",
+      "locationSource": "https://www.laget.se/UlvsbyIF-tabata/Event/Month/2026/11/18?eventId=30624007",
+      "aliases": [
+        4874
+      ]
+    },
+    {
+      "id": 1598,
+      "name": "Vålbergs Sporthall",
+      "city": "Vålberg",
+      "address": "Långgatan",
+      "lat": 59.38984,
+      "lng": 13.18751,
+      "inScope": true,
+      "scheduledMatches": 19,
+      "aliases": [
+        1598,
+        3136
+      ]
+    },
+    {
+      "id": 1599,
+      "name": "Väse Sporthall",
+      "city": "Väse",
+      "address": "Guståsgatan 6",
+      "lat": 59.38565,
+      "lng": 13.85503,
+      "inScope": true,
+      "scheduledMatches": 110,
+      "aliases": [
+        1599,
+        3123
+      ]
+    },
+    {
+      "id": 1600,
+      "name": "Årjängs Sporthall A",
+      "city": "Årjäng",
+      "address": "",
+      "lat": 59.38626,
+      "lng": 12.11976,
+      "inScope": true,
+      "scheduledMatches": 69,
+      "aliases": [
+        1600,
+        3124
+      ]
+    },
+    {
+      "id": 1601,
+      "name": "Årjängs Sporthall B",
+      "city": "Årjäng",
+      "address": "",
+      "lat": 59.38626,
+      "lng": 12.11976,
+      "inScope": true,
+      "scheduledMatches": 8,
+      "aliases": [
+        1601,
+        3666
+      ]
+    },
+    {
+      "id": 1602,
+      "name": "Älvstrandshallen",
+      "city": "Hagfors",
+      "address": "Geijersholmsvägen 5",
+      "lat": 60.03732,
+      "lng": 13.70092,
+      "inScope": true,
+      "scheduledMatches": 23,
+      "aliases": [
+        1602,
+        3110
+      ]
+    }
+  ],
+  "clubs": [
+    {
+      "id": 514,
+      "name": "Arvika IBF",
+      "venueId": 1591,
+      "lat": 59.65505,
+      "lng": 12.58165,
+      "city": "Arvika"
+    },
+    {
+      "id": 3962,
+      "name": "Arvika IBF Ungdom",
+      "venueId": 1591,
+      "lat": 59.65505,
+      "lng": 12.58165,
+      "city": "Arvika"
+    },
+    {
+      "id": 604,
+      "name": "Billingsfors IBK",
+      "venueId": 2357,
+      "lat": 58.98485,
+      "lng": 12.24455,
+      "city": "Billingsfors"
+    },
+    {
+      "id": 757,
+      "name": "BK Vålberg",
+      "venueId": 1598,
+      "lat": 59.38984,
+      "lng": 13.18751,
+      "city": "Vålberg"
+    },
+    {
+      "id": 402,
+      "name": "BKI Sunnanå",
+      "venueId": 3614,
+      "lat": 59.50692,
+      "lng": 13.30631,
+      "city": "Kil"
+    },
+    {
+      "id": 4028,
+      "name": "Bärstads BK",
+      "venueId": 1572,
+      "lat": 59.33165,
+      "lng": 13.47687,
+      "city": "Skoghall"
+    },
+    {
+      "id": 796,
+      "name": "Degerfors IBK",
+      "venueId": 1589,
+      "lat": 59.24089,
+      "lng": 14.446,
+      "city": "Degerfors"
+    },
+    {
+      "id": 660,
+      "name": "Deje IBF",
+      "venueId": 1554,
+      "lat": 59.61082,
+      "lng": 13.46879,
+      "city": "Deje"
+    },
+    {
+      "id": 43,
+      "name": "Dotteviks IF",
+      "venueId": 1591,
+      "lat": 59.65505,
+      "lng": 12.58165,
+      "city": "Arvika"
+    },
+    {
+      "id": 1454,
+      "name": "Eda IF",
+      "venueId": 1568,
+      "lat": 59.88121,
+      "lng": 12.31019,
+      "city": "Charlottenberg"
+    },
+    {
+      "id": 499,
+      "name": "Edebäck IBF",
+      "venueId": 1557,
+      "lat": 60.17345,
+      "lng": 13.4841,
+      "city": "Ekshärad"
+    },
+    {
+      "id": 1607,
+      "name": "Fagerås BK",
+      "venueId": 1558,
+      "lat": 59.52043,
+      "lng": 13.22271,
+      "city": "Fagerås"
+    },
+    {
+      "id": 799,
+      "name": "Filipstad IBK",
+      "venueId": 4171,
+      "lat": 59.70925,
+      "lng": 14.16495,
+      "city": "Filipstad"
+    },
+    {
+      "id": 3992,
+      "name": "Finnskoga IF",
+      "venueId": 4191,
+      "lat": 60.71046,
+      "lng": 12.88585,
+      "city": "Sysslebäck"
+    },
+    {
+      "id": 576,
+      "name": "Grums IBK",
+      "venueId": 1567,
+      "lat": 59.35414,
+      "lng": 13.10589,
+      "city": "Grums"
+    },
+    {
+      "id": 482,
+      "name": "GS 86 AIF",
+      "venueId": 1559,
+      "lat": 59.52853,
+      "lng": 13.48161,
+      "city": "Forshaga"
+    },
+    {
+      "id": 4048,
+      "name": "Gustavsfors IBK",
+      "venueId": 2521,
+      "lat": 60.03731,
+      "lng": 13.70162,
+      "city": ""
+    },
+    {
+      "id": 661,
+      "name": "Hagfors IBS",
+      "venueId": 2521,
+      "lat": 60.03731,
+      "lng": 13.70162,
+      "city": ""
+    },
+    {
+      "id": 460,
+      "name": "Hagfors IF Uddeholm",
+      "venueId": 2521,
+      "lat": 60.03731,
+      "lng": 13.70162,
+      "city": ""
+    },
+    {
+      "id": 3924,
+      "name": "Herrhagens IF",
+      "venueId": 1585,
+      "lat": 59.38074,
+      "lng": 13.51572,
+      "city": "Karlstad"
+    },
+    {
+      "id": 1363,
+      "name": "Hertzöga BK",
+      "venueId": 4174,
+      "lat": 59.43171,
+      "lng": 13.42276,
+      "city": ""
+    },
+    {
+      "id": 458,
+      "name": "Hultsberg IBF",
+      "venueId": 1552,
+      "lat": 59.385,
+      "lng": 13.483,
+      "city": "Karlstad"
+    },
+    {
+      "id": 1508,
+      "name": "IBF Lesjöfors",
+      "venueId": 1581,
+      "lat": 59.98406,
+      "lng": 14.17599,
+      "city": "Lesjöfors"
+    },
+    {
+      "id": 3993,
+      "name": "IBK Björkås",
+      "venueId": 1552,
+      "lat": 59.385,
+      "lng": 13.483,
+      "city": "Karlstad"
+    },
+    {
+      "id": 110,
+      "name": "IFK Heden",
+      "venueId": 1599,
+      "lat": 59.38565,
+      "lng": 13.85503,
+      "city": "Väse"
+    },
+    {
+      "id": 2940,
+      "name": "IFK Åmål",
+      "venueId": 2126,
+      "lat": 59.04296,
+      "lng": 12.70843,
+      "city": "Åmål"
+    },
+    {
+      "id": 572,
+      "name": "Karlskoga IBF",
+      "venueId": 3740,
+      "lat": 59.33138,
+      "lng": 14.49545,
+      "city": ""
+    },
+    {
+      "id": 1379,
+      "name": "Karlstad IBF Bredd",
+      "venueId": 1587,
+      "lat": 59.385,
+      "lng": 13.483,
+      "city": "Karlstad"
+    },
+    {
+      "id": 361,
+      "name": "Karlstad IBF Ungdom",
+      "venueId": 1551,
+      "lat": 59.385,
+      "lng": 13.483,
+      "city": "Karlstad"
+    },
+    {
+      "id": 459,
+      "name": "Karlstads IBK",
+      "venueId": 1552,
+      "lat": 59.385,
+      "lng": 13.483,
+      "city": "Karlstad"
+    },
+    {
+      "id": 461,
+      "name": "Kristinehamns IBF",
+      "venueId": 1550,
+      "lat": 59.3112,
+      "lng": 14.11305,
+      "city": "Kristinehamn"
+    },
+    {
+      "id": 4044,
+      "name": "Kronans FK",
+      "venueId": 3155,
+      "lat": 59.30579,
+      "lng": 14.11258,
+      "city": "Kristinehamn"
+    },
+    {
+      "id": 693,
+      "name": "Lekvattnets BK",
+      "venueId": 4817,
+      "lat": 60.1412,
+      "lng": 13.00255,
+      "city": "Torsby"
+    },
+    {
+      "id": 153,
+      "name": "Mangskog SK",
+      "venueId": 1591,
+      "lat": 59.65505,
+      "lng": 12.58165,
+      "city": "Arvika"
+    },
+    {
+      "id": 705,
+      "name": "Munkfors IBK",
+      "venueId": 3599,
+      "lat": 59.84035,
+      "lng": 13.56384,
+      "city": ""
+    },
+    {
+      "id": 321,
+      "name": "Nilsby IK",
+      "venueId": 3614,
+      "lat": 59.50692,
+      "lng": 13.30631,
+      "city": "Kil"
+    },
+    {
+      "id": 784,
+      "name": "Nordmarkens IBF",
+      "venueId": 1600,
+      "lat": 59.38626,
+      "lng": 12.11976,
+      "city": "Årjäng"
+    },
+    {
+      "id": 4018,
+      "name": "Nykroppa FBC",
+      "venueId": 1579,
+      "lat": 59.62219,
+      "lng": 14.30011,
+      "city": "Nykroppa"
+    },
+    {
+      "id": 3774,
+      "name": "Olsäters SK",
+      "venueId": 1554,
+      "lat": 59.61082,
+      "lng": 13.46879,
+      "city": "Deje"
+    },
+    {
+      "id": 306,
+      "name": "SK Örnen",
+      "venueId": 1578,
+      "lat": 59.59922,
+      "lng": 13.72553,
+      "city": "Molkom"
+    },
+    {
+      "id": 486,
+      "name": "Skattkärrs IK",
+      "venueId": 1599,
+      "lat": 59.38565,
+      "lng": 13.85503,
+      "city": "Väse"
+    },
+    {
+      "id": 1681,
+      "name": "Skoghalls IBK Utveckling",
+      "venueId": 1572,
+      "lat": 59.33165,
+      "lng": 13.47687,
+      "city": "Skoghall"
+    },
+    {
+      "id": 715,
+      "name": "Storfors IBF",
+      "venueId": 1590,
+      "lat": 59.54371,
+      "lng": 14.27944,
+      "city": "Storfors"
+    },
+    {
+      "id": 1011,
+      "name": "Sunne IBK",
+      "venueId": 1584,
+      "lat": 59.84233,
+      "lng": 13.16331,
+      "city": "Sunne"
+    },
+    {
+      "id": 4023,
+      "name": "Säffle IBF",
+      "venueId": 1596,
+      "lat": 59.12885,
+      "lng": 12.94137,
+      "city": "Säffle"
+    },
+    {
+      "id": 4039,
+      "name": "Ulvsby IF",
+      "venueId": null,
+      "lat": null,
+      "lng": null,
+      "city": ""
+    },
+    {
+      "id": 3991,
+      "name": "Villastaden Kristinehamns IF IBF",
+      "venueId": 1550,
+      "lat": 59.3112,
+      "lng": 14.11305,
+      "city": "Kristinehamn"
+    },
+    {
+      "id": 293,
+      "name": "Åmotfors IF",
+      "venueId": 1569,
+      "lat": 59.7677,
+      "lng": 12.35631,
+      "city": "Åmotfors"
+    },
+    {
+      "id": 717,
+      "name": "Åmåls IBK",
+      "venueId": 2126,
+      "lat": 59.04296,
+      "lng": 12.70843,
+      "city": "Åmål"
+    },
+    {
+      "id": 1075,
+      "name": "Åsmyra IBK",
+      "venueId": 1566,
+      "lat": 59.53663,
+      "lng": 13.4792,
+      "city": "Forshaga"
+    }
+  ],
+  "teams": [
+    {
+      "id": 3804,
+      "name": "Karlstad IBF Ungdom dam div 1",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 26526,
+      "name": "Skoghalls IBK Utveckling Damer Div 1",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124424,
+      "name": "IBK Hallsta D1",
+      "associationId": 1197,
+      "associationName": "IBK Hallsta",
+      "federationId": 15,
+      "active": true
+    },
+    {
+      "id": 3453,
+      "name": "Dotteviks IF Dam A",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 18022,
+      "name": "Grums IBK Dam",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 4458,
+      "name": "Kumla IBK D1",
+      "associationId": 472,
+      "associationName": "Kumla IBK",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 4429,
+      "name": "Hagfors IF Uddeholm Div 1",
+      "associationId": 460,
+      "associationName": "Hagfors IF Uddeholm",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3252,
+      "name": "GS 86 AIF Dam",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126376,
+      "name": "Lillån IBK Ungdom Dam",
+      "associationId": 3813,
+      "associationName": "Lillån IBK Ungdom",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 3755,
+      "name": "Västerås IBS D1",
+      "associationId": 1463,
+      "associationName": "Västerås IBS",
+      "federationId": 15,
+      "active": true
+    },
+    {
+      "id": 3267,
+      "name": "BKI Sunnanå Dam A",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 4467,
+      "name": "Munkfors IBK Dam A",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 27186,
+      "name": "GS 86 AIF U",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3385,
+      "name": "Skattkärrs IK Dam-A",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3685,
+      "name": "Filipstad IBK A-Dam Div 2",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124073,
+      "name": "Säffle IBF Dam A",
+      "associationId": 4023,
+      "associationName": "Säffle IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3314,
+      "name": "Degerfors IBK Dam Div 2",
+      "associationId": 796,
+      "associationName": "Degerfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3469,
+      "name": "Kristinehamns IBF Dam A",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126200,
+      "name": "BKI Sunnanå Dam U",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119405,
+      "name": "Grums IBK Dam U",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126189,
+      "name": "Åmotfors IF /Eda IF",
+      "associationId": 293,
+      "associationName": "Åmotfors IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 88216,
+      "name": "Sunne IBK Dam",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117861,
+      "name": "Dotteviks IF Dam U",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119475,
+      "name": "Lekvattnets BK Dam",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124074,
+      "name": "Säffle IBF Dam U",
+      "associationId": 4023,
+      "associationName": "Säffle IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 27187,
+      "name": "Åmåls IBK Dam",
+      "associationId": 717,
+      "associationName": "Åmåls IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117331,
+      "name": "Kristinehamns IBF Dam U",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 21706,
+      "name": "Hultsberg IBF Dam-A",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126921,
+      "name": "Bärstads BK Dam",
+      "associationId": 4028,
+      "associationName": "Bärstads BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122096,
+      "name": "Edebäck IBF Dam Div 3",
+      "associationId": 499,
+      "associationName": "Edebäck IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128433,
+      "name": "Munkfors IBK Dam U",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3313,
+      "name": "Degerfors IBK Dam Div 3",
+      "associationId": 796,
+      "associationName": "Degerfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122042,
+      "name": "Dotteviks IF F15/16 2",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122054,
+      "name": "BKI Sunnanå F-15/16",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123480,
+      "name": "Deje IBF Blåserie 2 (F15/16)",
+      "associationId": 660,
+      "associationName": "Deje IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123889,
+      "name": "Munkfors IBK F11 (2015-2016) Blå 2",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119605,
+      "name": "Hagfors IF Uddeholm F15",
+      "associationId": 460,
+      "associationName": "Hagfors IF Uddeholm",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125382,
+      "name": "Sunne IBK F15/16 Lag Blå",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127227,
+      "name": "Karlstad IBF Bredd F 15",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124204,
+      "name": "Skoghalls IBK Utveckling F16",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 120111,
+      "name": "Örebro SK I-F11/12",
+      "associationId": 636,
+      "associationName": "Örebro SK Ungdomsklubb",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 122473,
+      "name": "Örebro SK Ung I-F2010",
+      "associationId": 636,
+      "associationName": "Örebro SK Ungdomsklubb",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 22225,
+      "name": "GS 86 AIF DJ17",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123873,
+      "name": "Karlstad IBF Ungdom DJ17",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124174,
+      "name": "Kumla IBK DJ",
+      "associationId": 472,
+      "associationName": "Kumla IBK",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 27979,
+      "name": "Skoghalls IBK Utveckling DJ",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126198,
+      "name": "BKI Sunnanå DJ-17",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124437,
+      "name": "WSK Lindesberg DJ/Nora IBK",
+      "associationId": 763,
+      "associationName": "WSK Lindesberg",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 120052,
+      "name": "Västerås IBS Ung DJ16",
+      "associationId": 1735,
+      "associationName": "Västerås IBS Ungdom",
+      "federationId": 15,
+      "active": true
+    },
+    {
+      "id": 27980,
+      "name": "Hagfors IF Uddeholm DJ17",
+      "associationId": 460,
+      "associationName": "Hagfors IF Uddeholm",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 22229,
+      "name": "Skattkärrs IK DJ17",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122043,
+      "name": "Dotteviks IF F15/16 1",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128022,
+      "name": "BK Vålberg Flickor Blå 2 ö",
+      "associationId": 757,
+      "associationName": "BK Vålberg",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123820,
+      "name": "Herrhagens IF F2014-2016",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124636,
+      "name": "Degerfors IBK Flickor Blå serie",
+      "associationId": 796,
+      "associationName": "Degerfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124026,
+      "name": "Karlstad IBF Bredd F 15 lag öst",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128452,
+      "name": "Grums IBK Flickor Blå Serie 3",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126242,
+      "name": "Skoghalls IBK Utveckling F17",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124302,
+      "name": "Dotteviks IF F17 2",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124060,
+      "name": "Nordmarkens IBF F16/17",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127580,
+      "name": "Åmåls IBK F14/17 Blå3",
+      "associationId": 717,
+      "associationName": "Åmåls IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117209,
+      "name": "Billingsfors IBK Blå 3",
+      "associationId": 604,
+      "associationName": "Billingsfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124321,
+      "name": "Lekvattnets BK Flick f 16-17 Blå 3 V",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 129511,
+      "name": "Hertzöga BK F Blå 3",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122023,
+      "name": "Fagerås BK F16/17",
+      "associationId": 1607,
+      "associationName": "Fagerås BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124308,
+      "name": "Eda IF 2015/16",
+      "associationId": 1454,
+      "associationName": "Eda IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123495,
+      "name": "GS 86 AIF F16 Blå",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124178,
+      "name": "SK Örnen Flickor Blå 3",
+      "associationId": 306,
+      "associationName": "SK Örnen",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124317,
+      "name": "Skattkärrs IK F15/16",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119661,
+      "name": "Kristinehamns IBF F16/17 Blå 3",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128515,
+      "name": "Filipstad IBK F Blå 3 Ö",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123632,
+      "name": "Hagfors IF Uddeholm F16",
+      "associationId": 460,
+      "associationName": "Hagfors IF Uddeholm",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126161,
+      "name": "Herrhagens IF F2017",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124301,
+      "name": "Dotteviks IF F17 1",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 129528,
+      "name": "Grums IBK Flickor Grön Poolspel Forts (17/18) Lag 2",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126364,
+      "name": "IFK Heden F 16/17/18",
+      "associationId": 110,
+      "associationName": "IFK Heden",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125428,
+      "name": "Karlstad IBF Bredd F 17 LAG 2",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126330,
+      "name": "Grums IBK Flickor Grön Poolspel Forts(F17/18) Lag 1",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 25346,
+      "name": "Filipstad IBK Flickor Grön poolspel nybörjare",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124208,
+      "name": "GS 86 AIF F17 Grön Fortsättning",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126104,
+      "name": "Munkfors IBK F9 (2017-2018 Grön fortsättning",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123959,
+      "name": "Karlskoga IBF F16-18",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127484,
+      "name": "Karlstad IBF Bredd f 18 lag 2",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127277,
+      "name": "Hertzöga BK F17 Poolspel Grön nybörjare GRÖN",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127466,
+      "name": "Skattkärrs IK F18",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126292,
+      "name": "Skattkärrs IK F17",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127481,
+      "name": "Karlstad IBF Bredd f 18 lag 3",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 129612,
+      "name": "Munkfors IBK F9 Poolspel Lag 2",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3697,
+      "name": "Skoghalls IBK Utveckling Herrar Div 2",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3515,
+      "name": "Hertzöga BK Herr A",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3467,
+      "name": "Kristinehamns IBF Herr A",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3683,
+      "name": "Filipstad IBK A-Herr Div2",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3110,
+      "name": "Hultsberg IBF",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 69,
+      "name": "GS 86 AIF Herr A",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3397,
+      "name": "Edebäck IBF Herr Div 2",
+      "associationId": 499,
+      "associationName": "Edebäck IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3387,
+      "name": "Skattkärrs IK Herr-A",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 24616,
+      "name": "BK Vålberg A-Lag Herr div 2",
+      "associationId": 757,
+      "associationName": "BK Vålberg",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 4589,
+      "name": "Arvika IBF A-lag",
+      "associationId": 514,
+      "associationName": "Arvika IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3506,
+      "name": "Grums IBK Herr",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128440,
+      "name": "Nordmarkens IBF F18/19",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128222,
+      "name": "Dotteviks IF F18/19",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119648,
+      "name": "Billingsfors IBK Grön nybörjare F 18/19",
+      "associationId": 604,
+      "associationName": "Billingsfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127527,
+      "name": "Fagerås BK F18/19",
+      "associationId": 1607,
+      "associationName": "Fagerås BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128628,
+      "name": "Eda IF 17/18",
+      "associationId": 1454,
+      "associationName": "Eda IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127441,
+      "name": "BKI Sunnanå F-17",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128354,
+      "name": "Skoghalls IBK Utveckling F18",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125221,
+      "name": "Hagfors IF Uddeholm F17-18 1",
+      "associationId": 460,
+      "associationName": "Hagfors IF Uddeholm",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126006,
+      "name": "Hagfors IF Uddeholm F17-18 2",
+      "associationId": 460,
+      "associationName": "Hagfors IF Uddeholm",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126162,
+      "name": "Herrhagens IF F2017/2018",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126196,
+      "name": "BKI Sunnanå Pool F 18/19",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127158,
+      "name": "Herrhagens IF F2017/2018",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127276,
+      "name": "GS 86 AIF F18 Grön Nybörjare",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126163,
+      "name": "Sunne IBK F17/18 Poolspel Nyb",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124323,
+      "name": "Sunne IBK Herr",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3311,
+      "name": "Degerfors IBK Herr Div 3",
+      "associationId": 796,
+      "associationName": "Degerfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3451,
+      "name": "Dotteviks IF Herr A",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119606,
+      "name": "Skoghalls IBK Utveckling Herr U",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3111,
+      "name": "Hultsberg IBF U",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3320,
+      "name": "Karlstads IBK A-lag",
+      "associationId": 459,
+      "associationName": "Karlstads IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3991,
+      "name": "Karlskoga IBF U-Lag",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3637,
+      "name": "Arvika IBF U-lag",
+      "associationId": 514,
+      "associationName": "Arvika IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 4602,
+      "name": "Åmåls IBK A",
+      "associationId": 717,
+      "associationName": "Åmåls IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 18018,
+      "name": "Olsäters SK U-Lag",
+      "associationId": 3774,
+      "associationName": "Olsäters SK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3193,
+      "name": "Hagfors IBS U",
+      "associationId": 661,
+      "associationName": "Hagfors IBS",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 13244,
+      "name": "Edebäck IBF Herr div 5",
+      "associationId": 499,
+      "associationName": "Edebäck IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128434,
+      "name": "Munkfors IBK Herr U",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119596,
+      "name": "Lekvattnets BK Herr U-lag",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128408,
+      "name": "Sunne IBK Herr U",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3322,
+      "name": "SK Örnen Herr A",
+      "associationId": 306,
+      "associationName": "SK Örnen",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3886,
+      "name": "Storfors IBF Herrar",
+      "associationId": 715,
+      "associationName": "Storfors IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125810,
+      "name": "Gustavsfors IBK A-lag",
+      "associationId": 4048,
+      "associationName": "Gustavsfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 13247,
+      "name": "Olsäters SK A-Lag",
+      "associationId": 3774,
+      "associationName": "Olsäters SK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 458,
+      "name": "IBF Lesjöfors Herrar",
+      "associationId": 1508,
+      "associationName": "IBF Lesjöfors",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119499,
+      "name": "Hertzöga BK Herr U Div 4 Östra",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124078,
+      "name": "Bärstads BK Herr",
+      "associationId": 4028,
+      "associationName": "Bärstads BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126105,
+      "name": "Munkfors IBK Herr A",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 120784,
+      "name": "IBK Björkås",
+      "associationId": 3993,
+      "associationName": "IBK Björkås",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 27907,
+      "name": "IFK Heden Herr",
+      "associationId": 110,
+      "associationName": "IFK Heden",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 28032,
+      "name": "Kristinehamns IBF Herr U",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 4010,
+      "name": "Åmotfors IF Herr A",
+      "associationId": 293,
+      "associationName": "Åmotfors IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3485,
+      "name": "Billingsfors IBK A-lag herrar",
+      "associationId": 604,
+      "associationName": "Billingsfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3298,
+      "name": "Nordmarkens IBF Herr A",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3264,
+      "name": "BKI Sunnanå Herr A",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3678,
+      "name": "Lekvattnets BK Herr",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 116090,
+      "name": "Arvika IBF Ungdom Div 4",
+      "associationId": 3962,
+      "associationName": "Arvika IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3452,
+      "name": "Dotteviks IF Herr U",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121896,
+      "name": "Mangskog SK",
+      "associationId": 153,
+      "associationName": "Mangskog SK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 4279,
+      "name": "Åmåls IBK U",
+      "associationId": 717,
+      "associationName": "Åmåls IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 461,
+      "name": "Åsmyra IBK A-lag",
+      "associationId": 1075,
+      "associationName": "Åsmyra IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124071,
+      "name": "Säffle IBF Herr A",
+      "associationId": 4023,
+      "associationName": "Säffle IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3299,
+      "name": "Nordmarkens IBF Herr U",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122055,
+      "name": "BK Vålberg U-lag Herr div 5",
+      "associationId": 757,
+      "associationName": "BK Vålberg",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119264,
+      "name": "Grums IBK Herr U",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 114593,
+      "name": "IFK Åmål",
+      "associationId": 2940,
+      "associationName": "IFK Åmål                     ",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 13246,
+      "name": "Åmotfors IF Herr U",
+      "associationId": 293,
+      "associationName": "Åmotfors IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 72,
+      "name": "Nilsby IK",
+      "associationId": 321,
+      "associationName": "Nilsby IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 4285,
+      "name": "Billingsfors IBK U",
+      "associationId": 604,
+      "associationName": "Billingsfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3312,
+      "name": "Degerfors IBK Herr Div 5",
+      "associationId": 796,
+      "associationName": "Degerfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123815,
+      "name": "Nykroppa FBC",
+      "associationId": 4018,
+      "associationName": "Nykroppa FBC",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3388,
+      "name": "Skattkärrs IK Herr-U",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124217,
+      "name": "Kristinehamns IBF Herr C",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121958,
+      "name": "Skoghalls IBK Utveckling C",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124072,
+      "name": "Säffle IBF Herr U",
+      "associationId": 4023,
+      "associationName": "Säffle IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 120722,
+      "name": "Villastaden Kristinehamns IF IBF",
+      "associationId": 3991,
+      "associationName": "Villastaden Kristinehamns IF IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128234,
+      "name": "Karlstad IBF Ungdom HJ 17",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 14767,
+      "name": "GS 86 AIF HJ",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 17986,
+      "name": "Hagfors IBS HJ17",
+      "associationId": 661,
+      "associationName": "Hagfors IBS",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 22289,
+      "name": "Grums IBK HJ 17 Region",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126617,
+      "name": "Ekeby IF Ungdom HJ17",
+      "associationId": 1771,
+      "associationName": "Ekeby IF Ungdom",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 128212,
+      "name": "Dotteviks IF HJ",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117649,
+      "name": "Rönnby IBK Ung HJ",
+      "associationId": 1376,
+      "associationName": "Rönnby Västerås IBK Ungdom",
+      "federationId": 15,
+      "active": true
+    },
+    {
+      "id": 25313,
+      "name": "Hultsberg IBF HJ17",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119888,
+      "name": "Västerås IBS Ung HJ17",
+      "associationId": 1735,
+      "associationName": "Västerås IBS Ungdom",
+      "federationId": 15,
+      "active": true
+    },
+    {
+      "id": 22274,
+      "name": "Skoghalls IBK Utveckling HJ",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124471,
+      "name": "Lillån IBK Ungdom HJ",
+      "associationId": 3813,
+      "associationName": "Lillån IBK Ungdom",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 128712,
+      "name": "Rönnby Västerås IBK Ung HJ",
+      "associationId": 1376,
+      "associationName": "Rönnby Västerås IBK Ungdom",
+      "federationId": 15,
+      "active": true
+    },
+    {
+      "id": 27335,
+      "name": "Västerås IBS Ungdom HJ 16-20",
+      "associationId": 1735,
+      "associationName": "Västerås IBS Ungdom",
+      "federationId": 15,
+      "active": true
+    },
+    {
+      "id": 22292,
+      "name": "Karlskoga IBF HJ 16-20",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117601,
+      "name": "IBK Köping HJ 16-20",
+      "associationId": 404,
+      "associationName": "IBK Köping",
+      "federationId": 15,
+      "active": true
+    },
+    {
+      "id": 117311,
+      "name": "Hagfors IF Uddeholm F14",
+      "associationId": 460,
+      "associationName": "Hagfors IF Uddeholm",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119407,
+      "name": "Skoghalls IBK Utveckling F14/15",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 116917,
+      "name": "Nordmarkens IBF F14-15",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124103,
+      "name": "IFK Heden F14/15",
+      "associationId": 110,
+      "associationName": "IFK Heden",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 24852,
+      "name": "Filipstad IBK F Blå 1",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124345,
+      "name": "Grums IBK Flickor Blå Serie 1",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 28239,
+      "name": "Skoghalls IBK Utveckling F10/11/12",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 25383,
+      "name": "BKI Sunnanå Röd 1",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123986,
+      "name": "Karlstad IBF Ungdom F11",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122050,
+      "name": "Dotteviks IF F11/12 1",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 18809,
+      "name": "Dotteviks IF F11/12 2",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 118594,
+      "name": "Åmotfors IF 2010-2011",
+      "associationId": 293,
+      "associationName": "Åmotfors IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 18810,
+      "name": "GS 86 AIF Röd 2",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123990,
+      "name": "Karlstad IBF Ungdom F2012 Röd 2",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124165,
+      "name": "BKI Sunnanå Röd F-12 Lag 1",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 115938,
+      "name": "Åmåls IBK F11/12/13 Röd 2",
+      "associationId": 717,
+      "associationName": "Åmåls IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 115931,
+      "name": "Karlskoga IBF F10/11",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126347,
+      "name": "Lekvattnets BK Flick f 11-13 Röd 3 V",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123987,
+      "name": "Karlstad IBF Ungdom F2012 Röd 3",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121668,
+      "name": "Grums IBK Flickor Röd 3",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126259,
+      "name": "BKI Sunnanå Röd F-13",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117258,
+      "name": "Skoghalls IBK Utveckling F13",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 13389,
+      "name": "Dotteviks IF F13",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122102,
+      "name": "Sunne IBK F13/14 Röd",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124206,
+      "name": "SK Örnen Flickor Röd 3",
+      "associationId": 306,
+      "associationName": "SK Örnen",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121684,
+      "name": "Munkfors IBK F13 (2012-2014) Röd 3",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 25349,
+      "name": "Kristinehamns IBF F12/13 Röd 3",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124633,
+      "name": "BKI Sunnanå Röd F-12 lag 2",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 115932,
+      "name": "Hagfors IF Uddeholm F12-13",
+      "associationId": 460,
+      "associationName": "Hagfors IF Uddeholm",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126144,
+      "name": "Karlstad IBF Ungdom F13",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119568,
+      "name": "Karlskoga IBF F12/13",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128023,
+      "name": "BK Vålberg /IFK Heden Flickor Röd 3 ö",
+      "associationId": 757,
+      "associationName": "BK Vålberg",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124258,
+      "name": "Säffle IBF Röd 4",
+      "associationId": 4023,
+      "associationName": "Säffle IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 120411,
+      "name": "Fagerås BK F13/15",
+      "associationId": 1607,
+      "associationName": "Fagerås BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 120709,
+      "name": "BKI Sunnanå F-14",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126164,
+      "name": "Sunne IBK Flickor Röd 4",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3310,
+      "name": "Nordmarkens IBF F11-13",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 118589,
+      "name": "GS 86 AIF Röd 4",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128318,
+      "name": "Lekvattnets BK Flick f 13-15 Röd 4 V",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128252,
+      "name": "Karlstad IBF Ungdom F 14 Lag 1",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121052,
+      "name": "Dotteviks IF F14",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119527,
+      "name": "SK Örnen Flickor Röd 4",
+      "associationId": 306,
+      "associationName": "SK Örnen",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123427,
+      "name": "Skattkärrs IK F14",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119662,
+      "name": "Kristinehamns IBF F14/15 Röd 4",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122088,
+      "name": "Karlskoga IBF F14/15",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124104,
+      "name": "IFK Heden F12/13",
+      "associationId": 110,
+      "associationName": "IFK Heden",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128253,
+      "name": "Karlstad IBF Ungdom F 14 Lag 2",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 116969,
+      "name": "Hagfors IBS Blå 1 lag 1",
+      "associationId": 661,
+      "associationName": "Hagfors IBS",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128435,
+      "name": "Karlstad IBF Bredd P15 CENTRAL",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122052,
+      "name": "BKI Sunnanå P-15/14",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124322,
+      "name": "Sunne IBK P14/15 Blå 1",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119679,
+      "name": "Grums IBK Pojkar Blå Serie 1 Västra",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125192,
+      "name": "Fagerås BK P15",
+      "associationId": 1607,
+      "associationName": "Fagerås BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121301,
+      "name": "Hultsberg IBF P-15",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124099,
+      "name": "IFK Heden P14/15",
+      "associationId": 110,
+      "associationName": "IFK Heden",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126232,
+      "name": "Karlstad IBF Ungdom P 11 Röd Serie 1",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128521,
+      "name": "Filipstad IBK P Röd 1",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128312,
+      "name": "Hertzöga BK P09/10 Röd 1",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 22291,
+      "name": "GS 86 AIF Röd 1",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 22279,
+      "name": "Skoghalls IBK Utveckling P09/10/11",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 115928,
+      "name": "Hagfors IBS Röd 1",
+      "associationId": 661,
+      "associationName": "Hagfors IBS",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 113799,
+      "name": "Hultsberg IBF P-11 lag 1",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119566,
+      "name": "Karlskoga IBF P14",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121307,
+      "name": "Hagfors IBS Blå 1 lag 2",
+      "associationId": 661,
+      "associationName": "Hagfors IBS",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 25236,
+      "name": "Filipstad IBK P Blå 1",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122013,
+      "name": "Karlstad IBF Bredd P 15 ÖST",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119680,
+      "name": "Grums IBK Pojkar Blå Serie 1 Östra",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 22900,
+      "name": "Storfors IBF Blå serie",
+      "associationId": 715,
+      "associationName": "Storfors IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119658,
+      "name": "Edebäck IBF Pojkar Blå 1",
+      "associationId": 499,
+      "associationName": "Edebäck IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 113790,
+      "name": "Dotteviks IF P11/12",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 113800,
+      "name": "Hultsberg/Björkås IBF P 11 lag 2",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 18844,
+      "name": "Sunne IBK P10/11/12",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126234,
+      "name": "Karlstad IBF Ungdom P 11 Röd Serie 2",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126236,
+      "name": "Karlstad IBF Ungdom P 12 väst",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 113789,
+      "name": "Degerfors IBK Pojkar Röd serie",
+      "associationId": 796,
+      "associationName": "Degerfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 26000,
+      "name": "Hultsberg IBF 1 P-12",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124316,
+      "name": "Lekvattnets BK Pojk f 11-12 Röd 3",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 22297,
+      "name": "Skattkärrs IK P12",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124058,
+      "name": "Karlskoga IBF P11-13",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 19682,
+      "name": "Hagfors IBS Röd 3",
+      "associationId": 661,
+      "associationName": "Hagfors IBS",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126238,
+      "name": "Karlstad IBF Ungdom P 12 Öst",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124634,
+      "name": "Skoghalls IBK Utveckling P12",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117074,
+      "name": "Hertzöga BK P12/13 Röd 5",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117355,
+      "name": "GS 86 AIF Röd 5",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117257,
+      "name": "Skoghalls IBK Utveckling P13",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 18838,
+      "name": "Dotteviks IF P13",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124328,
+      "name": "Deje IBF Röd serie",
+      "associationId": 660,
+      "associationName": "Deje IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 25017,
+      "name": "Kristinehamns IBF P13/14 Röd 5",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119395,
+      "name": "Lekvattnets BK Pojk f 13 Röd 5",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 113805,
+      "name": "Åmåls IBK P12/13 Röd 5",
+      "associationId": 717,
+      "associationName": "Åmåls IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117253,
+      "name": "Skattkärrs IK P13",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117038,
+      "name": "Hultsberg IBF P-13",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126262,
+      "name": "BKI Sunnanå P-13",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3531,
+      "name": "Hertzöga BK P12/P13 Röd 4",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 113794,
+      "name": "Grums IBK Pojkar Röd 4",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124077,
+      "name": "Säffle IBF Röd 4",
+      "associationId": 4023,
+      "associationName": "Säffle IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 14768,
+      "name": "Hagfors IBS Röd 4",
+      "associationId": 661,
+      "associationName": "Hagfors IBS",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 116087,
+      "name": "Herrhagens IF P2012/2013 Röd 4",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 3305,
+      "name": "Nordmarkens IBF P11-13",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 4011,
+      "name": "Åmotfors IF 2012-2013",
+      "associationId": 293,
+      "associationName": "Åmotfors IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128320,
+      "name": "Lekvattnets BK Pojk f 12-14 Röd 4",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119410,
+      "name": "Skoghalls IBK Utveckling P14",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124260,
+      "name": "Säffle IBF Röd 6",
+      "associationId": 4023,
+      "associationName": "Säffle IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117201,
+      "name": "Fagerås BK P13",
+      "associationId": 1607,
+      "associationName": "Fagerås BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128179,
+      "name": "Kristinehamns IBF P13/14 Röd 6",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119653,
+      "name": "Hultsberg IBF P14 1",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119654,
+      "name": "Hultsberg IBF P14-2",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117207,
+      "name": "SK Örnen Pojkar Röd 7",
+      "associationId": 306,
+      "associationName": "SK Örnen",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 118622,
+      "name": "Herrhagens IF P2012/2013 Röd 7",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128396,
+      "name": "Filipstad IBK P Röd 7 Ö",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119573,
+      "name": "Skattkärrs IK P14",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 22293,
+      "name": "Karlskoga IBF P13",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128428,
+      "name": "Karlstad IBF Ungdom P14",
+      "associationId": 361,
+      "associationName": "Karlstad IBF Ungdom",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 120545,
+      "name": "Askersunds IBK P14/15 SVART",
+      "associationId": 467,
+      "associationName": "Askersunds IBK",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 123053,
+      "name": "Askersunds IBK P14/15 RÖD",
+      "associationId": 467,
+      "associationName": "Askersunds IBK",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 119567,
+      "name": "Karlskoga IBF P15",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124478,
+      "name": "Örebro SK Ung I-P2015",
+      "associationId": 636,
+      "associationName": "Örebro SK Ungdomsklubb",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 121097,
+      "name": "Hovsta IF P-15",
+      "associationId": 93,
+      "associationName": "Hovsta IF",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 118728,
+      "name": "GS 86 AIF Röd 7",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121220,
+      "name": "Arvika IBF P14 lag2",
+      "associationId": 514,
+      "associationName": "Arvika IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122105,
+      "name": "Lekvattnets BK Pojk f 14 Röd 7 V",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117039,
+      "name": "Hultsberg IBF P-13 2",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 116916,
+      "name": "Nordmarkens IBF P14-15",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119493,
+      "name": "Hertzöga BK P14 Röd 7 Västra",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124293,
+      "name": "Grums IBK Pojkar Röd 7",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124188,
+      "name": "GS 86 AIF P16 Blå",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122073,
+      "name": "Deje IBF Blåserie 2 (P15/16)",
+      "associationId": 660,
+      "associationName": "Deje IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122077,
+      "name": "Munkfors IBK P11 (2014-2016) Blå serie 2",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126289,
+      "name": "Finnskoga IF ",
+      "associationId": 3992,
+      "associationName": "Finnskoga IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121306,
+      "name": "Hagfors IBS Blå 2",
+      "associationId": 661,
+      "associationName": "Hagfors IBS",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128403,
+      "name": "Sunne IBK P14/15 Blå 2",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126346,
+      "name": "Lekvattnets BK Pojk f 15 Blå 2 N",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122092,
+      "name": "Arvika IBF P2015 lag1",
+      "associationId": 514,
+      "associationName": "Arvika IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121282,
+      "name": "Åmåls IBK P15 Blå2",
+      "associationId": 717,
+      "associationName": "Åmåls IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124304,
+      "name": "Dotteviks IF P17 Röd 1",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124261,
+      "name": "Säffle IBF Blå 2",
+      "associationId": 4023,
+      "associationName": "Säffle IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124292,
+      "name": "Billingsfors IBK Blå 2 14/15",
+      "associationId": 604,
+      "associationName": "Billingsfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119529,
+      "name": "SK Örnen Pojkar Blå 2",
+      "associationId": 306,
+      "associationName": "SK Örnen",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 118729,
+      "name": "GS 86 AIF P15 blå 2",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123960,
+      "name": "Karlskoga IBF P16",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122016,
+      "name": "Hertzöga BK P15/16 Pojkar Blå 2 södra",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121291,
+      "name": "Herrhagens IF P2015/2016",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121823,
+      "name": "Skoghalls IBK Utveckling P15",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122044,
+      "name": "Dotteviks IF P16 1",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122093,
+      "name": "Arvika IBF P2015 lag 2",
+      "associationId": 514,
+      "associationName": "Arvika IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128439,
+      "name": "Karlstad IBF Bredd P15",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119641,
+      "name": "Kristinehamns IBF P15 Blå 2",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121053,
+      "name": "Filipstad IBK P Blå 2 ö",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124635,
+      "name": "Degerfors IBK Pojkar Blå serie",
+      "associationId": 796,
+      "associationName": "Degerfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121965,
+      "name": "Skattkärrs IK P15",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125142,
+      "name": "Hertzöga BK P15/16 Pojkar Blå 2 östra",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 122045,
+      "name": "Dotteviks IF P16 2",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124034,
+      "name": "Karlstad IBF Bredd P2016 Öst Lag 1",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117213,
+      "name": "Sunne IBK P16 Vit Blå3",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124040,
+      "name": "Karlstad IBF Bredd P2016 Väst",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126274,
+      "name": "Grums IBK Pojkar Blå Serie 3 Central",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124080,
+      "name": "Hultsberg IBF P-16 1",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121753,
+      "name": "Herrhagens IF P2015/2016 2",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124203,
+      "name": "Skoghalls IBK Utveckling P16",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124164,
+      "name": "BKI Sunnanå P-16/17",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 121074,
+      "name": "Lekvattnets BK Pojk f 16 Blå 3 C",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124182,
+      "name": "SK Örnen Pojkar Blå Serie 3 södra",
+      "associationId": 306,
+      "associationName": "SK Örnen",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125420,
+      "name": "Hertzöga BK P17 Blå 3 Södra",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125280,
+      "name": "GS 86 AIF P17 Grön",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126221,
+      "name": "Skoghalls IBK Utveckling P17",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125433,
+      "name": "Karlstad IBF Bredd P 17 Väst",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125435,
+      "name": "Karlstad IBF Bredd P 17 Öst lag 1",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126339,
+      "name": "Hultsberg IBF P-17 2",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128021,
+      "name": "BK Vålberg Pojkar Blå 3 v",
+      "associationId": 757,
+      "associationName": "BK Vålberg",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126273,
+      "name": "Grums IBK Pojkar Blå Serie 3 Västra",
+      "associationId": 576,
+      "associationName": "Grums IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 509,
+      "name": "Billingsfors IBK Blå 3",
+      "associationId": 604,
+      "associationName": "Billingsfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124059,
+      "name": "Nordmarkens IBF P16/17",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124306,
+      "name": "Dotteviks IF P17 Röd 2",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123830,
+      "name": "Åmåls IBK P16 Blå3",
+      "associationId": 717,
+      "associationName": "Åmåls IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128441,
+      "name": "Karlstad IBF Bredd P 17 Väst/Central",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125436,
+      "name": "Karlstad IBF Bredd P 17 Öst Lag 2",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 117260,
+      "name": "Sunne IBK P16 Blå 3",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124318,
+      "name": "Skattkärrs IK P16",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124106,
+      "name": "IFK Heden P 16/17",
+      "associationId": 110,
+      "associationName": "IFK Heden",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125429,
+      "name": "Karlstad IBF Bredd P 17 Central",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126338,
+      "name": "Hultsberg IBF P-17 1",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125098,
+      "name": "Ulvsby IF (2016)",
+      "associationId": 4039,
+      "associationName": "Ulvsby IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124035,
+      "name": "Karlstad IBF Bredd P2016 Öst Lag 2",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126406,
+      "name": "Kristinehamns IBF P16 Blå 3",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127479,
+      "name": "Hertzöga BK P18 Grön poolspel",
+      "associationId": 1363,
+      "associationName": "Hertzöga BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128020,
+      "name": "BK Vålberg Poolspel Grön Fortsättning",
+      "associationId": 757,
+      "associationName": "BK Vålberg",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127526,
+      "name": "Fagerås BK P16/17",
+      "associationId": 1607,
+      "associationName": "Fagerås BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125409,
+      "name": "Skattkärrs IK P17 1",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125170,
+      "name": "Filipstad IBK P Grön fortsättning",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126286,
+      "name": "Skattkärrs IK P17 2",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126158,
+      "name": "Herrhagens IF P2017/2018 Forts.",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 129454,
+      "name": "Hultsberg IBF Poolspel Fortsättning",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 123819,
+      "name": "Herrhagens IF P2017/2018 Forts.",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 129532,
+      "name": "Filipstad IBK P17/18 2",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124145,
+      "name": "Hagfors IBS Grön P17/18 1",
+      "associationId": 661,
+      "associationName": "Hagfors IBS",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 14764,
+      "name": "Storfors IBF Grön Fortsättning",
+      "associationId": 715,
+      "associationName": "Storfors IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125415,
+      "name": "Hagfors IBS Grön P17/18 2",
+      "associationId": 661,
+      "associationName": "Hagfors IBS",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 124320,
+      "name": "Lekvattnets BK POOL Pojk f 17-18 Forts",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 129277,
+      "name": "Lekvattnets BK P17/18 Lag 2",
+      "associationId": 693,
+      "associationName": "Lekvattnets BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126399,
+      "name": "Kristinehamns IBF P17 1 grön fortsättning",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125616,
+      "name": "Kronans FK ",
+      "associationId": 4044,
+      "associationName": "Kronans FK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126400,
+      "name": "Kristinehamns IBF P17 2 grön fortsättning",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127534,
+      "name": "Kronans FK Lag 2",
+      "associationId": 4044,
+      "associationName": "Kronans FK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125224,
+      "name": "Munkfors IBK P9 (2017-2018) Grön Serie fortsättning",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125405,
+      "name": "Karlskoga IBF P17",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127328,
+      "name": "IFK Heden Poolspel 16/17",
+      "associationId": 110,
+      "associationName": "IFK Heden",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127660,
+      "name": "HG 2020 IBF P17-P18",
+      "associationId": 3981,
+      "associationName": "HG 2020 IBF",
+      "federationId": 14,
+      "active": true
+    },
+    {
+      "id": 128232,
+      "name": "Gropens IF 18 Poolspel",
+      "associationId": 3741,
+      "associationName": "Gropens IF",
+      "federationId": 5,
+      "active": true
+    },
+    {
+      "id": 126023,
+      "name": "Åmotfors IF 2017/2018 Svart",
+      "associationId": 293,
+      "associationName": "Åmotfors IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125384,
+      "name": "Sunne IBK P17 blå Poolspel forts",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127221,
+      "name": "Åmotfors IF 2017-2018 Vit",
+      "associationId": 293,
+      "associationName": "Åmotfors IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125383,
+      "name": "Sunne IBK P17 Vit Poolspel forts",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125444,
+      "name": "Dotteviks IF P17 Blå",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126413,
+      "name": "Degerfors IBK Pojkar poolspel",
+      "associationId": 796,
+      "associationName": "Degerfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128430,
+      "name": "Munkfors IBK Munkfors IBK P9 (2017-2018) Grön Serie fortsättning 2",
+      "associationId": 705,
+      "associationName": "Munkfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127528,
+      "name": "Karlskoga IBF P18",
+      "associationId": 572,
+      "associationName": "Karlskoga IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126401,
+      "name": "Kristinehamns IBF P18 grön nyb lag 1",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126404,
+      "name": "Kristinehamns IBF P18 grön nyb lag 2",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126328,
+      "name": "Edebäck IBF Grön Nybörjare",
+      "associationId": 499,
+      "associationName": "Edebäck IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125845,
+      "name": "Deje IBF Grönserie nybörjare",
+      "associationId": 660,
+      "associationName": "Deje IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127727,
+      "name": "Filipstad IBK P Grön nybörjare",
+      "associationId": 799,
+      "associationName": "Filipstad IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126362,
+      "name": "SK Örnen Pojkar Grön Nybörjare",
+      "associationId": 306,
+      "associationName": "SK Örnen",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126405,
+      "name": "Kristinehamns IBF P18 grön nyb lag 3",
+      "associationId": 461,
+      "associationName": "Kristinehamns IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128404,
+      "name": "Sunne IBK P18 Blå Poolspel nyb",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128405,
+      "name": "Sunne IBK P18 Vit Poolspel nyb",
+      "associationId": 1011,
+      "associationName": "Sunne IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126415,
+      "name": "Arvika IBF P18",
+      "associationId": 514,
+      "associationName": "Arvika IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126085,
+      "name": "Dotteviks IF P18 1",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126322,
+      "name": "Säffle IBF Grön N",
+      "associationId": 4023,
+      "associationName": "Säffle IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126086,
+      "name": "Dotteviks IF P18 2",
+      "associationId": 43,
+      "associationName": "Dotteviks IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127669,
+      "name": "GS 86 AIF P18 Grön",
+      "associationId": 482,
+      "associationName": "GS 86 AIF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127500,
+      "name": "Karlstad IBF Bredd P 18 lag 1",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127501,
+      "name": "Karlstad IBF Bredd P 18 lag 2",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128018,
+      "name": "BK Vålberg Poolspel Grön Nybörjare 1",
+      "associationId": 757,
+      "associationName": "BK Vålberg",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 125439,
+      "name": "BKI Sunnanå Poolspel P-18",
+      "associationId": 402,
+      "associationName": "BKI Sunnanå",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126918,
+      "name": "Fagerås BK P18/19 Gul",
+      "associationId": 1607,
+      "associationName": "Fagerås BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128479,
+      "name": "Fagerås BK P18/19 Svart",
+      "associationId": 1607,
+      "associationName": "Fagerås BK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128574,
+      "name": "Skoghalls IBK Utveckling P18",
+      "associationId": 1681,
+      "associationName": "Skoghalls IBK Utveckling",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 119643,
+      "name": "Billingsfors IBK Grön nybörjare P 18/19",
+      "associationId": 604,
+      "associationName": "Billingsfors IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128438,
+      "name": "Nordmarkens IBF P18/19",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127471,
+      "name": "Åmåls IBK PF18 Grön 1",
+      "associationId": 717,
+      "associationName": "Åmåls IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128019,
+      "name": "BK Vålberg Poolspel Grön Nybörjare 2",
+      "associationId": 757,
+      "associationName": "BK Vålberg",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126321,
+      "name": "Säffle IBF Grön F",
+      "associationId": 4023,
+      "associationName": "Säffle IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126159,
+      "name": "Herrhagens IF P2017/2018 Nybörj.",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126365,
+      "name": "IFK Heden P 18/19",
+      "associationId": 110,
+      "associationName": "IFK Heden",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 126160,
+      "name": "Herrhagens IF P2017/2018 Nybörj.",
+      "associationId": 3924,
+      "associationName": "Herrhagens IF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127775,
+      "name": "Åmåls IBK PF18 Grön 2",
+      "associationId": 717,
+      "associationName": "Åmåls IBK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127719,
+      "name": "Hultsberg IBF P18 lag 1",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127720,
+      "name": "Hultsberg IBF P18 Lag 2",
+      "associationId": 458,
+      "associationName": "Hultsberg IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 128456,
+      "name": "Karlstad IBF Bredd P 18 lag 3",
+      "associationId": 1379,
+      "associationName": "Karlstad IBF Bredd",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 127438,
+      "name": "Skattkärrs IK P18",
+      "associationId": 486,
+      "associationName": "Skattkärrs IK",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 129610,
+      "name": "Nordmarkens IBF Poolspel 18/19 Lag 4",
+      "associationId": 784,
+      "associationName": "Nordmarkens IBF",
+      "federationId": 11,
+      "active": true
+    },
+    {
+      "id": 129611,
+      "name": "Arvika IBF Poolspel 18/19 Lag 2",
+      "associationId": 514,
+      "associationName": "Arvika IBF",
+      "federationId": 11,
+      "active": true
+    }
+  ],
+  "errors": [],
+  "locationReview": {
+    "excluded": [
+      {
+        "id": 3670,
+        "name": "Norrbyhallen",
+        "reason": "Örebro"
+      },
+      {
+        "id": 3484,
+        "name": "Tybblelundsskolan",
+        "reason": "Örebro"
+      },
+      {
+        "id": 4116,
+        "name": "Lindbacka Sporthall",
+        "reason": "Lindesberg"
+      }
+    ],
+    "sources": [
+      "https://orebro.se/kultur--fritid/motion--idrott/idrottsanlaggningar/kommunens-bokningsbara-idrottsanlaggningar.html",
+      "https://www.lindesberg.se/download/18.f8e5dc7175d75112a2bbbb/1606214154869/Pressmeddelande%2011%20november%202020_Nya%20namn%20p%C3%A5%20tva%CC%8A%20omra%CC%8Aden%20i%20Lindesberg.pdf"
+    ],
+    "unpositioned": [
+      4874
+    ]
+  }
+}

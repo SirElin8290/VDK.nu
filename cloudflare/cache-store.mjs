@@ -1,3 +1,4 @@
+import {rememberJourneyMatch} from './journey.mjs';
 import {normalizeName,referees,penaltySeconds,isLeague,isVdkStatisticsCompetition,isVdkJunior,isVdkRed,isUsmQualifier} from '../server/stats-source.mjs';
 export function cacheMatch(db,m,c,{federal=false,regionalEligible=true}={}){
  if(![40,41,42,43,44].includes(Number(m.SeasonID))||(!isLeague(c)&&!isUsmQualifier(c))||(!federal&&!isVdkStatisticsCompetition(c)))throw Error('Matchen ligger utanför VDK:s statistikavgränsning');
@@ -23,6 +24,7 @@ const users=db.prepare("SELECT u.id,u.name FROM users u WHERE EXISTS(SELECT 1 FR
    db.prepare('INSERT INTO match_referees(match_id,referee_id,name,normalized_name) VALUES(?,?,?,?)').run(id,r.id,r.name,normalizeName(r.name));
    for(const u of users)if(normalizeName(u.name)===normalizeName(r.name))db.prepare('INSERT INTO match_members(match_id,user_id,colleague) VALUES(?,?,?)').run(id,u.id,refs.filter(x=>x.id!==r.id).map(x=>x.name).join(', '));
   }
+  rememberJourneyMatch(db,m);
   return true;
  });
 }

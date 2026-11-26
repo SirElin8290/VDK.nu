@@ -1,3 +1,4 @@
+import {initializeJourney} from '../cloudflare/journey.mjs';
 import {initializeBoardAccess,hasBoardAccess} from './board-access.mjs';
 import {initializeDocuments} from './documents.mjs';
 import {initializeCoaching} from './coaching.mjs';
@@ -47,6 +48,7 @@ db.exec(`PRAGMA foreign_keys=ON;
   db.exec("CREATE TABLE IF NOT EXISTS match_referees(match_id INTEGER NOT NULL REFERENCES matches(id),referee_id INTEGER NOT NULL,name TEXT NOT NULL,normalized_name TEXT NOT NULL,PRIMARY KEY(match_id,referee_id)); CREATE INDEX IF NOT EXISTS referee_matches ON match_referees(referee_id,match_id); CREATE INDEX IF NOT EXISTS referee_names ON match_referees(normalized_name,match_id); CREATE INDEX IF NOT EXISTS penalties_match ON penalties(match_id);");
   initializeCoaching(db);
   initializeBoardAccess(db);
+  initializeJourney(db);
   return db;
 }
 export function transaction(db,fn){return db.transaction(fn);}

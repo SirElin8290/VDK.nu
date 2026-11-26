@@ -1,3 +1,4 @@
+import {journeyAction} from '../cloudflare/journey.mjs';
 import {initializeBoardroom,boardroomAction} from './boardroom.mjs';
 import {initializeMeetings,meetingsAction} from './meetings.mjs';
 import {initializeMemberTools,memberToolsAction} from '../server/member-tools.mjs';
@@ -52,6 +53,7 @@ export function createApp(options={}){
         }
         const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:(path==='/api/admin/documents'||(path==='/api/boardroom/documents'||/^\/api\/meetings\/[0-9a-f-]{36}\/documents$/.test(path)))?7500000:32768):{};
         if(/^\/api\/(dashboard|matches|statistics|regional-statistics|availability|commented-matches|coachings|coach-applications|coach\/work)(?:\/|$)/.test(path)){const u=auth(req);if(u.membershipCategory==='support'&&!u.roles.includes('ADMIN'))fail(403,'Den här funktionen ingår inte i stödmedlemskapet.');}
+        if(await journeyAction({db,path,req,auth,json,fail,url,onQueued:options.onJourneyQueued}))return;
         if(await boardroomAction({db,path,method,body,req,requireMembership:requireMembership,fail,json,res}))return;
         if(await meetingsAction({db,path,method,body,req,res,requireMembership,fail,json,url,env:options.env,rate,onQueued:options.onMeetingsQueued}))return;
         if(memberToolsAction({db,path,method,body,req,auth,requireMembership:requireMembership,season,fail,res,json,url}))return;

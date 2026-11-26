@@ -1,3 +1,4 @@
+import {journeyAction} from '../cloudflare/journey.mjs';
 import {initializeBoardroom,boardroomAction} from '../cloudflare/boardroom.mjs';
 import {initializeMeetings,meetingsAction} from '../cloudflare/meetings.mjs';
 import {initializeMemberTools,memberToolsAction} from './member-tools.mjs';
@@ -53,6 +54,7 @@ export function createApp(options={}){
           if(!(req.headers['content-type']||'').startsWith('application/json'))fail(415,'JSON krävs.');
         }
         const body=method==='POST'?await readBody(req,path==='/api/profile/photo'?2800000:(path==='/api/boardroom/documents'||/^\/api\/meetings\/[0-9a-f-]{36}\/documents$/.test(path))?7500000:32768):{};
+        if(await journeyAction({db,path,req,auth,json,fail,url,onQueued:options.onJourneyQueued}))return;
         if(await boardroomAction({db,path,method,body,req,requireMembership:auth,fail,json,res}))return;
         if(await meetingsAction({db,path,method,body,req,res,requireMembership:auth,fail,json,url,env:options.env||process.env,rate}))return;
         if(memberToolsAction({db,path,method,body,req,auth,requireMembership:auth,season,fail,res,json,url}))return;

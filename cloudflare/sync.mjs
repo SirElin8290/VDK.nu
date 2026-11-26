@@ -1,3 +1,4 @@
+import {enqueueJourney} from './journey.mjs';
 import {isVenueInScope} from '../server/stat-geography.mjs';
 import {StatsSource,isLeague,isVdkStatisticsCompetition,normalizeName,referees,isUsmQualifier} from '../server/stats-source.mjs';
 import {cacheMatch} from './cache-store.mjs';
@@ -59,6 +60,7 @@ export async function runSyncBatch(owner){
    }}catch(e){errors.push({matchId:j.id,error:e.message});}position++;db.prepare('UPDATE regional_sync_plan SET position=?,errors=? WHERE id=1').run(position,JSON.stringify(errors));}
   if(position<total){await owner.ctx.storage.setAlarm(Date.now()+1000);return;}
   db.transaction(()=>{const status=errors.length?'partial':'complete';db.prepare('INSERT INTO sync_runs(started_at,finished_at,status,report) VALUES(?,?,?,?)').run(plan.started_at,new Date().toISOString(),status,JSON.stringify({scope:'Värmlands regionala seriespel samt VDK-domarnas förbundsserier i hela Sverige',checked:total,errors}));db.prepare('UPDATE sync_schedule_windows SET status=? WHERE window=?').run(status,plan.window);db.prepare('DELETE FROM stats_sync_jobs WHERE window=?').run(plan.window);db.prepare('DELETE FROM regional_sync_plan WHERE id=1').run();});
+  if(enqueueJourney(db).pending)await owner.ctx.storage.setAlarm(Date.now()+1000);
  }catch(e){if(plan.position===-1)db.prepare('UPDATE regional_sync_plan SET errors=? WHERE id=1 AND window=?').run(JSON.stringify([{error:e.message,phase:'planning'}]),plan.window);await owner.ctx.storage.setAlarm(Date.now()+60000);throw e;}
 }
 export function isSwedishMondayThree(time){const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Stockholm',weekday:'short',hour:'2-digit',hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(time)).map(x=>[x.type,x.value]));return p.weekday==='Mon'&&p.hour==='03'?`${p.year}-${p.month}-${p.day}`:null;}
