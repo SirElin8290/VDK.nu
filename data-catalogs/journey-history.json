@@ -1,0 +1,2941 @@
+{
+  "version": "journey-history-1",
+  "season": "2026/27",
+  "halls": [
+    {
+      "id": 1552,
+      "name": "AllOffice Arena",
+      "city": "Karlstad",
+      "address": "Stadionvägen 1",
+      "lat": 59.385,
+      "lng": 13.483,
+      "inScope": true,
+      "scheduledMatches": 134,
+      "aliases": [
+        1552
+      ],
+      "key": "1552",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        323.68,
+        577.06
+      ]
+    },
+    {
+      "id": 1548,
+      "name": "Arvika Sporthall",
+      "city": "Arvika",
+      "address": "Skolgatan 34-36",
+      "lat": 59.65737,
+      "lng": 12.59229,
+      "inScope": true,
+      "scheduledMatches": 27,
+      "aliases": [
+        1548,
+        3167
+      ],
+      "key": "1548",
+      "scope": "active",
+      "municipality": "1784",
+      "point": [
+        175.21,
+        487.07
+      ]
+    },
+    {
+      "id": 1587,
+      "name": "ASP Arena",
+      "city": "Karlstad",
+      "address": "Stadionvägen 1",
+      "lat": 59.385,
+      "lng": 13.483,
+      "inScope": true,
+      "scheduledMatches": 166,
+      "aliases": [
+        1587,
+        3117
+      ],
+      "key": "1587",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        323.68,
+        577.06
+      ]
+    },
+    {
+      "id": 2357,
+      "name": "Billingsfors Bollhall",
+      "city": "Billingsfors",
+      "address": "Lövåsenskolan i  Billingsfors",
+      "lat": 58.98485,
+      "lng": 12.24455,
+      "inScope": true,
+      "scheduledMatches": 48,
+      "aliases": [
+        2357,
+        3302
+      ],
+      "key": "2357",
+      "scope": "active",
+      "municipality": "1460",
+      "point": [
+        117.25,
+        709.26
+      ]
+    },
+    {
+      "id": 1550,
+      "name": "Brogårdshallen",
+      "city": "Kristinehamn",
+      "address": "Gamla Kyrkogatan 3",
+      "lat": 59.3112,
+      "lng": 14.11305,
+      "inScope": true,
+      "scheduledMatches": 82,
+      "aliases": [
+        1550
+      ],
+      "key": "1550",
+      "scope": "active",
+      "municipality": "1781",
+      "point": [
+        428.7,
+        601.44
+      ]
+    },
+    {
+      "id": 4817,
+      "name": "CarlGustav Arena",
+      "city": "Torsby",
+      "address": "",
+      "lat": 60.1412,
+      "lng": 13.00255,
+      "inScope": true,
+      "scheduledMatches": 88,
+      "aliases": [
+        4817
+      ],
+      "key": "4817",
+      "scope": "active",
+      "municipality": "1737",
+      "point": [
+        243.59,
+        327.23
+      ]
+    },
+    {
+      "id": 1554,
+      "name": "Deje Sporthall A",
+      "city": "Deje",
+      "address": "Bruksvägen 1",
+      "lat": 59.61082,
+      "lng": 13.46879,
+      "inScope": true,
+      "scheduledMatches": 44,
+      "aliases": [
+        1554
+      ],
+      "key": "1554",
+      "scope": "active",
+      "municipality": "1763",
+      "point": [
+        321.31,
+        502.45
+      ]
+    },
+    {
+      "id": 3614,
+      "name": "ECG Arena",
+      "city": "Kil",
+      "address": "Industrigatan 2",
+      "lat": 59.50692,
+      "lng": 13.30631,
+      "inScope": true,
+      "scheduledMatches": 99,
+      "aliases": [
+        3614,
+        3615
+      ],
+      "key": "3614",
+      "scope": "active",
+      "municipality": "1715",
+      "point": [
+        294.22,
+        536.78
+      ]
+    },
+    {
+      "id": 1557,
+      "name": "Ekshärads Sporthall",
+      "city": "Ekshärad",
+      "address": "",
+      "lat": 60.17345,
+      "lng": 13.4841,
+      "inScope": true,
+      "scheduledMatches": 38,
+      "aliases": [
+        1557,
+        3133
+      ],
+      "key": "1557",
+      "scope": "active",
+      "municipality": "1783",
+      "point": [
+        323.86,
+        316.57
+      ]
+    },
+    {
+      "id": 1558,
+      "name": "Fageråshallen",
+      "city": "Fagerås",
+      "address": "",
+      "lat": 59.52043,
+      "lng": 13.22271,
+      "inScope": true,
+      "scheduledMatches": 42,
+      "aliases": [
+        1558,
+        3125
+      ],
+      "key": "1558",
+      "scope": "active",
+      "municipality": "1715",
+      "point": [
+        280.29,
+        532.32
+      ]
+    },
+    {
+      "id": 4171,
+      "name": "Filipstads Sporthall",
+      "city": "Filipstad",
+      "address": "",
+      "lat": 59.70925,
+      "lng": 14.16495,
+      "inScope": true,
+      "scheduledMatches": 74,
+      "aliases": [
+        4171,
+        4172
+      ],
+      "key": "4171",
+      "scope": "active",
+      "municipality": "1782",
+      "point": [
+        437.35,
+        469.93
+      ]
+    },
+    {
+      "id": 1559,
+      "name": "Forshaga Sporthall",
+      "city": "Forshaga",
+      "address": "",
+      "lat": 59.52853,
+      "lng": 13.48161,
+      "inScope": true,
+      "scheduledMatches": 154,
+      "aliases": [
+        1559,
+        3112
+      ],
+      "key": "1559",
+      "scope": "active",
+      "municipality": "1763",
+      "point": [
+        323.44,
+        529.64
+      ]
+    },
+    {
+      "id": 4191,
+      "name": "GA-hallen, Sysslebäck",
+      "city": "Sysslebäck",
+      "address": "",
+      "lat": 60.71046,
+      "lng": 12.88585,
+      "inScope": true,
+      "scheduledMatches": 7,
+      "aliases": [
+        4191
+      ],
+      "key": "4191",
+      "scope": "active",
+      "municipality": "1737",
+      "point": [
+        224.14,
+        139.16
+      ]
+    },
+    {
+      "id": 1566,
+      "name": "Grossbolshallen",
+      "city": "Forshaga",
+      "address": "Europavägen 4",
+      "lat": 59.53663,
+      "lng": 13.4792,
+      "inScope": true,
+      "scheduledMatches": 13,
+      "aliases": [
+        1566
+      ],
+      "key": "1566",
+      "scope": "active",
+      "municipality": "1763",
+      "point": [
+        323.04,
+        526.96
+      ]
+    },
+    {
+      "id": 1567,
+      "name": "Grums Sporthall",
+      "city": "Grums",
+      "address": "Gamla Vägen 33",
+      "lat": 59.35414,
+      "lng": 13.10589,
+      "inScope": true,
+      "scheduledMatches": 112,
+      "aliases": [
+        1567,
+        3114
+      ],
+      "key": "1567",
+      "scope": "active",
+      "municipality": "1764",
+      "point": [
+        260.82,
+        587.25
+      ]
+    },
+    {
+      "id": 1568,
+      "name": "Gunnarsbyhallen",
+      "city": "Charlottenberg",
+      "address": "",
+      "lat": 59.88121,
+      "lng": 12.31019,
+      "inScope": true,
+      "scheduledMatches": 7,
+      "aliases": [
+        1568
+      ],
+      "key": "1568",
+      "scope": "active",
+      "municipality": "1730",
+      "point": [
+        128.19,
+        413.12
+      ]
+    },
+    {
+      "id": 1569,
+      "name": "Gärdeshallen",
+      "city": "Åmotfors",
+      "address": "Norumsvägen",
+      "lat": 59.7677,
+      "lng": 12.35631,
+      "inScope": true,
+      "scheduledMatches": 43,
+      "aliases": [
+        1569,
+        3295
+      ],
+      "key": "1569",
+      "scope": "active",
+      "municipality": "1730",
+      "point": [
+        135.88,
+        450.62
+      ]
+    },
+    {
+      "id": 4030,
+      "name": "Hammarhallen A",
+      "city": "Hammarö",
+      "address": "",
+      "lat": 59.33248,
+      "lng": 13.51761,
+      "inScope": true,
+      "scheduledMatches": 1,
+      "aliases": [
+        4030
+      ],
+      "key": "4030",
+      "scope": "active",
+      "municipality": "1761",
+      "point": [
+        329.45,
+        594.41
+      ]
+    },
+    {
+      "id": 1571,
+      "name": "Hammarö Arena",
+      "city": "Skoghall",
+      "address": "",
+      "lat": 59.33165,
+      "lng": 13.47687,
+      "inScope": true,
+      "scheduledMatches": 115,
+      "aliases": [
+        1571
+      ],
+      "key": "1571",
+      "scope": "active",
+      "municipality": "1761",
+      "point": [
+        322.65,
+        594.68
+      ]
+    },
+    {
+      "id": 1572,
+      "name": "Hammarö Arena B",
+      "city": "Skoghall",
+      "address": "",
+      "lat": 59.33165,
+      "lng": 13.47687,
+      "inScope": true,
+      "scheduledMatches": 141,
+      "aliases": [
+        1572,
+        3120
+      ],
+      "key": "1572",
+      "scope": "active",
+      "municipality": "1761",
+      "point": [
+        322.65,
+        594.68
+      ]
+    },
+    {
+      "id": 3491,
+      "name": "Hultsbergshallen",
+      "city": "",
+      "address": "",
+      "lat": 59.38363,
+      "lng": 13.42972,
+      "inScope": true,
+      "scheduledMatches": 9,
+      "aliases": [
+        3491
+      ],
+      "key": "3491",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        314.8,
+        577.51
+      ]
+    },
+    {
+      "id": 4174,
+      "name": "Ilandahallen",
+      "city": "",
+      "address": "",
+      "lat": 59.43171,
+      "lng": 13.42276,
+      "inScope": true,
+      "scheduledMatches": 75,
+      "aliases": [
+        4174,
+        4175
+      ],
+      "key": "4174",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        313.64,
+        561.63
+      ]
+    },
+    {
+      "id": 1577,
+      "name": "Ilandaskolan",
+      "city": "Karlstad",
+      "address": "Ilandavägen 50",
+      "lat": 59.43223,
+      "lng": 13.42195,
+      "inScope": true,
+      "scheduledMatches": 10,
+      "aliases": [
+        1577
+      ],
+      "key": "1577",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        313.5,
+        561.46
+      ]
+    },
+    {
+      "id": 3740,
+      "name": "Karlbergshallen A Karlskoga",
+      "city": "",
+      "address": "",
+      "lat": 59.33138,
+      "lng": 14.49545,
+      "inScope": true,
+      "scheduledMatches": 103,
+      "aliases": [
+        3740,
+        3741
+      ],
+      "key": "3740",
+      "scope": "active",
+      "municipality": "1883",
+      "point": [
+        492.44,
+        594.77
+      ]
+    },
+    {
+      "id": 1574,
+      "name": "Karlbergshallen B Karlskoga",
+      "city": "Karlskoga",
+      "address": "",
+      "lat": 59.33138,
+      "lng": 14.49545,
+      "inScope": true,
+      "scheduledMatches": 1,
+      "aliases": [
+        1574
+      ],
+      "key": "1574",
+      "scope": "active",
+      "municipality": "1883",
+      "point": [
+        492.44,
+        594.77
+      ]
+    },
+    {
+      "id": 2126,
+      "name": "Karlbergshallen Åmål",
+      "city": "Åmål",
+      "address": "Schölinsgatan 7",
+      "lat": 59.04296,
+      "lng": 12.70843,
+      "inScope": true,
+      "scheduledMatches": 74,
+      "aliases": [
+        2126,
+        3303
+      ],
+      "key": "2126",
+      "scope": "active",
+      "municipality": "1492",
+      "point": [
+        194.57,
+        690.06
+      ]
+    },
+    {
+      "id": 1551,
+      "name": "Klubbhuset Arena",
+      "city": "Karlstad",
+      "address": "Stadionvägen 1",
+      "lat": 59.385,
+      "lng": 13.483,
+      "inScope": true,
+      "scheduledMatches": 113,
+      "aliases": [
+        1551,
+        3118
+      ],
+      "key": "1551",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        323.68,
+        577.06
+      ]
+    },
+    {
+      "id": 1581,
+      "name": "Lesjöforshallen",
+      "city": "Lesjöfors",
+      "address": "",
+      "lat": 59.98406,
+      "lng": 14.17599,
+      "inScope": true,
+      "scheduledMatches": 9,
+      "aliases": [
+        1581
+      ],
+      "key": "1581",
+      "scope": "active",
+      "municipality": "1782",
+      "point": [
+        439.19,
+        379.14
+      ]
+    },
+    {
+      "id": 1578,
+      "name": "Molkoms Sporthall",
+      "city": "Molkom",
+      "address": "Skolgatan 3",
+      "lat": 59.59922,
+      "lng": 13.72553,
+      "inScope": true,
+      "scheduledMatches": 58,
+      "aliases": [
+        1578,
+        3296
+      ],
+      "key": "1578",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        364.1,
+        506.29
+      ]
+    },
+    {
+      "id": 3599,
+      "name": "Munkfors Arena",
+      "city": "",
+      "address": "",
+      "lat": 59.84035,
+      "lng": 13.56384,
+      "inScope": true,
+      "scheduledMatches": 64,
+      "aliases": [
+        3599,
+        3600
+      ],
+      "key": "3599",
+      "scope": "active",
+      "municipality": "1762",
+      "point": [
+        337.15,
+        426.62
+      ]
+    },
+    {
+      "id": 1579,
+      "name": "Nykroppahallen",
+      "city": "Nykroppa",
+      "address": "",
+      "lat": 59.62219,
+      "lng": 14.30011,
+      "inScope": true,
+      "scheduledMatches": 9,
+      "aliases": [
+        1579
+      ],
+      "key": "1579",
+      "scope": "active",
+      "municipality": "1782",
+      "point": [
+        459.88,
+        498.7
+      ]
+    },
+    {
+      "id": 1582,
+      "name": "Sannerudshallen",
+      "city": "Kil",
+      "address": "Karlslundsgatan 6",
+      "lat": 59.49858,
+      "lng": 13.31025,
+      "inScope": true,
+      "scheduledMatches": 50,
+      "aliases": [
+        1582,
+        3119
+      ],
+      "key": "1582",
+      "scope": "active",
+      "municipality": "1715",
+      "point": [
+        294.88,
+        539.54
+      ]
+    },
+    {
+      "id": 1583,
+      "name": "Skattkärrsskolan",
+      "city": "Skattkärr",
+      "address": "Skattkärrsvägen 44-46",
+      "lat": 59.41281,
+      "lng": 13.67128,
+      "inScope": true,
+      "scheduledMatches": 21,
+      "aliases": [
+        1583
+      ],
+      "key": "1583",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        355.06,
+        567.87
+      ]
+    },
+    {
+      "id": 1584,
+      "name": "Sparbankshallen Sunne",
+      "city": "Sunne",
+      "address": "",
+      "lat": 59.84233,
+      "lng": 13.16331,
+      "inScope": true,
+      "scheduledMatches": 96,
+      "aliases": [
+        1584,
+        3135
+      ],
+      "key": "1584",
+      "scope": "active",
+      "municipality": "1766",
+      "point": [
+        270.39,
+        425.97
+      ]
+    },
+    {
+      "id": 1585,
+      "name": "Sporthallen Gjutaren",
+      "city": "Karlstad",
+      "address": "Verkstadsgatan",
+      "lat": 59.38074,
+      "lng": 13.51572,
+      "inScope": true,
+      "scheduledMatches": 64,
+      "aliases": [
+        1585,
+        3215
+      ],
+      "key": "1585",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        329.13,
+        578.47
+      ]
+    },
+    {
+      "id": 1588,
+      "name": "Stjernehallen",
+      "city": "Torsby",
+      "address": "Fabriksgatan 3",
+      "lat": 60.14127,
+      "lng": 13.00461,
+      "inScope": true,
+      "scheduledMatches": 12,
+      "aliases": [
+        1588,
+        3134
+      ],
+      "key": "1588",
+      "scope": "active",
+      "municipality": "1737",
+      "point": [
+        243.94,
+        327.21
+      ]
+    },
+    {
+      "id": 1589,
+      "name": "Stora Vallahallen",
+      "city": "Degerfors",
+      "address": "Stora Vallavägen",
+      "lat": 59.24089,
+      "lng": 14.446,
+      "inScope": true,
+      "scheduledMatches": 54,
+      "aliases": [
+        1589
+      ],
+      "key": "1589",
+      "scope": "active",
+      "municipality": "1862",
+      "point": [
+        484.19,
+        624.67
+      ]
+    },
+    {
+      "id": 1590,
+      "name": "Storfors Sporthall",
+      "city": "Storfors",
+      "address": "Kroppavägen",
+      "lat": 59.54371,
+      "lng": 14.27944,
+      "inScope": true,
+      "scheduledMatches": 16,
+      "aliases": [
+        1590
+      ],
+      "key": "1590",
+      "scope": "active",
+      "municipality": "1760",
+      "point": [
+        456.43,
+        524.63
+      ]
+    },
+    {
+      "id": 1591,
+      "name": "Strandhallen Arvika",
+      "city": "Arvika",
+      "address": "Strandvägen 2",
+      "lat": 59.65505,
+      "lng": 12.58165,
+      "inScope": true,
+      "scheduledMatches": 193,
+      "aliases": [
+        1591,
+        3113
+      ],
+      "key": "1591",
+      "scope": "active",
+      "municipality": "1784",
+      "point": [
+        173.44,
+        487.84
+      ]
+    },
+    {
+      "id": 3156,
+      "name": "Södermalmshallen",
+      "city": "Kristinehamn",
+      "address": "",
+      "lat": 59.30579,
+      "lng": 14.11258,
+      "inScope": true,
+      "scheduledMatches": 39,
+      "aliases": [
+        3156,
+        3155
+      ],
+      "key": "3156",
+      "scope": "active",
+      "municipality": "1781",
+      "point": [
+        428.62,
+        603.23
+      ]
+    },
+    {
+      "id": 1596,
+      "name": "Tegnérhallen",
+      "city": "Säffle",
+      "address": "Tegnérgatan 20",
+      "lat": 59.12885,
+      "lng": 12.94137,
+      "inScope": true,
+      "scheduledMatches": 61,
+      "aliases": [
+        1596
+      ],
+      "key": "1596",
+      "scope": "active",
+      "municipality": "1785",
+      "point": [
+        233.4,
+        661.69
+      ]
+    },
+    {
+      "id": 2521,
+      "name": "Uddeholm Arena",
+      "city": "",
+      "address": "",
+      "lat": 60.03731,
+      "lng": 13.70162,
+      "inScope": true,
+      "scheduledMatches": 113,
+      "aliases": [
+        2521
+      ],
+      "key": "2521",
+      "scope": "active",
+      "municipality": "1783",
+      "point": [
+        360.12,
+        361.55
+      ]
+    },
+    {
+      "id": 4874,
+      "name": "Vallargärdets Sporthall",
+      "city": "Vallargärdet",
+      "address": "",
+      "lat": 59.4777318,
+      "lng": 13.5838109,
+      "inScope": true,
+      "scheduledMatches": 7,
+      "locationNote": "Ungefärlig position vid Vallargärdets skola.",
+      "locationSource": "OpenStreetMap, geokodad skoladress Diamantvägen 12",
+      "aliases": [
+        4874
+      ],
+      "key": "4874",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        340.48,
+        546.42
+      ]
+    },
+    {
+      "id": 1598,
+      "name": "Vålbergs Sporthall",
+      "city": "Vålberg",
+      "address": "Långgatan",
+      "lat": 59.38984,
+      "lng": 13.18751,
+      "inScope": true,
+      "scheduledMatches": 19,
+      "aliases": [
+        1598,
+        3136
+      ],
+      "key": "1598",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        274.42,
+        575.46
+      ]
+    },
+    {
+      "id": 1599,
+      "name": "Väse Sporthall",
+      "city": "Väse",
+      "address": "Guståsgatan 6",
+      "lat": 59.38565,
+      "lng": 13.85503,
+      "inScope": true,
+      "scheduledMatches": 110,
+      "aliases": [
+        1599,
+        3123
+      ],
+      "key": "1599",
+      "scope": "active",
+      "municipality": "1780",
+      "point": [
+        385.69,
+        576.84
+      ]
+    },
+    {
+      "id": 1600,
+      "name": "Årjängs Sporthall A",
+      "city": "Årjäng",
+      "address": "",
+      "lat": 59.38626,
+      "lng": 12.11976,
+      "inScope": true,
+      "scheduledMatches": 69,
+      "aliases": [
+        1600,
+        3124
+      ],
+      "key": "1600",
+      "scope": "active",
+      "municipality": "1765",
+      "point": [
+        96.45,
+        576.64
+      ]
+    },
+    {
+      "id": 1601,
+      "name": "Årjängs Sporthall B",
+      "city": "Årjäng",
+      "address": "",
+      "lat": 59.38626,
+      "lng": 12.11976,
+      "inScope": true,
+      "scheduledMatches": 8,
+      "aliases": [
+        1601,
+        3666
+      ],
+      "key": "1601",
+      "scope": "active",
+      "municipality": "1765",
+      "point": [
+        96.45,
+        576.64
+      ]
+    },
+    {
+      "id": 1602,
+      "name": "Älvstrandshallen",
+      "city": "Hagfors",
+      "address": "Geijersholmsvägen 5",
+      "lat": 60.03732,
+      "lng": 13.70092,
+      "inScope": true,
+      "scheduledMatches": 23,
+      "aliases": [
+        1602,
+        3110
+      ],
+      "key": "1602",
+      "scope": "active",
+      "municipality": "1783",
+      "point": [
+        360.0,
+        361.55
+      ]
+    },
+    {
+      "key": "history:hall:6f4859dd300d",
+      "name": "Krykebyhallen",
+      "city": "Arvika",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1784"
+    },
+    {
+      "key": "history:hall:35ad5bb03caa",
+      "name": "Taserudshallen",
+      "city": "Arvika",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1784"
+    },
+    {
+      "key": "history:hall:ac3482d17b68",
+      "name": "Ekhagshallen",
+      "city": "Dals-Långed",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1460"
+    },
+    {
+      "key": "history:hall:2ad78e5b96d8",
+      "name": "Gillevihallen",
+      "city": "Koppom",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1730"
+    },
+    {
+      "key": "history:hall:af45d46c8771",
+      "name": "Deje Sporthall B",
+      "city": "Deje",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1763"
+    },
+    {
+      "key": "history:hall:d5f67163c001",
+      "name": "Ferlinhallen",
+      "city": "Filipstad",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1782"
+    },
+    {
+      "key": "history:hall:70db3cc3221c",
+      "name": "Spångbergshallen",
+      "city": "Filipstad",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1782"
+    },
+    {
+      "key": "history:hall:04eaf1ab4807",
+      "name": "Djupsundshallen",
+      "city": "Skoghall",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1761"
+    },
+    {
+      "key": "history:hall:8bfeda658f97",
+      "name": "Hammarhallen B",
+      "city": "Hammarö",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1761"
+    },
+    {
+      "key": "history:hall:f9f5cb8ecc2c",
+      "name": "Bergslagshallen",
+      "city": "Karlskoga",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1883"
+    },
+    {
+      "key": "history:hall:bb139a0b7564",
+      "name": "Fröding Arena",
+      "city": "Karlstad",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1780"
+    },
+    {
+      "key": "history:hall:6580a40fa03b",
+      "name": "Mariebergshallen",
+      "city": "Karlstad",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1780"
+    },
+    {
+      "key": "history:hall:30bdf603430d",
+      "name": "Orrholmshallen",
+      "city": "Karlstad",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1780"
+    },
+    {
+      "key": "history:hall:5b6be3c9efb5",
+      "name": "Sundsta A-sal",
+      "city": "Karlstad",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1780"
+    },
+    {
+      "key": "history:hall:7286d2f728d9",
+      "name": "Sundsta Sporthall",
+      "city": "Karlstad",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1780"
+    },
+    {
+      "key": "history:hall:038fad98aab4",
+      "name": "Tolitahallen",
+      "city": "Tolita",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1715"
+    },
+    {
+      "key": "history:hall:80836574a4ee",
+      "name": "Vikstahallen",
+      "city": "Kil",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1715"
+    },
+    {
+      "key": "history:hall:7a64693d6db6",
+      "name": "Stenstalidshallen",
+      "city": "Kristinehamn",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1781"
+    },
+    {
+      "key": "history:hall:09167e8e67c8",
+      "name": "Forsnäshallen",
+      "city": "Munkfors",
+      "scope": "legends",
+      "reviewNote": "Historisk hallförteckning. Aktuell matchanvändning inte bekräftad.",
+      "municipality": "1762"
+    }
+  ],
+  "clubs": [
+    {
+      "id": 514,
+      "name": "Arvika IBF",
+      "venueId": 1591,
+      "lat": 59.65505,
+      "lng": 12.58165,
+      "city": "Arvika",
+      "key": "514",
+      "scope": "active",
+      "point": [
+        173.44,
+        487.84
+      ],
+      "municipality": "1784"
+    },
+    {
+      "id": 3962,
+      "name": "Arvika IBF Ungdom",
+      "venueId": 1591,
+      "lat": 59.65505,
+      "lng": 12.58165,
+      "city": "Arvika",
+      "key": "3962",
+      "scope": "active",
+      "point": [
+        173.44,
+        487.84
+      ],
+      "municipality": "1784"
+    },
+    {
+      "id": 604,
+      "name": "Billingsfors IBK",
+      "venueId": 2357,
+      "lat": 58.98485,
+      "lng": 12.24455,
+      "city": "Billingsfors",
+      "key": "604",
+      "scope": "active",
+      "point": [
+        117.25,
+        709.26
+      ],
+      "municipality": "1460"
+    },
+    {
+      "id": 757,
+      "name": "BK Vålberg",
+      "venueId": 1598,
+      "lat": 59.38984,
+      "lng": 13.18751,
+      "city": "Vålberg",
+      "key": "757",
+      "scope": "active",
+      "point": [
+        274.42,
+        575.46
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 402,
+      "name": "BKI Sunnanå",
+      "venueId": 3614,
+      "lat": 59.50692,
+      "lng": 13.30631,
+      "city": "Kil",
+      "key": "402",
+      "scope": "active",
+      "point": [
+        294.22,
+        536.78
+      ],
+      "municipality": "1715"
+    },
+    {
+      "id": 4028,
+      "name": "Bärstads BK",
+      "venueId": 1572,
+      "lat": 59.33165,
+      "lng": 13.47687,
+      "city": "Skoghall",
+      "key": "4028",
+      "scope": "active",
+      "point": [
+        322.65,
+        594.68
+      ],
+      "municipality": "1761"
+    },
+    {
+      "id": 796,
+      "name": "Degerfors IBK",
+      "venueId": 1589,
+      "lat": 59.24089,
+      "lng": 14.446,
+      "city": "Degerfors",
+      "key": "796",
+      "scope": "active",
+      "point": [
+        484.19,
+        624.67
+      ],
+      "municipality": "1862"
+    },
+    {
+      "id": 660,
+      "name": "Deje IBF",
+      "venueId": 1554,
+      "lat": 59.61082,
+      "lng": 13.46879,
+      "city": "Deje",
+      "key": "660",
+      "scope": "active",
+      "point": [
+        321.31,
+        502.45
+      ],
+      "municipality": "1763"
+    },
+    {
+      "id": 43,
+      "name": "Dotteviks IF",
+      "venueId": 1591,
+      "lat": 59.65505,
+      "lng": 12.58165,
+      "city": "Arvika",
+      "key": "43",
+      "scope": "active",
+      "point": [
+        173.44,
+        487.84
+      ],
+      "municipality": "1784"
+    },
+    {
+      "id": 1454,
+      "name": "Eda IF",
+      "venueId": 1568,
+      "lat": 59.88121,
+      "lng": 12.31019,
+      "city": "Charlottenberg",
+      "key": "1454",
+      "scope": "active",
+      "point": [
+        128.19,
+        413.12
+      ],
+      "municipality": "1730"
+    },
+    {
+      "id": 499,
+      "name": "Edebäck IBF",
+      "venueId": 1557,
+      "lat": 60.17345,
+      "lng": 13.4841,
+      "city": "Ekshärad",
+      "key": "499",
+      "scope": "active",
+      "point": [
+        323.86,
+        316.57
+      ],
+      "municipality": "1783"
+    },
+    {
+      "id": 1607,
+      "name": "Fagerås BK",
+      "venueId": 1558,
+      "lat": 59.52043,
+      "lng": 13.22271,
+      "city": "Fagerås",
+      "key": "1607",
+      "scope": "active",
+      "point": [
+        280.29,
+        532.32
+      ],
+      "municipality": "1715"
+    },
+    {
+      "id": 799,
+      "name": "Filipstad IBK",
+      "venueId": 4171,
+      "lat": 59.70925,
+      "lng": 14.16495,
+      "city": "Filipstad",
+      "key": "799",
+      "scope": "active",
+      "point": [
+        437.35,
+        469.93
+      ],
+      "municipality": "1782"
+    },
+    {
+      "id": 3992,
+      "name": "Finnskoga IF",
+      "venueId": 4191,
+      "lat": 60.71046,
+      "lng": 12.88585,
+      "city": "Sysslebäck",
+      "key": "3992",
+      "scope": "active",
+      "point": [
+        224.14,
+        139.16
+      ],
+      "municipality": "1737"
+    },
+    {
+      "id": 576,
+      "name": "Grums IBK",
+      "venueId": 1567,
+      "lat": 59.35414,
+      "lng": 13.10589,
+      "city": "Grums",
+      "key": "576",
+      "scope": "active",
+      "point": [
+        260.82,
+        587.25
+      ],
+      "municipality": "1764"
+    },
+    {
+      "id": 482,
+      "name": "GS 86 AIF",
+      "venueId": 1559,
+      "lat": 59.52853,
+      "lng": 13.48161,
+      "city": "Forshaga",
+      "key": "482",
+      "scope": "active",
+      "point": [
+        323.44,
+        529.64
+      ],
+      "municipality": "1763"
+    },
+    {
+      "id": 4048,
+      "name": "Gustavsfors IBK",
+      "venueId": 2521,
+      "lat": 60.03731,
+      "lng": 13.70162,
+      "city": "",
+      "key": "4048",
+      "scope": "active",
+      "point": [
+        360.12,
+        361.55
+      ],
+      "municipality": "1783"
+    },
+    {
+      "id": 661,
+      "name": "Hagfors IBS",
+      "venueId": 2521,
+      "lat": 60.03731,
+      "lng": 13.70162,
+      "city": "",
+      "key": "661",
+      "scope": "active",
+      "point": [
+        360.12,
+        361.55
+      ],
+      "municipality": "1783"
+    },
+    {
+      "id": 460,
+      "name": "Hagfors IF Uddeholm",
+      "venueId": 2521,
+      "lat": 60.03731,
+      "lng": 13.70162,
+      "city": "",
+      "key": "460",
+      "scope": "active",
+      "point": [
+        360.12,
+        361.55
+      ],
+      "municipality": "1783"
+    },
+    {
+      "id": 3924,
+      "name": "Herrhagens IF",
+      "venueId": 1585,
+      "lat": 59.38074,
+      "lng": 13.51572,
+      "city": "Karlstad",
+      "key": "3924",
+      "scope": "active",
+      "point": [
+        329.13,
+        578.47
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 1363,
+      "name": "Hertzöga BK",
+      "venueId": 4174,
+      "lat": 59.43171,
+      "lng": 13.42276,
+      "city": "",
+      "key": "1363",
+      "scope": "active",
+      "point": [
+        313.64,
+        561.63
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 458,
+      "name": "Hultsberg IBF",
+      "venueId": 1552,
+      "lat": 59.385,
+      "lng": 13.483,
+      "city": "Karlstad",
+      "key": "458",
+      "scope": "active",
+      "point": [
+        323.68,
+        577.06
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 1508,
+      "name": "IBF Lesjöfors",
+      "venueId": 1581,
+      "lat": 59.98406,
+      "lng": 14.17599,
+      "city": "Lesjöfors",
+      "key": "1508",
+      "scope": "active",
+      "point": [
+        439.19,
+        379.14
+      ],
+      "municipality": "1782"
+    },
+    {
+      "id": 3993,
+      "name": "IBK Björkås",
+      "venueId": 1552,
+      "lat": 59.385,
+      "lng": 13.483,
+      "city": "Karlstad",
+      "key": "3993",
+      "scope": "active",
+      "point": [
+        323.68,
+        577.06
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 110,
+      "name": "IFK Heden",
+      "venueId": 1599,
+      "lat": 59.38565,
+      "lng": 13.85503,
+      "city": "Väse",
+      "key": "110",
+      "scope": "active",
+      "point": [
+        385.69,
+        576.84
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 2940,
+      "name": "IFK Åmål",
+      "venueId": 2126,
+      "lat": 59.04296,
+      "lng": 12.70843,
+      "city": "Åmål",
+      "key": "2940",
+      "scope": "active",
+      "point": [
+        194.57,
+        690.06
+      ],
+      "municipality": "1492"
+    },
+    {
+      "id": 572,
+      "name": "Karlskoga IBF",
+      "venueId": 3740,
+      "lat": 59.33138,
+      "lng": 14.49545,
+      "city": "",
+      "key": "572",
+      "scope": "active",
+      "point": [
+        492.44,
+        594.77
+      ],
+      "municipality": "1883"
+    },
+    {
+      "id": 1379,
+      "name": "Karlstad IBF Bredd",
+      "venueId": 1587,
+      "lat": 59.385,
+      "lng": 13.483,
+      "city": "Karlstad",
+      "key": "1379",
+      "scope": "active",
+      "point": [
+        323.68,
+        577.06
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 361,
+      "name": "Karlstad IBF Ungdom",
+      "venueId": 1551,
+      "lat": 59.385,
+      "lng": 13.483,
+      "city": "Karlstad",
+      "key": "361",
+      "scope": "active",
+      "point": [
+        323.68,
+        577.06
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 459,
+      "name": "Karlstads IBK",
+      "venueId": 1552,
+      "lat": 59.385,
+      "lng": 13.483,
+      "city": "Karlstad",
+      "key": "459",
+      "scope": "active",
+      "point": [
+        323.68,
+        577.06
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 461,
+      "name": "Kristinehamns IBF",
+      "venueId": 1550,
+      "lat": 59.3112,
+      "lng": 14.11305,
+      "city": "Kristinehamn",
+      "key": "461",
+      "scope": "active",
+      "point": [
+        428.7,
+        601.44
+      ],
+      "municipality": "1781"
+    },
+    {
+      "id": 4044,
+      "name": "Kronans FK",
+      "venueId": 3155,
+      "lat": 59.30579,
+      "lng": 14.11258,
+      "city": "Kristinehamn",
+      "key": "4044",
+      "scope": "active",
+      "point": [
+        428.62,
+        603.23
+      ],
+      "municipality": "1781"
+    },
+    {
+      "id": 693,
+      "name": "Lekvattnets BK",
+      "venueId": 4817,
+      "lat": 60.1412,
+      "lng": 13.00255,
+      "city": "Torsby",
+      "key": "693",
+      "scope": "active",
+      "point": [
+        243.59,
+        327.23
+      ],
+      "municipality": "1737"
+    },
+    {
+      "id": 153,
+      "name": "Mangskog SK",
+      "venueId": 1591,
+      "lat": 59.65505,
+      "lng": 12.58165,
+      "city": "Arvika",
+      "key": "153",
+      "scope": "active",
+      "point": [
+        173.44,
+        487.84
+      ],
+      "municipality": "1784"
+    },
+    {
+      "id": 705,
+      "name": "Munkfors IBK",
+      "venueId": 3599,
+      "lat": 59.84035,
+      "lng": 13.56384,
+      "city": "",
+      "key": "705",
+      "scope": "active",
+      "point": [
+        337.15,
+        426.62
+      ],
+      "municipality": "1762"
+    },
+    {
+      "id": 321,
+      "name": "Nilsby IK",
+      "venueId": 3614,
+      "lat": 59.50692,
+      "lng": 13.30631,
+      "city": "Kil",
+      "key": "321",
+      "scope": "active",
+      "point": [
+        294.22,
+        536.78
+      ],
+      "municipality": "1715"
+    },
+    {
+      "id": 784,
+      "name": "Nordmarkens IBF",
+      "venueId": 1600,
+      "lat": 59.38626,
+      "lng": 12.11976,
+      "city": "Årjäng",
+      "key": "784",
+      "scope": "active",
+      "point": [
+        96.45,
+        576.64
+      ],
+      "municipality": "1765"
+    },
+    {
+      "id": 4018,
+      "name": "Nykroppa FBC",
+      "venueId": 1579,
+      "lat": 59.62219,
+      "lng": 14.30011,
+      "city": "Nykroppa",
+      "key": "4018",
+      "scope": "active",
+      "point": [
+        459.88,
+        498.7
+      ],
+      "municipality": "1782"
+    },
+    {
+      "id": 3774,
+      "name": "Olsäters SK",
+      "venueId": 1554,
+      "lat": 59.61082,
+      "lng": 13.46879,
+      "city": "Deje",
+      "key": "3774",
+      "scope": "active",
+      "point": [
+        321.31,
+        502.45
+      ],
+      "municipality": "1763"
+    },
+    {
+      "id": 306,
+      "name": "SK Örnen",
+      "venueId": 1578,
+      "lat": 59.59922,
+      "lng": 13.72553,
+      "city": "Molkom",
+      "key": "306",
+      "scope": "active",
+      "point": [
+        364.1,
+        506.29
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 486,
+      "name": "Skattkärrs IK",
+      "venueId": 1599,
+      "lat": 59.38565,
+      "lng": 13.85503,
+      "city": "Väse",
+      "key": "486",
+      "scope": "active",
+      "point": [
+        385.69,
+        576.84
+      ],
+      "municipality": "1780"
+    },
+    {
+      "id": 1681,
+      "name": "Skoghalls IBK Utveckling",
+      "venueId": 1572,
+      "lat": 59.33165,
+      "lng": 13.47687,
+      "city": "Skoghall",
+      "key": "1681",
+      "scope": "active",
+      "point": [
+        322.65,
+        594.68
+      ],
+      "municipality": "1761"
+    },
+    {
+      "id": 715,
+      "name": "Storfors IBF",
+      "venueId": 1590,
+      "lat": 59.54371,
+      "lng": 14.27944,
+      "city": "Storfors",
+      "key": "715",
+      "scope": "active",
+      "point": [
+        456.43,
+        524.63
+      ],
+      "municipality": "1760"
+    },
+    {
+      "id": 1011,
+      "name": "Sunne IBK",
+      "venueId": 1584,
+      "lat": 59.84233,
+      "lng": 13.16331,
+      "city": "Sunne",
+      "key": "1011",
+      "scope": "active",
+      "point": [
+        270.39,
+        425.97
+      ],
+      "municipality": "1766"
+    },
+    {
+      "id": 4023,
+      "name": "Säffle IBF",
+      "venueId": 1596,
+      "lat": 59.12885,
+      "lng": 12.94137,
+      "city": "Säffle",
+      "key": "4023",
+      "scope": "active",
+      "point": [
+        233.4,
+        661.69
+      ],
+      "municipality": "1785"
+    },
+    {
+      "id": 4039,
+      "name": "Ulvsby IF",
+      "venueId": null,
+      "lat": null,
+      "lng": null,
+      "city": "",
+      "key": "4039",
+      "scope": "active"
+    },
+    {
+      "id": 3991,
+      "name": "Villastaden Kristinehamns IF IBF",
+      "venueId": 1550,
+      "lat": 59.3112,
+      "lng": 14.11305,
+      "city": "Kristinehamn",
+      "key": "3991",
+      "scope": "active",
+      "point": [
+        428.7,
+        601.44
+      ],
+      "municipality": "1781"
+    },
+    {
+      "id": 293,
+      "name": "Åmotfors IF",
+      "venueId": 1569,
+      "lat": 59.7677,
+      "lng": 12.35631,
+      "city": "Åmotfors",
+      "key": "293",
+      "scope": "active",
+      "point": [
+        135.88,
+        450.62
+      ],
+      "municipality": "1730"
+    },
+    {
+      "id": 717,
+      "name": "Åmåls IBK",
+      "venueId": 2126,
+      "lat": 59.04296,
+      "lng": 12.70843,
+      "city": "Åmål",
+      "key": "717",
+      "scope": "active",
+      "point": [
+        194.57,
+        690.06
+      ],
+      "municipality": "1492"
+    },
+    {
+      "id": 1075,
+      "name": "Åsmyra IBK",
+      "venueId": 1566,
+      "lat": 59.53663,
+      "lng": 13.4792,
+      "city": "Forshaga",
+      "key": "1075",
+      "scope": "active",
+      "point": [
+        323.04,
+        526.96
+      ],
+      "municipality": "1763"
+    },
+    {
+      "key": "history:club:1266",
+      "name": "Bortans IK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:54568",
+      "name": "Dotteviks IF Ungdom",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:1452",
+      "name": "Edane GOIF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:34360",
+      "name": "Guldkusten IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:1846",
+      "name": "Gunnarskog IK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:27974",
+      "name": "Minnebergs IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:51336",
+      "name": "Solvik IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:3772",
+      "name": "Stavnäs",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:27972",
+      "name": "Degerfors Finska Förening",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:29457",
+      "name": "Flogneds Innebandy & HC",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:9311",
+      "name": "Koppoms IK",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:27201",
+      "name": "Filipstads IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:26067",
+      "name": "Forshyttans IK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:25921",
+      "name": "Nykroppa IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:23232",
+      "name": "Forshaga AIK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:23161",
+      "name": "Forshaga IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:22729",
+      "name": "Forshaga Kamrat-sportförening",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:39715",
+      "name": "Knutpunkten IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:27973",
+      "name": "Skiveds IK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:20965",
+      "name": "Tetra Pak KF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:54121",
+      "name": "Vargåna Ullerud IF",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:90222",
+      "name": "Bergsängs IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:36492",
+      "name": "Hagfors IBS Veteraner",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:44247",
+      "name": "Hagfors If Ungdom",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:37026",
+      "name": "Höökens IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:28625",
+      "name": "IBK Sättrastrand",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:3438",
+      "name": "Råda IK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:34271",
+      "name": "Råda IBS",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:30929",
+      "name": "Hammarlunden IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:20871",
+      "name": "Hammarö IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:31407",
+      "name": "Holken IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:34509",
+      "name": "IF Solstabollen 98",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:28382",
+      "name": "IBK Inre Hamn",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:23268",
+      "name": "Lövet IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:34409",
+      "name": "Lövnäs IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:31183",
+      "name": "Räddningstjänsten IF Hammarö",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:12548",
+      "name": "Skoghalls BGK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:29772",
+      "name": "Skoghalls IBK",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:30416",
+      "name": "Tors IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:28030",
+      "name": "Ulvsby IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:29715",
+      "name": "Vidön IK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:28282",
+      "name": "Bofors IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:33543",
+      "name": "Karlberg IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:53469",
+      "name": "Karlskoga FBC",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:21131",
+      "name": "Karlskoga FK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:21345",
+      "name": "Karlskoga IK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:22340",
+      "name": "Alsters IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:31737",
+      "name": "Björknäs IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:26102",
+      "name": "BK Fröding",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:34411",
+      "name": "BK Hammarö 06",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:23666",
+      "name": "Boccia BOIS",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:25305",
+      "name": "Botorpsheas IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:45507",
+      "name": "Carlstad IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:19792",
+      "name": "Carlstads IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:32494",
+      "name": "Club 30 IBK",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:28129",
+      "name": "Fallängens IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:45579",
+      "name": "FC Karlstad",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:36528",
+      "name": "Färjestad IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:30766",
+      "name": "Färjestads IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:90275",
+      "name": "Gruvlyckans IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:31513",
+      "name": "Haga AIK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:19793",
+      "name": "Herrhagen IK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:53873",
+      "name": "Herrhagens IBF",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:27033",
+      "name": "Hultsberg IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:2212",
+      "name": "I 2 IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:22345",
+      "name": "IBF Team Alfred",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:36434",
+      "name": "IBK Gruvlyckan",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:27091",
+      "name": "IBK Gruvlyckan Karlstad",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:30385",
+      "name": "IBK Höje",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:33713",
+      "name": "IBK Tvärhult",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:32842",
+      "name": "IBK Vargen",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:3196",
+      "name": "IF Nyedshov/Lindfors",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:22763",
+      "name": "IF Solstabollen",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:2333",
+      "name": "IFK Väse",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:31084",
+      "name": "Ilanda IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:19790",
+      "name": "Karlstad IBF",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:21524",
+      "name": "Karlstad sport-och idrottsförening",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:31184",
+      "name": "Karlstad/Skoghall IBF 95",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:2498",
+      "name": "KAU IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:24420",
+      "name": "Kilsta IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:90345",
+      "name": "Klara IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:23543",
+      "name": "Kroppkärrs IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:35336",
+      "name": "Kvarntorps IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:22631",
+      "name": "Lindfors IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:9313",
+      "name": "Lindfors IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:28220",
+      "name": "Lorenberg IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:90349",
+      "name": "Norrstrands IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:9317",
+      "name": "Norrstrands IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:28998",
+      "name": "Nyeds IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:33285",
+      "name": "Orrholmens IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:21766",
+      "name": "Ruds IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:22344",
+      "name": "Ruds IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:25383",
+      "name": "Saga SK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:36433",
+      "name": "Sjöstads Veteraner IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:23714",
+      "name": "Skåre IBS",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:33602",
+      "name": "Solidens IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:33544",
+      "name": "Solsta-97 IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:19794",
+      "name": "Solstadens BK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:9327",
+      "name": "Sommaro IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:90363",
+      "name": "Stockfallets IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:31512",
+      "name": "Stodene IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:27034",
+      "name": "Sundsta IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:25231",
+      "name": "Tingvalla IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:90365",
+      "name": "Tingvallastaden IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:36488",
+      "name": "Tvärhult IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:21765",
+      "name": "Tvärhults IK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:20796",
+      "name": "Vikens IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:90368",
+      "name": "Vålbergs IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:29921",
+      "name": "Vänerstrands IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:52094",
+      "name": "Värmlands MIBF",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:23269",
+      "name": "Ängbacken BK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:32176",
+      "name": "Glänne IK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:31553",
+      "name": "IBK Kil",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:1008",
+      "name": "A 9 IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:30449",
+      "name": "Björneborgs IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:30667",
+      "name": "Brogårdens IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:23785",
+      "name": "IBK Kristinehamn",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:54575",
+      "name": "Kristinehamns IBF Bredd",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:41386",
+      "name": "Lusasken IBK",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:25836",
+      "name": "FSK Forsfuran Munkfors",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:28347",
+      "name": "Munkfors IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:2869",
+      "name": "Lundsbergs IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:54483",
+      "name": "Lysvik IBF",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:25431",
+      "name": "Lysviks IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:22082",
+      "name": "Lysviks IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:4530",
+      "name": "Västra Ämteviks IF",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:3553",
+      "name": "SK Sifhälla",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:30022",
+      "name": "Svanskogs IBF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:9328",
+      "name": "Säffle SK",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:30638",
+      "name": "Säffle IBK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:4490",
+      "name": "Värmlandsbro SK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:34405",
+      "name": "Fryksände BK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:9321",
+      "name": "Rinns AIK",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:9305",
+      "name": "Karlanda IF",
+      "scope": "legends",
+      "reviewNote": "Historisk förening.",
+      "sourceActive": false
+    },
+    {
+      "key": "history:club:14274",
+      "name": "Lennartsfors IF",
+      "scope": "legends",
+      "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
+      "sourceActive": true
+    },
+    {
+      "key": "history:club:mb87",
+      "name": "MB87",
+      "scope": "legends",
+      "reviewNote": "Historiskt innebandynamn.",
+      "source": "Namn uppgivet av VDK."
+    },
+    {
+      "key": "history:club:tosse",
+      "name": "Tösse IF",
+      "scope": "legends",
+      "reviewNote": "Historiskt innebandynamn.",
+      "source": "https://bohuslan-dalsland.svenskfotboll.se/nyheter/2026/besok-his-tosse-if/"
+    }
+  ],
+  "municipalities": [
+    {
+      "id": "1780",
+      "name": "Karlstad"
+    },
+    {
+      "id": "1784",
+      "name": "Arvika"
+    },
+    {
+      "id": "1785",
+      "name": "Säffle"
+    },
+    {
+      "id": "1460",
+      "name": "Bengtsfors"
+    },
+    {
+      "id": "1492",
+      "name": "Åmål"
+    },
+    {
+      "id": "1760",
+      "name": "Storfors"
+    },
+    {
+      "id": "1761",
+      "name": "Hammarö"
+    },
+    {
+      "id": "1715",
+      "name": "Kil"
+    },
+    {
+      "id": "1730",
+      "name": "Eda"
+    },
+    {
+      "id": "1764",
+      "name": "Grums"
+    },
+    {
+      "id": "1765",
+      "name": "Årjäng"
+    },
+    {
+      "id": "1737",
+      "name": "Torsby"
+    },
+    {
+      "id": "1762",
+      "name": "Munkfors"
+    },
+    {
+      "id": "1763",
+      "name": "Forshaga"
+    },
+    {
+      "id": "1766",
+      "name": "Sunne"
+    },
+    {
+      "id": "1781",
+      "name": "Kristinehamn"
+    },
+    {
+      "id": "1782",
+      "name": "Filipstad"
+    },
+    {
+      "id": "1783",
+      "name": "Hagfors"
+    },
+    {
+      "id": "1862",
+      "name": "Degerfors"
+    },
+    {
+      "id": "1883",
+      "name": "Karlskoga"
+    }
+  ],
+  "sources": [
+    "https://www.innebandy.se/varmland/tavling/innebandyhallar",
+    "https://innebandy.se/varmland/historikstatistik/varmlandska-innebandyforeningar",
+    "https://www.scb.se/vara-tjanster/oppna-data/oppna-geodata/regso/"
+  ]
+}
