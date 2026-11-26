@@ -154,3 +154,27 @@ profile explains that these are self-reported experiences, not federation rankin
 Contact privacy, separate opt-ins, revocation, bronze/gold display and checklist
 persistence were tested through real local handlers at 320/390/1440 px without
 screenshots or changes to production members' profile settings.
+
+## Referee calendar years
+
+Optional `member_profiles.referee_start_year` defaults to NULL; migrated profiles
+are not assigned an inferred year. The profile accepts an integer 1900 through the
+current Swedish calendar year, or empty/null to clear. Missing fields from older
+clients preserve the saved year. Values and all sharing choices save in one UPSERT.
+
+`server/referee-years.mjs` computes current year in Europe/Stockholm minus start
+year, not completed anniversaries or active seasons. Breaks are not subtracted,
+as explained next to the field. Cumulative badges: 5 bronze, 10 silver, 20 gold.
+They recalculate on read and after save; no scheduled job or external lookup.
+Clearing/correcting the year removes badges whose milestones no longer apply.
+
+Own profile includes the saved year, elapsed calendar years and milestone preview.
+Other members never receive the raw start year. They receive only earned career
+badges when the existing share_badges opt-in is on. Existing membership and photo
+permissions are unchanged. Years are self-reported, not an official accreditation.
+Profile display distinguishes Career/Domarår badges from Active/Legends badges.
+
+Tests cover exact thresholds, cumulative milestones, malformed/future years,
+clearing, old-client saves, sharing/revocation, raw-year privacy and the Swedish
+New Year boundary. Browser tests at 320/390/1440 px use activated test accounts
+and do not change production members' start years or disclosure choices.
