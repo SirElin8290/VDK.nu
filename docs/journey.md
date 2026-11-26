@@ -1,4 +1,45 @@
-# Min domarresa – manual checklist
+# Min domarresa – approval requirement
+
+All new user-supplied halls, clubs and referees must be proposed and approved by
+an administrator before they appear in any catalogue, map totals or badges.
+This includes administrators submitting a new name themselves. Ordinary match
+statistics and the existing source-backed catalogues are separate from proposals.
+
+- `POST /api/journey/items`: creates a pending journey_proposals row, never a
+  private or shared catalogue item. Ignore any client-supplied status/shared flag.
+- `GET /api/journey`: includes only this member's proposal statuses/comments.
+  Pending/rejected names are not selectable and cannot affect progress.
+- `GET /api/journey/proposals`: ADMIN only; all pending proposals plus the most
+  recent 50 reviewed decisions. Does not require referee membership from admins.
+- `POST /api/journey/proposals/:id/review`: ADMIN only. Decision is approved or
+  rejected. Approval requires `verified:true`, confirming existence or historical
+  existence. Admin may correct name, scope and municipality. Optional comment is
+  shown to the submitter. An active hall needs a valid municipality code.
+- Approval publishes one canonical shared entry. Same-name approvals from different
+  submitters reuse it. No automatic experience checkmark is awarded.
+- Rejection publishes nothing. A reviewed decision cannot be replayed or changed
+  by a competing reviewer. The atomic transaction retains reviewer ID/time/comment.
+- Members cannot submit another user's identity, review, classify catalogue items,
+  or inspect anyone else's pending submissions. Mutations retain origin checks.
+
+Existing journey_manual_items are archived and migrated idempotently into pending
+proposals with unique legacy_item_id. Existing custom:* checkmarks stay archived;
+if that proposal is approved, its original member's checkmark is copied to the
+approved canonical key. They are excluded from counts until approval. Existing
+shared entries originally authored by admins remain in the approved catalogue.
+
+Admin UI: Administration > Domarresan – förslag. Member UI: Föreslå ett tillägg,
+optional evidence, and Mina förslag with pending/approved/rejected statuses.
+No email notifications are sent by this workflow. Proposal evidence is visible to
+admins; approved names are shared, while experience selections remain private.
+
+Validated with unit tests for all categories, strict verification, role/origin
+checks, no pre-approval count changes, privacy, rejection, duplicate approval,
+legacy migration and restoring selected experience only after approval. Browser
+checks cover the full member/admin flow at 320, 390 and 1440 px.
+
+The sections below describe the underlying checklist and map. Any earlier private
+addition behaviour is superseded by this approval requirement.
 
 The private member tab now uses manually selected grids, without maps or external
 requests. It is separate from ordinary match statistics. The saved seasonal hall
