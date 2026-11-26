@@ -1,6 +1,7 @@
+import seriesCatalogue from '../data-catalogs/journey-series.json' with {type:'json'};
 import catalog from '../data-catalogs/journey-history.json' with {type:'json'};
 import {normalizeName} from '../server/stats-source.mjs';
-const kinds=['halls','clubs','colleagues'];
+const kinds=['halls','clubs','colleagues','series'];
 export function initializeJourney(db){
  db.exec(`CREATE TABLE IF NOT EXISTS match_referees(match_id INTEGER NOT NULL,referee_id INTEGER NOT NULL,name TEXT NOT NULL,normalized_name TEXT NOT NULL,PRIMARY KEY(match_id,referee_id));
  CREATE TABLE IF NOT EXISTS journey_manual_selections(user_id INTEGER NOT NULL,kind TEXT NOT NULL,item_key TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(user_id,kind,item_key));
@@ -32,7 +33,7 @@ function catalogues(db,user,target=catalog){
  const future=new Set();const snapshot=db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name='availability_snapshot'").get()?db.prepare('SELECT data FROM availability_snapshot WHERE id=1').get():null;if(snapshot)for(const m of JSON.parse(snapshot.data).rows||[])for(const name of m.referees||[])future.add(normalizeName(name));
  const retained=new Set(db.prepare("SELECT item_key FROM journey_manual_selections WHERE user_id=? AND kind='colleagues'").all(user.id).map(x=>x.item_key));
  const colleagues=db.prepare('SELECT id,name,normalized_name,regional FROM journey_referee_directory').all().filter(r=>(r.regional||retained.has(String(r.id)))&&r.id!==Number(profile?.referee_id)&&r.normalized_name!==normalizeName(user.name)).map(r=>({key:String(r.id),name:r.name,scope:current.has(r.id)||future.has(r.normalized_name)?'active':'legends',reviewNote:current.has(r.id)||future.has(r.normalized_name)?'Förekommer i årets matchunderlag.':'Historiskt matchunderlag; aktuell aktivitet inte bekräftad.'}));
- const lists={halls:target.halls.map(h=>({...h,key:h.key||String(h.id),scope:h.scope||'active',city:h.city||''})),clubs:target.clubs.map(c=>({...c,key:c.key||String(c.id),scope:c.scope||'active'})),colleagues};
+ const lists={series:seriesCatalogue.map(x=>({...x})),halls:target.halls.map(h=>({...h,key:h.key||String(h.id),scope:h.scope||'active',city:h.city||''})),clubs:target.clubs.map(c=>({...c,key:c.key||String(c.id),scope:c.scope||'active'})),colleagues};
  for(const item of db.prepare('SELECT * FROM journey_global_items').all())lists[item.kind]?.push({...item,key:'extra:'+item.id,global:true});
  const overrides=new Map(db.prepare('SELECT * FROM journey_catalog_overrides').all().map(x=>[x.kind+':'+x.item_key,x]));
  for(const kind of kinds){for(const item of lists[kind]){const override=overrides.get(kind+':'+item.key);if(override){item.scope=override.scope;item.municipality=override.municipality||item.municipality;item.reviewNote='Klassificerad av VDK.';}if(item.municipality)item.municipalityName=catalog.municipalities.find(m=>m.id===item.municipality)?.name;}lists[kind].sort((a,b)=>a.name.localeCompare(b.name,'sv'));}
@@ -52,7 +53,7 @@ export async function journeyAction({db,path,req,auth,json,fail,body={}}){
  const user=auth(req);if(!db.prepare("SELECT 1 FROM memberships WHERE user_id=? AND season=? AND category='active' AND status='active' AND paid=1").get(user.id,user.season))fail(403,'Min domarresa är för godkända aktiva domarmedlemmar.');
  if(path==='/api/journey'){if(req.method!=='GET')fail(405,'Metoden stöds inte.');json(200,journeyView(db,user));return true;}
  if(req.method!=='POST')fail(405,'Metoden stöds inte.');
- const {kind}=body;if(!kinds.includes(kind))fail(400,'Välj hallar, föreningar eller kollegor.');
+ const {kind}=body;if(!kinds.includes(kind))fail(400,'Välj hallar, föreningar, kollegor eller serier.');
  const scope=body.scope||'legends';
  const municipality=body.municipality||null;
  if(body.scope&&!['active','legends'].includes(scope))fail(400,'Välj Aktiva eller Legends.');
@@ -108,3 +109,7 @@ function reviewAction({db,path,req,auth,json,fail,body,reviewMatch}){
  if(db.transaction)db.transaction(apply);else{db.exec('BEGIN');try{apply();db.exec('COMMIT');}catch(e){db.exec('ROLLBACK');throw e;}}
  json(200,reviewList(db));return true;
 }
+
+// Only aggregate badges and explicitly selected series are shareable, never raw
+// hall/club/colleague checklists, proposals, reviewer notes or map coordinates.
+export function journeyProfileSummary(db,user){const view=journeyView(db,user);const titles={halls:'Hallar',clubs:'Föreningar',colleagues:'Domarkollegor',series:'Serier'};const badges=[];for(const scope of ['active','legends']){for(const [kind,p]of Object.entries(view.groups[scope].progress))if(p.tier!=='none')badges.push({kind,scope,tier:p.tier,label:titles[kind],done:p.done,total:p.total});if(view.groups[scope].doubleSilver)badges.push({kind:'combined',scope,tier:'silver',label:'Dubbelresan'});}return {badges,series:view.series.filter(s=>s.selected).map(s=>({key:s.key,name:s.name,group:s.group||'Övriga serier'}))};}

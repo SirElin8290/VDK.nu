@@ -124,3 +124,33 @@ address Diamantvägen 12 (OpenStreetMap); all initial active halls have position
 Browser validation: 320/390/1440 px, scope navigation, historic selections after
 reload, admin moves, map-to-tile navigation, gray/blue/green and reverse transitions,
 zoom controls and no horizontal overflow. No screenshots were created.
+
+## Shared member profile and series checklist
+
+The fixed `journey-series.json` catalogue adds 29 lifetime experience boxes:
+boys red 1–7, girls red 1–4, men 5–2, women 3–1, HJ17/DJ17, male/female
+HJ18/DJ18 JAS, HJ16–20, senior/junior DM group/finals and Lilla VM group/finals.
+No green/blue series. These are personal experience statements, not eligibility.
+They use existing manual selection, badges and admin proposal approval protections.
+The Series tab opens from the profile via `?category=series` and uses the active
+collection for the fixed lifetime checklist. Historical section badges stay separate.
+
+Member profile sharing has a contact master switch and individual switches for
+email, phone, city, address, departure and bio. Existing shared contact permissions
+migrate unchanged; new badge/series sharing defaults off. Old clients retain their
+previous all-contact sharing semantics, without ever enabling badge/series sharing.
+Photo sharing remains independent. Login email is never substituted for contact email.
+
+`journeyProfileSummary` returns only earned badge aggregates and names of selected
+series. No hall/club/colleague lists, map coordinates or proposal metadata reach
+another member's profile. Separate share_badges/share_series opt-ins control the
+response itself. Revoking either permission stops subsequent reads immediately.
+Only paid approved members or admins can read shared profiles/photos; temporary
+members can still edit their own profile and see directory names, without contact
+fields or shared images. Member directory pictures use the same protected endpoint.
+
+The owner can preview the shared profile and open the series checklist. The shared
+profile explains that these are self-reported experiences, not federation ranking.
+Contact privacy, separate opt-ins, revocation, bronze/gold display and checklist
+persistence were tested through real local handlers at 320/390/1440 px without
+screenshots or changes to production members' profile settings.

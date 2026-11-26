@@ -1,0 +1,176 @@
+[
+  {
+    "key": "p-red-1",
+    "name": "Pojkar Röd serie 1",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "p-red-2",
+    "name": "Pojkar Röd serie 2",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "p-red-3",
+    "name": "Pojkar Röd serie 3",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "p-red-4",
+    "name": "Pojkar Röd serie 4",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "p-red-5",
+    "name": "Pojkar Röd serie 5",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "p-red-6",
+    "name": "Pojkar Röd serie 6",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "p-red-7",
+    "name": "Pojkar Röd serie 7",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "f-red-1",
+    "name": "Flickor Röd serie 1",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "f-red-2",
+    "name": "Flickor Röd serie 2",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "f-red-3",
+    "name": "Flickor Röd serie 3",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "f-red-4",
+    "name": "Flickor Röd serie 4",
+    "group": "Röd serie",
+    "scope": "active"
+  },
+  {
+    "key": "h5",
+    "name": "Herrar division 5",
+    "group": "Seniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "h4",
+    "name": "Herrar division 4",
+    "group": "Seniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "h3",
+    "name": "Herrar division 3",
+    "group": "Seniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "h2",
+    "name": "Herrar division 2",
+    "group": "Seniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "d3",
+    "name": "Damer division 3",
+    "group": "Seniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "d2",
+    "name": "Damer division 2",
+    "group": "Seniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "d1",
+    "name": "Damer division 1",
+    "group": "Seniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "hj17",
+    "name": "HJ17 Region",
+    "group": "Juniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "dj17",
+    "name": "DJ17 Region",
+    "group": "Juniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "hj18-jas",
+    "name": "HJ18 / JAS – herrar",
+    "group": "Juniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "dj18-jas",
+    "name": "DJ18 / JAS – damer",
+    "group": "Juniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "hj16-20",
+    "name": "HJ16–20",
+    "group": "Juniorserier",
+    "scope": "active"
+  },
+  {
+    "key": "dm-senior-gruppspel",
+    "name": "Senior-DM – gruppspel",
+    "group": "DM och Lilla VM",
+    "scope": "active"
+  },
+  {
+    "key": "dm-senior-slutspel",
+    "name": "Senior-DM – slutspel",
+    "group": "DM och Lilla VM",
+    "scope": "active"
+  },
+  {
+    "key": "dm-junior-gruppspel",
+    "name": "Junior-DM – gruppspel",
+    "group": "DM och Lilla VM",
+    "scope": "active"
+  },
+  {
+    "key": "dm-junior-slutspel",
+    "name": "Junior-DM – slutspel",
+    "group": "DM och Lilla VM",
+    "scope": "active"
+  },
+  {
+    "key": "lilla-vm-gruppspel",
+    "name": "Lilla VM – gruppspel",
+    "group": "DM och Lilla VM",
+    "scope": "active"
+  },
+  {
+    "key": "lilla-vm-slutspel",
+    "name": "Lilla VM – slutspel",
+    "group": "DM och Lilla VM",
+    "scope": "active"
+  }
+]
