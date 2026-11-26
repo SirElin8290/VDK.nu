@@ -1829,7 +1829,9 @@
       "lng": null,
       "city": "",
       "key": "4039",
-      "scope": "active"
+      "scope": "active",
+      "locationNote": "Ulvsby i Karlstads kommun. Verifierad hemmaarena saknas i underlaget.",
+      "municipality": "1780"
     },
     {
       "id": 3991,
@@ -1896,945 +1898,1080 @@
       "name": "Bortans IK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1784"
     },
     {
       "key": "history:club:54568",
       "name": "Dotteviks IF Ungdom",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1784"
     },
     {
       "key": "history:club:1452",
       "name": "Edane GOIF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1784"
     },
     {
       "key": "history:club:34360",
       "name": "Guldkusten IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1784"
     },
     {
       "key": "history:club:1846",
       "name": "Gunnarskog IK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1784"
     },
     {
       "key": "history:club:27974",
       "name": "Minnebergs IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1784"
     },
     {
       "key": "history:club:51336",
       "name": "Solvik IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1784"
     },
     {
       "key": "history:club:3772",
       "name": "Stavnäs",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1784"
     },
     {
       "key": "history:club:27972",
       "name": "Degerfors Finska Förening",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1862"
     },
     {
       "key": "history:club:29457",
       "name": "Flogneds Innebandy & HC",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1730"
     },
     {
       "key": "history:club:9311",
       "name": "Koppoms IK",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1730"
     },
     {
       "key": "history:club:27201",
       "name": "Filipstads IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1782"
     },
     {
       "key": "history:club:26067",
       "name": "Forshyttans IK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1782"
     },
     {
       "key": "history:club:25921",
       "name": "Nykroppa IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1782"
     },
     {
       "key": "history:club:23232",
       "name": "Forshaga AIK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1763"
     },
     {
       "key": "history:club:23161",
       "name": "Forshaga IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1763"
     },
     {
       "key": "history:club:22729",
       "name": "Forshaga Kamrat-sportförening",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1763"
     },
     {
       "key": "history:club:39715",
       "name": "Knutpunkten IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1763"
     },
     {
       "key": "history:club:27973",
       "name": "Skiveds IK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1763"
     },
     {
       "key": "history:club:20965",
       "name": "Tetra Pak KF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1763"
     },
     {
       "key": "history:club:54121",
       "name": "Vargåna Ullerud IF",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1763"
     },
     {
       "key": "history:club:90222",
       "name": "Bergsängs IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1783"
     },
     {
       "key": "history:club:36492",
       "name": "Hagfors IBS Veteraner",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1783"
     },
     {
       "key": "history:club:44247",
       "name": "Hagfors If Ungdom",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1783"
     },
     {
       "key": "history:club:37026",
       "name": "Höökens IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1783"
     },
     {
       "key": "history:club:28625",
       "name": "IBK Sättrastrand",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1783"
     },
     {
       "key": "history:club:3438",
       "name": "Råda IK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1783"
     },
     {
       "key": "history:club:34271",
       "name": "Råda IBS",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1783"
     },
     {
       "key": "history:club:30929",
       "name": "Hammarlunden IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:20871",
       "name": "Hammarö IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:31407",
       "name": "Holken IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:34509",
       "name": "IF Solstabollen 98",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:28382",
       "name": "IBK Inre Hamn",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:23268",
       "name": "Lövet IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:34409",
       "name": "Lövnäs IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:31183",
       "name": "Räddningstjänsten IF Hammarö",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:12548",
       "name": "Skoghalls BGK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:29772",
       "name": "Skoghalls IBK",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1761"
     },
     {
       "key": "history:club:30416",
       "name": "Tors IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:28030",
       "name": "Ulvsby IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:29715",
       "name": "Vidön IK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1761"
     },
     {
       "key": "history:club:28282",
       "name": "Bofors IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1883"
     },
     {
       "key": "history:club:33543",
       "name": "Karlberg IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1883"
     },
     {
       "key": "history:club:53469",
       "name": "Karlskoga FBC",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1883"
     },
     {
       "key": "history:club:21131",
       "name": "Karlskoga FK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1883"
     },
     {
       "key": "history:club:21345",
       "name": "Karlskoga IK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1883"
     },
     {
       "key": "history:club:22340",
       "name": "Alsters IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:31737",
       "name": "Björknäs IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:26102",
       "name": "BK Fröding",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:34411",
       "name": "BK Hammarö 06",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:23666",
       "name": "Boccia BOIS",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:25305",
       "name": "Botorpsheas IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:45507",
       "name": "Carlstad IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:19792",
       "name": "Carlstads IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:32494",
       "name": "Club 30 IBK",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1780"
     },
     {
       "key": "history:club:28129",
       "name": "Fallängens IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:45579",
       "name": "FC Karlstad",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:36528",
       "name": "Färjestad IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:30766",
       "name": "Färjestads IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:90275",
       "name": "Gruvlyckans IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:31513",
       "name": "Haga AIK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:19793",
       "name": "Herrhagen IK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:53873",
       "name": "Herrhagens IBF",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1780"
     },
     {
       "key": "history:club:27033",
       "name": "Hultsberg IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:2212",
       "name": "I 2 IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:22345",
       "name": "IBF Team Alfred",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:36434",
       "name": "IBK Gruvlyckan",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:27091",
       "name": "IBK Gruvlyckan Karlstad",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:30385",
       "name": "IBK Höje",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:33713",
       "name": "IBK Tvärhult",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:32842",
       "name": "IBK Vargen",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:3196",
       "name": "IF Nyedshov/Lindfors",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:22763",
       "name": "IF Solstabollen",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:2333",
       "name": "IFK Väse",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:31084",
       "name": "Ilanda IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:19790",
       "name": "Karlstad IBF",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1780"
     },
     {
       "key": "history:club:21524",
       "name": "Karlstad sport-och idrottsförening",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:31184",
       "name": "Karlstad/Skoghall IBF 95",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:2498",
       "name": "KAU IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:24420",
       "name": "Kilsta IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:90345",
       "name": "Klara IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:23543",
       "name": "Kroppkärrs IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:35336",
       "name": "Kvarntorps IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:22631",
       "name": "Lindfors IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:9313",
       "name": "Lindfors IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:28220",
       "name": "Lorenberg IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:90349",
       "name": "Norrstrands IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:9317",
       "name": "Norrstrands IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:28998",
       "name": "Nyeds IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:33285",
       "name": "Orrholmens IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:21766",
       "name": "Ruds IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:22344",
       "name": "Ruds IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:25383",
       "name": "Saga SK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:36433",
       "name": "Sjöstads Veteraner IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:23714",
       "name": "Skåre IBS",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:33602",
       "name": "Solidens IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:33544",
       "name": "Solsta-97 IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:19794",
       "name": "Solstadens BK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:9327",
       "name": "Sommaro IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:90363",
       "name": "Stockfallets IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:31512",
       "name": "Stodene IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:27034",
       "name": "Sundsta IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:25231",
       "name": "Tingvalla IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:90365",
       "name": "Tingvallastaden IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:36488",
       "name": "Tvärhult IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:21765",
       "name": "Tvärhults IK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:20796",
       "name": "Vikens IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:90368",
       "name": "Vålbergs IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:29921",
       "name": "Vänerstrands IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:52094",
       "name": "Värmlands MIBF",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1780"
     },
     {
       "key": "history:club:23269",
       "name": "Ängbacken BK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1780"
     },
     {
       "key": "history:club:32176",
       "name": "Glänne IK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1715"
     },
     {
       "key": "history:club:31553",
       "name": "IBK Kil",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1715"
     },
     {
       "key": "history:club:1008",
       "name": "A 9 IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1781"
     },
     {
       "key": "history:club:30449",
       "name": "Björneborgs IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1781"
     },
     {
       "key": "history:club:30667",
       "name": "Brogårdens IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1781"
     },
     {
       "key": "history:club:23785",
       "name": "IBK Kristinehamn",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1781"
     },
     {
       "key": "history:club:54575",
       "name": "Kristinehamns IBF Bredd",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1781"
     },
     {
       "key": "history:club:41386",
       "name": "Lusasken IBK",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1781"
     },
     {
       "key": "history:club:25836",
       "name": "FSK Forsfuran Munkfors",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1762"
     },
     {
       "key": "history:club:28347",
       "name": "Munkfors IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1762"
     },
     {
       "key": "history:club:2869",
       "name": "Lundsbergs IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1760"
     },
     {
       "key": "history:club:54483",
       "name": "Lysvik IBF",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1766"
     },
     {
       "key": "history:club:25431",
       "name": "Lysviks IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1766"
     },
     {
       "key": "history:club:22082",
       "name": "Lysviks IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1766"
     },
     {
       "key": "history:club:4530",
       "name": "Västra Ämteviks IF",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1766"
     },
     {
       "key": "history:club:3553",
       "name": "SK Sifhälla",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1785"
     },
     {
       "key": "history:club:30022",
       "name": "Svanskogs IBF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1785"
     },
     {
       "key": "history:club:9328",
       "name": "Säffle SK",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1785"
     },
     {
       "key": "history:club:30638",
       "name": "Säffle IBK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1785"
     },
     {
       "key": "history:club:4490",
       "name": "Värmlandsbro SK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1785"
     },
     {
       "key": "history:club:34405",
       "name": "Fryksände BK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1737"
     },
     {
       "key": "history:club:9321",
       "name": "Rinns AIK",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1737"
     },
     {
       "key": "history:club:9305",
       "name": "Karlanda IF",
       "scope": "legends",
       "reviewNote": "Historisk förening.",
-      "sourceActive": false
+      "sourceActive": false,
+      "municipality": "1765"
     },
     {
       "key": "history:club:14274",
       "name": "Lennartsfors IF",
       "scope": "legends",
       "reviewNote": "Finns i föreningsregistret, men aktuell tävlingsverksamhet är inte bekräftad.",
-      "sourceActive": true
+      "sourceActive": true,
+      "municipality": "1765"
     },
     {
       "key": "history:club:mb87",
@@ -2848,7 +2985,8 @@
       "name": "Tösse IF",
       "scope": "legends",
       "reviewNote": "Historiskt innebandynamn.",
-      "source": "https://bohuslan-dalsland.svenskfotboll.se/nyheter/2026/besok-his-tosse-if/"
+      "source": "https://bohuslan-dalsland.svenskfotboll.se/nyheter/2026/besok-his-tosse-if/",
+      "municipality": "1492"
     }
   ],
   "municipalities": [

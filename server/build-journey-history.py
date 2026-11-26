@@ -61,6 +61,23 @@ for key,name,source in [('mb87','MB87','Namn uppgivet av VDK.'),('tosse','Tösse
  if norm(name) not in clubnames:clubs.append(dict(key='history:club:'+key,name=name,scope='legends',reviewNote='Historiskt innebandynamn.',source=source))
 for c in clubs:
  if c.get('lat') and c.get('lng'):c['point']=project(c['lng'],c['lat']);c['municipality']=municipality(c)
+# Municipality headings from the official club history, cached once during review.
+# Reuse existing catalogue identities; this does not add or approve new names.
+source=root.parent/'outputs/VDK-journey-club-municipalities.json'
+if source.exists():
+ by_name={};by_rf={};codes={v:k for k,v in names.items()}
+ for section in json.loads(source.read_text(encoding='utf-8')):
+  code=codes.get(section['heading'])
+  if not code:continue
+  for row in section['rows']:
+   if len(row)<2:continue
+   by_name[norm(row[0])]=code;by_rf[row[1]]=code
+ for c in clubs:
+  code=by_name.get(norm(c['name'])) or (by_rf.get(c['key'].removeprefix('history:club:')) if c['key'].startswith('history:club:') else None)
+  if c['key']=='history:club:tosse':code='1492'
+  if c['key']=='4039':
+   code='1780';c['locationNote']='Ulvsby i Karlstads kommun. Verifierad hemmaarena saknas i underlaget.'
+  if code:c['municipality']=code
 data=dict(version='journey-history-1',season=base['season'],halls=halls,clubs=clubs,municipalities=[dict(id=m['id'],name=m['name']) for m in municipalities],sources=[inventory['halls']['url'],inventory['clubs']['url'],'https://www.scb.se/vara-tjanster/oppna-data/oppna-geodata/regso/'])
 (root/'data-catalogs/journey-history.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 mapdata=dict(width=660,height=round(50+(north-south)*scale),municipalities=municipalities,source='SCB RegSO 2025, sammanslaget per kommun',sourceUrl=data['sources'][-1])

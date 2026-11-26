@@ -1,8 +1,8 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';
 import {refereeYears,parseRefereeStartYear,refereeCalendarYear} from '../server/referee-years.mjs';
 const now=new Date('2026-11-26T12:00:00Z');
-test('career badges are cumulative and exact at 5, 10 and 20 calendar years',()=>{
- for(const [years,expected]of [[0,[]],[4,[]],[5,[5]],[9,[5]],[10,[5,10]],[19,[5,10]],[20,[5,10,20]],[30,[5,10,20]]])assert.deepEqual(refereeYears(2026-years,now).badges.map(b=>b.milestone),expected);
+test('career badges are cumulative and exact at all six milestones through 50 calendar years',()=>{
+ for(const [years,expected]of [[0,[]],[4,[]],[5,[5]],[9,[5]],[10,[5,10]],[19,[5,10]],[20,[5,10,20]],[29,[5,10,20]],[30,[5,10,20,30]],[39,[5,10,20,30]],[40,[5,10,20,30,40]],[49,[5,10,20,30,40]],[50,[5,10,20,30,40,50]],[60,[5,10,20,30,40,50]]])assert.deepEqual(refereeYears(2026-years,now).badges.map(b=>b.milestone),expected);
  assert.equal(refereeYears(null,now).years,null);assert.deepEqual(refereeYears(null,now).badges,[]);assert.deepEqual(refereeYears(2027,now).badges,[]);
 });
 test('start year validation permits clearing and rejects future, malformed or noninteger values',()=>{

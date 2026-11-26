@@ -9,6 +9,6 @@ export function parseRefereeStartYear(value,now=new Date()){
 }
 export function refereeYears(startYear,now=new Date()){
  const currentYear=refereeCalendarYear(now),valid=Number.isInteger(startYear)&&startYear>=1900&&startYear<=currentYear,years=valid?currentYear-startYear:null;
- const levels=[[5,'bronze'],[10,'silver'],[20,'gold']].map(([target,tier])=>({target,tier,earned:years!==null&&years>=target}));
+ const levels=[[5,'bronze'],[10,'silver'],[20,'gold'],[30,'platinum'],[40,'diamond'],[50,'legend']].map(([target,tier])=>({target,tier,earned:years!==null&&years>=target}));
  return {currentYear,years,levels,badges:levels.filter(l=>l.earned).map(l=>({kind:'referee-years',scope:'career',tier:l.tier,label:l.target+' domarår',milestone:l.target}))};
 }

@@ -178,3 +178,31 @@ Tests cover exact thresholds, cumulative milestones, malformed/future years,
 clearing, old-client saves, sharing/revocation, raw-year privacy and the Swedish
 New Year boundary. Browser tests at 320/390/1440 px use activated test accounts
 and do not change production members' start years or disclosure choices.
+
+## 30/40/50 years and category-specific maps
+
+Career milestones are cumulative at 5 bronze, 10 silver, 20 gold, 30 platinum,
+40 diamond and 50 legend years. They keep the same calendar-year calculation,
+private raw start year and share_badges opt-in. No extra personal data or jobs.
+
+The single map panel now switches context with BOTH category and Active/Legends:
+hall maps count only halls, club maps count only clubs. Each computes its own
+municipality totals and gray/blue/green state. The panel is hidden for colleagues
+and series, including direct series links. Selecting a map item opens the tile
+for the current category/scope, without marking it automatically or switching
+club selections to hall selections.
+
+Club municipality metadata comes from cached municipal headings in the official
+association history. Existing stable catalogue keys and all checkmarks remain
+unchanged; no additional names were added by this location review. Ulvsby IF is
+assigned Karlstad municipality, with no invented arena pin. All 50 initial active
+clubs have a municipality. Historical entries without known municipality remain
+in the checklist and are explained as unplaced. Club pin positions represent the
+saved typical home arena where available, not a registered postal address.
+Admin proposal/reclassification forms accept a municipality for clubs as well.
+
+Map paths remain local SCB geometry. No runtime scraping or external tile provider.
+Tests cover category isolation, scope isolation, empty municipalities, club-map
+navigation, hiding maps for colleagues/series and 30/40/50 exact thresholds.
+Browser checks at 320/390/1440 px also verify all six visible year milestones,
+club-only municipal completion and reverse transitions, without screenshots.

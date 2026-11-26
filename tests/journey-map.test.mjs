@@ -1,0 +1,6 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import {municipalityMapState} from '../journey-map.js';
+test('hall and club maps count their own checklists independently and use the chosen scope',()=>{
+ const data={municipalities:[{id:'A',name:'Area'},{id:'B',name:'Empty'}],groups:{active:{halls:[{municipality:'A',selected:true},{municipality:'A',selected:true}],clubs:[{municipality:'A',selected:false},{municipality:'A',selected:false},{name:'Unplaced',selected:true}]},legends:{halls:[{municipality:'A',selected:false}],clubs:[{municipality:'A',selected:true}]}}};
+ assert.equal(municipalityMapState(data,'halls','active').areas[0].state,'complete');let clubs=municipalityMapState(data,'clubs','active');assert.equal(clubs.areas[0].state,'empty');assert.equal(clubs.areas[0].total,2);assert.equal(clubs.unplaced,1);data.groups.active.clubs[0].selected=true;assert.equal(municipalityMapState(data,'clubs','active').areas[0].state,'started');data.groups.active.clubs[1].selected=true;assert.equal(municipalityMapState(data,'clubs','active').areas[0].state,'complete');assert.equal(municipalityMapState(data,'clubs','active').areas[1].state,'empty');assert.equal(municipalityMapState(data,'halls','legends').areas[0].state,'empty');assert.equal(municipalityMapState(data,'clubs','legends').areas[0].state,'complete');
+});
