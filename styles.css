@@ -318,3 +318,5 @@ html[data-theme=light] .entry-backdrop{display:none}
 .profile-series-disclosure>summary{cursor:pointer;list-style:none;width:fit-content;max-width:100%;white-space:normal}.profile-series-disclosure>summary::-webkit-details-marker{display:none}
 .profile-series-disclosure .series-hide,.profile-series-disclosure[open] .series-show{display:none}.profile-series-disclosure[open] .series-hide{display:inline}.profile-series-disclosure .profile-series-list{margin-top:1rem}
 @media(max-width:650px){.referee-year-milestones{grid-template-columns:repeat(2,minmax(0,1fr))}.profile-achievement-career .referee-year-badge{width:128px;height:128px}}
+
+.journey-shield{display:block;width:144px;height:144px;max-width:100%;object-fit:contain;flex-shrink:0}.journey-overview>.journey-shield{width:112px;height:112px;grid-column:1/-1;justify-self:center}.profile-achievement-career .journey-shield{width:144px;height:144px}
